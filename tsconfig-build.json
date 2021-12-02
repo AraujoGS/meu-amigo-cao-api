@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json", //estende o arquivo principal
+  "exclude": ["tests"] //remove a pasta com os testes
+}
