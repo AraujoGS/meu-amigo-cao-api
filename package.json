@@ -4,6 +4,7 @@
   "description": "Projeto para praticar boas práticas de programação",
   "main": "dist/main/server.js",
   "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "jest"
   },
   "author": "Guilherme AS",
@@ -11,6 +12,7 @@
   "devDependencies": {
     "@types/node": "^16.11.11",
     "git-commit-msg-linter": "^3.2.8",
+    "rimraf": "^3.0.2",
     "typescript": "^4.5.2"
   }
 }
