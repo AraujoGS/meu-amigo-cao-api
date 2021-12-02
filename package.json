@@ -1,0 +1,14 @@
+{
+  "name": "meu-amigo-cao-api",
+  "version": "1.0.0",
+  "description": "Projeto para praticar boas práticas de programação",
+  "main": "dist/main/server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Guilherme AS",
+  "license": "ISC",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.2.8"
+  }
+}
