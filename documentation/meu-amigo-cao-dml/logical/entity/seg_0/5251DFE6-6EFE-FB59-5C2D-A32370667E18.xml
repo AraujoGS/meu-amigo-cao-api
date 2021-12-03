@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="5251DFE6-6EFE-FB59-5C2D-A32370667E18" name="Porte_Pet">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:30:29 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_porte" id="FD6E74B9-681A-9F66-A42D-33B17F46BCFC">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:30:37 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT018</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="titulo_porte" id="22B9E6EA-448B-1F05-3794-BF7BBC1FE1F5">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:30:56 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="5626824F-78F0-0DE8-ABE8-413D6E00E82D" name="Porte_Pet PK">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:30:52 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>FD6E74B9-681A-9F66-A42D-33B17F46BCFC</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

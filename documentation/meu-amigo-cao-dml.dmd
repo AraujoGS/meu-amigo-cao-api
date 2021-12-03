@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="meu-amigo-cao-dml" id="0E2BC9E4-270D-E978-7C89-F2AE84D08789" version="3.5">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:09:34 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>0E2BC9E4-270D-E978-7C89-F2AE84D08789</designId>
+</OSDM_Design>

@@ -1,0 +1,158 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="072CB49C-5E42-4E6F-2BC2-0E09E84E374B" name="Enderecos">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>CBC12A47-50B0-C585-A124-7D6FD139A9D2</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_endereco" id="1ACBA128-A2BC-61C9-2A08-FC7447AF023C">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>F2F327AA-9C72-F78A-7F0D-FB87973813FB</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cep" id="5FDF06B1-E915-4F72-8301-8C08291ACCC4">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>7CB3E775-C2B7-A3F2-C599-C651F0B72864</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>8</dataTypeSize>
+<ownDataTypeParameters>8,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="logradouro" id="71EBAB58-8AFA-2786-E4A3-E2ED4C4B0DC0">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>1968BB7F-8E74-285C-BE9E-E6281005F3F0</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="numero" id="27F86AC2-0D4B-5CCB-0DA8-CFD9278BA7C0">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>246ADF09-CC94-A716-64DC-0993290FC1F6</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="bairro" id="FE3535BF-E988-4006-83C5-125104F846D6">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>A397753C-907A-8196-7661-CFE1AD38197C</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="complemento" id="7AB6A1AB-DD66-BD50-1383-6CBFFD51EA44">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>5627CC6D-40DE-4B2F-5785-1834F56B18F4</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cidade" id="67CDE0EB-064B-8948-08DE-DD1725B7B907">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>A518BF3F-7A03-601A-E6BC-7025579BA03E</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="uf" id="5C885AE1-C511-038E-5782-70B52E4BB8CA">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>16664E83-53BF-15E8-1B49-8C64E7A8A117</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>2</dataTypeSize>
+<ownDataTypeParameters>2,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_cliente" id="3099D48C-206F-4ABE-A0C1-BF5CE5DFCD08">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>3EC991F0-BD84-7051-6769-A57E8504DF65</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="158DE6E5-4590-1578-7FEB-0CAF7DA0B71B" referredColumn="349B1BAD-A450-D0F1-FD76-160B454F4747"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B34226B7-55BB-A999-44CB-C18E022E5281" name="Enderecos_PK">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>BB9973DC-74EE-F074-3C65-9F3FE31E4F20</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1ACBA128-A2BC-61C9-2A08-FC7447AF023C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F6724AFF-7534-BCCC-9D32-85AAA89A8CF4" name="Enderecos__IDX">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>A259BF69-CF91-84EA-C086-99DE68AA5CAA</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="3099D48C-206F-4ABE-A0C1-BF5CE5DFCD08"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="24D535D9-E2A2-57EF-2095-DCC065EDBBCB" name="Enderecos_Clientes_FK">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>A259BF69-CF91-84EA-C086-99DE68AA5CAA</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3099D48C-206F-4ABE-A0C1-BF5CE5DFCD08"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

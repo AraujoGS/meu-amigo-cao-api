@@ -1,0 +1,150 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="CBC12A47-50B0-C585-A124-7D6FD139A9D2" name="Enderecos">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:17:42 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_endereco" id="F2F327AA-9C72-F78A-7F0D-FB87973813FB">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:17:49 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cep" id="7CB3E775-C2B7-A3F2-C599-C651F0B72864">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:18:01 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>8</dataTypeSize>
+<ownDataTypeParameters>8,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="logradouro" id="1968BB7F-8E74-285C-BE9E-E6281005F3F0">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:20:28 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="numero" id="246ADF09-CC94-A716-64DC-0993290FC1F6">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:20:42 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="bairro" id="A397753C-907A-8196-7661-CFE1AD38197C">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:23:45 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="complemento" id="5627CC6D-40DE-4B2F-5785-1834F56B18F4">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:24:01 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cidade" id="A518BF3F-7A03-601A-E6BC-7025579BA03E">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:24:17 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="uf" id="16664E83-53BF-15E8-1B49-8C64E7A8A117">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:24:35 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>2</dataTypeSize>
+<ownDataTypeParameters>2,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_cliente" id="3EC991F0-BD84-7051-6769-A57E8504DF65">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:30:22 UTC</createdTime>
+<generatorID>A259BF69-CF91-84EA-C086-99DE68AA5CAA</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<referedAttribute>7B0A1F32-73A1-6C05-E9C1-A998F7100D83</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="BB9973DC-74EE-F074-3C65-9F3FE31E4F20" name="Enderecos PK">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:18:00 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>F2F327AA-9C72-F78A-7F0D-FB87973813FB</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

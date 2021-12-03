@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="852726BE-264B-6325-28DA-2C96461E92D1" name="Raca_Pet">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>FC2A6401-45B9-28E1-AE8A-334D5E890010</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_raca" id="6A7E98F1-C6CA-DC31-C061-67C1EB2C9CCB">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>5D0B1772-6136-C7D3-7E59-526F9302669A</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT018</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nome_raca" id="569A602D-68CF-BE1D-480E-9D73F64BCD10">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>21ADB69E-5E71-72CA-2EAB-E206162628C8</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="31A8FA9C-7C43-B8D2-072F-30A821FE5AC6" name="Raca_Pet_PK">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>33B3289E-09F8-0A5B-5A1C-C2588C4F98FC</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6A7E98F1-C6CA-DC31-C061-67C1EB2C9CCB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="36822558-1F5B-5EF5-4749-754E105544F1" containerWithKeyObject="CF446991-32FC-433F-06EA-F6B65545B6A9" localFKIndex="DF587B02-6C81-9A0B-41BC-B3815488BE24" name="Pets_Porte_Pet_FK">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>CF07542E-4780-C567-A7B2-92CF692FE6CA</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<referredTableLongName>Porte_Pet</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>6F481B3F-F97D-8E00-FCAE-584E5F7B410D</referredTableID>
+<keyObject>0C5CE9E0-B4A5-3989-5250-3A674AD86F48</keyObject>
+<referredKeyID>0C5CE9E0-B4A5-3989-5250-3A674AD86F48</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>id_porte</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

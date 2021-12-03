@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="E_Dov2" directorySegmentName="seg_0" id="CED61E8E-1879-282D-FA87-541BC1738B7D">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:45:56 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="FEA486FC-0BBA-1ABB-C393-A40ADF35E80C" value="true"/>
+</engineerTo>
+<sourcePk>33B3289E-09F8-0A5B-5A1C-C2588C4F98FC</sourcePk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>FC2A6401-45B9-28E1-AE8A-334D5E890010</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>8419F56C-D09F-D7DE-DFB3-57DE1D706EFF</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

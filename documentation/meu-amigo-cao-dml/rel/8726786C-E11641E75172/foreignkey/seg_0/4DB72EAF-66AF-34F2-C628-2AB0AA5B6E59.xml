@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="4DB72EAF-66AF-34F2-C628-2AB0AA5B6E59" containerWithKeyObject="E975793C-6381-1C52-EA32-8E06C7DFD206" localFKIndex="E1921AE0-384D-703E-757A-202CB4EC2FB9" name="Agendamentos_Servicos_FK">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 18:02:32 UTC</createdTime>
+<generatorID>4439FB80-587D-4210-6249-6B7F41A5E902</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<referredTableLongName>Servicos</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>256B3603-73D4-AC23-890F-1A5D0A463183</referredTableID>
+<keyObject>D1FC2714-500E-7E01-0693-A7E582B06506</keyObject>
+<referredKeyID>D1FC2714-500E-7E01-0693-A7E582B06506</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>id_servico</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

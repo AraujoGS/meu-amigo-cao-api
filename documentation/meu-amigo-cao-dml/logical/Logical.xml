@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="8358B8A7-19E8-5629-6643-B65EB2293536" mainViewID="B5BB3484-9FB6-6F68-1C88-31E0CE1267F3">
+<createdBy>gdear</createdBy>
+<createdTime>2021-11-02 17:09:34 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>
