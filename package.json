@@ -5,7 +5,10 @@
   "main": "dist/main/server.js",
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig-build.json",
-    "test": "jest"
+    "test": "jest",
+    "test:ci": "npm test -- --coverage",
+    "test:staged": "npm test -- --findRelatedTests",
+    "prepare": "husky install"
   },
   "author": "Guilherme AS",
   "license": "ISC",
@@ -18,6 +21,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.0.0",
     "git-commit-msg-linter": "^3.2.8",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.5.2"
   }
