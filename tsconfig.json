@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-      "outDir": "dist",//pasta com o código js compilado
-      "module": "commonjs",//sistema de modulos do js utilizado nos arquivos compilados
-      "target": "ES2019",//versão do javascript que os arquivos compilados vão ter
-      "esModuleInterop": true,//faz com que módulos que utilizem o padrão commonjs(require) sejam usados import/export
+      "outDir": "dist",
+      "module": "commonjs",
+      "target": "ES2021",
+      "esModuleInterop": true,
       "sourceMap": true,
       "rootDirs": ["src", "tests"],
       "baseUrl": "src",
       "paths": {
-        "@/tests/*": ["../tests/*"],//definindo alias para o path tests
-        "@/*": ["*"]//definindo alias para o path src
+        "@/tests/*": ["../tests/*"],
+        "@/*": ["*"]
       }
   },
   "include": ["src", "tests"],
