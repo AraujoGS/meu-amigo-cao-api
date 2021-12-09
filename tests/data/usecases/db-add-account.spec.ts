@@ -1,4 +1,5 @@
 import { DbAddAccount } from '@/data/usecases'
+import { CreationAccountResult } from '@/domain/models'
 import { mockAddAccountParams, throwError } from '@/tests/domain/mocks'
 import { AddAccountRepositorySpy, HasherSpy } from '@/tests/data/mocks'
 
@@ -51,5 +52,10 @@ describe('DbAddAccount Usecase', () => {
     const data = mockAddAccountParams()
     const promise = sut.add(data)
     await expect(promise).rejects.toThrow()
+  })
+  test('should return SUCCESS(0) if AddAccountRepository returns true', async () => {
+    const { sut } = makeSut()
+    const response = await sut.add(mockAddAccountParams())
+    expect(response).toBe(CreationAccountResult.SUCCESS)
   })
 })
