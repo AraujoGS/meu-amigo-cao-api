@@ -45,4 +45,11 @@ describe('DbAddAccount Usecase', () => {
       birthDate: data.birthDate
     })
   })
+  test('should throw exception when error AddAccountRepository', async () => {
+    const { sut, addAccountRepositorySpy } = makeSut()
+    jest.spyOn(addAccountRepositorySpy, 'add').mockImplementationOnce(throwError)
+    const data = mockAddAccountParams()
+    const promise = sut.add(data)
+    await expect(promise).rejects.toThrow()
+  })
 })
