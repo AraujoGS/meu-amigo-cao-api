@@ -1,13 +1,7 @@
-import { CreationAccountResult } from '@/domain/models'
+import { CreationAccountResult, AddAccountModel } from '@/domain/models'
 
 export namespace AddAccount{
-  export type Params = {
-    name: string
-    email: string
-    password: string
-    phone: string
-    birthDate: number
-  }
+  export type Params = AddAccountModel
   export type Result = CreationAccountResult
 }
 
