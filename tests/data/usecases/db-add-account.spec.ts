@@ -58,4 +58,10 @@ describe('DbAddAccount Usecase', () => {
     const response = await sut.add(mockAddAccountParams())
     expect(response).toBe(CreationAccountResult.SUCCESS)
   })
+  test('should return ERROR(1) if AddAccountRepository returns false', async () => {
+    const { sut, addAccountRepositorySpy } = makeSut()
+    addAccountRepositorySpy.result = false
+    const response = await sut.add(mockAddAccountParams())
+    expect(response).toBe(CreationAccountResult.ERROR)
+  })
 })
