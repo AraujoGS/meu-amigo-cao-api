@@ -1,22 +1,25 @@
 import { DbAddAccount } from '@/data/usecases'
 import { CreationAccountResult } from '@/domain/models'
 import { mockAddAccountParams, throwError } from '@/tests/domain/mocks'
-import { AddAccountRepositorySpy, HasherSpy } from '@/tests/data/mocks'
+import { AddAccountRepositorySpy, CheckAccountByEmailRepositorySpy, HasherSpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbAddAccount
   hasherSpy: HasherSpy
   addAccountRepositorySpy: AddAccountRepositorySpy
+  checkAccountByEmailRepositorySpy: CheckAccountByEmailRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const hasherSpy = new HasherSpy()
   const addAccountRepositorySpy = new AddAccountRepositorySpy()
-  const sut = new DbAddAccount(hasherSpy, addAccountRepositorySpy)
+  const checkAccountByEmailRepositorySpy = new CheckAccountByEmailRepositorySpy()
+  const sut = new DbAddAccount(hasherSpy, addAccountRepositorySpy, checkAccountByEmailRepositorySpy)
   return {
     sut,
     hasherSpy,
-    addAccountRepositorySpy
+    addAccountRepositorySpy,
+    checkAccountByEmailRepositorySpy
   }
 }
 
@@ -63,5 +66,11 @@ describe('DbAddAccount Usecase', () => {
     addAccountRepositorySpy.result = false
     const response = await sut.add(mockAddAccountParams())
     expect(response).toBe(CreationAccountResult.ERROR)
+  })
+  test('should call CheckAccountByEmailRepository with correct email', async () => {
+    const { sut, checkAccountByEmailRepositorySpy } = makeSut()
+    const data = mockAddAccountParams()
+    await sut.add(data)
+    expect(checkAccountByEmailRepositorySpy.email).toBe(data.email)
   })
 })
