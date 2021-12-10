@@ -102,4 +102,10 @@ describe('DbAddAccount Usecase', () => {
     const promise = sut.add(data)
     await expect(promise).rejects.toThrow()
   })
+  test('should return ERROR_PHONE(3) if CheckAccountByPhoneRepository returns true', async () => {
+    const { sut, checkAccountByPhoneRepositorySpy } = makeSut()
+    checkAccountByPhoneRepositorySpy.result = true
+    const response = await sut.add(mockAddAccountParams())
+    expect(response).toBe(CreationAccountResult.ERROR_PHONE)
+  })
 })
