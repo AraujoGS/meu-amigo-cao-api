@@ -1,5 +1,5 @@
 import { Hasher } from '@/data/interfaces/cryptography'
-import { AddAccountRepository, CheckAccountByEmailRepository } from '@/data/interfaces/db'
+import { AddAccountRepository, CheckAccountByEmailRepository, CheckAccountByPhoneRepository } from '@/data/interfaces/db'
 import faker from 'faker'
 
 export class HasherSpy implements Hasher {
@@ -25,6 +25,15 @@ export class CheckAccountByEmailRepositorySpy implements CheckAccountByEmailRepo
   result = false
   async check (data: CheckAccountByEmailRepository.Params): Promise<CheckAccountByEmailRepository.Result> {
     this.email = data
+    return this.result
+  }
+}
+
+export class CheckAccountByPhoneRepositorySpy implements CheckAccountByPhoneRepository {
+  phone: CheckAccountByPhoneRepository.Params
+  result = false
+  async check (data: CheckAccountByPhoneRepository.Params): Promise<CheckAccountByPhoneRepository.Result> {
+    this.phone = data
     return this.result
   }
 }
