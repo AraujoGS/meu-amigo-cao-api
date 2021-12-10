@@ -80,4 +80,10 @@ describe('DbAddAccount Usecase', () => {
     const promise = sut.add(data)
     await expect(promise).rejects.toThrow()
   })
+  test('should return ERROR_EMAIL(2) if CheckAccountByEmailRepository returns true', async () => {
+    const { sut, checkAccountByEmailRepositorySpy } = makeSut()
+    checkAccountByEmailRepositorySpy.result = true
+    const response = await sut.add(mockAddAccountParams())
+    expect(response).toBe(CreationAccountResult.ERROR_EMAIL)
+  })
 })
