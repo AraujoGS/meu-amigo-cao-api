@@ -95,4 +95,11 @@ describe('DbAddAccount Usecase', () => {
     await sut.add(data)
     expect(checkAccountByPhoneRepositorySpy.phone).toBe(data.phone)
   })
+  test('should throw exception when error CheckAccountByPhoneRepository', async () => {
+    const { sut, checkAccountByPhoneRepositorySpy } = makeSut()
+    jest.spyOn(checkAccountByPhoneRepositorySpy, 'check').mockImplementationOnce(throwError)
+    const data = mockAddAccountParams()
+    const promise = sut.add(data)
+    await expect(promise).rejects.toThrow()
+  })
 })
