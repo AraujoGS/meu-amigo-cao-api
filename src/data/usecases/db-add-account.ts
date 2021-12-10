@@ -15,7 +15,8 @@ export class DbAddAccount implements AddAccount {
     const { password, email, phone } = data
     const emailInUse = await this.checkAccountByEmailRepository.check(email)
     if (emailInUse) return CreationAccountResult.ERROR_EMAIL
-    await this.checkAccountByPhoneRepository.check(phone)
+    const phoneInUse = await this.checkAccountByPhoneRepository.check(phone)
+    if (phoneInUse) return CreationAccountResult.ERROR_PHONE
     const hashedPassword = await this.hasher.hash(password)
     const isValid = await this.addAccountRepository.add({
       ...data,
