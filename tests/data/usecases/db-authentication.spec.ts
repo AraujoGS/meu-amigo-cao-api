@@ -1,5 +1,5 @@
 import { DbAuthentication } from '@/data/usecases'
-import { mockAuthenticationParams } from '@/tests/domain/mocks'
+import { mockAuthenticationParams, throwError } from '@/tests/domain/mocks'
 import { LoadAccountByEmailRepositorySpy } from '@/tests/data/mocks'
 
 type SutTypes = {
@@ -22,5 +22,11 @@ describe('DbAuthentication UseCase', () => {
     const data = mockAuthenticationParams()
     await sut.auth(data)
     expect(loadAccountByEmailRepositorySpy.email).toBe(data.email)
+  })
+  test('should throw exception when error LoadAccountByEmailRepository', async () => {
+    const { sut, loadAccountByEmailRepositorySpy } = makeSut()
+    jest.spyOn(loadAccountByEmailRepositorySpy, 'loadByEmail').mockImplementationOnce(throwError)
+    const promise = sut.auth(mockAuthenticationParams())
+    await expect(promise).rejects.toThrow()
   })
 })
