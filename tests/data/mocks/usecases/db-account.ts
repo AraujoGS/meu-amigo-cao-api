@@ -23,8 +23,8 @@ export class AddAccountRepositorySpy implements AddAccountRepository {
 export class CheckAccountByEmailRepositorySpy implements CheckAccountByEmailRepository {
   email: CheckAccountByEmailRepository.Params
   result = false
-  async check (data: CheckAccountByEmailRepository.Params): Promise<CheckAccountByEmailRepository.Result> {
-    this.email = data
+  async check (email: CheckAccountByEmailRepository.Params): Promise<CheckAccountByEmailRepository.Result> {
+    this.email = email
     return this.result
   }
 }
@@ -32,8 +32,8 @@ export class CheckAccountByEmailRepositorySpy implements CheckAccountByEmailRepo
 export class CheckAccountByPhoneRepositorySpy implements CheckAccountByPhoneRepository {
   phone: CheckAccountByPhoneRepository.Params
   result = false
-  async check (data: CheckAccountByPhoneRepository.Params): Promise<CheckAccountByPhoneRepository.Result> {
-    this.phone = data
+  async check (phone: CheckAccountByPhoneRepository.Params): Promise<CheckAccountByPhoneRepository.Result> {
+    this.phone = phone
     return this.result
   }
 }
