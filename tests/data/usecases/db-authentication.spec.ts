@@ -83,4 +83,10 @@ describe('DbAuthentication UseCase', () => {
       accessToken: encrypterSpy.result
     })
   })
+  test('should throw exception when error UpdateAccessTokenRepository', async () => {
+    const { sut, updateAccessTokenRepositorySpy } = makeSut()
+    jest.spyOn(updateAccessTokenRepositorySpy, 'updateAccessToken').mockImplementationOnce(throwError)
+    const promise = sut.auth(mockAuthenticationParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
