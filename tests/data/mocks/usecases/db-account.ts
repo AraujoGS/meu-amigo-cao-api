@@ -5,7 +5,7 @@ import faker from 'faker'
 export class HasherSpy implements Hasher {
   password: string
   result = faker.datatype.hexaDecimal()
-  async hash (data: string): Promise<string> {
+  async hash (data: Hasher.Params): Promise<Hasher.Result> {
     this.password = data
     return this.result
   }
