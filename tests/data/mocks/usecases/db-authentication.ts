@@ -1,4 +1,4 @@
-import { LoadAccountByEmailRepository } from '@/data/interfaces/db'
+import { LoadAccountByEmailRepository, UpdateAccessTokenRepository } from '@/data/interfaces/db'
 import { HashComparer, Encrypter } from '@/data/interfaces/cryptography'
 import faker from 'faker'
 
@@ -31,5 +31,13 @@ export class EncrypterSpy implements Encrypter {
   async encrypt (value: Encrypter.Params): Promise<Encrypter.Result> {
     this.value = value
     return this.result
+  }
+}
+
+export class UpdateAccessTokenRepositorySpy implements UpdateAccessTokenRepository {
+  data: UpdateAccessTokenRepository.Params
+  async updateAccessToken (data: UpdateAccessTokenRepository.Params): Promise<void> {
+    this.data = data
+    return await Promise.resolve()
   }
 }
