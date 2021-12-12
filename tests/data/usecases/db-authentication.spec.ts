@@ -1,18 +1,21 @@
 import { DbAuthentication } from '@/data/usecases'
 import { mockAuthenticationParams, throwError } from '@/tests/domain/mocks'
-import { LoadAccountByEmailRepositorySpy } from '@/tests/data/mocks'
+import { HashComparerSpy, LoadAccountByEmailRepositorySpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbAuthentication
   loadAccountByEmailRepositorySpy: LoadAccountByEmailRepositorySpy
+  hashComparerSpy: HashComparerSpy
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByEmailRepositorySpy = new LoadAccountByEmailRepositorySpy()
-  const sut = new DbAuthentication(loadAccountByEmailRepositorySpy)
+  const hashComparerSpy = new HashComparerSpy()
+  const sut = new DbAuthentication(loadAccountByEmailRepositorySpy, hashComparerSpy)
   return {
     sut,
-    loadAccountByEmailRepositorySpy
+    loadAccountByEmailRepositorySpy,
+    hashComparerSpy
   }
 }
 
@@ -34,5 +37,12 @@ describe('DbAuthentication UseCase', () => {
     loadAccountByEmailRepositorySpy.result = null
     const response = await sut.auth(mockAuthenticationParams())
     expect(response).toBeNull()
+  })
+  test('should DbAuthentication call HashComparer with correct values', async () => {
+    const { sut, hashComparerSpy, loadAccountByEmailRepositorySpy } = makeSut()
+    const data = mockAuthenticationParams()
+    await sut.auth(data)
+    expect(hashComparerSpy.data.value).toBe(data.password)
+    expect(hashComparerSpy.data.hash).toBe(loadAccountByEmailRepositorySpy.result.password)
   })
 })
