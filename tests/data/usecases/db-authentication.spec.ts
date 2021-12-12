@@ -66,4 +66,10 @@ describe('DbAuthentication UseCase', () => {
     await sut.auth(data)
     expect(encrypterSpy.value).toBe(loadAccountByEmailRepositorySpy.result.id)
   })
+  test('should throw exception when error Encrypter', async () => {
+    const { sut, encrypterSpy } = makeSut()
+    jest.spyOn(encrypterSpy, 'encrypt').mockImplementationOnce(throwError)
+    const promise = sut.auth(mockAuthenticationParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
