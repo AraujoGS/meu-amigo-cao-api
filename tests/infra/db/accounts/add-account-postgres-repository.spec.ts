@@ -1,29 +1,32 @@
-import { AddAccountPostgresRepository, PostgresTestsHelper } from '@/infra/db'
+import { AddAccountPostgresRepository, PostgresHelper } from '@/infra/db'
 import { mockAddAccountParams, throwError } from '@/tests/domain/mocks'
-import { IdentifierGeneratorSpy } from '@/tests/infra/mocks'
+import { IdentifierGeneratorSpy, createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
 
 type SutTypes = {
   sut: AddAccountPostgresRepository
   identifierGeneratorSpy: IdentifierGeneratorSpy
 }
-const db = new PostgresTestsHelper()
 
 const makeSut = (): SutTypes => {
   const identifierGeneratorSpy = new IdentifierGeneratorSpy()
-  const sut = new AddAccountPostgresRepository(db, identifierGeneratorSpy)
+  const sut = new AddAccountPostgresRepository(identifierGeneratorSpy)
   return {
     sut,
     identifierGeneratorSpy
   }
 }
 
-beforeEach(async () => {
-  await db.connect()
-  await db.createDb()
+beforeAll(async () => {
+  await PostgresHelper.connect(createDbTest())
+  await PostgresHelper.execute(sqlCreateDb)
 })
 
-afterEach(async () => {
-  await db.disconnect()
+beforeEach(async () => {
+  await PostgresHelper.execute(sqlClearDb)
+})
+
+afterAll(async () => {
+  await PostgresHelper.disconnect()
 })
 
 describe('Add Account Postgres Repository', () => {

@@ -1,10 +1,9 @@
-import { DriverDb } from '@/infra/db/interfaces'
+import { PostgresHelper } from '@/infra/db'
 import { AddAccountRepository } from '@/data/interfaces/db'
 import { IdentifierGenerator } from '@/data/interfaces/utils'
 
 export class AddAccountPostgresRepository implements AddAccountRepository {
   constructor (
-    private readonly db: DriverDb,
     private readonly identifierGenerator: IdentifierGenerator
   ) {}
 
@@ -16,7 +15,14 @@ export class AddAccountPostgresRepository implements AddAccountRepository {
     const { name, password, email, phone, birthDate } = data
     const id = this.identifierGenerator.generate()
     const params = [id, name, password, email, phone, birthDate]
-    const result = await this.db.execute(query, params)
-    return result.rowCount !== 0
+    try {
+      await PostgresHelper.beginTransaction()
+      const result = await PostgresHelper.execute(query, params)
+      await PostgresHelper.commitTransaction()
+      return result.rowCount !== 0
+    } catch (error) {
+      await PostgresHelper.rollbackTransaction()
+      return null
+    }
   }
 }
