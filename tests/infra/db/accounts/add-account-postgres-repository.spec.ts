@@ -16,20 +16,20 @@ const makeSut = (): SutTypes => {
   }
 }
 
-beforeAll(async () => {
-  await PostgresHelper.connect(createDbTest())
-  await PostgresHelper.execute(sqlCreateDb)
-})
-
-beforeEach(async () => {
-  await PostgresHelper.execute(sqlClearDb)
-})
-
-afterAll(async () => {
-  await PostgresHelper.disconnect()
-})
-
 describe('Add Account Postgres Repository', () => {
+  beforeAll(async () => {
+    await PostgresHelper.connect(createDbTest())
+    await PostgresHelper.execute(sqlCreateDb)
+  })
+
+  beforeEach(async () => {
+    await PostgresHelper.execute(sqlClearDb)
+  })
+
+  afterAll(async () => {
+    await PostgresHelper.disconnect()
+  })
+
   test('should AddAccountPostgresRepository call IdentifierGenerator with correctly', async () => {
     const { sut, identifierGeneratorSpy } = makeSut()
     await sut.add(mockAddAccountParams())
