@@ -46,4 +46,10 @@ describe('Add Account Postgres Repository', () => {
     const response = await sut.add(mockAddAccountParams())
     expect(response).toBeTruthy()
   })
+  test('should AddAccountPostgresRepository return null if Postgres throw error', async () => {
+    const { sut } = makeSut()
+    jest.spyOn(PostgresHelper, 'execute').mockImplementationOnce(throwError)
+    const response = await sut.add(mockAddAccountParams())
+    expect(response).toBeNull()
+  })
 })

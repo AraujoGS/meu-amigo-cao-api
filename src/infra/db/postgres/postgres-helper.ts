@@ -22,3 +22,7 @@ export const PostgresHelper = {
     return this.client.query('ROLLBACK')
   }
 }
+
+export const PostgresClient = (uri: string): Pool => {
+  return new Pool({ connectionString: uri })
+}
