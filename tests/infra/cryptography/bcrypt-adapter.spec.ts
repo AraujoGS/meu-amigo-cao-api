@@ -48,5 +48,10 @@ describe('Bcrypt Adapter', () => {
       const promise = sut.compare({ value: fakePassword, hash: fakeHash })
       await expect(promise).rejects.toThrow()
     })
+    test('should BcryptAdapter return true if correct password', async () => {
+      const sut = makeSut()
+      const isValid = await sut.compare({ value: fakePassword, hash: fakeHash })
+      expect(isValid).toBe(true)
+    })
   })
 })
