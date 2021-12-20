@@ -20,6 +20,7 @@
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.11",
     "@types/pg": "^8.6.1",
+    "@types/uuid": "^8.3.3",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "eslint": "^7.12.1",
     "eslint-config-standard-with-typescript": "^21.0.1",
@@ -41,6 +42,7 @@
     "@": "dist"
   },
   "dependencies": {
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "uuid": "^8.3.2"
   }
 }
