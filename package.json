@@ -16,6 +16,7 @@
   "author": "Guilherme AS",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/faker": "^5.5.9",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.11",
@@ -42,6 +43,7 @@
     "@": "dist"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "pg": "^8.7.1",
     "uuid": "^8.3.2"
   }
