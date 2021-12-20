@@ -4,5 +4,5 @@ export namespace Encrypter {
 }
 
 export interface Encrypter {
-  encrypt: (value: Encrypter.Params) => Promise<Encrypter.Result>
+  encrypt: (value: Encrypter.Params) => Encrypter.Result
 }
