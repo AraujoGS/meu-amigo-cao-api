@@ -27,4 +27,9 @@ describe('Jwt Adapter', () => {
     jest.spyOn(jwt, 'sign').mockImplementationOnce(throwError)
     expect(() => sut.encrypt(fakeId)).toThrow()
   })
+  test('should JwtAdapter return token if success', () => {
+    const sut = makeSut()
+    const token = sut.encrypt(fakeId)
+    expect(token).toBe(fakeToken)
+  })
 })
