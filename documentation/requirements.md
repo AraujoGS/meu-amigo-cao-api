@@ -8,9 +8,9 @@
 - [X] validar se o telefone é um celular válido, se não retornar 400
 - [X] validar se o email é válido, se não retornar 400
 - [X] validar data de nascimento no formato yyyy-mm-dd, caso não esteja retornar 400
-- [ ] validar se o e-mail está em uso, caso esteja retornar 412
-- [ ] validar se o telefone está em uso, caso esteja retornar 412
-- [ ] validar se a conta foi de fato criada, caso não tenha sido retornar 412
+- [X] validar se o e-mail está em uso, caso esteja retornar 412
+- [X] validar se o telefone está em uso, caso esteja retornar 412
+- [X] validar se a conta foi de fato criada, caso não tenha sido retornar 412
 - [X] em caso de erro inesperado retornar 500
 - [ ] inserir a nova conta, retornar 201 e o usuário logado
 
