@@ -14,3 +14,10 @@ export const badRequest = (error: Error): HttpResponse => {
     body: error
   }
 }
+
+export const preconditionFailed = (error: Error): HttpResponse => {
+  return {
+    statusCode: 412,
+    body: error
+  }
+}

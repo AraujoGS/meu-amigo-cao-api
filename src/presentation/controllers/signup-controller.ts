@@ -1,5 +1,6 @@
+import { CreationAccountResult } from '@/domain/models'
 import { AddAccount } from '@/domain/usecases'
-import { internalServerError, badRequest } from '@/presentation/helpers'
+import { internalServerError, badRequest, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace SignUpController {
@@ -15,7 +16,8 @@ export namespace SignUpController {
 export class SignUpController implements Controller {
   constructor (
     private readonly addAccount: AddAccount,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly businessRulesValidation: Validation
   ) {}
 
   async handle (request: SignUpController.Request): Promise<HttpResponse> {
@@ -25,7 +27,17 @@ export class SignUpController implements Controller {
         return badRequest(clientError)
       }
       const { name, email, password, phone, birthDate } = request
-      this.addAccount.add({ name, email, password, phone, birthDate: new Date(`${birthDate} 00:00:00`).getTime() })
+      const result = await this.addAccount.add({
+        name,
+        email,
+        password,
+        phone,
+        birthDate: new Date(`${birthDate} 00:00:00`).getTime()
+      })
+      if (result !== CreationAccountResult.SUCCESS) {
+        const conditionFailed = this.businessRulesValidation.validate(result)
+        return preconditionFailed(conditionFailed)
+      }
     } catch (error) {
       return internalServerError(error)
     }
