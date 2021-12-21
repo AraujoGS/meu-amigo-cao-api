@@ -84,7 +84,7 @@ describe('SignUp Controller', () => {
     businessRulesValidationSpy.result = new CreationAccountError()
     const request = mockRequest()
     await sut.handle(request)
-    expect(businessRulesValidationSpy.input).toEqual(CreationAccountResult.ERROR)
+    expect(businessRulesValidationSpy.input).toEqual({ resultAddAccount: CreationAccountResult.ERROR })
   })
   test('should SignUpController return 500 if Authentication throw error', async () => {
     const { sut, authenticationSpy } = makeSut()
