@@ -1,5 +1,5 @@
 import { Validation } from '@/presentation/interfaces'
-import { EmailValidator, PhoneValidator } from '@/validation/interfaces'
+import { EmailValidator, PhoneValidator, DateValidator } from '@/validation/interfaces'
 
 export class ValidationSpy implements Validation {
   input: any
@@ -24,6 +24,15 @@ export class PhoneValidatorSpy implements PhoneValidator {
   result = true
   isValid (phone: string): boolean {
     this.phone = phone
+    return this.result
+  }
+}
+
+export class DateValidatorSpy implements DateValidator {
+  date: string
+  result = true
+  isValid (date: string): boolean {
+    this.date = date
     return this.result
   }
 }
