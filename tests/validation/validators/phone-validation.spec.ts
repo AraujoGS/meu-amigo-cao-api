@@ -2,6 +2,7 @@ import { PhoneValidation } from '@/validation/validators'
 import { PhoneValidatorSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 import { InvalidParamError } from '@/presentation/errors'
+import { throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: PhoneValidation
@@ -28,5 +29,10 @@ describe('Phone Validation', () => {
     phoneValidatorSpy.result = false
     const error = sut.validate({ phone: phoneFake })
     expect(error).toEqual(new InvalidParamError('phone'))
+  })
+  test('should PhoneValidation throw error if PhoneValidator throws', () => {
+    const { sut, phoneValidatorSpy } = makeSut()
+    jest.spyOn(phoneValidatorSpy, 'isValid').mockImplementationOnce(throwError)
+    expect(() => sut.validate({ phone: phoneFake })).toThrow()
   })
 })
