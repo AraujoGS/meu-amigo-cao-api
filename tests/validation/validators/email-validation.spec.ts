@@ -1,6 +1,7 @@
 import { EmailValidation } from '@/validation/validators'
-import { EmailValidatorSpy } from '@/tests/validation/mocks'
 import { InvalidParamError } from '@/presentation/errors'
+import { EmailValidatorSpy } from '@/tests/validation/mocks'
+import { throwError } from '@/tests/domain/mocks'
 import faker from 'faker'
 
 type SutTypes = {
@@ -28,5 +29,10 @@ describe('Email Validation', () => {
     emailValidatorSpy.result = false
     const error = sut.validate({ email: emailFake })
     expect(error).toEqual(new InvalidParamError('email'))
+  })
+  test('should EmailValidation throw error if EmailValidator throws', () => {
+    const { sut, emailValidatorSpy } = makeSut()
+    jest.spyOn(emailValidatorSpy, 'isValid').mockImplementationOnce(throwError)
+    expect(sut.validate).toThrow()
   })
 })
