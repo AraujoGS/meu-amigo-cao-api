@@ -12,7 +12,7 @@ type SutTypes = {
 const phoneFake = faker.phone.phoneNumber('###########')
 const makeSut = (): SutTypes => {
   const phoneValidatorSpy = new PhoneValidatorSpy()
-  const sut = new PhoneValidation(phoneValidatorSpy)
+  const sut = new PhoneValidation('phone', phoneValidatorSpy)
   return {
     sut,
     phoneValidatorSpy
