@@ -1,6 +1,7 @@
+import { CreationAccountResult } from '@/domain/models'
 import { SignUpController } from '@/presentation/controllers'
-import { MissingParamError, ServerError } from '@/presentation/errors'
-import { badRequest, internalServerError } from '@/presentation/helpers'
+import { MissingParamError, ServerError, CreationAccountError } from '@/presentation/errors'
+import { badRequest, internalServerError, preconditionFailed } from '@/presentation/helpers'
 import { throwError } from '@/tests/domain/mocks'
 import { AddAccountSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
@@ -10,16 +11,19 @@ type SutTypes = {
   sut: SignUpController
   addAccountSpy: AddAccountSpy
   validationSpy: ValidationSpy
+  businessRulesValidationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const addAccountSpy = new AddAccountSpy()
   const validationSpy = new ValidationSpy()
-  const sut = new SignUpController(addAccountSpy, validationSpy)
+  const businessRulesValidationSpy = new ValidationSpy()
+  const sut = new SignUpController(addAccountSpy, validationSpy, businessRulesValidationSpy)
   return {
     sut,
     addAccountSpy,
-    validationSpy
+    validationSpy,
+    businessRulesValidationSpy
   }
 }
 
@@ -63,5 +67,12 @@ describe('SignUp Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(validationSpy.input).toEqual(request)
+  })
+  test('should SignUpController return 412 if AddAccount not success', async () => {
+    const { sut, addAccountSpy, businessRulesValidationSpy } = makeSut()
+    addAccountSpy.result = CreationAccountResult.ERROR
+    businessRulesValidationSpy.result = new CreationAccountError()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(preconditionFailed(new CreationAccountError()))
   })
 })
