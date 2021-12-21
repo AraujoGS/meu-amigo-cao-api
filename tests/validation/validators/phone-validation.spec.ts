@@ -1,6 +1,7 @@
 import { PhoneValidation } from '@/validation/validators'
 import { PhoneValidatorSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
+import { InvalidParamError } from '@/presentation/errors'
 
 type SutTypes = {
   sut: PhoneValidation
@@ -21,5 +22,11 @@ describe('Phone Validation', () => {
     const { sut, phoneValidatorSpy } = makeSut()
     sut.validate({ phone: phoneFake })
     expect(phoneValidatorSpy.phone).toBe(phoneFake)
+  })
+  test('should PhoneValidation return error if PhoneValidator return false', () => {
+    const { sut, phoneValidatorSpy } = makeSut()
+    phoneValidatorSpy.result = false
+    const error = sut.validate({ phone: phoneFake })
+    expect(error).toEqual(new InvalidParamError('phone'))
   })
 })
