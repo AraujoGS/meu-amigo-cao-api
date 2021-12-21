@@ -1,4 +1,4 @@
-import { AddAccount } from '@/domain/usecases'
+import { AddAccount, Authentication } from '@/domain/usecases'
 import { internalServerError, badRequest, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
@@ -16,7 +16,8 @@ export class SignUpController implements Controller {
   constructor (
     private readonly addAccount: AddAccount,
     private readonly validation: Validation,
-    private readonly businessRulesValidation: Validation
+    private readonly businessRulesValidation: Validation,
+    private readonly authentication: Authentication
   ) {}
 
   async handle (request: SignUpController.Request): Promise<HttpResponse> {
@@ -37,6 +38,7 @@ export class SignUpController implements Controller {
       if (conditionFailed) {
         return preconditionFailed(conditionFailed)
       }
+      await this.authentication.auth({ email, password })
     } catch (error) {
       return internalServerError(error)
     }
