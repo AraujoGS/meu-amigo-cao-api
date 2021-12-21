@@ -28,7 +28,7 @@ export class HashComparerSpy implements HashComparer {
 export class EncrypterSpy implements Encrypter {
   value: Encrypter.Params
   result = faker.random.alphaNumeric()
-  async encrypt (value: Encrypter.Params): Promise<Encrypter.Result> {
+  encrypt (value: Encrypter.Params): Encrypter.Result {
     this.value = value
     return this.result
   }
