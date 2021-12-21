@@ -1,4 +1,3 @@
-import { CreationAccountResult } from '@/domain/models'
 import { AddAccount } from '@/domain/usecases'
 import { internalServerError, badRequest, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
@@ -34,8 +33,8 @@ export class SignUpController implements Controller {
         phone,
         birthDate: new Date(`${birthDate} 00:00:00`).getTime()
       })
-      if (result !== CreationAccountResult.SUCCESS) {
-        const conditionFailed = this.businessRulesValidation.validate(result)
+      const conditionFailed = this.businessRulesValidation.validate(result)
+      if (conditionFailed) {
         return preconditionFailed(conditionFailed)
       }
     } catch (error) {
