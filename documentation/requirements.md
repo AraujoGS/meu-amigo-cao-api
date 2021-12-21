@@ -7,6 +7,7 @@
 - [ ] validar inputs e retornar 400 caso algum campo esteja faltando
 - [ ] validar se o telefone é um celular válido, se não retornar 400
 - [ ] validar se o email é válido, se não retornar 400
+- [ ] validar data de nascimento no formato yyyy-mm-dd, caso não esteja retornar 400
 - [ ] validar se o e-mail está em uso, caso esteja retornar 412
 - [ ] validar se o telefone está em uso, caso esteja retornar 412
 - [ ] validar se a conta foi de fato criada, caso não tenha sido retornar 412
