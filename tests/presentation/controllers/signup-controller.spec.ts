@@ -1,7 +1,7 @@
 import { CreationAccountResult } from '@/domain/models'
 import { SignUpController } from '@/presentation/controllers'
 import { MissingParamError, ServerError, CreationAccountError } from '@/presentation/errors'
-import { badRequest, internalServerError, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, created, internalServerError, preconditionFailed } from '@/presentation/helpers'
 import { throwError } from '@/tests/domain/mocks'
 import { AddAccountSpy, AuthenticationSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
@@ -100,5 +100,11 @@ describe('SignUp Controller', () => {
       email: request.email,
       password: request.password
     })
+  })
+  test('should SignUpController return 201 if success', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    const request = mockRequest()
+    const response = await sut.handle(request)
+    expect(response).toEqual(created(authenticationSpy.result))
   })
 })
