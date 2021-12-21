@@ -34,7 +34,7 @@ export class SignUpController implements Controller {
         phone,
         birthDate: new Date(`${birthDate} 00:00:00`).getTime()
       })
-      const conditionFailed = this.businessRulesValidation.validate(result)
+      const conditionFailed = this.businessRulesValidation.validate({ resultAddAccount: result })
       if (conditionFailed) {
         return preconditionFailed(conditionFailed)
       }
