@@ -1,7 +1,7 @@
 import { SignUpController } from '@/presentation/controllers'
 import { ServerError } from '@/presentation/errors'
 import { internalServerError } from '@/presentation/helpers'
-import { throwError } from '@/tests/domain/mocks'
+import { mockAddAccountParams, throwError } from '@/tests/domain/mocks'
 import { AddAccountSpy } from '@/tests/presentation/mocks'
 import faker from 'faker'
 
@@ -34,5 +34,16 @@ describe('SignUp Controller', () => {
     jest.spyOn(addAccountSpy, 'add').mockImplementationOnce(throwError)
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(internalServerError(new ServerError(null)))
+  })
+  test('should SignUpController call AddAccount with correct values', async () => {
+    const { sut, addAccountSpy } = makeSut()
+    const params = mockAddAccountParams()
+    const request = {
+      ...params,
+      birthDate: new Date(params.birthDate),
+      passwordConfirmation: params.password
+    }
+    await sut.handle(request)
+    expect(addAccountSpy.params).toEqual(params)
   })
 })
