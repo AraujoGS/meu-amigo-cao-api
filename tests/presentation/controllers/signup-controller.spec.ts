@@ -58,4 +58,10 @@ describe('SignUp Controller', () => {
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(badRequest(new MissingParamError(fakeParam)))
   })
+  test('should SignUpController call Validation with correct values', async () => {
+    const { sut, validationSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(validationSpy.input).toEqual(request)
+  })
 })
