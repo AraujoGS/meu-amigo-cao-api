@@ -1,21 +1,25 @@
 import { SignUpController } from '@/presentation/controllers'
-import { ServerError } from '@/presentation/errors'
-import { internalServerError } from '@/presentation/helpers'
-import { mockAddAccountParams, throwError } from '@/tests/domain/mocks'
+import { MissingParamError, ServerError } from '@/presentation/errors'
+import { badRequest, internalServerError } from '@/presentation/helpers'
+import { throwError } from '@/tests/domain/mocks'
 import { AddAccountSpy } from '@/tests/presentation/mocks'
+import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 
 type SutTypes = {
   sut: SignUpController
   addAccountSpy: AddAccountSpy
+  validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const addAccountSpy = new AddAccountSpy()
-  const sut = new SignUpController(addAccountSpy)
+  const validationSpy = new ValidationSpy()
+  const sut = new SignUpController(addAccountSpy, validationSpy)
   return {
     sut,
-    addAccountSpy
+    addAccountSpy,
+    validationSpy
   }
 }
 
@@ -25,7 +29,7 @@ const mockRequest = (): SignUpController.Request => ({
   password: faker.random.word(),
   passwordConfirmation: faker.random.word(),
   phone: faker.phone.phoneNumber('###########'),
-  birthDate: faker.date.past()
+  birthDate: '1997-05-30'
 })
 
 describe('SignUp Controller', () => {
@@ -37,13 +41,21 @@ describe('SignUp Controller', () => {
   })
   test('should SignUpController call AddAccount with correct values', async () => {
     const { sut, addAccountSpy } = makeSut()
-    const params = mockAddAccountParams()
-    const request = {
-      ...params,
-      birthDate: new Date(params.birthDate),
-      passwordConfirmation: params.password
-    }
+    const request = mockRequest()
     await sut.handle(request)
-    expect(addAccountSpy.params).toEqual(params)
+    expect(addAccountSpy.params).toEqual({
+      name: request.name,
+      email: request.email,
+      password: request.password,
+      phone: request.phone,
+      birthDate: new Date(`${request.birthDate} 00:00:00`).getTime()
+    })
+  })
+  test('should SignUpController return 400 if Validation throw error', async () => {
+    const { sut, validationSpy } = makeSut()
+    const fakeParam = faker.random.word()
+    validationSpy.result = new MissingParamError(fakeParam)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(badRequest(new MissingParamError(fakeParam)))
   })
 })
