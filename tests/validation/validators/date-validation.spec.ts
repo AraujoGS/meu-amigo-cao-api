@@ -1,6 +1,7 @@
 import { DateValidation } from '@/validation/validators'
 import { DateValidatorSpy } from '@/tests/validation/mocks'
 import { InvalidParamError } from '@/presentation/errors'
+import { throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DateValidation
@@ -28,5 +29,10 @@ describe('Date Validation', () => {
     dateValidatorSpy.result = false
     const error = sut.validate({ birthDate })
     expect(error).toEqual(new InvalidParamError('birthDate'))
+  })
+  test('should DateValidation throw error if DateValidator throws', () => {
+    const { sut, dateValidatorSpy } = makeSut()
+    jest.spyOn(dateValidatorSpy, 'isValid').mockImplementationOnce(throwError)
+    expect(() => sut.validate({ birthDate })).toThrow()
   })
 })
