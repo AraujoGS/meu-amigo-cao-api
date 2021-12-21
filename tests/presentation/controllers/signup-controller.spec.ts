@@ -3,7 +3,7 @@ import { SignUpController } from '@/presentation/controllers'
 import { MissingParamError, ServerError, CreationAccountError } from '@/presentation/errors'
 import { badRequest, internalServerError, preconditionFailed } from '@/presentation/helpers'
 import { throwError } from '@/tests/domain/mocks'
-import { AddAccountSpy } from '@/tests/presentation/mocks'
+import { AddAccountSpy, AuthenticationSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 
@@ -12,18 +12,21 @@ type SutTypes = {
   addAccountSpy: AddAccountSpy
   validationSpy: ValidationSpy
   businessRulesValidationSpy: ValidationSpy
+  authenticationSpy: AuthenticationSpy
 }
 
 const makeSut = (): SutTypes => {
   const addAccountSpy = new AddAccountSpy()
   const validationSpy = new ValidationSpy()
   const businessRulesValidationSpy = new ValidationSpy()
-  const sut = new SignUpController(addAccountSpy, validationSpy, businessRulesValidationSpy)
+  const authenticationSpy = new AuthenticationSpy()
+  const sut = new SignUpController(addAccountSpy, validationSpy, businessRulesValidationSpy, authenticationSpy)
   return {
     sut,
     addAccountSpy,
     validationSpy,
-    businessRulesValidationSpy
+    businessRulesValidationSpy,
+    authenticationSpy
   }
 }
 
@@ -55,7 +58,7 @@ describe('SignUp Controller', () => {
       birthDate: new Date(`${request.birthDate} 00:00:00`).getTime()
     })
   })
-  test('should SignUpController return 400 if Validation throw error', async () => {
+  test('should SignUpController return 400 if Validation return error', async () => {
     const { sut, validationSpy } = makeSut()
     const fakeParam = faker.random.word()
     validationSpy.result = new MissingParamError(fakeParam)
@@ -82,5 +85,11 @@ describe('SignUp Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(businessRulesValidationSpy.input).toEqual(CreationAccountResult.ERROR)
+  })
+  test('should SignUpController return 500 if Authentication throw error', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    jest.spyOn(authenticationSpy, 'auth').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new ServerError(null)))
   })
 })
