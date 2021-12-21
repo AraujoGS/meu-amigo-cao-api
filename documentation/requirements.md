@@ -12,7 +12,7 @@
 - [X] validar se o telefone está em uso, caso esteja retornar 412
 - [X] validar se a conta foi de fato criada, caso não tenha sido retornar 412
 - [X] em caso de erro inesperado retornar 500
-- [ ] inserir a nova conta, retornar 201 e o usuário logado
+- [X] inserir a nova conta, retornar 201 e o usuário logado
 
 -Login de cliente (deslogado)
 - [ ] inputs: email e senha
