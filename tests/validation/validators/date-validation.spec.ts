@@ -1,5 +1,6 @@
 import { DateValidation } from '@/validation/validators'
 import { DateValidatorSpy } from '@/tests/validation/mocks'
+import { InvalidParamError } from '@/presentation/errors'
 
 type SutTypes = {
   sut: DateValidation
@@ -21,5 +22,11 @@ describe('Date Validation', () => {
     const { sut, dateValidatorSpy } = makeSut()
     sut.validate({ birthDate })
     expect(dateValidatorSpy.date).toBe(birthDate)
+  })
+  test('should DateValidation return error if DateValidator return false', () => {
+    const { sut, dateValidatorSpy } = makeSut()
+    dateValidatorSpy.result = false
+    const error = sut.validate({ birthDate })
+    expect(error).toEqual(new InvalidParamError('birthDate'))
   })
 })
