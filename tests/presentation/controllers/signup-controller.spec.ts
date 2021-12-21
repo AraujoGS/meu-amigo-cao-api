@@ -75,4 +75,12 @@ describe('SignUp Controller', () => {
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new CreationAccountError()))
   })
+  test('should SignUpController call BusinessRulesValidation with correct value', async () => {
+    const { sut, addAccountSpy, businessRulesValidationSpy } = makeSut()
+    addAccountSpy.result = CreationAccountResult.ERROR
+    businessRulesValidationSpy.result = new CreationAccountError()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(businessRulesValidationSpy.input).toEqual(CreationAccountResult.ERROR)
+  })
 })
