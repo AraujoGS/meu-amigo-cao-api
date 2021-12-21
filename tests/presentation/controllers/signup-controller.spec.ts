@@ -92,4 +92,13 @@ describe('SignUp Controller', () => {
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(internalServerError(new ServerError(null)))
   })
+  test('should SignUpController call Authentication with correct values', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(authenticationSpy.params).toEqual({
+      email: request.email,
+      password: request.password
+    })
+  })
 })
