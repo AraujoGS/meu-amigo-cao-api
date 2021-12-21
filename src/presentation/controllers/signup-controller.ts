@@ -1,5 +1,5 @@
 import { AddAccount, Authentication } from '@/domain/usecases'
-import { internalServerError, badRequest, preconditionFailed } from '@/presentation/helpers'
+import { internalServerError, badRequest, preconditionFailed, created } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace SignUpController {
@@ -38,7 +38,8 @@ export class SignUpController implements Controller {
       if (conditionFailed) {
         return preconditionFailed(conditionFailed)
       }
-      await this.authentication.auth({ email, password })
+      const user = await this.authentication.auth({ email, password })
+      return created(user)
     } catch (error) {
       return internalServerError(error)
     }

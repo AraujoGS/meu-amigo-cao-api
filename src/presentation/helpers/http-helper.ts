@@ -21,3 +21,10 @@ export const preconditionFailed = (error: Error): HttpResponse => {
     body: error
   }
 }
+
+export const created = (data?: any): HttpResponse => {
+  return {
+    statusCode: 201,
+    body: data
+  }
+}
