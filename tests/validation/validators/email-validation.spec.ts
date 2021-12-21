@@ -12,7 +12,7 @@ type SutTypes = {
 const emailFake = faker.internet.email()
 const makeSut = (): SutTypes => {
   const emailValidatorSpy = new EmailValidatorSpy()
-  const sut = new EmailValidation(emailValidatorSpy)
+  const sut = new EmailValidation('email', emailValidatorSpy)
   return {
     sut,
     emailValidatorSpy

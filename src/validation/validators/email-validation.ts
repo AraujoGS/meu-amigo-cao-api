@@ -3,11 +3,15 @@ import { Validation } from '@/presentation/interfaces'
 import { EmailValidator } from '@/validation/interfaces'
 
 export class EmailValidation implements Validation {
-  constructor (private readonly emailValidator: EmailValidator) {}
+  constructor (
+    private readonly field: string,
+    private readonly emailValidator: EmailValidator
+  ) {}
+
   validate (input: any): Error {
-    const isValid = this.emailValidator.isValid(input.email)
+    const isValid = this.emailValidator.isValid(input[this.field])
     if (!isValid) {
-      return new InvalidParamError('email')
+      return new InvalidParamError(this.field)
     }
   }
 }
