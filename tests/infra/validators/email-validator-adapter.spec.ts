@@ -15,4 +15,9 @@ describe('Email Validator Adapter', () => {
     sut.isValid(emailFake)
     expect(isEmailSpy).toHaveBeenCalledWith(emailFake)
   })
+  test('should EmailValidatorAdapter return true if validator return true', () => {
+    const sut = makeSut()
+    const isValid = sut.isValid(emailFake)
+    expect(isValid).toBe(true)
+  })
 })
