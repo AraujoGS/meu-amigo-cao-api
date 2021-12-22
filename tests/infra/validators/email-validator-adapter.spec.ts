@@ -1,6 +1,7 @@
 import { EmailValidatorAdapter } from '@/infra/validators'
 import validator from 'validator'
 import faker from 'faker'
+import { throwError } from '@/tests/domain/mocks'
 
 const emailFake = faker.internet.email()
 const makeSut = (): EmailValidatorAdapter => new EmailValidatorAdapter()
@@ -25,5 +26,10 @@ describe('Email Validator Adapter', () => {
     jest.spyOn(validator, 'isEmail').mockImplementationOnce(() => false)
     const isValid = sut.isValid(emailFake)
     expect(isValid).toBe(false)
+  })
+  test('should EmailValidatorAdapter throw error if validator throws', () => {
+    const sut = makeSut()
+    jest.spyOn(validator, 'isEmail').mockImplementationOnce(throwError)
+    expect(() => sut.isValid(emailFake)).toThrow()
   })
 })
