@@ -8,7 +8,7 @@ type AccountModel = {
   email: string
   password: string
   phone: string
-  birthDate: number
+  birthDate: Date
 }
 
 export const mockAccount = async (): Promise<AccountModel> => {

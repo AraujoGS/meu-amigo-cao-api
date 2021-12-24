@@ -32,7 +32,7 @@ export class SignUpController implements Controller {
         email,
         password,
         phone,
-        birthDate: new Date(`${birthDate} 00:00:00`).getTime()
+        birthDate: new Date(`${birthDate} 00:00:00`)
       })
       const conditionFailed = this.businessRulesValidation.validate({ resultAddAccount: result })
       if (conditionFailed) {

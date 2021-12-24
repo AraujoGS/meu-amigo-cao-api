@@ -55,7 +55,7 @@ describe('SignUp Controller', () => {
       email: request.email,
       password: request.password,
       phone: request.phone,
-      birthDate: new Date(`${request.birthDate} 00:00:00`).getTime()
+      birthDate: new Date(`${request.birthDate} 00:00:00`)
     })
   })
   test('should SignUpController return 400 if Validation return error', async () => {

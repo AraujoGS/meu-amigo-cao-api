@@ -6,7 +6,7 @@ export const mockAddAccountParams = (): AddAccount.Params => ({
   email: faker.internet.email(),
   password: faker.random.word(),
   phone: faker.phone.phoneNumber('###########'),
-  birthDate: faker.date.past().getTime()
+  birthDate: faker.date.past()
 })
 
 export const mockAuthenticationParams = (): Authentication.Params => ({

@@ -3,5 +3,5 @@ export type AddAccountModel = {
   email: string
   password: string
   phone: string
-  birthDate: number
+  birthDate: Date
 }

@@ -7,7 +7,7 @@ export const sqlCreateDb = `CREATE TABLE IF NOT EXISTS CLIENTES (
   senha_cliente VARCHAR(150) NOT NULL,
   email_cliente VARCHAR(120) CONSTRAINT UK_EMAIL_CLIENTE UNIQUE NOT NULL,
   telefone_cliente VARCHAR(11) CONSTRAINT UK_TELEFONE_CLIENTE UNIQUE NOT NULL,
-  data_nascimento_cliente INTEGER NOT NULL,
+  data_nascimento_cliente DATE NOT NULL,
   token_acesso VARCHAR(250)
 );
 
