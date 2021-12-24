@@ -36,6 +36,20 @@ describe('Account Routes', () => {
         .send(payload)
         .expect(201)
     })
+    test('should signup route return 400 if fail', async () => {
+      const fakePwd = '123'
+      const payload = {
+        name: 'Guilherme de Araujo',
+        email: 'guilhermearaujo421@gmail.com',
+        password: fakePwd,
+        passwordConfirmation: fakePwd,
+        phone: '11954976863'
+      }
+      await request(app)
+        .post('/api/signup')
+        .send(payload)
+        .expect(400)
+    })
     test('should signup route return 412 if fail', async () => {
       const password = await hash('123', 12)
       const phone = '11954976863'
