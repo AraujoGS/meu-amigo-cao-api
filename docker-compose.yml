@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  postgres:
+    container_name: db-container
+    image: postgres
+    restart: always  
+    volumes:
+      - ./data/db:/var/lib/postgresql 
+    ports: 
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: guilhermeDev
+      POSTGRES_USER: guilhermeDev
+      POSTGRES_DB: db-petshop
+  api:
+    container_name: api-container
+    image: node:14
+    working_dir: /usr/src/meu-amigo-cao-api
+    restart: always
+    command: bash -c "npm i --only=prod && npm run debug"
+    volumes:
+      - ./dist/:/usr/src/meu-amigo-cao-api/dist
+      - ./package.json:/usr/src/meu-amigo-cao-api/package.json
+      - ./.env.docker:/usr/src/meu-amigo-cao-api/.env # o arquivo .env.docker deve ser criado na máquina com as mesmas chaves do .env.example
+    ports:
+      - "9000:9000"
+      - "9222:9222" 
+    links:
+      - postgres

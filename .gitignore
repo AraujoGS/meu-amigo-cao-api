@@ -3,6 +3,8 @@ package-lock.json
 coverage
 dist
 .env
+.env.docker
 **/*.localz
 **/*.local
 .vscode
+data
