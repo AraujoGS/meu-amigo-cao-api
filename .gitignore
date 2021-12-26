@@ -5,3 +5,4 @@ dist
 .env
 **/*.localz
 **/*.local
+.vscode
