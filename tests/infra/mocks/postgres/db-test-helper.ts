@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS PETS (
 
 CREATE TABLE IF NOT EXISTS AGENDAMENTOS (
   id_agendamento  UUID CONSTRAINT PK_ID_AGENDAMENTO PRIMARY KEY,
-  data_agendamento  TIMESTAMP NOT NULL,
+  data_agendamento  DATE NOT NULL,
   observacoes VARCHAR(300),
   id_pet UUID,
   id_servico SMALLINT,

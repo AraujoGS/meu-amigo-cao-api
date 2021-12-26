@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS CLIENTES (
   id_cliente  UUID CONSTRAINT PK_ID_CLIENTE PRIMARY KEY,
   nome_cliente VARCHAR(100) NOT NULL,
-  email_cliente VARCHAR(120) CONSTRAINT UK_EMAIL_CLIENTE UNIQUE NOT NULL,
   senha_cliente VARCHAR(150) NOT NULL,
+  email_cliente VARCHAR(120) CONSTRAINT UK_EMAIL_CLIENTE UNIQUE NOT NULL,
   telefone_cliente VARCHAR(11) CONSTRAINT UK_TELEFONE_CLIENTE UNIQUE NOT NULL,
-  data_nascimento_cliente TIMESTAMP NOT NULL,
+  data_nascimento_cliente DATE NOT NULL,
   token_acesso VARCHAR(250)
 );
 
@@ -17,7 +17,10 @@ CREATE TABLE IF NOT EXISTS ENDERECOS (
   complemento VARCHAR(80),
   cidade  VARCHAR(100) NOT NULL,
   uf VARCHAR(2) NOT NULL,
-  id_cliente UUID REFERENCES CLIENTES (id_cliente)
+  id_cliente UUID,
+  CONSTRAINT FK_ID_CLIENTE_ENDERECOS
+    FOREIGN KEY (id_cliente)
+     REFERENCES CLIENTES (id_cliente)
 );
 
 CREATE TABLE IF NOT EXISTS PORTE_PET (
@@ -40,17 +43,32 @@ CREATE TABLE IF NOT EXISTS PETS (
   nome_pet  VARCHAR(100) NOT NULL,
   cor_pet   VARCHAR(120) NOT NULL,
   consideracoes VARCHAR(300),
-  id_cliente UUID REFERENCES CLIENTES (id_cliente),
-  id_raca SMALLINT REFERENCES RACA_PET (id_raca),
-  id_porte SMALLINT REFERENCES PORTE_PET (id_porte)
+  id_cliente UUID,
+  id_raca SMALLINT,
+  id_porte SMALLINT,
+  CONSTRAINT FK_ID_CLIENTE_PETS
+    FOREIGN KEY (id_cliente)
+      REFERENCES CLIENTES (id_cliente),
+  CONSTRAINT FK_ID_RACA_PETS
+    FOREIGN KEY (id_raca)
+      REFERENCES RACA_PET (id_raca),
+  CONSTRAINT FK_ID_PORTE_PETS
+    FOREIGN KEY (id_porte)
+      REFERENCES PORTE_PET(id_porte)
 );
 
 CREATE TABLE IF NOT EXISTS AGENDAMENTOS (
   id_agendamento  UUID CONSTRAINT PK_ID_AGENDAMENTO PRIMARY KEY,
-  data_agendamento  TIMESTAMP NOT NULL,
+  data_agendamento  DATE NOT NULL,
   observacoes VARCHAR(300),
-  id_pet UUID REFERENCES PETS (id_pet),
-  id_servico SMALLINT REFERENCES SERVICOS (id_servico)  
+  id_pet UUID,
+  id_servico SMALLINT,
+  CONSTRAINT FK_ID_PET_AGENDAMENTOS
+    FOREIGN KEY (id_pet)
+      REFERENCES PETS (id_pet),
+  CONSTRAINT FK_ID_SERVICO_AGENDAMENTOS
+    FOREIGN KEY (id_servico)
+      REFERENCES SERVICOS (id_servico)
 );
 
 INSERT INTO PORTE_PET (id_porte, titulo_porte)
@@ -115,4 +133,4 @@ VALUES (1, 'Akita'),
   (46, 'Weimaraner'),
   (47, 'Yorkshire'),
   (48, 'Outro')
-ON CONFLICT (id_raca) DO UPDATE SET nome_raca = EXCLUDED.nome_raca;
+ON CONFLICT (id_raca) DO UPDATE SET nome_raca = EXCLUDED.nome_raca
