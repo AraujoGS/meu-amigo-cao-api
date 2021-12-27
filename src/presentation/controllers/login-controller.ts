@@ -1,5 +1,5 @@
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
-import { badRequest, unauthorized } from '@/presentation/helpers'
+import { badRequest, unauthorized, ok } from '@/presentation/helpers'
 import { Authentication } from '@/domain/usecases'
 
 export namespace LoginController {
@@ -20,7 +20,10 @@ export class LoginController implements Controller {
     if (clientError) {
       return badRequest(clientError)
     }
-    await this.authentication.auth(httpRequest)
-    return unauthorized()
+    const user = await this.authentication.auth(httpRequest)
+    if (!user) {
+      return unauthorized()
+    }
+    return ok(user)
   }
 }
