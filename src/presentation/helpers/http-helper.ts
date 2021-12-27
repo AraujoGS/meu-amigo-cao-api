@@ -1,5 +1,5 @@
 import { HttpResponse } from '@/presentation/interfaces'
-import { ServerError } from '@/presentation/errors'
+import { ServerError, UnauthorizedError } from '@/presentation/errors'
 
 export const internalServerError = (error: Error): HttpResponse => {
   return {
@@ -26,5 +26,12 @@ export const created = (data?: any): HttpResponse => {
   return {
     statusCode: 201,
     body: data
+  }
+}
+
+export const unauthorized = (): HttpResponse => {
+  return {
+    statusCode: 401,
+    body: new UnauthorizedError()
   }
 }
