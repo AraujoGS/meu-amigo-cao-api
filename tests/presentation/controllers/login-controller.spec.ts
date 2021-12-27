@@ -1,4 +1,6 @@
 import { LoginController } from '@/presentation/controllers'
+import { MissingParamError } from '@/presentation/errors'
+import { badRequest } from '@/presentation/helpers'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 
@@ -27,5 +29,12 @@ describe('Login Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(validationSpy.input).toEqual(request)
+  })
+  test('should LoginController return 400 if Validation return error', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.result = new MissingParamError('password')
+    const request = mockRequest()
+    const response = await sut.handle(request)
+    expect(response).toEqual(badRequest(new MissingParamError('password')))
   })
 })
