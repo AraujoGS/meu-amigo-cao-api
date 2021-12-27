@@ -2,7 +2,7 @@ import { DateValidatorAdapter, EmailValidatorAdapter } from '@/infra/validators'
 import { Validation } from '@/presentation/interfaces'
 import { CompareFieldsValidation, DateValidation, EmailValidation, PhoneValidation, RequiredFieldValidation, ValidationComposite } from '@/validation/validators'
 
-export const makeSignUpValidationFactory = (): Validation => {
+export const makeSignUpValidation = (): Validation => {
   const fields = ['name', 'email', 'password', 'passwordConfirmation', 'phone', 'birthDate']
   const validations: Validation[] = []
   for (const field of fields) {
