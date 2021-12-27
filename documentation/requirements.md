@@ -15,11 +15,11 @@
 - [X] inserir a nova conta, retornar 201 e o usuário logado
 
 -Login de cliente (deslogado)
-- [ ] inputs: email e senha
-- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando
-- [ ] tentar login e em caso de problema com os dados retornar 401
-- [ ] em caso de erro inesperado retornar 500
-- [ ] tentar login e em caso de sucesso retornar 200 com o usuário logado 
+- [X] inputs: email e senha
+- [X] validar os inputs e retornar 400 caso algum campo esteja faltando
+- [X] tentar login e em caso de problema com os dados retornar 401
+- [X] em caso de erro inesperado retornar 500
+- [X] tentar login e em caso de sucesso retornar 200 com o usuário logado 
 
 -Esqueci minha senha (deslogado)
 - [ ] inputs: email e telefone
