@@ -15,7 +15,7 @@ export class AuthenticationSpy implements Authentication {
   params: Authentication.Params
   result: Authentication.Result = {
     name: faker.name.findName(),
-    accessToken: faker.random.alphaNumeric()
+    accessToken: faker.random.alphaNumeric(32)
   }
 
   async auth (data: Authentication.Params): Promise<Authentication.Result> {
