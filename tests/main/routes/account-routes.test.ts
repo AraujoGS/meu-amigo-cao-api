@@ -90,5 +90,13 @@ describe('Account Routes', () => {
         })
         .expect(200)
     })
+    test('should login route return 400 if fail', async () => {
+      await request(app)
+        .post('/api/login')
+        .send({
+          email: 'guilhermearaujo421@gmail.com'
+        })
+        .expect(400)
+    })
   })
 })
