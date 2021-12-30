@@ -19,7 +19,7 @@ describe('Load Account By Email Postgres Repository', () => {
   afterAll(async () => {
     await PostgresHelper.disconnect()
   })
-  test('should LoadAccountByEmailPostgresRepository return data if account exists', async () => {
+  it('should LoadAccountByEmailPostgresRepository return data if account exists', async () => {
     const sut = makeSut()
     const params = await mockAccount()
     const response = await sut.loadByEmail(params.email)
@@ -28,7 +28,7 @@ describe('Load Account By Email Postgres Repository', () => {
     expect(response.name).toBe(params.name)
     expect(response.password).toBe(params.password)
   })
-  test('should LoadAccountByEmailPostgresRepository return null if account not exists', async () => {
+  it('should LoadAccountByEmailPostgresRepository return null if account not exists', async () => {
     const sut = makeSut()
     const emailFake = faker.internet.email()
     const response = await sut.loadByEmail(emailFake)

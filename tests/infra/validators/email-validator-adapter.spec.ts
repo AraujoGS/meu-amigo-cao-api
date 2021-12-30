@@ -10,24 +10,24 @@ jest.mock('validator', () => ({
 }))
 
 describe('Email Validator Adapter', () => {
-  test('should EmailValidatorAdapter call validator with correct email', () => {
+  it('should EmailValidatorAdapter call validator with correct email', () => {
     const sut = makeSut()
     const isEmailSpy = jest.spyOn(validator, 'isEmail')
     sut.isValid(emailFake)
     expect(isEmailSpy).toHaveBeenCalledWith(emailFake)
   })
-  test('should EmailValidatorAdapter return true if validator return true', () => {
+  it('should EmailValidatorAdapter return true if validator return true', () => {
     const sut = makeSut()
     const isValid = sut.isValid(emailFake)
     expect(isValid).toBe(true)
   })
-  test('should EmailValidatorAdapter return false if validator return false', () => {
+  it('should EmailValidatorAdapter return false if validator return false', () => {
     const sut = makeSut()
     jest.spyOn(validator, 'isEmail').mockImplementationOnce(() => false)
     const isValid = sut.isValid(emailFake)
     expect(isValid).toBe(false)
   })
-  test('should EmailValidatorAdapter throw error if validator throws', () => {
+  it('should EmailValidatorAdapter throw error if validator throws', () => {
     const sut = makeSut()
     jest.spyOn(validator, 'isEmail').mockImplementationOnce(throwError)
     expect(() => sut.isValid(emailFake)).toThrow()

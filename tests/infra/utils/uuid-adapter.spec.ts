@@ -14,18 +14,18 @@ const makeSut = (): UuidAdapter => {
 }
 
 describe('UUID Adapter', () => {
-  test('should UuidAdapter call uuid correctly', () => {
+  it('should UuidAdapter call uuid correctly', () => {
     const sut = makeSut()
     const uuidSpy = jest.spyOn(uuid, 'v4')
     sut.generate()
     expect(uuidSpy).toHaveBeenCalled()
   })
-  test('should UuidAdapter throw error if uuid throws', () => {
+  it('should UuidAdapter throw error if uuid throws', () => {
     const sut = makeSut()
     jest.spyOn(uuid, 'v4').mockImplementationOnce(throwError)
     expect(() => sut.generate()).toThrow()
   })
-  test('should UuidAdapter generate unique identifier valid', () => {
+  it('should UuidAdapter generate unique identifier valid', () => {
     const sut = makeSut()
     const uuid = sut.generate()
     expect(uuid).toBe(fakeUuid)

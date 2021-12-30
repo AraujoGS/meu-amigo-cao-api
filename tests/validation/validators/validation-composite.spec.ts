@@ -20,20 +20,20 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Validation Composite', () => {
-  test('should ValidationComposite return an error if any Validation returns an error', () => {
+  it('should ValidationComposite return an error if any Validation returns an error', () => {
     const { sut, validationSpys } = makeSut()
     jest.spyOn(validationSpys[0], 'validate').mockImplementationOnce(() => new MissingParamError('field'))
     const error = sut.validate({ field: 'any_field' })
     expect(error).toEqual(new MissingParamError('field'))
   })
-  test('should ValidationComposite return the first error throws', () => {
+  it('should ValidationComposite return the first error throws', () => {
     const { sut, validationSpys } = makeSut()
     jest.spyOn(validationSpys[0], 'validate').mockImplementationOnce(() => new Error())
     jest.spyOn(validationSpys[1], 'validate').mockImplementationOnce(() => new MissingParamError('field'))
     const error = sut.validate({ field: 'any_field' })
     expect(error).toEqual(new Error())
   })
-  test('should ValidationComposite not return error if validation success', () => {
+  it('should ValidationComposite not return error if validation success', () => {
     const { sut } = makeSut()
     const response = sut.validate({ field: 'any_field' })
     expect(response).toBeFalsy()

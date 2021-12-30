@@ -40,13 +40,13 @@ const mockRequest = (): SignUpController.Request => ({
 })
 
 describe('SignUp Controller', () => {
-  test('should SignUpController return 500 if AddAccount throw error', async () => {
+  it('should SignUpController return 500 if AddAccount throw error', async () => {
     const { sut, addAccountSpy } = makeSut()
     jest.spyOn(addAccountSpy, 'add').mockImplementationOnce(throwError)
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(internalServerError(new ServerError(null)))
   })
-  test('should SignUpController call AddAccount with correct values', async () => {
+  it('should SignUpController call AddAccount with correct values', async () => {
     const { sut, addAccountSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
@@ -58,27 +58,27 @@ describe('SignUp Controller', () => {
       birthDate: new Date(`${request.birthDate} 00:00:00`)
     })
   })
-  test('should SignUpController return 400 if Validation return error', async () => {
+  it('should SignUpController return 400 if Validation return error', async () => {
     const { sut, validationSpy } = makeSut()
     const fakeParam = faker.random.word()
     validationSpy.result = new MissingParamError(fakeParam)
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(badRequest(new MissingParamError(fakeParam)))
   })
-  test('should SignUpController call Validation with correct values', async () => {
+  it('should SignUpController call Validation with correct values', async () => {
     const { sut, validationSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
     expect(validationSpy.input).toEqual(request)
   })
-  test('should SignUpController return 412 if AddAccount not success', async () => {
+  it('should SignUpController return 412 if AddAccount not success', async () => {
     const { sut, addAccountSpy, businessRulesValidationSpy } = makeSut()
     addAccountSpy.result = CreationAccountResult.ERROR
     businessRulesValidationSpy.result = new CreationAccountError()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new CreationAccountError()))
   })
-  test('should SignUpController call BusinessRulesValidation with correct value', async () => {
+  it('should SignUpController call BusinessRulesValidation with correct value', async () => {
     const { sut, addAccountSpy, businessRulesValidationSpy } = makeSut()
     addAccountSpy.result = CreationAccountResult.ERROR
     businessRulesValidationSpy.result = new CreationAccountError()
@@ -86,13 +86,13 @@ describe('SignUp Controller', () => {
     await sut.handle(request)
     expect(businessRulesValidationSpy.input).toEqual({ resultAddAccount: CreationAccountResult.ERROR })
   })
-  test('should SignUpController return 500 if Authentication throw error', async () => {
+  it('should SignUpController return 500 if Authentication throw error', async () => {
     const { sut, authenticationSpy } = makeSut()
     jest.spyOn(authenticationSpy, 'auth').mockImplementationOnce(throwError)
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(internalServerError(new ServerError(null)))
   })
-  test('should SignUpController call Authentication with correct values', async () => {
+  it('should SignUpController call Authentication with correct values', async () => {
     const { sut, authenticationSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
@@ -101,7 +101,7 @@ describe('SignUp Controller', () => {
       password: request.password
     })
   })
-  test('should SignUpController return 201 if success', async () => {
+  it('should SignUpController return 201 if success', async () => {
     const { sut, authenticationSpy } = makeSut()
     const request = mockRequest()
     const response = await sut.handle(request)

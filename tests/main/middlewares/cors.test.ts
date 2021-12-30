@@ -7,7 +7,7 @@ describe('Cors Middleware', () => {
   beforeAll(async () => {
     app = await setupApp()
   })
-  test('should CORS be enabled', async () => {
+  it('should CORS be enabled', async () => {
     app.get('/test-cors', (req, res) => {
       res.send()
     })

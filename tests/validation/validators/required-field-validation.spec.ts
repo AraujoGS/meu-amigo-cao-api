@@ -5,7 +5,7 @@ import faker from 'faker'
 const field = faker.random.word()
 const makeSut = (): RequiredFieldValidation => new RequiredFieldValidation(field)
 describe('Required Field Validation', () => {
-  test('should RequiredFieldValidation return error if missing parameter', () => {
+  it('should RequiredFieldValidation return error if missing parameter', () => {
     const sut = makeSut()
     const error = sut.validate({ any: 'any_value' })
     expect(error).toEqual(new MissingParamError(field))

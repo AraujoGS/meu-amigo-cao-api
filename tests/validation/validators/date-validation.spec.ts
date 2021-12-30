@@ -19,18 +19,18 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Date Validation', () => {
-  test('should DateValidation call DateValidator with correct value', () => {
+  it('should DateValidation call DateValidator with correct value', () => {
     const { sut, dateValidatorSpy } = makeSut()
     sut.validate({ birthDate })
     expect(dateValidatorSpy.date).toBe(birthDate)
   })
-  test('should DateValidation return error if DateValidator return false', () => {
+  it('should DateValidation return error if DateValidator return false', () => {
     const { sut, dateValidatorSpy } = makeSut()
     dateValidatorSpy.result = false
     const error = sut.validate({ birthDate })
     expect(error).toEqual(new InvalidParamError('birthDate'))
   })
-  test('should DateValidation throw error if DateValidator throws', () => {
+  it('should DateValidation throw error if DateValidator throws', () => {
     const { sut, dateValidatorSpy } = makeSut()
     jest.spyOn(dateValidatorSpy, 'isValid').mockImplementationOnce(throwError)
     expect(() => sut.validate({ birthDate })).toThrow()

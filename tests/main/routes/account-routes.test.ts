@@ -33,7 +33,7 @@ describe('Account Routes', () => {
     await PostgresHelper.disconnect()
   })
   describe('POST /signup', () => {
-    test('should signup route return 201 if success', async () => {
+    it('should signup route return 201 if success', async () => {
       const fakePwd = '123'
       const payload = {
         name: 'Guilherme de Araujo',
@@ -48,7 +48,7 @@ describe('Account Routes', () => {
         .send(payload)
         .expect(201)
     })
-    test('should signup route return 400 if fail', async () => {
+    it('should signup route return 400 if fail', async () => {
       const fakePwd = '123'
       const payload = {
         name: 'Guilherme de Araujo',
@@ -62,7 +62,7 @@ describe('Account Routes', () => {
         .send(payload)
         .expect(400)
     })
-    test('should signup route return 412 if fail', async () => {
+    it('should signup route return 412 if fail', async () => {
       await mockAddAccount()
       const fakePwd = '123'
       const payload = {
@@ -80,7 +80,7 @@ describe('Account Routes', () => {
     })
   })
   describe('POST /login', () => {
-    test('should login route return 200 if success', async () => {
+    it('should login route return 200 if success', async () => {
       await mockAddAccount()
       await request(app)
         .post('/api/login')
@@ -90,7 +90,7 @@ describe('Account Routes', () => {
         })
         .expect(200)
     })
-    test('should login route return 400 if fail', async () => {
+    it('should login route return 400 if fail', async () => {
       await request(app)
         .post('/api/login')
         .send({
@@ -98,7 +98,7 @@ describe('Account Routes', () => {
         })
         .expect(400)
     })
-    test('should login route return 401 if fail', async () => {
+    it('should login route return 401 if fail', async () => {
       await request(app)
         .post('/api/login')
         .send({

@@ -19,13 +19,13 @@ describe('Check Account By Phone Postgres Repository', () => {
   afterAll(async () => {
     await PostgresHelper.disconnect()
   })
-  test('should CheckAccountByPhonePostgresRepository return true if account exists', async () => {
+  it('should CheckAccountByPhonePostgresRepository return true if account exists', async () => {
     const sut = makeSut()
     const params = await mockAccount()
     const response = await sut.check(params.phone)
     expect(response).toBe(true)
   })
-  test('should CheckAccountByPhonePostgresRepository return false if account not exists', async () => {
+  it('should CheckAccountByPhonePostgresRepository return false if account not exists', async () => {
     const sut = makeSut()
     const phoneFake = faker.phone.phoneNumber('###########')
     const response = await sut.check(phoneFake)

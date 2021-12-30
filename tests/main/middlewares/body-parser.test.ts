@@ -7,7 +7,7 @@ describe('Body Parser Middleware', () => {
   beforeAll(async () => {
     app = await setupApp()
   })
-  test('should received json data', async () => {
+  it('should received json data', async () => {
     app.get('/test-body-parser', (req, res) => {
       res.send(req.body)
     })

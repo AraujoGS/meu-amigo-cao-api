@@ -25,7 +25,7 @@ describe('Update Access Token Postgres Repository', () => {
   afterAll(async () => {
     await PostgresHelper.disconnect()
   })
-  test('should UpdateAccessTokenPostgresRepository update access token with success', async () => {
+  it('should UpdateAccessTokenPostgresRepository update access token with success', async () => {
     const sut = makeSut()
     const params = await mockAccount()
     const response = await getAccessToken(params.id)
@@ -36,7 +36,7 @@ describe('Update Access Token Postgres Repository', () => {
     expect(account.token_acesso).toBeTruthy()
     expect(account.token_acesso).toBe(accessToken)
   })
-  test('should UpdateAccessTokenPostgresRepository throw error if Postgres throws', async () => {
+  it('should UpdateAccessTokenPostgresRepository throw error if Postgres throws', async () => {
     const sut = makeSut()
     jest.spyOn(PostgresHelper, 'execute').mockImplementationOnce(throwError)
     const promise = sut.updateAccessToken({ id: faker.datatype.uuid(), accessToken: faker.random.alphaNumeric() })

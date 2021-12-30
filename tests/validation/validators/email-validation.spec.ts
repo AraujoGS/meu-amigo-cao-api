@@ -19,18 +19,18 @@ const makeSut = (): SutTypes => {
   }
 }
 describe('Email Validation', () => {
-  test('should EmailValidation call EmailValidator with correct email', () => {
+  it('should EmailValidation call EmailValidator with correct email', () => {
     const { sut, emailValidatorSpy } = makeSut()
     sut.validate({ email: emailFake })
     expect(emailValidatorSpy.email).toBe(emailFake)
   })
-  test('should EmailValidation return error if EmailValidator return false', () => {
+  it('should EmailValidation return error if EmailValidator return false', () => {
     const { sut, emailValidatorSpy } = makeSut()
     emailValidatorSpy.result = false
     const error = sut.validate({ email: emailFake })
     expect(error).toEqual(new InvalidParamError('email'))
   })
-  test('should EmailValidation throw error if EmailValidator throws', () => {
+  it('should EmailValidation throw error if EmailValidator throws', () => {
     const { sut, emailValidatorSpy } = makeSut()
     jest.spyOn(emailValidatorSpy, 'isValid').mockImplementationOnce(throwError)
     expect(() => sut.validate({ email: emailFake })).toThrow()

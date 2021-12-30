@@ -30,23 +30,23 @@ describe('Add Account Postgres Repository', () => {
     await PostgresHelper.disconnect()
   })
 
-  test('should AddAccountPostgresRepository call IdentifierGenerator with correctly', async () => {
+  it('should AddAccountPostgresRepository call IdentifierGenerator with correctly', async () => {
     const { sut, identifierGeneratorSpy } = makeSut()
     await sut.add(mockAddAccountParams())
     expect(identifierGeneratorSpy.callNumber).toBe(1)
   })
-  test('should AddAccountPostgresRepository throw error if IdentifierGenerator throws', async () => {
+  it('should AddAccountPostgresRepository throw error if IdentifierGenerator throws', async () => {
     const { sut, identifierGeneratorSpy } = makeSut()
     jest.spyOn(identifierGeneratorSpy, 'generate').mockImplementationOnce(throwError)
     const promise = sut.add(mockAddAccountParams())
     await expect(promise).rejects.toThrow()
   })
-  test('should AddAccountPostgresRepository return true if success', async () => {
+  it('should AddAccountPostgresRepository return true if success', async () => {
     const { sut } = makeSut()
     const response = await sut.add(mockAddAccountParams())
     expect(response).toBeTruthy()
   })
-  test('should AddAccountPostgresRepository return null if Postgres throw error', async () => {
+  it('should AddAccountPostgresRepository return null if Postgres throw error', async () => {
     const { sut } = makeSut()
     jest.spyOn(PostgresHelper, 'execute').mockImplementationOnce(throwError)
     const response = await sut.add(mockAddAccountParams())

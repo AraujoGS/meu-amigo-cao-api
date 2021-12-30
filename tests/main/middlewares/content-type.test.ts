@@ -7,7 +7,7 @@ describe('Content Type Middleware', () => {
   beforeAll(async () => {
     app = await setupApp()
   })
-  test('should default type request be a JSON', async () => {
+  it('should default type request be a JSON', async () => {
     app.get('/test-content-type', (req, res) => {
       res.send(req.body)
     })
@@ -16,7 +16,7 @@ describe('Content Type Middleware', () => {
       .get('/test-content-type')
       .expect('content-type', /json/)
   })
-  test('should modify type request for XML', async () => {
+  it('should modify type request for XML', async () => {
     app.get('/test-content-type_xml', (req, res) => {
       res.type('xml')
       res.send(req.body)
