@@ -1,18 +1,21 @@
 import { DbForgotPassword } from '@/data/usecases'
 import { mockForgotPasswordParams, throwError } from '@/tests/domain/mocks'
-import { LoadAccountByEmailAndPhoneRepositorySpy } from '@/tests/data/mocks'
+import { LoadAccountByEmailAndPhoneRepositorySpy, RandomPasswordGeneratorSpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbForgotPassword
   loadAccountByEmailAndPhoneRepositorySpy: LoadAccountByEmailAndPhoneRepositorySpy
+  randomPasswordGeneratorSpy: RandomPasswordGeneratorSpy
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByEmailAndPhoneRepositorySpy = new LoadAccountByEmailAndPhoneRepositorySpy()
-  const sut = new DbForgotPassword(loadAccountByEmailAndPhoneRepositorySpy)
+  const randomPasswordGeneratorSpy = new RandomPasswordGeneratorSpy()
+  const sut = new DbForgotPassword(loadAccountByEmailAndPhoneRepositorySpy, randomPasswordGeneratorSpy)
   return {
     sut,
-    loadAccountByEmailAndPhoneRepositorySpy
+    loadAccountByEmailAndPhoneRepositorySpy,
+    randomPasswordGeneratorSpy
   }
 }
 
@@ -34,5 +37,10 @@ describe('DbForgotPassword Usecase', () => {
     jest.spyOn(loadAccountByEmailAndPhoneRepositorySpy, 'loadByEmailAndPhone').mockImplementationOnce(throwError)
     const promise = sut.recover(mockForgotPasswordParams())
     expect(promise).rejects.toThrow()
+  })
+  it('should DbForgotPassword call RandomPasswordGenerator correctly', async () => {
+    const { sut, randomPasswordGeneratorSpy } = makeSut()
+    await sut.recover(mockForgotPasswordParams())
+    expect(randomPasswordGeneratorSpy.count).toBe(1)
   })
 })
