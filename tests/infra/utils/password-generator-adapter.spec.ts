@@ -1,6 +1,7 @@
 import { PasswordGeneratorAdapter } from '@/infra/utils'
 import passwordGenerate from 'generate-password'
 import faker from 'faker'
+import { throwError } from '@/tests/domain/mocks'
 
 const fakePwd = faker.random.alphaNumeric(12)
 const lenghPwd = 8
@@ -19,5 +20,10 @@ describe('Password Generator Adapter', () => {
       length: lenghPwd,
       numbers: true
     })
+  })
+  it('should PasswordGeneratorAdapter throw error if generate throws', () => {
+    const sut = makeSut()
+    jest.spyOn(passwordGenerate, 'generate').mockImplementationOnce(throwError)
+    expect(() => sut.generate()).toThrow()
   })
 })
