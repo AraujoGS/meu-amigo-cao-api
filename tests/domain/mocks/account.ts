@@ -16,5 +16,5 @@ export const mockAuthenticationParams = (): Authentication.Params => ({
 
 export const mockForgotPasswordParams = (): ForgotPassword.Params => ({
   email: faker.internet.email(),
-  telefone: faker.phone.phoneNumber('###########')
+  phone: faker.phone.phoneNumber('###########')
 })
