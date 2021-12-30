@@ -1,6 +1,7 @@
 import { ForgotPassword } from '@/domain/usecases'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
-import { badRequest } from '@/presentation/helpers'
+import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { InvalidParamError } from '@/presentation/errors'
 
 export namespace ForgotPasswordController {
   export type Request = {
@@ -20,7 +21,10 @@ export class ForgotPasswordController implements Controller {
     if (clientError) {
       return badRequest(clientError)
     }
-    await this.forgotPassword.recover(httpRequest)
+    const result = await this.forgotPassword.recover(httpRequest)
+    if (!result) {
+      return preconditionFailed(new InvalidParamError('email or phone'))
+    }
     return null
   }
 }
