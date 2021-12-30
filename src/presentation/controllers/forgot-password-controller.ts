@@ -1,4 +1,5 @@
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
+import { badRequest } from '@/presentation/helpers'
 
 export namespace ForgotPasswordController {
   export type Request = {
@@ -13,7 +14,10 @@ export class ForgotPasswordController implements Controller {
   ) {}
 
   async handle (httpRequest: ForgotPasswordController.Request): Promise<HttpResponse> {
-    this.validation.validate(httpRequest)
+    const clientError = this.validation.validate(httpRequest)
+    if (clientError) {
+      return badRequest(clientError)
+    }
     return null
   }
 }
