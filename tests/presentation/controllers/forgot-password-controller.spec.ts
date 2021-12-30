@@ -1,8 +1,9 @@
 import { ForgotPasswordController } from '@/presentation/controllers'
 import { MissingParamError, InvalidParamError } from '@/presentation/errors'
-import { badRequest, preconditionFailed, ok } from '@/presentation/helpers'
+import { badRequest, preconditionFailed, ok, internalServerError } from '@/presentation/helpers'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import { ForgotPasswordSpy } from '@/tests/presentation/mocks'
+import { throwError } from '@/tests/domain/mocks'
 import faker from 'faker'
 
 type SutTypes = {
@@ -56,5 +57,11 @@ describe('ForgotPassword Controller', () => {
     const { sut } = makeSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(ok())
+  })
+  it('should ForgotPasswordController return 500 if ForgotPassword throw error', async () => {
+    const { sut, forgotPasswordSpy } = makeSut()
+    jest.spyOn(forgotPasswordSpy, 'recover').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new Error()))
   })
 })
