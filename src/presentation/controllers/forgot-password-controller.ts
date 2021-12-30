@@ -1,6 +1,6 @@
 import { ForgotPassword } from '@/domain/usecases'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, preconditionFailed, ok } from '@/presentation/helpers'
 import { InvalidParamError } from '@/presentation/errors'
 
 export namespace ForgotPasswordController {
@@ -25,6 +25,6 @@ export class ForgotPasswordController implements Controller {
     if (!result) {
       return preconditionFailed(new InvalidParamError('email or phone'))
     }
-    return null
+    return ok()
   }
 }
