@@ -26,6 +26,7 @@
 - [ ] validar os inputs e retornar 400 caso algum campo esteja faltando
 - [ ] validar se o telefone é um celular válido, se não retornar 400
 - [ ] validar se o email é válido, se não retornar 400
+- [ ] validar se o usuário existe, caso não retornar 412
 - [ ] em caso de erro inesperado retornar 500
 - [ ] envia um email para o cliente com uma senha temporária e retorna 200
 
