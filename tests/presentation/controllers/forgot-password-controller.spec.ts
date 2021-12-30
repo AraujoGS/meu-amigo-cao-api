@@ -1,6 +1,6 @@
 import { ForgotPasswordController } from '@/presentation/controllers'
 import { MissingParamError, InvalidParamError } from '@/presentation/errors'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, preconditionFailed, ok } from '@/presentation/helpers'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import { ForgotPasswordSpy } from '@/tests/presentation/mocks'
 import faker from 'faker'
@@ -51,5 +51,10 @@ describe('ForgotPassword Controller', () => {
     forgotPasswordSpy.result = null
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new InvalidParamError('email or phone')))
+  })
+  it('should ForgotPasswordController return 200 if ForgotPassword return true', async () => {
+    const { sut } = makeSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(ok())
   })
 })
