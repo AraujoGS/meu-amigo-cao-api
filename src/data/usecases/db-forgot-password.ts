@@ -6,7 +6,8 @@ export class DbForgotPassword implements ForgotPassword {
     private readonly loadAccountByEmailAndPhoneRepository: LoadAccountByEmailAndPhoneRepository
   ) {}
 
-  async recover (params: ForgotPassword.Params): Promise<void> {
-    this.loadAccountByEmailAndPhoneRepository.loadByEmailAndPhone(params)
+  async recover (params: ForgotPassword.Params): Promise<ForgotPassword.Result> {
+    await this.loadAccountByEmailAndPhoneRepository.loadByEmailAndPhone(params)
+    return null
   }
 }
