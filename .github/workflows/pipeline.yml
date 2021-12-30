@@ -32,6 +32,11 @@ jobs:
           touch .env
           echo JWT_SECRET="github_actions_tests" >> .env
           echo SALT=12 >> .env
+          echo HOST_EMAIL=smtp.mailtrap.io >> .env
+          echo PORT_EMAIL=2525 >> .env
+          echo USER_EMAIL=7f0c0a4ac5db4f >> .env
+          echo PWD_EMAIL=a84f7c9bab16c5 >> .env
+          echo FROM_EMAIL=garaujo_dev@dev.com >> .env
           cat .env
       
       - name: Install dependencies
