@@ -1,21 +1,24 @@
 import { DbForgotPassword } from '@/data/usecases'
 import { mockForgotPasswordParams, throwError } from '@/tests/domain/mocks'
-import { LoadAccountByEmailAndPhoneRepositorySpy, RandomPasswordGeneratorSpy } from '@/tests/data/mocks'
+import { LoadAccountByEmailAndPhoneRepositorySpy, RandomPasswordGeneratorSpy, SendEmailRecoverPasswordSpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbForgotPassword
   loadAccountByEmailAndPhoneRepositorySpy: LoadAccountByEmailAndPhoneRepositorySpy
   randomPasswordGeneratorSpy: RandomPasswordGeneratorSpy
+  sendEmailRecoverPasswordSpy: SendEmailRecoverPasswordSpy
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByEmailAndPhoneRepositorySpy = new LoadAccountByEmailAndPhoneRepositorySpy()
   const randomPasswordGeneratorSpy = new RandomPasswordGeneratorSpy()
-  const sut = new DbForgotPassword(loadAccountByEmailAndPhoneRepositorySpy, randomPasswordGeneratorSpy)
+  const sendEmailRecoverPasswordSpy = new SendEmailRecoverPasswordSpy()
+  const sut = new DbForgotPassword(loadAccountByEmailAndPhoneRepositorySpy, randomPasswordGeneratorSpy, sendEmailRecoverPasswordSpy)
   return {
     sut,
     loadAccountByEmailAndPhoneRepositorySpy,
-    randomPasswordGeneratorSpy
+    randomPasswordGeneratorSpy,
+    sendEmailRecoverPasswordSpy
   }
 }
 
@@ -48,5 +51,13 @@ describe('DbForgotPassword Usecase', () => {
     jest.spyOn(randomPasswordGeneratorSpy, 'generate').mockImplementationOnce(throwError)
     const promise = sut.recover(mockForgotPasswordParams())
     expect(promise).rejects.toThrow()
+  })
+  it('should DbForgotPassword call SendEmailRecoverPassword with correct values', async () => {
+    const { sut, sendEmailRecoverPasswordSpy, loadAccountByEmailAndPhoneRepositorySpy, randomPasswordGeneratorSpy } = makeSut()
+    await sut.recover(mockForgotPasswordParams())
+    expect(sendEmailRecoverPasswordSpy.params).toEqual({
+      ...loadAccountByEmailAndPhoneRepositorySpy.result,
+      password: randomPasswordGeneratorSpy.result
+    })
   })
 })

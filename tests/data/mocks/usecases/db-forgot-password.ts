@@ -1,5 +1,6 @@
 import { LoadAccountByEmailAndPhoneRepository } from '@/data/interfaces/db'
 import { RandomPasswordGenerator } from '@/data/interfaces/utils'
+import { SendEmailRecoverPassword } from '@/data/interfaces/comunication'
 import faker from 'faker'
 
 export class LoadAccountByEmailAndPhoneRepositorySpy implements LoadAccountByEmailAndPhoneRepository {
@@ -22,5 +23,12 @@ export class RandomPasswordGeneratorSpy implements RandomPasswordGenerator {
   generate (): RandomPasswordGenerator.Result {
     this.count++
     return this.result
+  }
+}
+
+export class SendEmailRecoverPasswordSpy implements SendEmailRecoverPassword {
+  params: SendEmailRecoverPassword.Params
+  async send (params: SendEmailRecoverPassword.Params): Promise<void> {
+    this.params = params
   }
 }
