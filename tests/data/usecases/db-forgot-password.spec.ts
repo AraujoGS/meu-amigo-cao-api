@@ -60,4 +60,10 @@ describe('DbForgotPassword Usecase', () => {
       password: randomPasswordGeneratorSpy.result
     })
   })
+  it('should DbForgotPassword throw error if SendEmailRecoverPassword throws', async () => {
+    const { sut, sendEmailRecoverPasswordSpy } = makeSut()
+    jest.spyOn(sendEmailRecoverPasswordSpy, 'send').mockImplementationOnce(throwError)
+    const promise = sut.recover(mockForgotPasswordParams())
+    expect(promise).rejects.toThrow()
+  })
 })
