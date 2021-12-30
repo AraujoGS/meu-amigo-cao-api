@@ -26,4 +26,9 @@ describe('Password Generator Adapter', () => {
     jest.spyOn(passwordGenerate, 'generate').mockImplementationOnce(throwError)
     expect(() => sut.generate()).toThrow()
   })
+  it('should PasswordGeneratorAdapter return random password if generate success', () => {
+    const sut = makeSut()
+    const randomPwd = sut.generate()
+    expect(randomPwd).toBe(fakePwd)
+  })
 })
