@@ -1,5 +1,5 @@
 import { DbForgotPassword } from '@/data/usecases'
-import { mockForgotPasswordParams } from '@/tests/domain/mocks'
+import { mockForgotPasswordParams, throwError } from '@/tests/domain/mocks'
 import { LoadAccountByEmailAndPhoneRepositorySpy } from '@/tests/data/mocks'
 
 type SutTypes = {
@@ -28,5 +28,11 @@ describe('DbForgotPassword Usecase', () => {
     loadAccountByEmailAndPhoneRepositorySpy.result = null
     const response = await sut.recover(mockForgotPasswordParams())
     expect(response).toBeNull()
+  })
+  it('should DbForgotPassword throw error if LoadAccountByEmailAndPhoneRepository throws', async () => {
+    const { sut, loadAccountByEmailAndPhoneRepositorySpy } = makeSut()
+    jest.spyOn(loadAccountByEmailAndPhoneRepositorySpy, 'loadByEmailAndPhone').mockImplementationOnce(throwError)
+    const promise = sut.recover(mockForgotPasswordParams())
+    expect(promise).rejects.toThrow()
   })
 })
