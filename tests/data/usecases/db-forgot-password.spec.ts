@@ -39,7 +39,7 @@ describe('DbForgotPassword Usecase', () => {
     const { sut, loadAccountByEmailAndPhoneRepositorySpy } = makeSut()
     jest.spyOn(loadAccountByEmailAndPhoneRepositorySpy, 'loadByEmailAndPhone').mockImplementationOnce(throwError)
     const promise = sut.recover(mockForgotPasswordParams())
-    expect(promise).rejects.toThrow()
+    await expect(promise).rejects.toThrow()
   })
   it('should DbForgotPassword call RandomPasswordGenerator correctly', async () => {
     const { sut, randomPasswordGeneratorSpy } = makeSut()
@@ -50,7 +50,7 @@ describe('DbForgotPassword Usecase', () => {
     const { sut, randomPasswordGeneratorSpy } = makeSut()
     jest.spyOn(randomPasswordGeneratorSpy, 'generate').mockImplementationOnce(throwError)
     const promise = sut.recover(mockForgotPasswordParams())
-    expect(promise).rejects.toThrow()
+    await expect(promise).rejects.toThrow()
   })
   it('should DbForgotPassword call SendEmailRecoverPassword with correct values', async () => {
     const { sut, sendEmailRecoverPasswordSpy, loadAccountByEmailAndPhoneRepositorySpy, randomPasswordGeneratorSpy } = makeSut()
@@ -64,7 +64,7 @@ describe('DbForgotPassword Usecase', () => {
     const { sut, sendEmailRecoverPasswordSpy } = makeSut()
     jest.spyOn(sendEmailRecoverPasswordSpy, 'send').mockImplementationOnce(throwError)
     const promise = sut.recover(mockForgotPasswordParams())
-    expect(promise).rejects.toThrow()
+    await expect(promise).rejects.toThrow()
   })
   it('should DbForgotPassword return true if success', async () => {
     const { sut } = makeSut()
