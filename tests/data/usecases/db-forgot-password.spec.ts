@@ -23,4 +23,10 @@ describe('DbForgotPassword Usecase', () => {
     await sut.recover(params)
     expect(loadAccountByEmailAndPhoneRepositorySpy.params).toEqual(params)
   })
+  it('should DbForgotPassword return null if LoadAccountByEmailAndPhoneRepository return null', async () => {
+    const { sut, loadAccountByEmailAndPhoneRepositorySpy } = makeSut()
+    loadAccountByEmailAndPhoneRepositorySpy.result = null
+    const response = await sut.recover(mockForgotPasswordParams())
+    expect(response).toBeNull()
+  })
 })
