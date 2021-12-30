@@ -66,4 +66,9 @@ describe('DbForgotPassword Usecase', () => {
     const promise = sut.recover(mockForgotPasswordParams())
     expect(promise).rejects.toThrow()
   })
+  it('should DbForgotPassword return true if success', async () => {
+    const { sut } = makeSut()
+    const response = await sut.recover(mockForgotPasswordParams())
+    expect(response).toBe(true)
+  })
 })
