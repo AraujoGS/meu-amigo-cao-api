@@ -1,4 +1,4 @@
-import { AddAccount, Authentication } from '@/domain/usecases'
+import { AddAccount, Authentication, ForgotPassword } from '@/domain/usecases'
 import faker from 'faker'
 
 export const mockAddAccountParams = (): AddAccount.Params => ({
@@ -12,4 +12,9 @@ export const mockAddAccountParams = (): AddAccount.Params => ({
 export const mockAuthenticationParams = (): Authentication.Params => ({
   email: faker.internet.email(),
   password: faker.datatype.hexaDecimal()
+})
+
+export const mockForgotPasswordParams = (): ForgotPassword.Params => ({
+  email: faker.internet.email(),
+  telefone: faker.phone.phoneNumber('###########')
 })
