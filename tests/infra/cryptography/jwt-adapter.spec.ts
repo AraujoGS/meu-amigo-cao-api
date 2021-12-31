@@ -39,12 +39,17 @@ describe('Jwt Adapter', () => {
   it('should JwtAdapter call verify with correct values', () => {
     const sut = makeSut()
     const verifySpy = jest.spyOn(jwt, 'verify')
-    sut.decrypt(fakeValue)
-    expect(verifySpy).toHaveBeenCalledWith(fakeValue, fakeSecretKey)
+    sut.decrypt(fakeId)
+    expect(verifySpy).toHaveBeenCalledWith(fakeId, fakeSecretKey)
   })
   it('should JwtAdapter throw error if verify throws', () => {
     const sut = makeSut()
     jest.spyOn(jwt, 'verify').mockImplementationOnce(throwError)
-    expect(() => sut.decrypt(fakeValue)).toThrow()
+    expect(() => sut.decrypt(fakeId)).toThrow()
+  })
+  it('should JwtAdapter return decrypted value if success', () => {
+    const sut = makeSut()
+    const decryptedValue = sut.decrypt(fakeId)
+    expect(decryptedValue).toBe(fakeValue)
   })
 })
