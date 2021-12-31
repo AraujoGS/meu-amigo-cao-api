@@ -31,6 +31,12 @@ describe('DbLoadAccountByToken Usecase', () => {
     const response = await sut.loadByToken(mockLoadAccountByTokenParams())
     expect(response).toBeNull()
   })
+  it('should DbLoadAccountByToken return null if Decrypter return null', async () => {
+    const { sut, decrypterSpy } = makeSut()
+    decrypterSpy.result = null
+    const response = await sut.loadByToken(mockLoadAccountByTokenParams())
+    expect(response).toBeNull()
+  })
   it('should DbLoadAccountByToken call LoadAccountByTokenRepository with correct values', async () => {
     const { sut, loadAccountByTokenRepositorySpy, decrypterSpy } = makeSut()
     const data = mockLoadAccountByTokenParams()
