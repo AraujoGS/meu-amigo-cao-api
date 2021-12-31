@@ -8,7 +8,11 @@ export class DbLoadAccountByToken implements LoadAccountByToken {
 
   async loadByToken (data: LoadAccountByToken.Params): Promise<LoadAccountByToken.Result> {
     const { token } = data
-    this.decrypter.decrypt(token)
+    try {
+      this.decrypter.decrypt(token)
+    } catch (error) {
+      return null
+    }
     return null
   }
 }
