@@ -22,13 +22,13 @@
 - [X] tentar login e em caso de sucesso retornar 200 com o usuário logado 
 
 -Esqueci minha senha (deslogado)
-- [ ] inputs: email e telefone
-- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando
-- [ ] validar se o telefone é um celular válido, se não retornar 400
-- [ ] validar se o email é válido, se não retornar 400
-- [ ] validar se o usuário existe, caso não retornar 412
-- [ ] em caso de erro inesperado retornar 500
-- [ ] envia um email para o cliente com uma senha temporária e retorna 200
+- [X] inputs: email e telefone
+- [X] validar os inputs e retornar 400 caso algum campo esteja faltando
+- [X] validar se o telefone é um celular válido, se não retornar 400
+- [X] validar se o email é válido, se não retornar 400
+- [X] validar se o usuário existe, caso não retornar 412
+- [X] em caso de erro inesperado retornar 500
+- [X] envia um email para o cliente com uma senha temporária e retorna 200
 
 -Consultar cadastro de cliente (logado)
 - [ ] inputs: uuid do usuário
