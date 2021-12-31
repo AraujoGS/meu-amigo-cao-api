@@ -129,5 +129,15 @@ describe('Account Routes', () => {
         })
         .expect(400)
     })
+    it('should forgot password route return 412 if fail', async () => {
+      await mockAddAccount()
+      await request(app)
+        .post('/api/forgot-password')
+        .send({
+          email: 'guilhermearaujo422@gmail.com',
+          phone: '11954976863'
+        })
+        .expect(412)
+    })
   })
 })
