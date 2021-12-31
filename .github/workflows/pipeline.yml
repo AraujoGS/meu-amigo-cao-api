@@ -39,11 +39,10 @@ jobs:
           echo FROM_EMAIL=garaujo_dev@dev.com >> .env
           cat .env
       
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run tests
-        run: npm run test:coveralls
+      - name: Install dependencies and run tests
+        run: |
+          npm ci
+          npm run test:coveralls 
       
       - name: Coveralls
         uses: coverallsapp/github-action@master
