@@ -20,14 +20,14 @@ describe('Load Account By Email And Phone Postgres Repository', () => {
 
   it('should LoadAccountByEmailAndPhonePostgresRepository return data if account exists', async () => {
     const sut = makeSut()
-    const params = await mockAccount()
+    const data = await mockAccount()
     const response = await sut.loadByEmailAndPhone({
-      email: params.email,
-      phone: params.phone
+      email: data.email,
+      phone: data.phone
     })
     expect(response).toEqual({
-      email: params.email,
-      name: params.name
+      email: data.email,
+      name: data.name
     })
   })
   it('should LoadAccountByEmailAndPhonePostgresRepository return null if account not exists', async () => {

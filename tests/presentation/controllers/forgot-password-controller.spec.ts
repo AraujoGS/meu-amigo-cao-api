@@ -45,7 +45,7 @@ describe('ForgotPassword Controller', () => {
     const { sut, forgotPasswordSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
-    expect(forgotPasswordSpy.params).toEqual(request)
+    expect(forgotPasswordSpy.data).toEqual(request)
   })
   it('should ForgotPasswordController return 412 if ForgotPassword return null', async () => {
     const { sut, forgotPasswordSpy } = makeSut()

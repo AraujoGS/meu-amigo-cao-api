@@ -7,5 +7,5 @@ export namespace SendEmailRecoverPassword {
 }
 
 export interface SendEmailRecoverPassword {
-  send: (params: SendEmailRecoverPassword.Params) => Promise<void>
+  send: (data: SendEmailRecoverPassword.Params) => Promise<void>
 }

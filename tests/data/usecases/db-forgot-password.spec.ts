@@ -31,9 +31,9 @@ const makeSut = (): SutTypes => {
 describe('DbForgotPassword Usecase', () => {
   it('should DbForgotPassword call LoadAccountByEmailAndPhoneRepository with correct values', async () => {
     const { sut, loadAccountByEmailAndPhoneRepositorySpy } = makeSut()
-    const params = mockForgotPasswordParams()
-    await sut.recover(params)
-    expect(loadAccountByEmailAndPhoneRepositorySpy.params).toEqual(params)
+    const data = mockForgotPasswordParams()
+    await sut.recover(data)
+    expect(loadAccountByEmailAndPhoneRepositorySpy.data).toEqual(data)
   })
   it('should DbForgotPassword return null if LoadAccountByEmailAndPhoneRepository return null', async () => {
     const { sut, loadAccountByEmailAndPhoneRepositorySpy } = makeSut()
@@ -87,7 +87,7 @@ describe('DbForgotPassword Usecase', () => {
   it('should DbForgotPassword call SendEmailRecoverPassword with correct values', async () => {
     const { sut, sendEmailRecoverPasswordSpy, loadAccountByEmailAndPhoneRepositorySpy, randomPasswordGeneratorSpy } = makeSut()
     await sut.recover(mockForgotPasswordParams())
-    expect(sendEmailRecoverPasswordSpy.params).toEqual({
+    expect(sendEmailRecoverPasswordSpy.data).toEqual({
       ...loadAccountByEmailAndPhoneRepositorySpy.result,
       password: randomPasswordGeneratorSpy.result
     })

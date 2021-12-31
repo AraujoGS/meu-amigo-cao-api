@@ -12,10 +12,10 @@ export class HasherSpy implements Hasher {
 }
 
 export class AddAccountRepositorySpy implements AddAccountRepository {
-  params: AddAccountRepository.Params
+  data: AddAccountRepository.Params
   result = true
   async add (data: AddAccountRepository.Params): Promise<AddAccountRepository.Result> {
-    this.params = data
+    this.data = data
     return this.result
   }
 }

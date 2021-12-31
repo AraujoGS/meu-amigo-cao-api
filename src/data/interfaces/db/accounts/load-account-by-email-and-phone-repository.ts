@@ -9,5 +9,5 @@ export namespace LoadAccountByEmailAndPhoneRepository {
 }
 
 export interface LoadAccountByEmailAndPhoneRepository {
-  loadByEmailAndPhone: (params: LoadAccountByEmailAndPhoneRepository.Params) => Promise<LoadAccountByEmailAndPhoneRepository.Result>
+  loadByEmailAndPhone: (data: LoadAccountByEmailAndPhoneRepository.Params) => Promise<LoadAccountByEmailAndPhoneRepository.Result>
 }

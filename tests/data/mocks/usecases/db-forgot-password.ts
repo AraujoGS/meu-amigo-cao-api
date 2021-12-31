@@ -4,14 +4,14 @@ import { SendEmailRecoverPassword } from '@/data/interfaces/comunication'
 import faker from 'faker'
 
 export class LoadAccountByEmailAndPhoneRepositorySpy implements LoadAccountByEmailAndPhoneRepository {
-  params: LoadAccountByEmailAndPhoneRepository.Params
+  data: LoadAccountByEmailAndPhoneRepository.Params
   result = {
     name: faker.name.findName(),
     email: faker.internet.email()
   }
 
-  async loadByEmailAndPhone (params: LoadAccountByEmailAndPhoneRepository.Params): Promise<LoadAccountByEmailAndPhoneRepository.Result> {
-    this.params = params
+  async loadByEmailAndPhone (data: LoadAccountByEmailAndPhoneRepository.Params): Promise<LoadAccountByEmailAndPhoneRepository.Result> {
+    this.data = data
     return this.result
   }
 }
@@ -35,8 +35,8 @@ export class UpdatePasswordRepositorySpy implements UpdatePasswordRepository {
 }
 
 export class SendEmailRecoverPasswordSpy implements SendEmailRecoverPassword {
-  params: SendEmailRecoverPassword.Params
-  async send (params: SendEmailRecoverPassword.Params): Promise<void> {
-    this.params = params
+  data: SendEmailRecoverPassword.Params
+  async send (data: SendEmailRecoverPassword.Params): Promise<void> {
+    this.data = data
   }
 }

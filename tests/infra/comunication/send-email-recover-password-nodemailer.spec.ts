@@ -22,7 +22,7 @@ describe('Send Email Recover Password Nodemailer', () => {
   })
   it('should SendEmailRecoverPasswordNodemailer send email with success', async () => {
     const sut = makeSut()
-    const params = makeFakeAccount()
-    expect(async () => await sut.send(params)).not.toThrow()
+    const data = makeFakeAccount()
+    expect(async () => await sut.send(data)).not.toThrow()
   })
 })

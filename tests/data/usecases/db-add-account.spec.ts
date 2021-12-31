@@ -44,7 +44,7 @@ describe('DbAddAccount Usecase', () => {
     const { sut, addAccountRepositorySpy, hasherSpy } = makeSut()
     const data = mockAddAccountParams()
     await sut.add(data)
-    expect(addAccountRepositorySpy.params).toEqual({
+    expect(addAccountRepositorySpy.data).toEqual({
       name: data.name,
       email: data.email,
       password: hasherSpy.result,

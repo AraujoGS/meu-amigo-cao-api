@@ -46,7 +46,7 @@ describe('Login Controller', () => {
     const { sut, authenticationSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
-    expect(authenticationSpy.params).toEqual(request)
+    expect(authenticationSpy.data).toEqual(request)
   })
   it('should LoginController return 401 if Autentication return null', async () => {
     const { sut, authenticationSpy } = makeSut()
