@@ -30,6 +30,17 @@
 - [X] em caso de erro inesperado retornar 500
 - [X] envia um email para o cliente com uma senha temporária e retorna 200
 
+-Alterar senha (logado)
+- [ ] inputs: email, nova senha, confirmação de nova senha e senha antiga
+- [ ] validar se token de acesso válido, caso não retornar 401
+- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
+- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando
+- [ ] validar se o email é válido, se não retornar 400
+- [ ] validar se a senha antiga e a nova são iguais, se são retornar 400
+- [ ] validar se o usuário existe, caso não retornar 412
+- [ ] em caso de erro inesperado retornar 500
+- [ ] envia um email para o cliente com uma senha temporária e retorna 200
+
 -Consultar cadastro de cliente (logado)
 - [ ] inputs: uuid do usuário
 - [ ] validar se token de acesso válido, caso não retornar 401
@@ -51,7 +62,7 @@
 - [ ] inserir o endereço do cliente, retornar 201 e os dados
 
 -Alterar cliente (logado)
-- [ ] inputs: uuid do cliente, nome, email, telefone, data de nascimento, senha e confirmação de senha
+- [ ] inputs: uuid do cliente, nome, email, telefone, data de nascimento
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar inputs e retornar 400 caso algum campo esteja faltando
