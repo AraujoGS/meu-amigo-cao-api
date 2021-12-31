@@ -63,6 +63,12 @@ describe('DbForgotPassword Usecase', () => {
     await sut.recover(mockForgotPasswordParams())
     expect(hasherSpy.password).toBe(randomPasswordGeneratorSpy.result)
   })
+  it('should DbForgotPassword throw error if Hasher throws', async () => {
+    const { sut, hasherSpy } = makeSut()
+    jest.spyOn(hasherSpy, 'hash').mockImplementationOnce(throwError)
+    const promise = sut.recover(mockForgotPasswordParams())
+    await expect(promise).rejects.toThrow()
+  })
   it('should DbForgotPassword call UpdatePasswordRepository with correct values', async () => {
     const { sut, updatePasswordRepositorySpy, hasherSpy } = makeSut()
     const params = mockForgotPasswordParams()
