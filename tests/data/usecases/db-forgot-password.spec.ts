@@ -64,12 +64,12 @@ describe('DbForgotPassword Usecase', () => {
     expect(hasherSpy.password).toBe(randomPasswordGeneratorSpy.result)
   })
   it('should DbForgotPassword call UpdatePasswordRepository with correct values', async () => {
-    const { sut, updatePasswordRepositorySpy, randomPasswordGeneratorSpy } = makeSut()
+    const { sut, updatePasswordRepositorySpy, hasherSpy } = makeSut()
     const params = mockForgotPasswordParams()
     await sut.recover(params)
     expect(updatePasswordRepositorySpy.data).toEqual({
       email: params.email,
-      password: randomPasswordGeneratorSpy.result
+      password: hasherSpy.result
     })
   })
   it('should DbForgotPassword throw error if UpdatePasswordRepository throws', async () => {
