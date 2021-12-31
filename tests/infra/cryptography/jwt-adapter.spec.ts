@@ -42,4 +42,9 @@ describe('Jwt Adapter', () => {
     sut.decrypt(fakeValue)
     expect(verifySpy).toHaveBeenCalledWith(fakeValue, fakeSecretKey)
   })
+  it('should JwtAdapter throw error if verify throws', () => {
+    const sut = makeSut()
+    jest.spyOn(jwt, 'verify').mockImplementationOnce(throwError)
+    expect(() => sut.decrypt(fakeValue)).toThrow()
+  })
 })
