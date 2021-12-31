@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import { setupApp } from '@/main/config/app'
 import { PostgresHelper } from '@/infra/db'
+import { NodemailerHelper } from '@/infra/comunication'
 import { createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
 import { Express } from 'express'
 import { hash } from 'bcrypt'
@@ -22,6 +23,7 @@ const mockAddAccount = async (): Promise<void> => {
 
 describe('Account Routes', () => {
   beforeAll(async () => {
+    NodemailerHelper.create()
     app = await setupApp()
     await PostgresHelper.connect(createDbTest())
     await PostgresHelper.execute(sqlCreateDb)
@@ -106,6 +108,18 @@ describe('Account Routes', () => {
           password: 'any_pwd'
         })
         .expect(401)
+    })
+  })
+  describe('POST /forgot-password', () => {
+    it('should forgot password route return 200 if success', async () => {
+      await mockAddAccount()
+      await request(app)
+        .post('/api/forgot-password')
+        .send({
+          email: 'guilhermearaujo421@gmail.com',
+          phone: '11954976863'
+        })
+        .expect(200)
     })
   })
 })
