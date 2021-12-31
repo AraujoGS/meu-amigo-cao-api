@@ -1,18 +1,21 @@
 import { DbLoadAccountByToken } from '@/data/usecases'
-import { DecrypterSpy } from '@/tests/data/mocks'
+import { DecrypterSpy, LoadAccountByTokenRepositorySpy } from '@/tests/data/mocks'
 import { mockLoadAccountByTokenParams, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbLoadAccountByToken
   decrypterSpy: DecrypterSpy
+  loadAccountByTokenRepositorySpy: LoadAccountByTokenRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const decrypterSpy = new DecrypterSpy()
-  const sut = new DbLoadAccountByToken(decrypterSpy)
+  const loadAccountByTokenRepositorySpy = new LoadAccountByTokenRepositorySpy()
+  const sut = new DbLoadAccountByToken(decrypterSpy, loadAccountByTokenRepositorySpy)
   return {
     sut,
-    decrypterSpy
+    decrypterSpy,
+    loadAccountByTokenRepositorySpy
   }
 }
 describe('DbLoadAccountByToken Usecase', () => {
@@ -27,5 +30,14 @@ describe('DbLoadAccountByToken Usecase', () => {
     jest.spyOn(decrypterSpy, 'decrypt').mockImplementationOnce(throwError)
     const response = await sut.loadByToken(mockLoadAccountByTokenParams())
     expect(response).toBeNull()
+  })
+  it('should DbLoadAccountByToken call LoadAccountByTokenRepository with correct values', async () => {
+    const { sut, loadAccountByTokenRepositorySpy, decrypterSpy } = makeSut()
+    const data = mockLoadAccountByTokenParams()
+    await sut.loadByToken(data)
+    expect(loadAccountByTokenRepositorySpy.data).toEqual({
+      token: decrypterSpy.result,
+      role: data.role
+    })
   })
 })

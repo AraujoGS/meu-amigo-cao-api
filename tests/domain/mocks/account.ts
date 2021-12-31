@@ -20,5 +20,6 @@ export const mockForgotPasswordParams = (): ForgotPassword.Params => ({
 })
 
 export const mockLoadAccountByTokenParams = (): LoadAccountByToken.Params => ({
-  token: faker.random.alphaNumeric(32)
+  token: faker.random.alphaNumeric(32),
+  role: faker.random.word()
 })
