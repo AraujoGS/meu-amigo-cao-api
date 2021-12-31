@@ -121,5 +121,13 @@ describe('Account Routes', () => {
         })
         .expect(200)
     })
+    it('should forgot password route return 400 if fail', async () => {
+      await request(app)
+        .post('/api/forgot-password')
+        .send({
+          email: 'any_email@gmail.com'
+        })
+        .expect(400)
+    })
   })
 })
