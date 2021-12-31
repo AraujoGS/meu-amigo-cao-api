@@ -42,7 +42,7 @@ jobs:
       - name: Install dependencies and run tests
         run: |
           npm ci
-          npm run test:coveralls 
+          npm run test:ci 
       
       - name: Coveralls
         uses: coverallsapp/github-action@master
