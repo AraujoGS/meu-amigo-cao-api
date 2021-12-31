@@ -15,11 +15,13 @@ export class DbForgotPassword implements ForgotPassword {
     const account = await this.loadAccountByEmailAndPhoneRepository.loadByEmailAndPhone(params)
     if (account) {
       const randomPassword = this.randomPasswordGenerator.generate()
-      await this.updatePasswordRepository.updatePassword({ email: params.email, password: randomPassword })
-      await this.sendEmailRecoverPassword.send({
-        ...account,
-        password: randomPassword
-      })
+      await Promise.all([
+        this.updatePasswordRepository.updatePassword({ email: params.email, password: randomPassword }),
+        this.sendEmailRecoverPassword.send({
+          ...account,
+          password: randomPassword
+        })
+      ])
       return true
     }
     return null
