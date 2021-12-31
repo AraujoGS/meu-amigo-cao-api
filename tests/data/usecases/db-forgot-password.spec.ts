@@ -1,11 +1,12 @@
 import { DbForgotPassword } from '@/data/usecases'
 import { mockForgotPasswordParams, throwError } from '@/tests/domain/mocks'
-import { LoadAccountByEmailAndPhoneRepositorySpy, RandomPasswordGeneratorSpy, SendEmailRecoverPasswordSpy, UpdatePasswordRepositorySpy } from '@/tests/data/mocks'
+import { LoadAccountByEmailAndPhoneRepositorySpy, RandomPasswordGeneratorSpy, SendEmailRecoverPasswordSpy, UpdatePasswordRepositorySpy, HasherSpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbForgotPassword
   loadAccountByEmailAndPhoneRepositorySpy: LoadAccountByEmailAndPhoneRepositorySpy
   randomPasswordGeneratorSpy: RandomPasswordGeneratorSpy
+  hasherSpy: HasherSpy
   updatePasswordRepositorySpy: UpdatePasswordRepositorySpy
   sendEmailRecoverPasswordSpy: SendEmailRecoverPasswordSpy
 }
@@ -13,13 +14,15 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const loadAccountByEmailAndPhoneRepositorySpy = new LoadAccountByEmailAndPhoneRepositorySpy()
   const randomPasswordGeneratorSpy = new RandomPasswordGeneratorSpy()
+  const hasherSpy = new HasherSpy()
   const updatePasswordRepositorySpy = new UpdatePasswordRepositorySpy()
   const sendEmailRecoverPasswordSpy = new SendEmailRecoverPasswordSpy()
-  const sut = new DbForgotPassword(loadAccountByEmailAndPhoneRepositorySpy, randomPasswordGeneratorSpy, updatePasswordRepositorySpy, sendEmailRecoverPasswordSpy)
+  const sut = new DbForgotPassword(loadAccountByEmailAndPhoneRepositorySpy, randomPasswordGeneratorSpy, hasherSpy, updatePasswordRepositorySpy, sendEmailRecoverPasswordSpy)
   return {
     sut,
     loadAccountByEmailAndPhoneRepositorySpy,
     randomPasswordGeneratorSpy,
+    hasherSpy,
     updatePasswordRepositorySpy,
     sendEmailRecoverPasswordSpy
   }
@@ -54,6 +57,11 @@ describe('DbForgotPassword Usecase', () => {
     jest.spyOn(randomPasswordGeneratorSpy, 'generate').mockImplementationOnce(throwError)
     const promise = sut.recover(mockForgotPasswordParams())
     await expect(promise).rejects.toThrow()
+  })
+  it('should DbForgotPassword call Hasher with correct password', async () => {
+    const { sut, hasherSpy, randomPasswordGeneratorSpy } = makeSut()
+    await sut.recover(mockForgotPasswordParams())
+    expect(hasherSpy.password).toBe(randomPasswordGeneratorSpy.result)
   })
   it('should DbForgotPassword call UpdatePasswordRepository with correct values', async () => {
     const { sut, updatePasswordRepositorySpy, randomPasswordGeneratorSpy } = makeSut()
