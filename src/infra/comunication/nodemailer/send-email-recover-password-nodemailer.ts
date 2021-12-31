@@ -8,7 +8,7 @@ export class SendEmailRecoverPasswordNodemailer implements SendEmailRecoverPassw
       from: process.env.FROM_EMAIL,
       subject: 'Recuperação de senha',
       to: `${name} <${email}>`,
-      html: `Olá ${name}, foi gerada para você a senha temporária: ${password}.<br><br> Assim que possível recomendamos alterar-lá.<br><br> Obrigado.`
+      html: `Olá ${name}, foi gerada para você a senha temporária: ${password}<br><br> Assim que possível recomendamos alterar-lá.<br><br> Obrigado.`
     })
   }
 }
