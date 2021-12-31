@@ -52,4 +52,9 @@ describe('DbLoadAccountByToken Usecase', () => {
     const response = await sut.loadByToken(mockLoadAccountByTokenParams())
     expect(response).toBeNull()
   })
+  it('should DbLoadAccountByToken return valid id if LoadAccountByTokenRepository return data', async () => {
+    const { sut, loadAccountByTokenRepositorySpy } = makeSut()
+    const response = await sut.loadByToken(mockLoadAccountByTokenParams())
+    expect(response).toEqual(loadAccountByTokenRepositorySpy.result)
+  })
 })
