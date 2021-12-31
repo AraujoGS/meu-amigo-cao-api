@@ -5,6 +5,7 @@ import faker from 'faker'
 
 const fakeSecretKey = faker.random.word()
 const fakeToken = faker.random.alphaNumeric(24)
+const fakeValue = faker.random.word()
 const fakeId = faker.datatype.uuid()
 const makeSut = (): JwtAdapter => {
   return new JwtAdapter(fakeSecretKey)
@@ -12,6 +13,9 @@ const makeSut = (): JwtAdapter => {
 jest.mock('jsonwebtoken', () => ({
   sign (): string {
     return fakeToken
+  },
+  verify (): string {
+    return fakeValue
   }
 }))
 
@@ -31,5 +35,11 @@ describe('Jwt Adapter', () => {
     const sut = makeSut()
     const token = sut.encrypt(fakeId)
     expect(token).toBe(fakeToken)
+  })
+  it('should JwtAdapter call verify with correct values', () => {
+    const sut = makeSut()
+    const verifySpy = jest.spyOn(jwt, 'verify')
+    sut.decrypt(fakeValue)
+    expect(verifySpy).toHaveBeenCalledWith(fakeValue, fakeSecretKey)
   })
 })
