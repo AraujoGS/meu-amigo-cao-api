@@ -16,4 +16,4 @@ API para estudo de boas práticas de programação
 
 ## instruções
 - É necessário criar alguns arquivos para a correta execução do projeto, no repositório eles foram indicados utilizando o sufixo '-example' ao nome.
-- OBS: o arquivo .coveralls.yml só se faz necessário caso você queira executar o comando ` npm run tes:coveralls`, também será necessário um token válido gerado pelo coveralls.io
+- OBS: o arquivo .coveralls.yml só se faz necessário caso você queira executar o comando ` npm run test:coveralls`, também será necessário um token válido gerado pelo coveralls.io
