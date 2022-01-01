@@ -1,4 +1,6 @@
 import { AuthMiddleware } from '@/presentation/middlewares'
+import { forbidden } from '@/presentation/helpers'
+import { AccessDeniedError } from '@/presentation/errors'
 import { LoadAccountByTokenSpy } from '@/tests/presentation/mocks'
 import faker from 'faker'
 
@@ -28,5 +30,11 @@ describe('Auth Middleware', () => {
     await sut.handle(request)
     expect(loadAccountByTokenSpy.data.token).toBe(request.accessToken)
     expect(loadAccountByTokenSpy.data.role).toBe(role)
+  })
+  it('should AuthMiddleware return 403 if LoadAccountByToken return null', async () => {
+    const { sut, loadAccountByTokenSpy } = makeSut()
+    loadAccountByTokenSpy.result = null
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(forbidden(new AccessDeniedError()))
   })
 })
