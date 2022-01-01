@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="D4804167-9A26-7468-F9EF-CDDC6DCF6D6F" name="Servicos">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>24E86148-BA58-EA19-1FA1-2CE7CA72DFEB</importedID>
+<engineerTo>
+<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_servico" id="52F7AFD7-ADC1-0FFA-581B-1A44E20DF258">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>9F522580-D141-E6E3-6909-9AE4BFFFAF02</importedID>
+<engineerTo>
+<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT018</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="titulo_servico" id="B0753BBE-D85C-4793-4A52-D03BAAD72BED">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>36D275AF-A0B8-B897-F9DF-E41159186C74</importedID>
+<engineerTo>
+<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="F8B2FA89-A078-B612-1C49-F9FFCAC7060B" name="Servicos PK">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>720EE567-DB28-72D9-5A8E-0255276D095E</importedID>
+<engineerTo>
+<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>52F7AFD7-ADC1-0FFA-581B-1A44E20DF258</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

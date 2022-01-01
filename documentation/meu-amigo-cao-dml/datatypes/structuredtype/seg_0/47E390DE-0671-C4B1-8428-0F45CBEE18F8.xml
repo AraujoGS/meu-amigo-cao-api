@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <StructuredType class="oracle.dbtools.crest.model.design.datatypes.StructuredType" name="SDO_GEOMETRY" directorySegmentName="seg_0" id="47E390DE-0671-C4B1-8428-0F45CBEE18F8">
 <createdBy>gdear</createdBy>
-<createdTime>2021-11-02 17:09:34 UTC</createdTime>
+<createdTime>2022-01-01 18:41:59 UTC</createdTime>
 <ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
 <visible>false</visible>
 <predefined>true</predefined>

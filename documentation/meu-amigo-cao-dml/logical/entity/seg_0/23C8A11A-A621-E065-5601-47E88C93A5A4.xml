@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="23C8A11A-A621-E065-5601-47E88C93A5A4" name="Raca_Pet">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>FC2A6401-45B9-28E1-AE8A-334D5E890010</importedID>
+<engineerTo>
+<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_raca" id="3C7576DA-2895-28EE-44B3-4AEFF5A5965B">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>5D0B1772-6136-C7D3-7E59-526F9302669A</importedID>
+<engineerTo>
+<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT018</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nome_raca" id="7A3BE42B-40CF-A42D-2F37-0DAE1955CF1C">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>21ADB69E-5E71-72CA-2EAB-E206162628C8</importedID>
+<engineerTo>
+<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="2B290116-593D-7142-07B7-A7326E64FEA3" name="Raca_Pet PK">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>33B3289E-09F8-0A5B-5A1C-C2588C4F98FC</importedID>
+<engineerTo>
+<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>3C7576DA-2895-28EE-44B3-4AEFF5A5965B</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

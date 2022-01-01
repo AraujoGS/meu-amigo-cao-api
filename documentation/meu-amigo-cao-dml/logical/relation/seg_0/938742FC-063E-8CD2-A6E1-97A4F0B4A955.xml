@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Esta_Em" directorySegmentName="seg_0" id="938742FC-063E-8CD2-A6E1-97A4F0B4A955">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>8FC14E6A-3547-A7FF-3256-F24BB08DF772</importedID>
+<engineerTo>
+<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+</engineerTo>
+<sourcePk>50EA37BF-5623-AE9C-99D1-8D1C1D7DC7D0</sourcePk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>F1D1DE82-5CBD-B025-8CEE-E8B406C2244F</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>872FB19C-DF83-B4C4-B76C-FFD3F218AD82</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

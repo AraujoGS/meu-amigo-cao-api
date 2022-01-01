@@ -1,0 +1,151 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="18081937-ABA4-F79D-6170-253CA194C345" name="Clientes">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>3FA88A13-E1F7-4601-315D-92FF020A2B66</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>76CFE3A3-ECAF-566F-CD0F-5B52E7EC11A2</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_cliente" id="5FBDB1D5-F14E-78A5-8BA1-B0D3D0AD8D00">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>C2084B79-99FD-9B46-26C6-3546EE09E3CA</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>349B1BAD-A450-D0F1-FD76-160B454F4747</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nome_cliente" id="1AF51CCA-42D9-8D5E-99E0-AFEC06865027">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>3AFC4AB7-726D-A093-3B50-F6CCD782C72F</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>8BF2695B-5694-B61B-F857-BAA8A2A575B0</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="email_cliente" id="D8DA7FB3-6FCB-3599-7DD1-A65EF61A174A">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>52AAE1A0-C8D6-1FC3-B18E-B9B786DFBD8D</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>17144B52-F081-BA3D-0B8F-ED254235B152</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>120</dataTypeSize>
+<ownDataTypeParameters>120,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="senha_cliente" id="E51C14AC-D844-DF25-A8E6-6AFC5E2D0E36">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>144900DE-52B5-87F2-C002-CFC6964B1466</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="telefone_cliente" id="D6FFFE50-B820-0A96-7E1A-B3788C0BC0E8">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>E6026D28-700C-2ADC-FF83-25DA7D4EA2C4</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>43A82927-B839-777C-A80B-1CB12C8A8994</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>11</dataTypeSize>
+<ownDataTypeParameters>11,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="data_nascimento_cliente" id="511E1529-943A-862A-05CC-D2F423F80D8A">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>A982CDB9-6492-A357-B650-537F7208EABA</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>9CE67372-AC1D-227E-E7AC-D0817E6E082D</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="token_acesso" id="074CAB8F-B8A7-5F14-88F2-064341F5F66D">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>0A6070E8-2159-A443-5875-148F0DD493CA</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>ABEFA660-2966-346C-8741-551C6987534E</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500</dataTypeSize>
+<ownDataTypeParameters>500,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="permissao" id="8C52D67B-F310-2779-06D8-E143B6D81AA3">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:43:32 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F4C3B968-DF0E-6523-34C6-F467CB5CF076" name="Clientes_PK">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>3C4B22DE-C5BC-6463-5271-B3C9270858A4</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>1A116A20-D04D-B0B1-EC39-678041F69BC1</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5FBDB1D5-F14E-78A5-8BA1-B0D3D0AD8D00"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6340CA7C-6BF3-67C4-9AA5-05B1C18012AE" name="Clientes__UN_email">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>491049AA-E121-4290-D164-72256CEB2A16</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D8DA7FB3-6FCB-3599-7DD1-A65EF61A174A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8A93F312-D998-A08E-7E5A-51EDCBF39BF9" name="Clientes__UN_telefone">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>DF111BBA-634B-14C3-EFDA-4E7D1471E200</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D6FFFE50-B820-0A96-7E1A-B3788C0BC0E8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

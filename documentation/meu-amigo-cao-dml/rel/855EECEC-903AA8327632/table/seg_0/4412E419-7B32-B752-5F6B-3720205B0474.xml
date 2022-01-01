@@ -1,0 +1,120 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4412E419-7B32-B752-5F6B-3720205B0474" name="Agendamentos">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>872FB19C-DF83-B4C4-B76C-FFD3F218AD82</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>E975793C-6381-1C52-EA32-8E06C7DFD206</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_agendamento" id="CF800EEB-F403-530F-B8FA-5BCE2953BC54">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>9B00C760-D926-E950-0EAF-0FF42A31317B</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>B716E1C8-0847-6A68-F864-B3CF99B6B666</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="data_agendamento" id="F35617E2-3F9E-1895-4434-7D8EDE23C009">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>9E741CC7-66E4-0487-300A-56E1785B8A9F</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>A541B95C-595C-074F-2447-7E5B8B29BC36</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="observacoes" id="9CAF45B7-C817-DED2-4451-01DDE1F76B90">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>3C1610CC-E298-06CB-0EAA-6076BB008FBD</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>D19D7681-E22A-CAC3-D9F6-6BAA7C47272C</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>300</dataTypeSize>
+<ownDataTypeParameters>300,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_servico" id="7CF4D175-BFEE-30B3-71B2-D929CD43FE40">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>DDD19889-5528-DE09-8027-B0B3617B8F84</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>11F9146E-F308-1BAA-1C81-F6C841F58B9C</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT018</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8897531E-1840-6689-6802-7D265E5BC608" referredColumn="9A585BE9-CF4D-26FE-89EB-6C856C2F962C"/>
+</associations>
+</Column>
+<Column name="id_pet" id="424A2CD3-C39A-613E-EAA8-89F343DC2EC3">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>ACE912F7-4034-3693-D950-2BBA2856F0CA</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>3AE902B9-F474-D437-73C0-B9B62B6EB6ED</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="53945199-6CAC-42A2-A917-9A48A098054B" referredColumn="89BE4906-9DD0-22EE-705E-FFF95F7F30BF"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4159B571-9589-DCC6-F18C-F9CC43E0210C" name="Agendamentos_PK">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>3BA6F9D0-932C-FB19-C82C-43A43CA3C0E7</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<importedID>01C771FC-7E50-4F9F-B82D-91D65DE645BC</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CF800EEB-F403-530F-B8FA-5BCE2953BC54"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="367BC63B-A479-B6BF-0696-1EB96A404CE1" name="Agendamentos_Pets_FK">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>938742FC-063E-8CD2-A6E1-97A4F0B4A955</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="424A2CD3-C39A-613E-EAA8-89F343DC2EC3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="040074C2-3A82-2E1F-3524-2FBA11EF5E33" name="Agendamentos_Servicos_FK">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-01 18:42:36 UTC</createdTime>
+<generatorID>D7D85145-D94B-99C4-996C-E29DC458E66B</generatorID>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7CF4D175-BFEE-30B3-71B2-D929CD43FE40"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
