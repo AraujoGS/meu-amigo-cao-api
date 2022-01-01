@@ -53,4 +53,10 @@ describe('DbChangePassword Usecase', () => {
     const promise = sut.change(mockChangePasswordParams())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbChangePassword return ERROR_INVALID_PASSWORD(2) if HashComparer return false', async () => {
+    const { sut, hashComparerSpy } = makeSut()
+    hashComparerSpy.result = false
+    const result = await sut.change(mockChangePasswordParams())
+    expect(result).toEqual(ChangePasswordResult.ERROR_INVALID_PASSWORD)
+  })
 })
