@@ -1,6 +1,7 @@
-import { AddAccountPostgresRepository } from '@/infra/db'
+import { AddAccountPostgresRepository, UpdateAccessTokenPostgresRepository } from '@/infra/db'
 import { mockAddAccountParams } from '@/tests/domain/mocks'
 import { IdentifierGeneratorSpy } from '@/tests/infra/mocks'
+import faker from 'faker'
 
 type AccountModel = {
   id: string
@@ -20,4 +21,14 @@ export const mockAccount = async (): Promise<AccountModel> => {
     ...params,
     id: identifierGeneratorSpy.result
   }
+}
+
+export const mockUpdateToken = async (id: string): Promise<string> => {
+  const accessToken = faker.random.alphaNumeric(32)
+  const updateAccessTokenPostgresRepository = new UpdateAccessTokenPostgresRepository()
+  await updateAccessTokenPostgresRepository.updateAccessToken({
+    id,
+    accessToken
+  })
+  return accessToken
 }

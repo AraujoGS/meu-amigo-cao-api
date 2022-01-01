@@ -8,7 +8,8 @@ export const sqlCreateDb = `CREATE TABLE IF NOT EXISTS CLIENTES (
   email_cliente VARCHAR(120) CONSTRAINT UK_EMAIL_CLIENTE UNIQUE NOT NULL,
   telefone_cliente VARCHAR(11) CONSTRAINT UK_TELEFONE_CLIENTE UNIQUE NOT NULL,
   data_nascimento_cliente DATE NOT NULL,
-  token_acesso VARCHAR(250)
+  token_acesso VARCHAR(250),
+  permissao VARCHAR(25)
 );
 
 CREATE TABLE IF NOT EXISTS ENDERECOS (
