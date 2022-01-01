@@ -1,4 +1,4 @@
-import { AddAccount, Authentication, ForgotPassword, LoadAccountByToken } from '@/domain/usecases'
+import { AddAccount, Authentication, ForgotPassword, LoadAccountByToken, ChangePassword } from '@/domain/usecases'
 import faker from 'faker'
 
 export const mockAddAccountParams = (): AddAccount.Params => ({
@@ -22,4 +22,10 @@ export const mockForgotPasswordParams = (): ForgotPassword.Params => ({
 export const mockLoadAccountByTokenParams = (): LoadAccountByToken.Params => ({
   token: faker.random.alphaNumeric(32),
   role: faker.random.word()
+})
+
+export const mockChangePasswordParams = (): ChangePassword.Params => ({
+  id: faker.datatype.uuid(),
+  oldPassword: faker.random.alphaNumeric(12),
+  newPassword: faker.random.alphaNumeric(15)
 })
