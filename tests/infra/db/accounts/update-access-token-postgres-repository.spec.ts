@@ -9,7 +9,7 @@ const makeSut = (): UpdateAccessTokenPostgresRepository => {
 
 const getAccessToken = async (id: string): Promise<any> => {
   const response = await PostgresHelper.execute('SELECT token_acesso FROM CLIENTES WHERE id_cliente = $1', [id])
-  return response?.rows[0]
+  return PostgresHelper.mapperOneResult(response)
 }
 
 describe('Update Access Token Postgres Repository', () => {

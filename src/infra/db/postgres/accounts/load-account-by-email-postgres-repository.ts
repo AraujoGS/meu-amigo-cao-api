@@ -6,6 +6,6 @@ export class LoadAccountByEmailPostgresRepository implements LoadAccountByEmailR
     const query = 'SELECT id_cliente as id, nome_cliente as name, senha_cliente as password FROM CLIENTES WHERE email_cliente = $1'
     const params = [email]
     const account = await PostgresHelper.execute(query, params)
-    return account?.rows.length ? account.rows[0] : null
+    return PostgresHelper.mapperOneResult(account)
   }
 }

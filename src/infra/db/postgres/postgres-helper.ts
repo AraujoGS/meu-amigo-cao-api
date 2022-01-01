@@ -20,6 +20,9 @@ export const PostgresHelper = {
   },
   async rollbackTransaction (): Promise<QueryResult> {
     return this.client.query('ROLLBACK')
+  },
+  mapperOneResult (result: QueryResult): any {
+    return result?.rows.length ? result.rows[0] : null
   }
 }
 

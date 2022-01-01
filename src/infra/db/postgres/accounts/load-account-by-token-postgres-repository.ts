@@ -6,6 +6,6 @@ export class LoadAccountByTokenPostgresRepository implements LoadAccountByTokenR
     const query = 'SELECT id_cliente as id FROM CLIENTES WHERE token_acesso = $1 AND (permissao IS NULL OR permissao = $2)'
     const params = [data.token, data.role]
     const account = await PostgresHelper.execute(query, params)
-    return account?.rows.length ? account.rows[0] : null
+    return PostgresHelper.mapperOneResult(account)
   }
 }

@@ -6,7 +6,7 @@ import faker from 'faker'
 const makeSut = (): UpdatePasswordPostgresRepository => new UpdatePasswordPostgresRepository()
 const getHashSenha = async (id: string): Promise<any> => {
   const response = await PostgresHelper.execute('SELECT senha_cliente as password FROM CLIENTES WHERE id_cliente = $1', [id])
-  return response?.rows[0]
+  return PostgresHelper.mapperOneResult(response)
 }
 
 describe('Update Password Postgres Repository', () => {

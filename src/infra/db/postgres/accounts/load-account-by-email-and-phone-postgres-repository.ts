@@ -7,6 +7,6 @@ export class LoadAccountByEmailAndPhonePostgresRepository implements LoadAccount
     const { email, phone } = data
     const params = [email, phone]
     const account = await PostgresHelper.execute(query, params)
-    return account?.rows.length ? account.rows[0] : null
+    return PostgresHelper.mapperOneResult(account)
   }
 }
