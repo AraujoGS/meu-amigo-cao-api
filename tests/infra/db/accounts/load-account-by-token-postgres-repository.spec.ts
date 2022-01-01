@@ -25,4 +25,10 @@ describe('Load Account By Token Postgres Repository', () => {
     expect(response).toBeTruthy()
     expect(response.id).toBe(params.id)
   })
+  it('should LoadAccountByTokenRepository return null if invalid token', async () => {
+    const sut = makeSut()
+    await mockAccount()
+    const response = await sut.loadByToken({ token: 'any_token' })
+    expect(response).toBeNull()
+  })
 })
