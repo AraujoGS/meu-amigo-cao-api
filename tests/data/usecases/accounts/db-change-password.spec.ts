@@ -68,4 +68,10 @@ describe('DbChangePassword Usecase', () => {
     await sut.change(params)
     expect(hasherSpy.password).toBe(params.newPassword)
   })
+  it('should DbChangePassword throw error if Hasher throws', async () => {
+    const { sut, hasherSpy } = makeSut()
+    jest.spyOn(hasherSpy, 'hash').mockImplementationOnce(throwError)
+    const promise = sut.change(mockChangePasswordParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
