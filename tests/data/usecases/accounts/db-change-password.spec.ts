@@ -1,22 +1,25 @@
 import { DbChangePassword } from '@/data/usecases'
 import { ChangePasswordResult } from '@/domain/models'
 import { mockChangePasswordParams, throwError } from '@/tests/domain/mocks'
-import { LoadAccountByIdRepositorySpy, HashComparerSpy } from '@/tests/data/mocks'
+import { LoadAccountByIdRepositorySpy, HashComparerSpy, HasherSpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbChangePassword
   loadAccountByIdRepositorySpy: LoadAccountByIdRepositorySpy
   hashComparerSpy: HashComparerSpy
+  hasherSpy: HasherSpy
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByIdRepositorySpy = new LoadAccountByIdRepositorySpy()
   const hashComparerSpy = new HashComparerSpy()
-  const sut = new DbChangePassword(loadAccountByIdRepositorySpy, hashComparerSpy)
+  const hasherSpy = new HasherSpy()
+  const sut = new DbChangePassword(loadAccountByIdRepositorySpy, hashComparerSpy, hasherSpy)
   return {
     sut,
     loadAccountByIdRepositorySpy,
-    hashComparerSpy
+    hashComparerSpy,
+    hasherSpy
   }
 }
 describe('DbChangePassword Usecase', () => {
@@ -58,5 +61,11 @@ describe('DbChangePassword Usecase', () => {
     hashComparerSpy.result = false
     const result = await sut.change(mockChangePasswordParams())
     expect(result).toEqual(ChangePasswordResult.ERROR_INVALID_PASSWORD)
+  })
+  it('should DbChangePassword call Hasher with correct password', async () => {
+    const { sut, hasherSpy } = makeSut()
+    const params = mockChangePasswordParams()
+    await sut.change(params)
+    expect(hasherSpy.password).toBe(params.newPassword)
   })
 })
