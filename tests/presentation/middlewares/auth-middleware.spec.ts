@@ -1,7 +1,8 @@
 import { AuthMiddleware } from '@/presentation/middlewares'
-import { forbidden, ok } from '@/presentation/helpers'
+import { forbidden, ok, internalServerError } from '@/presentation/helpers'
 import { AccessDeniedError } from '@/presentation/errors'
 import { LoadAccountByTokenSpy } from '@/tests/presentation/mocks'
+import { throwError } from '@/tests/domain/mocks'
 import faker from 'faker'
 
 type SutTypes = {
@@ -41,5 +42,11 @@ describe('Auth Middleware', () => {
     const { sut, loadAccountByTokenSpy } = makeSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(ok({ accountId: loadAccountByTokenSpy.result.id }))
+  })
+  it('should AuthMiddleware return 500 if LoadAccountByToken throw error', async () => {
+    const { sut, loadAccountByTokenSpy } = makeSut()
+    jest.spyOn(loadAccountByTokenSpy, 'loadByToken').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new Error()))
   })
 })
