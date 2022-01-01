@@ -16,7 +16,7 @@ describe('Load Account By Token Postgres Repository', () => {
   afterAll(async () => {
     await PostgresHelper.disconnect()
   })
-  it('should LoadAccountByTokenRepository return account data if valid token', async () => {
+  it('should LoadAccountByTokenPostgresRepository return account data if valid token', async () => {
     const sut = makeSut()
     const params = await mockAccount()
     const fakeAccessToken = await mockUpdateToken(params.id)
@@ -25,7 +25,7 @@ describe('Load Account By Token Postgres Repository', () => {
     expect(response).toBeTruthy()
     expect(response.id).toBe(params.id)
   })
-  it('should LoadAccountByTokenRepository return null if invalid token', async () => {
+  it('should LoadAccountByTokenPostgresRepository return null if invalid token', async () => {
     const sut = makeSut()
     await mockAccount()
     const response = await sut.loadByToken({ token: 'any_token' })
