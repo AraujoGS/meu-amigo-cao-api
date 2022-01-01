@@ -1,4 +1,5 @@
 import { LoadAccountByIdRepository } from '@/data/interfaces/db'
+import { ChangePasswordResult } from '@/domain/models'
 import { ChangePassword } from '@/domain/usecases'
 
 export class DbChangePassword implements ChangePassword {
@@ -9,6 +10,6 @@ export class DbChangePassword implements ChangePassword {
   async change (data: ChangePassword.Params): Promise<ChangePassword.Result> {
     const { id } = data
     await this.loadAccountByIdRepository.loadById(id)
-    return null
+    return ChangePasswordResult.ERROR_ACCOUNT_NOT_EXISTS
   }
 }
