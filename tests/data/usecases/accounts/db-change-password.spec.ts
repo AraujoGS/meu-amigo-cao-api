@@ -1,6 +1,6 @@
 import { DbChangePassword } from '@/data/usecases'
 import { ChangePasswordResult } from '@/domain/models'
-import { mockChangePasswordParams } from '@/tests/domain/mocks'
+import { mockChangePasswordParams, throwError } from '@/tests/domain/mocks'
 import { LoadAccountByIdRepositorySpy } from '@/tests/data/mocks'
 
 type SutTypes = {
@@ -28,5 +28,11 @@ describe('DbChangePassword Usecase', () => {
     loadAccountByIdRepositorySpy.result = null
     const result = await sut.change(mockChangePasswordParams())
     expect(result).toEqual(ChangePasswordResult.ERROR_ACCOUNT_NOT_EXISTS)
+  })
+  it('should DbChangePassword throw error if LoadAccountByIdRepository throws', async () => {
+    const { sut, loadAccountByIdRepositorySpy } = makeSut()
+    jest.spyOn(loadAccountByIdRepositorySpy, 'loadById').mockImplementationOnce(throwError)
+    const promise = sut.change(mockChangePasswordParams())
+    await expect(promise).rejects.toThrow()
   })
 })
