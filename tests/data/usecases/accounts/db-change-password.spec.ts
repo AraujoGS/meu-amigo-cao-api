@@ -1,25 +1,28 @@
 import { DbChangePassword } from '@/data/usecases'
 import { ChangePasswordResult } from '@/domain/models'
 import { mockChangePasswordParams, throwError } from '@/tests/domain/mocks'
-import { LoadAccountByIdRepositorySpy, HashComparerSpy, HasherSpy } from '@/tests/data/mocks'
+import { LoadAccountByIdRepositorySpy, HashComparerSpy, HasherSpy, UpdatePasswordRepositorySpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbChangePassword
   loadAccountByIdRepositorySpy: LoadAccountByIdRepositorySpy
   hashComparerSpy: HashComparerSpy
   hasherSpy: HasherSpy
+  updatePasswordRepositorySpy: UpdatePasswordRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByIdRepositorySpy = new LoadAccountByIdRepositorySpy()
   const hashComparerSpy = new HashComparerSpy()
   const hasherSpy = new HasherSpy()
-  const sut = new DbChangePassword(loadAccountByIdRepositorySpy, hashComparerSpy, hasherSpy)
+  const updatePasswordRepositorySpy = new UpdatePasswordRepositorySpy()
+  const sut = new DbChangePassword(loadAccountByIdRepositorySpy, hashComparerSpy, hasherSpy, updatePasswordRepositorySpy)
   return {
     sut,
     loadAccountByIdRepositorySpy,
     hashComparerSpy,
-    hasherSpy
+    hasherSpy,
+    updatePasswordRepositorySpy
   }
 }
 describe('DbChangePassword Usecase', () => {
@@ -73,5 +76,13 @@ describe('DbChangePassword Usecase', () => {
     jest.spyOn(hasherSpy, 'hash').mockImplementationOnce(throwError)
     const promise = sut.change(mockChangePasswordParams())
     await expect(promise).rejects.toThrow()
+  })
+  it('should DbChangePassword call UpdatePasswordRepository with correct values', async () => {
+    const { sut, loadAccountByIdRepositorySpy, updatePasswordRepositorySpy, hasherSpy } = makeSut()
+    await sut.change(mockChangePasswordParams())
+    expect(updatePasswordRepositorySpy.data).toEqual({
+      email: loadAccountByIdRepositorySpy.result.email,
+      password: hasherSpy.result
+    })
   })
 })
