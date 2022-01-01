@@ -1,5 +1,5 @@
 import { AuthMiddleware } from '@/presentation/middlewares'
-import { forbidden, ok, internalServerError } from '@/presentation/helpers'
+import { forbidden, ok, internalServerError, unauthorized } from '@/presentation/helpers'
 import { AccessDeniedError } from '@/presentation/errors'
 import { LoadAccountByTokenSpy } from '@/tests/presentation/mocks'
 import { throwError } from '@/tests/domain/mocks'
@@ -48,5 +48,10 @@ describe('Auth Middleware', () => {
     jest.spyOn(loadAccountByTokenSpy, 'loadByToken').mockImplementationOnce(throwError)
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(internalServerError(new Error()))
+  })
+  it('should AuthMiddleware return 401 if missing access token', async () => {
+    const { sut } = makeSut()
+    const response = await sut.handle({})
+    expect(response).toEqual(unauthorized())
   })
 })
