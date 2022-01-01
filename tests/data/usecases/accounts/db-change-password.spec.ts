@@ -1,19 +1,22 @@
 import { DbChangePassword } from '@/data/usecases'
 import { ChangePasswordResult } from '@/domain/models'
 import { mockChangePasswordParams, throwError } from '@/tests/domain/mocks'
-import { LoadAccountByIdRepositorySpy } from '@/tests/data/mocks'
+import { LoadAccountByIdRepositorySpy, HashComparerSpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbChangePassword
   loadAccountByIdRepositorySpy: LoadAccountByIdRepositorySpy
+  hashComparerSpy: HashComparerSpy
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByIdRepositorySpy = new LoadAccountByIdRepositorySpy()
-  const sut = new DbChangePassword(loadAccountByIdRepositorySpy)
+  const hashComparerSpy = new HashComparerSpy()
+  const sut = new DbChangePassword(loadAccountByIdRepositorySpy, hashComparerSpy)
   return {
     sut,
-    loadAccountByIdRepositorySpy
+    loadAccountByIdRepositorySpy,
+    hashComparerSpy
   }
 }
 describe('DbChangePassword Usecase', () => {
@@ -34,5 +37,14 @@ describe('DbChangePassword Usecase', () => {
     jest.spyOn(loadAccountByIdRepositorySpy, 'loadById').mockImplementationOnce(throwError)
     const promise = sut.change(mockChangePasswordParams())
     await expect(promise).rejects.toThrow()
+  })
+  it('should DbChangePassword call HashComparer with correct values', async () => {
+    const { sut, loadAccountByIdRepositorySpy, hashComparerSpy } = makeSut()
+    const params = mockChangePasswordParams()
+    await sut.change(params)
+    expect(hashComparerSpy.data).toEqual({
+      value: params.oldPassword,
+      hash: loadAccountByIdRepositorySpy.result.password
+    })
   })
 })
