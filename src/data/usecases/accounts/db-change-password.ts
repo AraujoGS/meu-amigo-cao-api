@@ -13,7 +13,8 @@ export class DbChangePassword implements ChangePassword {
     const { id, oldPassword } = data
     const account = await this.loadAccountByIdRepository.loadById(id)
     if (account) {
-      await this.hashComparer.compare({ value: oldPassword, hash: account.password })
+      const isValid = await this.hashComparer.compare({ value: oldPassword, hash: account.password })
+      if (!isValid) return ChangePasswordResult.ERROR_INVALID_PASSWORD
     }
     return ChangePasswordResult.ERROR_ACCOUNT_NOT_EXISTS
   }
