@@ -1,4 +1,5 @@
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
+import { ChangePassword } from '@/domain/usecases'
 import { badRequest } from '@/presentation/helpers'
 
 export namespace ChangePasswordController {
@@ -12,7 +13,8 @@ export namespace ChangePasswordController {
 
 export class ChangePasswordController implements Controller {
   constructor (
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly changePassword: ChangePassword
   ) {}
 
   async handle (httpRequest: ChangePasswordController.Request): Promise<HttpResponse> {
@@ -20,6 +22,8 @@ export class ChangePasswordController implements Controller {
     if (clientError) {
       return badRequest(clientError)
     }
+    const { oldPassword, newPassword, accountId: id } = httpRequest
+    await this.changePassword.change({ id, oldPassword, newPassword })
     return null
   }
 }
