@@ -19,6 +19,7 @@ export class DbChangePassword implements ChangePassword {
       if (!isValid) return ChangePasswordResult.ERROR_INVALID_PASSWORD
       const hashedNewPassword = await this.hasher.hash(newPassword)
       await this.updatePasswordRepository.updatePassword({ email: account.email, password: hashedNewPassword })
+      return ChangePasswordResult.SUCCESS
     }
     return ChangePasswordResult.ERROR_ACCOUNT_NOT_EXISTS
   }
