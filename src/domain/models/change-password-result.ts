@@ -1,0 +1,6 @@
+export enum ChangePasswordResult {
+  SUCCESS,
+  ERROR,
+  ERROR_INVALID_PASSWORD,
+  ERROR_ACCOUNT_NOT_EXISTS
+}
