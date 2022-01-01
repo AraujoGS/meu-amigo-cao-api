@@ -32,7 +32,7 @@ describe('DbChangePassword Usecase', () => {
     await sut.change(params)
     expect(loadAccountByIdRepositorySpy.id).toEqual(params.id)
   })
-  it('should DbChangePassword return ERROR_ACCOUNT_NOT_EXISTS(3) if LoadAccountByIdRepository return null', async () => {
+  it('should DbChangePassword return ERROR_ACCOUNT_NOT_EXISTS(2) if LoadAccountByIdRepository return null', async () => {
     const { sut, loadAccountByIdRepositorySpy } = makeSut()
     loadAccountByIdRepositorySpy.result = null
     const result = await sut.change(mockChangePasswordParams())
@@ -59,7 +59,7 @@ describe('DbChangePassword Usecase', () => {
     const promise = sut.change(mockChangePasswordParams())
     await expect(promise).rejects.toThrow()
   })
-  it('should DbChangePassword return ERROR_INVALID_PASSWORD(2) if HashComparer return false', async () => {
+  it('should DbChangePassword return ERROR_INVALID_PASSWORD(1) if HashComparer return false', async () => {
     const { sut, hashComparerSpy } = makeSut()
     hashComparerSpy.result = false
     const result = await sut.change(mockChangePasswordParams())
@@ -90,5 +90,10 @@ describe('DbChangePassword Usecase', () => {
     jest.spyOn(updatePasswordRepositorySpy, 'updatePassword').mockImplementationOnce(throwError)
     const promise = sut.change(mockChangePasswordParams())
     await expect(promise).rejects.toThrow()
+  })
+  it('should DbChangePassword return SUCCESS(0) if UpdatePasswordRepository success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.change(mockChangePasswordParams())
+    expect(result).toEqual(ChangePasswordResult.SUCCESS)
   })
 })
