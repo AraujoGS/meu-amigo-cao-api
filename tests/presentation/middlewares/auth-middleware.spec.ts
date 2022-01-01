@@ -1,5 +1,5 @@
 import { AuthMiddleware } from '@/presentation/middlewares'
-import { forbidden } from '@/presentation/helpers'
+import { forbidden, ok } from '@/presentation/helpers'
 import { AccessDeniedError } from '@/presentation/errors'
 import { LoadAccountByTokenSpy } from '@/tests/presentation/mocks'
 import faker from 'faker'
@@ -36,5 +36,10 @@ describe('Auth Middleware', () => {
     loadAccountByTokenSpy.result = null
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(forbidden(new AccessDeniedError()))
+  })
+  it('should AuthMiddleware return 200 if LoadAccountByToken return account', async () => {
+    const { sut, loadAccountByTokenSpy } = makeSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(ok({ accountId: loadAccountByTokenSpy.result.id }))
   })
 })
