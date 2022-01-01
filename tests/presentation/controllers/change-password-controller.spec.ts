@@ -1,4 +1,6 @@
 import { ChangePasswordController } from '@/presentation/controllers'
+import { MissingParamError } from '@/presentation/errors'
+import { badRequest } from '@/presentation/helpers'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 
@@ -32,5 +34,11 @@ describe('ChangePassword Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(validationSpy.input).toEqual(request)
+  })
+  it('should ChangePasswordController return 400 if Validation return error', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.result = new MissingParamError('accountId')
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(badRequest(new MissingParamError('accountId')))
   })
 })
