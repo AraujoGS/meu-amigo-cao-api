@@ -1,5 +1,6 @@
 import { PostgresHelper, LoadAccountByIdPostgresRepository } from '@/infra/db'
 import { createDbTest, sqlClearDb, sqlCreateDb, mockAccount } from '@/tests/infra/mocks'
+import faker from 'faker'
 
 const makeSut = (): LoadAccountByIdPostgresRepository => new LoadAccountByIdPostgresRepository()
 
@@ -23,5 +24,10 @@ describe('Load Account By Id Postgres Repository', () => {
     expect(response).toBeTruthy()
     expect(response.email).toBe(params.email)
     expect(response.password).toBe(params.password)
+  })
+  it('should LoadAccountByIdPostgresRepository return null if invalid id', async () => {
+    const sut = makeSut()
+    const response = await sut.loadById(faker.datatype.uuid())
+    expect(response).toBeNull()
   })
 })
