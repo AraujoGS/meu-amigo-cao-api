@@ -154,11 +154,11 @@ describe('Account Routes', () => {
         .expect(412)
     })
   })
-  describe('POST /change-password', () => {
+  describe('PATCH /change-password', () => {
     it('should change password route return 200 if success', async () => {
       const token = await mockGetAccessToken()
       await request(app)
-        .post('/api/change-password')
+        .patch('/api/change-password')
         .set('x-access-token', token)
         .send({
           oldPassword: '123',
@@ -170,7 +170,7 @@ describe('Account Routes', () => {
     it('should change password route return 400 if fail', async () => {
       const token = await mockGetAccessToken()
       await request(app)
-        .post('/api/change-password')
+        .patch('/api/change-password')
         .set('x-access-token', token)
         .send({
           oldPassword: '123',
@@ -181,7 +181,7 @@ describe('Account Routes', () => {
     it('should change password route return 412 if fail', async () => {
       const token = await mockGetAccessToken()
       await request(app)
-        .post('/api/change-password')
+        .patch('/api/change-password')
         .set('x-access-token', token)
         .send({
           oldPassword: '1234',
@@ -192,7 +192,7 @@ describe('Account Routes', () => {
     })
     it('should change password route return 401 if missing token', async () => {
       await request(app)
-        .post('/api/change-password')
+        .patch('/api/change-password')
         .send({
           oldPassword: '123',
           oldPasswordConfirmation: '123',
@@ -202,7 +202,7 @@ describe('Account Routes', () => {
     })
     it('should change password route return 403 if invalid token', async () => {
       await request(app)
-        .post('/api/change-password')
+        .patch('/api/change-password')
         .set('x-access-token', 'any_token')
         .send({
           oldPassword: '123',
