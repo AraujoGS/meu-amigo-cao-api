@@ -1,10 +1,11 @@
 import { ChangePasswordController } from '@/presentation/controllers'
 import { MissingParamError, InvalidParamError } from '@/presentation/errors'
-import { badRequest, preconditionFailed, ok } from '@/presentation/helpers'
+import { badRequest, preconditionFailed, ok, internalServerError } from '@/presentation/helpers'
 import { ChangePasswordResult } from '@/domain/models'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import { ChangePasswordSpy } from '@/tests/presentation/mocks'
 import faker from 'faker'
+import { throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: ChangePasswordController
@@ -76,5 +77,11 @@ describe('ChangePassword Controller', () => {
     const { sut } = makeSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(ok())
+  })
+  it('should ChangePasswordController return 500 if ChangePassword throw error', async () => {
+    const { sut, changePasswordSpy } = makeSut()
+    jest.spyOn(changePasswordSpy, 'change').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new Error()))
   })
 })
