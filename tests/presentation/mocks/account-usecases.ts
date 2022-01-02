@@ -1,5 +1,5 @@
-import { AddAccount, Authentication, ForgotPassword, LoadAccountByToken } from '@/domain/usecases'
-import { CreationAccountResult, LoadAccountByTokenModel } from '@/domain/models'
+import { AddAccount, Authentication, ForgotPassword, LoadAccountByToken, ChangePassword } from '@/domain/usecases'
+import { CreationAccountResult, LoadAccountByTokenModel, ChangePasswordResult } from '@/domain/models'
 import faker from 'faker'
 
 export class AddAccountSpy implements AddAccount {
@@ -40,6 +40,15 @@ export class LoadAccountByTokenSpy implements LoadAccountByToken {
   }
 
   async loadByToken (data: LoadAccountByTokenModel): Promise<LoadAccountByToken.Result> {
+    this.data = data
+    return this.result
+  }
+}
+
+export class ChangePasswordSpy implements ChangePassword {
+  data: ChangePassword.Params
+  result = ChangePasswordResult.SUCCESS
+  async change (data: ChangePassword.Params): Promise<ChangePassword.Result> {
     this.data = data
     return this.result
   }

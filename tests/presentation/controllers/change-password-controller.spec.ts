@@ -2,19 +2,23 @@ import { ChangePasswordController } from '@/presentation/controllers'
 import { MissingParamError } from '@/presentation/errors'
 import { badRequest } from '@/presentation/helpers'
 import { ValidationSpy } from '@/tests/validation/mocks'
+import { ChangePasswordSpy } from '@/tests/presentation/mocks'
 import faker from 'faker'
 
 type SutTypes = {
   sut: ChangePasswordController
   validationSpy: ValidationSpy
+  changePasswordSpy: ChangePasswordSpy
 }
 
 const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
-  const sut = new ChangePasswordController(validationSpy)
+  const changePasswordSpy = new ChangePasswordSpy()
+  const sut = new ChangePasswordController(validationSpy, changePasswordSpy)
   return {
     sut,
-    validationSpy
+    validationSpy,
+    changePasswordSpy
   }
 }
 
@@ -40,5 +44,15 @@ describe('ChangePassword Controller', () => {
     validationSpy.result = new MissingParamError('accountId')
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(badRequest(new MissingParamError('accountId')))
+  })
+  it('should ChangePasswordController call ChangePassword with correct values', async () => {
+    const { sut, changePasswordSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(changePasswordSpy.data).toEqual({
+      id: request.accountId,
+      oldPassword: request.oldPassword,
+      newPassword: request.newPassword
+    })
   })
 })
