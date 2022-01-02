@@ -9,16 +9,19 @@ type SutTypes = {
   sut: ChangePasswordController
   validationSpy: ValidationSpy
   changePasswordSpy: ChangePasswordSpy
+  businessRulesValidationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
   const changePasswordSpy = new ChangePasswordSpy()
-  const sut = new ChangePasswordController(validationSpy, changePasswordSpy)
+  const businessRulesValidationSpy = new ValidationSpy()
+  const sut = new ChangePasswordController(validationSpy, changePasswordSpy, businessRulesValidationSpy)
   return {
     sut,
     validationSpy,
-    changePasswordSpy
+    changePasswordSpy,
+    businessRulesValidationSpy
   }
 }
 
@@ -54,5 +57,11 @@ describe('ChangePassword Controller', () => {
       oldPassword: request.oldPassword,
       newPassword: request.newPassword
     })
+  })
+  it('should ChangePasswordController call BusinessRulesValidation with correct values', async () => {
+    const { sut, businessRulesValidationSpy, changePasswordSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(businessRulesValidationSpy.input).toEqual({ resultChangePassword: changePasswordSpy.result })
   })
 })
