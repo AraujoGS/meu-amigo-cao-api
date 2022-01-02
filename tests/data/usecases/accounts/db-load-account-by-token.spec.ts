@@ -38,11 +38,11 @@ describe('DbLoadAccountByToken Usecase', () => {
     expect(response).toBeNull()
   })
   it('should DbLoadAccountByToken call LoadAccountByTokenRepository with correct values', async () => {
-    const { sut, loadAccountByTokenRepositorySpy, decrypterSpy } = makeSut()
+    const { sut, loadAccountByTokenRepositorySpy } = makeSut()
     const data = mockLoadAccountByTokenParams()
     await sut.loadByToken(data)
     expect(loadAccountByTokenRepositorySpy.data).toEqual({
-      token: decrypterSpy.result,
+      token: data.token,
       role: data.role
     })
   })
