@@ -6,7 +6,8 @@ export const adaptRoutes = (controller: Controller): RequestHandler => {
     const request = {
       ...(req.body || {}),
       ...(req.params || {}),
-      ...(req.query || {})
+      ...(req.query || {}),
+      accountId: req.accountId
     }
     const httpResponse = await controller.handle(request)
     if ([200, 201, 203, 204].includes(httpResponse.statusCode)) {

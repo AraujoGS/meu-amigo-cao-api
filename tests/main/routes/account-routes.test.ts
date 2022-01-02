@@ -5,6 +5,7 @@ import { NodemailerHelper } from '@/infra/comunication'
 import { createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
 import { Express } from 'express'
 import { hash } from 'bcrypt'
+import { sign } from 'jsonwebtoken'
 import { v4 as uuid } from 'uuid'
 import request from 'supertest'
 let app: Express = null
@@ -19,6 +20,19 @@ const mockAddAccount = async (): Promise<void> => {
   `
   const params = [id, 'Guilherme de Araujo', password, 'guilhermearaujo421@gmail.com', phone, '1997-05-30']
   await PostgresHelper.execute(query, params)
+}
+
+const mockGetAccessToken = async (): Promise<string> => {
+  await mockAddAccount()
+  let query = 'SELECT id_cliente as id FROM CLIENTES WHERE email_cliente = $1'
+  let params = ['guilhermearaujo421@gmail.com']
+  const result = await PostgresHelper.execute(query, params)
+  const account = PostgresHelper.mapperOneResult(result)
+  const accessToken = sign({ id: account.id }, process.env.JWT_SECRET)
+  query = 'UPDATE CLIENTES SET token_acesso = $1 WHERE id_cliente = $2'
+  params = [accessToken, account.id]
+  await PostgresHelper.execute(query, params)
+  return accessToken
 }
 
 describe('Account Routes', () => {
@@ -138,6 +152,64 @@ describe('Account Routes', () => {
           phone: '11954976863'
         })
         .expect(412)
+    })
+  })
+  describe('POST /change-password', () => {
+    it('should change password route return 200 if success', async () => {
+      const token = await mockGetAccessToken()
+      await request(app)
+        .post('/api/change-password')
+        .set('x-access-token', token)
+        .send({
+          oldPassword: '123',
+          oldPasswordConfirmation: '123',
+          newPassword: '123Alterado'
+        })
+        .expect(200)
+    })
+    it('should change password route return 400 if fail', async () => {
+      const token = await mockGetAccessToken()
+      await request(app)
+        .post('/api/change-password')
+        .set('x-access-token', token)
+        .send({
+          oldPassword: '123',
+          oldPasswordConfirmation: '123'
+        })
+        .expect(400)
+    })
+    it('should change password route return 412 if fail', async () => {
+      const token = await mockGetAccessToken()
+      await request(app)
+        .post('/api/change-password')
+        .set('x-access-token', token)
+        .send({
+          oldPassword: '1234',
+          oldPasswordConfirmation: '1234',
+          newPassword: '123Alterado'
+        })
+        .expect(412)
+    })
+    it('should change password route return 401 if missing token', async () => {
+      await request(app)
+        .post('/api/change-password')
+        .send({
+          oldPassword: '123',
+          oldPasswordConfirmation: '123',
+          newPassword: '123Alterado'
+        })
+        .expect(401)
+    })
+    it('should change password route return 403 if invalid token', async () => {
+      await request(app)
+        .post('/api/change-password')
+        .set('x-access-token', 'any_token')
+        .send({
+          oldPassword: '123',
+          oldPasswordConfirmation: '123',
+          newPassword: '123Alterado'
+        })
+        .expect(403)
     })
   })
 })
