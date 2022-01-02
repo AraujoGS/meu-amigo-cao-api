@@ -1,6 +1,6 @@
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 import { ChangePassword } from '@/domain/usecases'
-import { badRequest, preconditionFailed, ok } from '@/presentation/helpers'
+import { badRequest, preconditionFailed, ok, internalServerError } from '@/presentation/helpers'
 
 export namespace ChangePasswordController {
   export type Request = {
@@ -19,16 +19,20 @@ export class ChangePasswordController implements Controller {
   ) {}
 
   async handle (httpRequest: ChangePasswordController.Request): Promise<HttpResponse> {
-    const clientError = this.validation.validate(httpRequest)
-    if (clientError) {
-      return badRequest(clientError)
+    try {
+      const clientError = this.validation.validate(httpRequest)
+      if (clientError) {
+        return badRequest(clientError)
+      }
+      const { oldPassword, newPassword, accountId: id } = httpRequest
+      const result = await this.changePassword.change({ id, oldPassword, newPassword })
+      const conditionFailed = this.businessRulesValidation.validate({ resultChangePassword: result })
+      if (conditionFailed) {
+        return preconditionFailed(conditionFailed)
+      }
+      return ok()
+    } catch (error) {
+      return internalServerError(error)
     }
-    const { oldPassword, newPassword, accountId: id } = httpRequest
-    const result = await this.changePassword.change({ id, oldPassword, newPassword })
-    const conditionFailed = this.businessRulesValidation.validate({ resultChangePassword: result })
-    if (conditionFailed) {
-      return preconditionFailed(conditionFailed)
-    }
-    return ok()
   }
 }
