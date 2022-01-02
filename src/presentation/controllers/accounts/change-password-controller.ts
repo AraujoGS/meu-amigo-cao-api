@@ -14,7 +14,8 @@ export namespace ChangePasswordController {
 export class ChangePasswordController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly changePassword: ChangePassword
+    private readonly changePassword: ChangePassword,
+    private readonly businessRulesValidation: Validation
   ) {}
 
   async handle (httpRequest: ChangePasswordController.Request): Promise<HttpResponse> {
@@ -23,7 +24,8 @@ export class ChangePasswordController implements Controller {
       return badRequest(clientError)
     }
     const { oldPassword, newPassword, accountId: id } = httpRequest
-    await this.changePassword.change({ id, oldPassword, newPassword })
+    const result = await this.changePassword.change({ id, oldPassword, newPassword })
+    this.businessRulesValidation.validate({ resultChangePassword: result })
     return null
   }
 }
