@@ -7,5 +7,5 @@ export default (router: Router): void => {
   router.post('/signup', adaptRoutes(makeSignUpController()))
   router.post('/login', adaptRoutes(makeLoginController()))
   router.post('/forgot-password', adaptRoutes(makeForgotPasswordController()))
-  router.post('/change-password', auth, adaptRoutes(makeChangePasswordController()))
+  router.patch('/change-password', auth, adaptRoutes(makeChangePasswordController()))
 }
