@@ -23,4 +23,10 @@ describe('DbAddAddress Usecase', () => {
     await sut.add(params)
     expect(loadAccountByIdRepositorySpy.id).toBe(params.accountId)
   })
+  it('should DbAddAddress return null if LoadAccountByIdRepository return null', async () => {
+    const { sut, loadAccountByIdRepositorySpy } = makeSut()
+    loadAccountByIdRepositorySpy.result = null
+    const result = await sut.add(mockAddAddressParams())
+    expect(result).toBeNull()
+  })
 })
