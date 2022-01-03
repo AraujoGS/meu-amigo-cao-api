@@ -1,7 +1,7 @@
 import { ChangePasswordController } from '@/presentation/controllers'
 import { MissingParamError, InvalidParamError } from '@/presentation/errors'
 import { badRequest, preconditionFailed, ok, internalServerError } from '@/presentation/helpers'
-import { ChangePasswordResult } from '@/domain/models'
+import { ActionResult } from '@/domain/models'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import { ChangePasswordSpy } from '@/tests/presentation/mocks'
 import faker from 'faker'
@@ -68,7 +68,7 @@ describe('ChangePassword Controller', () => {
   })
   it('should ChangePasswordController return 412 if ChangePassword not success', async () => {
     const { sut, changePasswordSpy, businessRulesValidationSpy } = makeSut()
-    changePasswordSpy.result = ChangePasswordResult.ERROR_ACCOUNT_NOT_EXISTS
+    changePasswordSpy.result = ActionResult.ERROR_ACCOUNT_NOT_EXISTS
     businessRulesValidationSpy.result = new InvalidParamError('id')
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new InvalidParamError('id')))

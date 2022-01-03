@@ -1,8 +1,8 @@
-import { CreationAccountResult, AddAccountModel } from '@/domain/models'
+import { ActionResult, AddAccountModel } from '@/domain/models'
 
 export namespace AddAccount{
   export type Params = AddAccountModel
-  export type Result = CreationAccountResult
+  export type Result = ActionResult
 }
 
 export interface AddAccount {

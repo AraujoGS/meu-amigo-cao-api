@@ -1,4 +1,4 @@
-import { CreationAccountResult } from '@/domain/models'
+import { ActionResult } from '@/domain/models'
 import { SignUpController } from '@/presentation/controllers'
 import { MissingParamError, ServerError, CreationAccountError } from '@/presentation/errors'
 import { badRequest, created, internalServerError, preconditionFailed } from '@/presentation/helpers'
@@ -73,18 +73,18 @@ describe('SignUp Controller', () => {
   })
   it('should SignUpController return 412 if AddAccount not success', async () => {
     const { sut, addAccountSpy, businessRulesValidationSpy } = makeSut()
-    addAccountSpy.result = CreationAccountResult.ERROR
+    addAccountSpy.result = ActionResult.ERROR
     businessRulesValidationSpy.result = new CreationAccountError()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new CreationAccountError()))
   })
   it('should SignUpController call BusinessRulesValidation with correct value', async () => {
     const { sut, addAccountSpy, businessRulesValidationSpy } = makeSut()
-    addAccountSpy.result = CreationAccountResult.ERROR
+    addAccountSpy.result = ActionResult.ERROR
     businessRulesValidationSpy.result = new CreationAccountError()
     const request = mockRequest()
     await sut.handle(request)
-    expect(businessRulesValidationSpy.input).toEqual({ resultAddAccount: CreationAccountResult.ERROR })
+    expect(businessRulesValidationSpy.input).toEqual({ resultAddAccount: ActionResult.ERROR })
   })
   it('should SignUpController return 500 if Authentication throw error', async () => {
     const { sut, authenticationSpy } = makeSut()

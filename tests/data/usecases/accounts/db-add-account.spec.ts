@@ -1,5 +1,5 @@
 import { DbAddAccount } from '@/data/usecases'
-import { CreationAccountResult } from '@/domain/models'
+import { ActionResult } from '@/domain/models'
 import { mockAddAccountParams, throwError } from '@/tests/domain/mocks'
 import { AddAccountRepositorySpy, CheckAccountByEmailRepositorySpy, HasherSpy, CheckAccountByPhoneRepositorySpy } from '@/tests/data/mocks'
 
@@ -62,13 +62,13 @@ describe('DbAddAccount Usecase', () => {
   it('should DbAddAccount return SUCCESS(0) if AddAccountRepository returns true', async () => {
     const { sut } = makeSut()
     const response = await sut.add(mockAddAccountParams())
-    expect(response).toBe(CreationAccountResult.SUCCESS)
+    expect(response).toBe(ActionResult.SUCCESS)
   })
   it('should DbAddAccount return ERROR(1) if AddAccountRepository returns false', async () => {
     const { sut, addAccountRepositorySpy } = makeSut()
     addAccountRepositorySpy.result = false
     const response = await sut.add(mockAddAccountParams())
-    expect(response).toBe(CreationAccountResult.ERROR)
+    expect(response).toBe(ActionResult.ERROR)
   })
   it('should DbAddAccount call CheckAccountByEmailRepository with correct email', async () => {
     const { sut, checkAccountByEmailRepositorySpy } = makeSut()
@@ -87,7 +87,7 @@ describe('DbAddAccount Usecase', () => {
     const { sut, checkAccountByEmailRepositorySpy } = makeSut()
     checkAccountByEmailRepositorySpy.result = true
     const response = await sut.add(mockAddAccountParams())
-    expect(response).toBe(CreationAccountResult.ERROR_EMAIL)
+    expect(response).toBe(ActionResult.ERROR_EMAIL_IN_USE)
   })
   it('should DbAddAccount call CheckAccountByPhoneRepository with correct phone', async () => {
     const { sut, checkAccountByPhoneRepositorySpy } = makeSut()
@@ -106,6 +106,6 @@ describe('DbAddAccount Usecase', () => {
     const { sut, checkAccountByPhoneRepositorySpy } = makeSut()
     checkAccountByPhoneRepositorySpy.result = true
     const response = await sut.add(mockAddAccountParams())
-    expect(response).toBe(CreationAccountResult.ERROR_PHONE)
+    expect(response).toBe(ActionResult.ERROR_PHONE_IN_USE)
   })
 })

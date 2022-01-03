@@ -1,6 +1,6 @@
 import { LoadAccountByIdRepository, UpdatePasswordRepository } from '@/data/interfaces/db'
 import { HashComparer, Hasher } from '@/data/interfaces/cryptography'
-import { ChangePasswordResult } from '@/domain/models'
+import { ActionResult } from '@/domain/models'
 import { ChangePassword } from '@/domain/usecases'
 
 export class DbChangePassword implements ChangePassword {
@@ -16,11 +16,11 @@ export class DbChangePassword implements ChangePassword {
     const account = await this.loadAccountByIdRepository.loadById(id)
     if (account) {
       const isValid = await this.hashComparer.compare({ value: oldPassword, hash: account.password })
-      if (!isValid) return ChangePasswordResult.ERROR_INVALID_PASSWORD
+      if (!isValid) return ActionResult.ERROR_INVALID_PASSWORD
       const hashedNewPassword = await this.hasher.hash(newPassword)
       await this.updatePasswordRepository.updatePassword({ email: account.email, password: hashedNewPassword })
-      return ChangePasswordResult.SUCCESS
+      return ActionResult.SUCCESS
     }
-    return ChangePasswordResult.ERROR_ACCOUNT_NOT_EXISTS
+    return ActionResult.ERROR_ACCOUNT_NOT_EXISTS
   }
 }

@@ -1,6 +1,5 @@
-export * from './creation-account-result'
 export * from './add-account-model'
 export * from './authentication-model'
 export * from './forgot-password-model'
 export * from './load-account-by-token-model'
-export * from './change-password-result'
+export * from './action-results'

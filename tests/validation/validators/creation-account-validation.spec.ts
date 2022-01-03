@@ -1,5 +1,5 @@
 import { CreationAccountValidation } from '@/validation/validators'
-import { CreationAccountResult } from '@/domain/models'
+import { ActionResult } from '@/domain/models'
 import { CreationAccountError } from '@/presentation/errors'
 
 const makeSut = (): CreationAccountValidation => new CreationAccountValidation('resultAddAccount')
@@ -7,7 +7,7 @@ const makeSut = (): CreationAccountValidation => new CreationAccountValidation('
 describe('EmailInUse Validation', () => {
   it('should CreationAccountValidation return error if account not created', () => {
     const sut = makeSut()
-    const error = sut.validate({ resultAddAccount: CreationAccountResult.ERROR })
+    const error = sut.validate({ resultAddAccount: ActionResult.ERROR })
     expect(error).toEqual(new CreationAccountError())
   })
 })

@@ -1,5 +1,5 @@
 import { DbChangePassword } from '@/data/usecases'
-import { ChangePasswordResult } from '@/domain/models'
+import { ActionResult } from '@/domain/models'
 import { mockChangePasswordParams, throwError } from '@/tests/domain/mocks'
 import { LoadAccountByIdRepositorySpy, HashComparerSpy, HasherSpy, UpdatePasswordRepositorySpy } from '@/tests/data/mocks'
 
@@ -32,11 +32,11 @@ describe('DbChangePassword Usecase', () => {
     await sut.change(params)
     expect(loadAccountByIdRepositorySpy.id).toEqual(params.id)
   })
-  it('should DbChangePassword return ERROR_ACCOUNT_NOT_EXISTS(2) if LoadAccountByIdRepository return null', async () => {
+  it('should DbChangePassword return ERROR_ACCOUNT_NOT_EXISTS(5) if LoadAccountByIdRepository return null', async () => {
     const { sut, loadAccountByIdRepositorySpy } = makeSut()
     loadAccountByIdRepositorySpy.result = null
     const result = await sut.change(mockChangePasswordParams())
-    expect(result).toEqual(ChangePasswordResult.ERROR_ACCOUNT_NOT_EXISTS)
+    expect(result).toEqual(ActionResult.ERROR_ACCOUNT_NOT_EXISTS)
   })
   it('should DbChangePassword throw error if LoadAccountByIdRepository throws', async () => {
     const { sut, loadAccountByIdRepositorySpy } = makeSut()
@@ -59,11 +59,11 @@ describe('DbChangePassword Usecase', () => {
     const promise = sut.change(mockChangePasswordParams())
     await expect(promise).rejects.toThrow()
   })
-  it('should DbChangePassword return ERROR_INVALID_PASSWORD(1) if HashComparer return false', async () => {
+  it('should DbChangePassword return ERROR_INVALID_PASSWORD(4) if HashComparer return false', async () => {
     const { sut, hashComparerSpy } = makeSut()
     hashComparerSpy.result = false
     const result = await sut.change(mockChangePasswordParams())
-    expect(result).toEqual(ChangePasswordResult.ERROR_INVALID_PASSWORD)
+    expect(result).toEqual(ActionResult.ERROR_INVALID_PASSWORD)
   })
   it('should DbChangePassword call Hasher with correct password', async () => {
     const { sut, hasherSpy } = makeSut()
@@ -94,6 +94,6 @@ describe('DbChangePassword Usecase', () => {
   it('should DbChangePassword return SUCCESS(0) if UpdatePasswordRepository success', async () => {
     const { sut } = makeSut()
     const result = await sut.change(mockChangePasswordParams())
-    expect(result).toEqual(ChangePasswordResult.SUCCESS)
+    expect(result).toEqual(ActionResult.SUCCESS)
   })
 })

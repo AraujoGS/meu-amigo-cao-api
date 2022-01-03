@@ -1,4 +1,4 @@
-import { ChangePasswordResult } from '@/domain/models'
+import { ActionResult } from '@/domain/models'
 
 export namespace ChangePassword {
   export type Params = {
@@ -6,7 +6,7 @@ export namespace ChangePassword {
     oldPassword: string
     newPassword: string
   }
-  export type Result = ChangePasswordResult
+  export type Result = ActionResult
 }
 
 export interface ChangePassword {
