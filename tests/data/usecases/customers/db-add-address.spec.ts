@@ -38,4 +38,9 @@ describe('DbAddAddress Usecase', () => {
     await sut.add(params)
     expect(addAddressRepositorySpy.data).toEqual(params)
   })
+  it('should DbAddAddress return true if AddAddressRepository success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.add(mockAddAddressParams())
+    expect(result).toBe(true)
+  })
 })
