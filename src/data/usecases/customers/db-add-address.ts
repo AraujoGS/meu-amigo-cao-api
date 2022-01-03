@@ -11,6 +11,7 @@ export class DbAddAddress implements AddAddress {
     const account = await this.loadAccountByIdRepository.loadById(params.accountId)
     if (account) {
       await this.addAddressRepository.add(params)
+      return true
     }
     return null
   }
