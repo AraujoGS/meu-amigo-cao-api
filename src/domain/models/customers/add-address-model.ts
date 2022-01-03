@@ -1,4 +1,5 @@
 export type AddAddressModel = {
+  accountId: string
   zipcode: string
   address: string
   number: number
