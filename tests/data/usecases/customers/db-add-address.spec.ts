@@ -1,18 +1,21 @@
 import { DbAddAddress } from '@/data/usecases'
 import { mockAddAddressParams } from '@/tests/domain/mocks'
-import { LoadAccountByIdRepositorySpy } from '@/tests/data/mocks'
+import { LoadAccountByIdRepositorySpy, AddAddressRepositorySpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbAddAddress
   loadAccountByIdRepositorySpy: LoadAccountByIdRepositorySpy
+  addAddressRepositorySpy: AddAddressRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByIdRepositorySpy = new LoadAccountByIdRepositorySpy()
-  const sut = new DbAddAddress(loadAccountByIdRepositorySpy)
+  const addAddressRepositorySpy = new AddAddressRepositorySpy()
+  const sut = new DbAddAddress(loadAccountByIdRepositorySpy, addAddressRepositorySpy)
   return {
     sut,
-    loadAccountByIdRepositorySpy
+    loadAccountByIdRepositorySpy,
+    addAddressRepositorySpy
   }
 }
 
@@ -28,5 +31,11 @@ describe('DbAddAddress Usecase', () => {
     loadAccountByIdRepositorySpy.result = null
     const result = await sut.add(mockAddAddressParams())
     expect(result).toBeNull()
+  })
+  it('should DbAddAddress call AddAddressRepository with correct values', async () => {
+    const { sut, addAddressRepositorySpy } = makeSut()
+    const params = mockAddAddressParams()
+    await sut.add(params)
+    expect(addAddressRepositorySpy.data).toEqual(params)
   })
 })

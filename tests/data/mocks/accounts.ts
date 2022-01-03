@@ -13,6 +13,7 @@ import {
 import { RandomPasswordGenerator } from '@/data/interfaces/utils'
 import { SendEmailRecoverPassword } from '@/data/interfaces/comunication'
 import faker from 'faker'
+faker.locale = 'pt_BR'
 
 export class DecrypterSpy implements Decrypter {
   value: Decrypter.Params
