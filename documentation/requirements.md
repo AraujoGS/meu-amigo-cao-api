@@ -41,36 +41,43 @@
 - [X] em caso de erro inesperado retornar 500
 - [X] altera a senha e retorna 200
 
--Consultar cadastro de cliente (logado)
-- [ ] inputs: uuid do usuário
-- [ ] validar se token de acesso válido, caso não retornar 401
-- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar se uuid válido e retornar 400 caso não seja
-- [ ] em caso de erro inesperado retornar 500
-- [ ] tentar consultar, caso não encontre retornar 204
-- [ ] tentar consultar, caso encontre retornar 200
-
 -Cadastro de endereço (logado)
 - [ ] inputs: uuid do cliente, cep, logradouro, numero, bairro, cidade, uf e complemento
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar inputs e retornar 400 caso algum campo esteja faltando. OBS: complemento é opcional
-- [ ] validar se uuid válido e retornar 400 caso não seja
 - [ ] validar se é um cep válido e retornar 400 caso não seja
 - [ ] validar se o usuário existe e retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
 - [ ] inserir o endereço do cliente, retornar 201 e os dados
+
+-Cadastro de pets (logado)
+- [ ] inputs: uuid do cliente, nome, raça, cor, porte e considerações
+- [ ] validar se token de acesso válido, caso não retornar 401
+- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
+- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: considerações é opcional
+- [ ] validar se o usuário existe e retornar 412 caso não
+- [ ] em caso de erro inesperado retornar 500
+- [ ] inserir o pet, retornar 201 e uma lista de pets do cliente
+
+-Consultar cadastro de cliente (logado)
+- [ ] inputs: uuid do usuário
+- [ ] validar se token de acesso válido, caso não retornar 401
+- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
+- [ ] em caso de erro inesperado retornar 500
+- [ ] tentar consultar, caso não encontre retornar 204
+- [ ] tentar consultar, caso encontre retornar 200
 
 -Alterar cliente (logado)
 - [ ] inputs: uuid do cliente, nome, email, telefone, data de nascimento
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar inputs e retornar 400 caso algum campo esteja faltando
-- [ ] validar se uuid válido e retornar 400 caso não seja
-- [ ] se o telefone for informado, validar se é um celular válido, se não retornar 400
-- [ ] se o email for informado, validar se é válido, se não retornar 400
+- [ ] validar se é um celular válido, se não retornar 400
+- [ ] validar se é válido, se não retornar 400
 - [ ] validar se algum outro campo além do uuid foi informado, caso não retornar 412
-- [ ] se o email for informado, validar se está em uso, caso esteja retornar 412 
+- [ ] validar se o email está em uso, caso esteja retornar 412 
+- [ ] validar se o telefone está em uso, caso esteja retornar 412 
 - [ ] em caso de erro inesperado retornar 500
 - [ ] alterar os dados, retornar 200 e os dados
 
@@ -79,29 +86,17 @@
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: complemento é opcional
-- [ ] validar se uuid válido e retornar 400 caso não seja
 - [ ] validar se é um cep válido e retornar 400 caso não seja
 - [ ] validar se o usuário existe e retornar 412 caso não
 - [ ] validar se o usuário tem endereço cadastrado e retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
 - [ ] alterar os dados, retornar 200 e os dados
 
--Cadastro de pets (logado)
-- [ ] inputs: uuid do cliente, nome, raça, cor, porte e considerações
-- [ ] validar se token de acesso válido, caso não retornar 401
-- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: considerações é opcional
-- [ ] validar se uuid válido e retornar 400 caso não seja
-- [ ] validar se o usuário existe e retornar 412 caso não
-- [ ] em caso de erro inesperado retornar 500
-- [ ] inserir o pet, retornar 201 e uma lista de pets do cliente
-
 -alterar pet (logado)
 - [ ] inputs: uuid do cliente, uuid do pet, nome, raça, cor, porte e considerações
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: considerações é opcional
-- [ ] validar se uuid válido e retornar 400 caso não seja
 - [ ] validar se o usuário existe e retornar 412 caso não
 - [ ] validar se o pet existe, se é desse usuário e retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
@@ -112,7 +107,6 @@
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: considerações é opcional
-- [ ] validar se uuid válido e retornar 400 caso não seja
 - [ ] validar se o usuário existe e retornar 412 caso não
 - [ ] validar se o pet existe, se é desse usuário e retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
@@ -130,7 +124,6 @@
 - [ ] inputs: uuid do cliente, offset e limit
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar se uuid válido e retornar 400 caso não seja
 - [ ] em caso de erro inesperado retornar 500
 - [ ] caso não tenha agendamentos, retornar 200 e uma lista vazia
 - [ ] em caso de sucesso retornar 200 e uma lista
@@ -139,7 +132,6 @@
 - [ ] inputs: uuid do cliente, uuid do agendamento
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar se uuid válido e retornar 400 caso não seja
 - [ ] em caso de erro inesperado retornar 500
 - [ ] caso o agendamento não exista, retornar 204
 - [ ] em caso de sucesso retornar 200 e os dados
@@ -148,7 +140,6 @@
 - [ ] inputs: uuid do cliente, uuid do agendamento
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar se uuid válido e retornar 400 caso não seja
 - [ ] em caso de erro inesperado retornar 500
 - [ ] caso o agendamento não exista, retornar 204
 - [ ] em caso de sucesso retornar 200
