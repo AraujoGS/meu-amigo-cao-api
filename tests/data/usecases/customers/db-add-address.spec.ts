@@ -49,4 +49,10 @@ describe('DbAddAddress Usecase', () => {
     const result = await sut.add(mockAddAddressParams())
     expect(result).toBe(true)
   })
+  it('should DbAddAddress throw error if AddAddressRepository throws', async () => {
+    const { sut, addAddressRepositorySpy } = makeSut()
+    jest.spyOn(addAddressRepositorySpy, 'add').mockImplementationOnce(throwError)
+    const promise = sut.add(mockAddAddressParams())
+    expect(promise).rejects.toThrow()
+  })
 })
