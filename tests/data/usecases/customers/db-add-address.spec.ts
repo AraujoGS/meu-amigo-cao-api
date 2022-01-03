@@ -1,5 +1,5 @@
 import { DbAddAddress } from '@/data/usecases'
-import { mockAddAddressParams } from '@/tests/domain/mocks'
+import { mockAddAddressParams, throwError } from '@/tests/domain/mocks'
 import { LoadAccountByIdRepositorySpy, AddAddressRepositorySpy } from '@/tests/data/mocks'
 
 type SutTypes = {
@@ -31,6 +31,12 @@ describe('DbAddAddress Usecase', () => {
     loadAccountByIdRepositorySpy.result = null
     const result = await sut.add(mockAddAddressParams())
     expect(result).toBeNull()
+  })
+  it('should DbAddAddress throw error if LoadAccountByIdRepository throws', async () => {
+    const { sut, loadAccountByIdRepositorySpy } = makeSut()
+    jest.spyOn(loadAccountByIdRepositorySpy, 'loadById').mockImplementationOnce(throwError)
+    const promise = sut.add(mockAddAddressParams())
+    expect(promise).rejects.toThrow()
   })
   it('should DbAddAddress call AddAddressRepository with correct values', async () => {
     const { sut, addAddressRepositorySpy } = makeSut()
