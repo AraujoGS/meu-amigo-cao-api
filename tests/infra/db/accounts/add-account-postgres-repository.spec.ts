@@ -30,7 +30,7 @@ describe('AddAccountPostgres Repository', () => {
     await PostgresHelper.disconnect()
   })
 
-  it('should AddAccountPostgresRepository call IdentifierGenerator with correctly', async () => {
+  it('should AddAccountPostgresRepository call IdentifierGenerator correctly', async () => {
     const { sut, identifierGeneratorSpy } = makeSut()
     await sut.add(mockAddAccountParams())
     expect(identifierGeneratorSpy.callNumber).toBe(1)
