@@ -1,5 +1,5 @@
 import { AddAddressPostgresRepository, PostgresHelper } from '@/infra/db'
-import { mockAddAddressParams } from '@/tests/domain/mocks'
+import { mockAddAddressParams, throwError } from '@/tests/domain/mocks'
 import { IdentifierGeneratorSpy, createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
 
 type SutTypes = {
@@ -35,5 +35,11 @@ describe('AddAddressPostgres Repository', () => {
     const params = mockAddAddressParams()
     await sut.add(params)
     expect(identifierGeneratorSpy.callNumber).toBe(1)
+  })
+  it('should AddAddressPostgresRepository throw error if IdentifierGenerator throws', async () => {
+    const { sut, identifierGeneratorSpy } = makeSut()
+    jest.spyOn(identifierGeneratorSpy, 'generate').mockImplementationOnce(throwError)
+    const promise = sut.add(mockAddAddressParams())
+    await expect(promise).rejects.toThrow()
   })
 })
