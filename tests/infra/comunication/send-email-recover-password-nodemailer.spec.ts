@@ -16,7 +16,7 @@ jest.mock('nodemailer', () => ({
   })
 }))
 
-describe('Send Email Recover Password Nodemailer', () => {
+describe('SendEmailRecoverPasswordNodemailer', () => {
   beforeAll(() => {
     NodemailerHelper.create()
   })

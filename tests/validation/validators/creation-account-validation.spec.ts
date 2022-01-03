@@ -4,7 +4,7 @@ import { CreationAccountError } from '@/presentation/errors'
 
 const makeSut = (): CreationAccountValidation => new CreationAccountValidation('resultAddAccount')
 
-describe('Email In Use Validation', () => {
+describe('EmailInUse Validation', () => {
   it('should CreationAccountValidation return error if account not created', () => {
     const sut = makeSut()
     const error = sut.validate({ resultAddAccount: CreationAccountResult.ERROR })

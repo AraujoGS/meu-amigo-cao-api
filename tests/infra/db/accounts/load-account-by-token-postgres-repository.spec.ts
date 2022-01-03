@@ -3,7 +3,7 @@ import { createDbTest, sqlClearDb, sqlCreateDb, mockAccount, mockUpdateToken } f
 
 const makeSut = (): LoadAccountByTokenPostgresRepository => new LoadAccountByTokenPostgresRepository()
 
-describe('Load Account By Token Postgres Repository', () => {
+describe('LoadAccountByTokenPostgres Repository', () => {
   beforeAll(async () => {
     await PostgresHelper.connect(createDbTest())
     await PostgresHelper.execute(sqlCreateDb)

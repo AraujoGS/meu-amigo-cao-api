@@ -9,7 +9,7 @@ jest.mock('validator', () => ({
   isEmail (): boolean { return true }
 }))
 
-describe('Email Validator Adapter', () => {
+describe('EmailValidator Adapter', () => {
   it('should EmailValidatorAdapter call validator with correct email', () => {
     const sut = makeSut()
     const isEmailSpy = jest.spyOn(validator, 'isEmail')

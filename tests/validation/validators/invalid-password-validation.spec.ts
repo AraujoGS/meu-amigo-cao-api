@@ -4,7 +4,7 @@ import { InvalidPasswordError } from '@/presentation/errors'
 
 const makeSut = (): InvalidPasswordValidation => new InvalidPasswordValidation('resultChangePassword')
 
-describe('Invalid Password Validation', () => {
+describe('InvalidPassword Validation', () => {
   it('should InvalidPasswordValidation return error if account not exists', () => {
     const sut = makeSut()
     const error = sut.validate({ resultChangePassword: ChangePasswordResult.ERROR_INVALID_PASSWORD })

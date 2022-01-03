@@ -11,7 +11,7 @@ jest.mock('generate-password', () => ({
   generate: (): string => fakePwd
 }))
 
-describe('Password Generator Adapter', () => {
+describe('PasswordGenerator Adapter', () => {
   it('should PasswordGeneratorAdapter call generate correctly', () => {
     const sut = makeSut()
     const generatePasswordSpy = jest.spyOn(passwordGenerate, 'generate')

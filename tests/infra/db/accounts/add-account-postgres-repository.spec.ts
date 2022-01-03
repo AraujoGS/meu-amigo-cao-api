@@ -16,7 +16,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('Add Account Postgres Repository', () => {
+describe('AddAccountPostgres Repository', () => {
   beforeAll(async () => {
     await PostgresHelper.connect(createDbTest())
     await PostgresHelper.execute(sqlCreateDb)

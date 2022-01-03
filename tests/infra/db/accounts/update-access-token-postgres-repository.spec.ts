@@ -12,7 +12,7 @@ const getAccessToken = async (id: string): Promise<any> => {
   return PostgresHelper.mapperOneResult(response)
 }
 
-describe('Update Access Token Postgres Repository', () => {
+describe('UpdateAccessTokenPostgres Repository', () => {
   beforeAll(async () => {
     await PostgresHelper.connect(createDbTest())
     await PostgresHelper.execute(sqlCreateDb)

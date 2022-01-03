@@ -32,7 +32,7 @@ describe('DbAuthentication Usecase', () => {
     await sut.auth(data)
     expect(loadAccountByEmailRepositorySpy.email).toBe(data.email)
   })
-  it('should throw exception when error LoadAccountByEmailRepository', async () => {
+  it('should DbAuthentication throw exception when error LoadAccountByEmailRepository', async () => {
     const { sut, loadAccountByEmailRepositorySpy } = makeSut()
     jest.spyOn(loadAccountByEmailRepositorySpy, 'loadByEmail').mockImplementationOnce(throwError)
     const promise = sut.auth(mockAuthenticationParams())
@@ -51,7 +51,7 @@ describe('DbAuthentication Usecase', () => {
     expect(hashComparerSpy.data.value).toBe(data.password)
     expect(hashComparerSpy.data.hash).toBe(loadAccountByEmailRepositorySpy.result.password)
   })
-  it('should throw exception when error HashComparer', async () => {
+  it('should DbAuthentication throw exception when error HashComparer', async () => {
     const { sut, hashComparerSpy } = makeSut()
     jest.spyOn(hashComparerSpy, 'compare').mockImplementationOnce(throwError)
     const promise = sut.auth(mockAuthenticationParams())
@@ -69,7 +69,7 @@ describe('DbAuthentication Usecase', () => {
     await sut.auth(data)
     expect(encrypterSpy.value).toBe(loadAccountByEmailRepositorySpy.result.id)
   })
-  it('should throw exception when error Encrypter', async () => {
+  it('should DbAuthentication throw exception when error Encrypter', async () => {
     const { sut, encrypterSpy } = makeSut()
     jest.spyOn(encrypterSpy, 'encrypt').mockImplementationOnce(throwError)
     const promise = sut.auth(mockAuthenticationParams())
@@ -83,7 +83,7 @@ describe('DbAuthentication Usecase', () => {
       accessToken: encrypterSpy.result
     })
   })
-  it('should throw exception when error UpdateAccessTokenRepository', async () => {
+  it('should DbAuthentication throw exception when error UpdateAccessTokenRepository', async () => {
     const { sut, updateAccessTokenRepositorySpy } = makeSut()
     jest.spyOn(updateAccessTokenRepositorySpy, 'updateAccessToken').mockImplementationOnce(throwError)
     const promise = sut.auth(mockAuthenticationParams())

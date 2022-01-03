@@ -4,7 +4,7 @@ import { PhoneInUseError } from '@/presentation/errors'
 
 const makeSut = (): PhoneInUseValidation => new PhoneInUseValidation('resultAddAccount')
 
-describe('Phone In Use Validation', () => {
+describe('PhoneInUse Validation', () => {
   it('should PhoneInUseValidation return error if phone in use', () => {
     const sut = makeSut()
     const error = sut.validate({ resultAddAccount: CreationAccountResult.ERROR_PHONE })

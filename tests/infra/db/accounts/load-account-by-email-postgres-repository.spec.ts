@@ -6,7 +6,7 @@ const makeSut = (): LoadAccountByEmailPostgresRepository => {
   return new LoadAccountByEmailPostgresRepository()
 }
 
-describe('Load Account By Email Postgres Repository', () => {
+describe('LoadAccountByEmailPostgres Repository', () => {
   beforeAll(async () => {
     await PostgresHelper.connect(createDbTest())
     await PostgresHelper.execute(sqlCreateDb)

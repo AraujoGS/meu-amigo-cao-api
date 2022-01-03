@@ -9,7 +9,7 @@ jest.mock('validator', () => ({
   isDate (): boolean { return true }
 }))
 
-describe('Date Validator Adapter', () => {
+describe('DateValidator Adapter', () => {
   it('should DateValidatorAdapter call validator with correct date', () => {
     const sut = makeSut()
     const isDateSpy = jest.spyOn(validator, 'isDate')

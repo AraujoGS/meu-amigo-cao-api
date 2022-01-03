@@ -4,7 +4,7 @@ import faker from 'faker'
 
 const makeSut = (): LoadAccountByEmailAndPhonePostgresRepository => new LoadAccountByEmailAndPhonePostgresRepository()
 
-describe('Load Account By Email And Phone Postgres Repository', () => {
+describe('LoadAccountByEmailAndPhonePostgres Repository', () => {
   beforeAll(async () => {
     await PostgresHelper.connect(createDbTest())
     await PostgresHelper.execute(sqlCreateDb)

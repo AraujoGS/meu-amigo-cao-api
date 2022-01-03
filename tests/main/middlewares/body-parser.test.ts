@@ -3,7 +3,7 @@ import { Express } from 'express'
 import request from 'supertest'
 let app: Express = null
 
-describe('Body Parser Middleware', () => {
+describe('BodyParser Middleware', () => {
   beforeAll(async () => {
     app = await setupApp()
   })

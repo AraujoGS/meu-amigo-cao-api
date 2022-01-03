@@ -3,7 +3,7 @@ import { Express } from 'express'
 import request from 'supertest'
 let app: Express = null
 
-describe('Content Type Middleware', () => {
+describe('ContentType Middleware', () => {
   beforeAll(async () => {
     app = await setupApp()
   })

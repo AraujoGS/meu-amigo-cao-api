@@ -9,7 +9,7 @@ const getHashSenha = async (id: string): Promise<any> => {
   return PostgresHelper.mapperOneResult(response)
 }
 
-describe('Update Password Postgres Repository', () => {
+describe('UpdatePasswordPostgres Repository', () => {
   beforeAll(async () => {
     await PostgresHelper.connect(createDbTest())
     await PostgresHelper.execute(sqlCreateDb)
