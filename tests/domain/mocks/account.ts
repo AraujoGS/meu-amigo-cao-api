@@ -1,5 +1,6 @@
 import { AddAccount, Authentication, ForgotPassword, LoadAccountByToken, ChangePassword } from '@/domain/usecases'
 import faker from 'faker'
+faker.locale = 'pt_BR'
 
 export const mockAddAccountParams = (): AddAccount.Params => ({
   name: faker.name.findName(),
