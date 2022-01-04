@@ -1,5 +1,5 @@
 import { AddAddressController } from '@/presentation/controllers'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, created, preconditionFailed } from '@/presentation/helpers'
 import { AccountNotExistsError, MissingParamError } from '@/presentation/errors'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import { mockAddAddressParams } from '@/tests/domain/mocks'
@@ -51,5 +51,10 @@ describe('AddAddress Controller', () => {
     addAddressSpy.result = null
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new AccountNotExistsError()))
+  })
+  it('should AddAddressController return 201 if AddAddress success', async () => {
+    const { sut } = makeSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(created())
   })
 })
