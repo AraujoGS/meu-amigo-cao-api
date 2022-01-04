@@ -1,6 +1,6 @@
 import { AddAddress } from '@/domain/usecases'
 import { AccountNotExistsError } from '@/presentation/errors'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, created, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace AddAddressController {
@@ -31,6 +31,6 @@ export class AddAddressController implements Controller {
     if (!result) {
       return preconditionFailed(new AccountNotExistsError())
     }
-    return null
+    return created()
   }
 }
