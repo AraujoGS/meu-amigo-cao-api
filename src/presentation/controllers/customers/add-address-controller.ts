@@ -1,3 +1,4 @@
+import { badRequest } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace AddAddressController {
@@ -19,7 +20,10 @@ export class AddAddressController implements Controller {
 
   async handle (httpRequest: AddAddressController.Request): Promise<HttpResponse> {
     const { complement, ...data } = httpRequest
-    this.validation.validate(data)
+    const clientError = this.validation.validate(data)
+    if (clientError) {
+      return badRequest(clientError)
+    }
     return null
   }
 }
