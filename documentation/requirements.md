@@ -42,14 +42,14 @@
 - [X] altera a senha e retorna 200
 
 -Cadastro de endereço (logado)
-- [ ] inputs: uuid do cliente, cep, logradouro, numero, bairro, cidade, uf e complemento
+- [X] inputs: uuid do cliente, cep, logradouro, numero, bairro, cidade, uf e complemento
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar inputs e retornar 400 caso algum campo esteja faltando. OBS: complemento é opcional
+- [X] validar inputs e retornar 400 caso algum campo esteja faltando. OBS: complemento é opcional
 - [ ] validar se é um cep válido e retornar 400 caso não seja
-- [ ] validar se o usuário existe e retornar 412 caso não
-- [ ] em caso de erro inesperado retornar 500
-- [ ] inserir o endereço do cliente, retornar 201 e os dados
+- [X] validar se o usuário existe e retornar 412 caso não
+- [X] em caso de erro inesperado retornar 500
+- [X] inserir o endereço do cliente, retornar 201
 
 -Cadastro de pets (logado)
 - [ ] inputs: uuid do cliente, nome, raça, cor, porte e considerações
