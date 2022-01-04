@@ -9,6 +9,6 @@ export const mockAddAddressParams = (): AddAddress.Params => ({
   city: faker.address.cityName(),
   number: faker.datatype.number(),
   district: faker.random.word(),
-  state: faker.address.state(true),
+  state: faker.address.stateAbbr(),
   complement: faker.random.word()
 })
