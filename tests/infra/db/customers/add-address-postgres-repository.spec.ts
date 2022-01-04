@@ -76,4 +76,10 @@ describe('AddAddressPostgres Repository', () => {
     const beforeAddResult = await mockGetAccount(params.accountId)
     expect(beforeAddResult.address).toBeTruthy()
   })
+  it('should AddAddressPostgresRepository throw error if Postgres throws', async () => {
+    const { sut } = makeSut()
+    jest.spyOn(PostgresHelper, 'execute').mockImplementationOnce(throwError)
+    const promise = sut.add(mockAddAddressParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
