@@ -6,5 +6,5 @@ export namespace AddAddress {
 }
 
 export interface AddAddress {
-  add: (params: AddAddress.Params) => Promise<AddAddress.Result>
+  add: (data: AddAddress.Params) => Promise<AddAddress.Result>
 }

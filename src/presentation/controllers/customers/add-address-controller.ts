@@ -1,3 +1,4 @@
+import { AddAddress } from '@/domain/usecases'
 import { badRequest } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
@@ -15,7 +16,8 @@ export namespace AddAddressController {
 }
 export class AddAddressController implements Controller {
   constructor (
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly addAddress: AddAddress
   ) {}
 
   async handle (httpRequest: AddAddressController.Request): Promise<HttpResponse> {
@@ -24,6 +26,7 @@ export class AddAddressController implements Controller {
     if (clientError) {
       return badRequest(clientError)
     }
+    await this.addAddress.add(httpRequest)
     return null
   }
 }
