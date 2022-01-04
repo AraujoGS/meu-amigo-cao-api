@@ -1,22 +1,26 @@
 import { AddAddressController } from '@/presentation/controllers'
+import { badRequest } from '@/presentation/helpers'
+import { MissingParamError } from '@/presentation/errors'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import { mockAddAddressParams } from '@/tests/domain/mocks'
-import { MissingParamError } from '@/presentation/errors'
+import { AddAddressSpy } from '@/tests/presentation/mocks'
 import faker from 'faker'
-import { badRequest } from '@/presentation/helpers'
 faker.locale = 'pt_BR'
 
 type SutTypes = {
   sut: AddAddressController
   validationSpy: ValidationSpy
+  addAddressSpy: AddAddressSpy
 }
 
 const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
-  const sut = new AddAddressController(validationSpy)
+  const addAddressSpy = new AddAddressSpy()
+  const sut = new AddAddressController(validationSpy, addAddressSpy)
   return {
     sut,
-    validationSpy
+    validationSpy,
+    addAddressSpy
   }
 }
 
@@ -35,5 +39,11 @@ describe('AddAddress Controller', () => {
     validationSpy.result = new MissingParamError('address')
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(badRequest(new MissingParamError('address')))
+  })
+  it('should AddAddressController call AddAddress with correct values', async () => {
+    const { sut, addAddressSpy } = makeSut()
+    const params = mockRequest()
+    await sut.handle(params)
+    expect(addAddressSpy.data).toEqual(params)
   })
 })
