@@ -1,8 +1,8 @@
 import { AddAddressController } from '@/presentation/controllers'
-import { badRequest, created, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, created, internalServerError, preconditionFailed } from '@/presentation/helpers'
 import { AccountNotExistsError, MissingParamError } from '@/presentation/errors'
 import { ValidationSpy } from '@/tests/validation/mocks'
-import { mockAddAddressParams } from '@/tests/domain/mocks'
+import { mockAddAddressParams, throwError } from '@/tests/domain/mocks'
 import { AddAddressSpy } from '@/tests/presentation/mocks'
 import faker from 'faker'
 faker.locale = 'pt_BR'
@@ -56,5 +56,11 @@ describe('AddAddress Controller', () => {
     const { sut } = makeSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(created())
+  })
+  it('should AddAddressController return 500 if AddAddress throw error', async () => {
+    const { sut, addAddressSpy } = makeSut()
+    jest.spyOn(addAddressSpy, 'add').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new Error()))
   })
 })
