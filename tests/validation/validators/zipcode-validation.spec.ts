@@ -2,6 +2,7 @@ import { ZipCodeValidation } from '@/validation/validators'
 import { ZipCodeValidatorSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 import { InvalidParamError } from '@/presentation/errors'
+import { throwError } from '@/tests/domain/mocks'
 faker.locale = 'pt_BR'
 
 type SutTypes = {
@@ -29,5 +30,10 @@ describe('ZipCode Validation', () => {
     zipCodeValidatorSpy.result = false
     const error = sut.validate({ zipcode: zipcodeFake })
     expect(error).toEqual(new InvalidParamError('zipcode'))
+  })
+  it('should ZipCodeValidation throw error if ZipCodeValidator throws', () => {
+    const { sut, zipCodeValidatorSpy } = makeSut()
+    jest.spyOn(zipCodeValidatorSpy, 'isValid').mockImplementationOnce(throwError)
+    expect(() => sut.validate({ zipcode: zipcodeFake })).toThrow()
   })
 })
