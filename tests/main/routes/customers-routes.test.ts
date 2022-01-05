@@ -23,7 +23,6 @@ describe('Customers Routes', () => {
     it('should add address route return 201 if success', async () => {
       const account = await mockGetAccountData()
       const payload = {
-        accountId: account.id,
         zipcode: '03086090',
         address: 'Rua Leonardo da Silva',
         city: 'São Paulo',
@@ -41,7 +40,6 @@ describe('Customers Routes', () => {
     it('should add address route return 400 if fail', async () => {
       const account = await mockGetAccountData()
       const payload = {
-        accountId: account.id,
         zipcode: '03086090',
         address: 'Rua Leonardo da Silva',
         city: 'São Paulo',
@@ -56,9 +54,7 @@ describe('Customers Routes', () => {
         .expect(400)
     })
     it('should add address route return 401 if missing token', async () => {
-      const account = await mockGetAccountData()
       const payload = {
-        accountId: account.id,
         zipcode: '03086090',
         address: 'Rua Leonardo da Silva',
         city: 'São Paulo',
@@ -73,9 +69,7 @@ describe('Customers Routes', () => {
         .expect(401)
     })
     it('should add address route return 403 if invalid token', async () => {
-      const account = await mockGetAccountData()
       const payload = {
-        accountId: account.id,
         zipcode: '03086090',
         address: 'Rua Leonardo da Silva',
         city: 'São Paulo',
