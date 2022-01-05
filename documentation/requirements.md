@@ -43,10 +43,10 @@
 
 -Cadastro de endereço (logado)
 - [X] inputs: uuid do cliente, cep, logradouro, numero, bairro, cidade, uf e complemento
-- [ ] validar se token de acesso válido, caso não retornar 401
-- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
+- [X] validar se token de acesso válido, caso não retornar 401
+- [X] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [X] validar inputs e retornar 400 caso algum campo esteja faltando. OBS: complemento é opcional
-- [ ] validar se é um cep válido e retornar 400 caso não seja
+- [X] validar se é um cep válido e retornar 400 caso não seja
 - [X] validar se o usuário existe e retornar 412 caso não
 - [X] em caso de erro inesperado retornar 500
 - [X] inserir o endereço do cliente, retornar 201
