@@ -1,6 +1,6 @@
 export const forgotPasswordPath = {
   post: {
-    tags: ['Account'],
+    tags: ['Accounts'],
     summary: 'API para recuperar a senha do usuário',
     requestBody: {
       content: {

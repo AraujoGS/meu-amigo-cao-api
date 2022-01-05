@@ -1,26 +1,22 @@
-export const loginPath = {
+export const addAddressPath = {
   post: {
-    tags: ['Accounts'],
-    summary: 'API para autenticar contas de usuário',
+    tags: ['Customers'],
+    summary: 'API para adicionar o endereço do cliente',
+    security: [{
+      apiKeyAuth: []
+    }],
     requestBody: {
       content: {
         'application/json': {
           schema: {
-            $ref: '#/schemas/loginParams'
+            $ref: '#/schemas/addAddressParams'
           }
         }
       }
     },
     responses: {
-      200: {
-        description: 'Autenticado com sucesso',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/schemas/accountAuthenticated'
-            }
-          }
-        }
+      201: {
+        description: 'Endereço cadastrado com sucesso'
       },
       400: {
         $ref: '#/components/badRequest'
@@ -28,8 +24,14 @@ export const loginPath = {
       401: {
         $ref: '#/components/unauthorized'
       },
+      403: {
+        $ref: '#/components/forbidden'
+      },
       404: {
         $ref: '#/components/notFound'
+      },
+      412: {
+        $ref: '#/components/preconditionFailed'
       },
       500: {
         $ref: '#/components/internalServerError'

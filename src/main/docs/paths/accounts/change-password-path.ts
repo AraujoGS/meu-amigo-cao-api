@@ -1,6 +1,6 @@
 export const changePasswordPath = {
   patch: {
-    tags: ['Account'],
+    tags: ['Accounts'],
     summary: 'API para alterar a senha do usuário',
     security: [{
       apiKeyAuth: []

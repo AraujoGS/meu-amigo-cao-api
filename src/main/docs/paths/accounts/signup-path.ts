@@ -1,6 +1,6 @@
 export const signUpPath = {
   post: {
-    tags: ['Account'],
+    tags: ['Accounts'],
     summary: 'API para criar a conta do usuário',
     requestBody: {
       content: {
