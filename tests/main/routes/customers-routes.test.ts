@@ -55,7 +55,7 @@ describe('Customers Routes', () => {
         .set('x-access-token', account.accessToken)
         .expect(400)
     })
-    it('should add address route return 401 if fail', async () => {
+    it('should add address route return 401 if missing token', async () => {
       const account = await mockGetAccountData()
       const payload = {
         accountId: account.id,
@@ -71,6 +71,24 @@ describe('Customers Routes', () => {
         .post('/api/customers/address')
         .send(payload)
         .expect(401)
+    })
+    it('should add address route return 403 if invalid token', async () => {
+      const account = await mockGetAccountData()
+      const payload = {
+        accountId: account.id,
+        zipcode: '03086090',
+        address: 'Rua Leonardo da Silva',
+        city: 'São Paulo',
+        number: 100,
+        district: 'Parque São Jorge',
+        state: 'SP',
+        complement: 'casa'
+      }
+      await request(app)
+        .post('/api/customers/address')
+        .send(payload)
+        .set('x-access-token', 'any-token')
+        .expect(403)
     })
   })
 })
