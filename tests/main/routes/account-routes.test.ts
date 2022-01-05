@@ -3,37 +3,10 @@ import { setupApp } from '@/main/config/app'
 import { PostgresHelper } from '@/infra/db'
 import { NodemailerHelper } from '@/infra/comunication'
 import { createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
+import { mockAddAccount, mockGetAccountData } from '@/tests/main/mocks'
 import { Express } from 'express'
-import { hash } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
-import { v4 as uuid } from 'uuid'
 import request from 'supertest'
 let app: Express = null
-
-const mockAddAccount = async (): Promise<void> => {
-  const password = await hash('123', 12)
-  const phone = '11954976863'
-  const id = uuid()
-  const query = `
-  INSERT INTO CLIENTES(id_cliente, nome_cliente, senha_cliente, email_cliente, telefone_cliente, data_nascimento_cliente)
-  VALUES ($1,$2,$3,$4,$5,$6)
-  `
-  const params = [id, 'Guilherme de Araujo', password, 'guilhermearaujo421@gmail.com', phone, '1997-05-30']
-  await PostgresHelper.execute(query, params)
-}
-
-const mockGetAccessToken = async (): Promise<string> => {
-  await mockAddAccount()
-  let query = 'SELECT id_cliente as id FROM CLIENTES WHERE email_cliente = $1'
-  let params = ['guilhermearaujo421@gmail.com']
-  const result = await PostgresHelper.execute(query, params)
-  const account = PostgresHelper.mapperOneResult(result)
-  const accessToken = sign({ id: account.id }, process.env.JWT_SECRET)
-  query = 'UPDATE CLIENTES SET token_acesso = $1 WHERE id_cliente = $2'
-  params = [accessToken, account.id]
-  await PostgresHelper.execute(query, params)
-  return accessToken
-}
 
 describe('Account Routes', () => {
   beforeAll(async () => {
@@ -156,7 +129,7 @@ describe('Account Routes', () => {
   })
   describe('PATCH /change-password', () => {
     it('should change password route return 200 if success', async () => {
-      const token = await mockGetAccessToken()
+      const { accessToken: token } = await mockGetAccountData()
       await request(app)
         .patch('/api/change-password')
         .set('x-access-token', token)
@@ -168,7 +141,7 @@ describe('Account Routes', () => {
         .expect(200)
     })
     it('should change password route return 400 if fail', async () => {
-      const token = await mockGetAccessToken()
+      const { accessToken: token } = await mockGetAccountData()
       await request(app)
         .patch('/api/change-password')
         .set('x-access-token', token)
@@ -179,7 +152,7 @@ describe('Account Routes', () => {
         .expect(400)
     })
     it('should change password route return 412 if fail', async () => {
-      const token = await mockGetAccessToken()
+      const { accessToken: token } = await mockGetAccountData()
       await request(app)
         .patch('/api/change-password')
         .set('x-access-token', token)
