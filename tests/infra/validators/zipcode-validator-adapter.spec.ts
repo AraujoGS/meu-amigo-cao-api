@@ -1,6 +1,6 @@
 import { ZipCodeValidatorAdapter } from '@/infra/validators'
-import validator from 'validator'
 import { throwError } from '@/tests/domain/mocks'
+import validator from 'validator'
 import faker from 'faker'
 faker.locale = 'pt_BR'
 

@@ -1,6 +1,6 @@
-import { InvalidPasswordValidation } from '@/validation/validators'
 import { ActionResult } from '@/domain/models'
 import { InvalidPasswordError } from '@/presentation/errors'
+import { InvalidPasswordValidation } from '@/validation/validators'
 
 const makeSut = (): InvalidPasswordValidation => new InvalidPasswordValidation('resultChangePassword')
 

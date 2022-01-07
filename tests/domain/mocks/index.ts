@@ -1,3 +1,3 @@
-export * from '@/tests/domain/mocks/account'
-export * from '@/tests/domain/mocks/customers'
-export * from '@/tests/domain/mocks/test-helpers'
+export * from './account'
+export * from './customers'
+export * from './test-helpers'

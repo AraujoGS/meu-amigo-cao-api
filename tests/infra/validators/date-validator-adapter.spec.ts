@@ -1,6 +1,6 @@
 import { DateValidatorAdapter } from '@/infra/validators'
-import validator from 'validator'
 import { throwError } from '@/tests/domain/mocks'
+import validator from 'validator'
 import faker from 'faker'
 
 const dateFake = faker.date.past().toLocaleDateString('pt-br').split('/').reverse().join('-')

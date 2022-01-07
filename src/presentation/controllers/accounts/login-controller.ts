@@ -1,6 +1,6 @@
+import { Authentication } from '@/domain/usecases'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 import { badRequest, unauthorized, ok, internalServerError } from '@/presentation/helpers'
-import { Authentication } from '@/domain/usecases'
 
 export namespace LoginController {
   export type Request = {

@@ -1,11 +1,11 @@
+import { ActionResult } from '@/domain/models'
 import { ChangePasswordController } from '@/presentation/controllers'
 import { MissingParamError, InvalidParamError } from '@/presentation/errors'
 import { badRequest, preconditionFailed, ok, internalServerError } from '@/presentation/helpers'
-import { ActionResult } from '@/domain/models'
-import { ValidationSpy } from '@/tests/validation/mocks'
-import { ChangePasswordSpy } from '@/tests/presentation/mocks'
-import faker from 'faker'
 import { throwError } from '@/tests/domain/mocks'
+import { ChangePasswordSpy } from '@/tests/presentation/mocks'
+import { ValidationSpy } from '@/tests/validation/mocks'
+import faker from 'faker'
 
 type SutTypes = {
   sut: ChangePasswordController

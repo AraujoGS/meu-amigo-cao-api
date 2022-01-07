@@ -1,6 +1,6 @@
-import { CreationAccountValidation } from '@/validation/validators'
 import { ActionResult } from '@/domain/models'
 import { CreationAccountError } from '@/presentation/errors'
+import { CreationAccountValidation } from '@/validation/validators'
 
 const makeSut = (): CreationAccountValidation => new CreationAccountValidation('resultAddAccount')
 

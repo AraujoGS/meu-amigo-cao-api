@@ -1,5 +1,5 @@
-import { AddAddress } from '@/domain/usecases'
 import { AddAddressRepository } from '@/data/interfaces/db'
+import { AddAddress } from '@/domain/usecases'
 
 export class DbAddAddress implements AddAddress {
   constructor (

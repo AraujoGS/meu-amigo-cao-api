@@ -1,5 +1,5 @@
-import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 import { ChangePassword } from '@/domain/usecases'
+import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 import { badRequest, preconditionFailed, ok, internalServerError } from '@/presentation/helpers'
 
 export namespace ChangePasswordController {

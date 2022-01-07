@@ -1,5 +1,5 @@
-import { PhoneValidation } from '@/validation/validators'
 import { InvalidParamError } from '@/presentation/errors'
+import { PhoneValidation } from '@/validation/validators'
 
 const makeSut = (): PhoneValidation => new PhoneValidation('phone')
 

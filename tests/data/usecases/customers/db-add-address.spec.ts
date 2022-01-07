@@ -1,6 +1,6 @@
 import { DbAddAddress } from '@/data/usecases'
-import { mockAddAddressParams, throwError } from '@/tests/domain/mocks'
 import { AddAddressRepositorySpy } from '@/tests/data/mocks'
+import { mockAddAddressParams, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbAddAddress

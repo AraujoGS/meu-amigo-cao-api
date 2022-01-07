@@ -1,9 +1,9 @@
 import { AddAddressController } from '@/presentation/controllers'
 import { badRequest, created, internalServerError } from '@/presentation/helpers'
 import { MissingParamError } from '@/presentation/errors'
-import { ValidationSpy } from '@/tests/validation/mocks'
 import { mockAddAddressParams, throwError } from '@/tests/domain/mocks'
 import { AddAddressSpy } from '@/tests/presentation/mocks'
+import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 faker.locale = 'pt_BR'
 

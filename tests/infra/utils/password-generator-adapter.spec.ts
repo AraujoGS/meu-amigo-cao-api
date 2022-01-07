@@ -1,7 +1,7 @@
 import { PasswordGeneratorAdapter } from '@/infra/utils'
+import { throwError } from '@/tests/domain/mocks'
 import passwordGenerate from 'generate-password'
 import faker from 'faker'
-import { throwError } from '@/tests/domain/mocks'
 
 const fakePwd = faker.random.alphaNumeric(12)
 const lenghPwd = 8

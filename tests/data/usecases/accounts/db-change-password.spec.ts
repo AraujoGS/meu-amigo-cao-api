@@ -1,7 +1,7 @@
 import { DbChangePassword } from '@/data/usecases'
 import { ActionResult } from '@/domain/models'
-import { mockChangePasswordParams, throwError } from '@/tests/domain/mocks'
 import { LoadAccountByIdRepositorySpy, HashComparerSpy, HasherSpy, UpdatePasswordRepositorySpy } from '@/tests/data/mocks'
+import { mockChangePasswordParams, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbChangePassword

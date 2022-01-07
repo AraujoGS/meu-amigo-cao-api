@@ -1,7 +1,7 @@
 import { EmailValidatorAdapter } from '@/infra/validators'
+import { throwError } from '@/tests/domain/mocks'
 import validator from 'validator'
 import faker from 'faker'
-import { throwError } from '@/tests/domain/mocks'
 
 const emailFake = faker.internet.email()
 const makeSut = (): EmailValidatorAdapter => new EmailValidatorAdapter()

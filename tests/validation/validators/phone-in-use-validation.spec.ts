@@ -1,6 +1,6 @@
-import { PhoneInUseValidation } from '@/validation/validators'
 import { ActionResult } from '@/domain/models'
 import { PhoneInUseError } from '@/presentation/errors'
+import { PhoneInUseValidation } from '@/validation/validators'
 
 const makeSut = (): PhoneInUseValidation => new PhoneInUseValidation('resultAddAccount')
 

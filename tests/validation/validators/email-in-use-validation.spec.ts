@@ -1,6 +1,6 @@
-import { EmailInUseValidation } from '@/validation/validators'
 import { ActionResult } from '@/domain/models'
 import { EmailInUseError } from '@/presentation/errors'
+import { EmailInUseValidation } from '@/validation/validators'
 
 const makeSut = (): EmailInUseValidation => new EmailInUseValidation('resultAddAccount')
 

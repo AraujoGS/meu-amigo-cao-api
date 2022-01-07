@@ -1,8 +1,8 @@
-import { ForgotPassword } from '@/domain/usecases'
 import { LoadAccountByEmailAndPhoneRepository, UpdatePasswordRepository } from '@/data/interfaces/db'
 import { Hasher } from '@/data/interfaces/cryptography'
 import { RandomPasswordGenerator } from '@/data/interfaces/utils'
 import { SendEmailRecoverPassword } from '@/data/interfaces/comunication'
+import { ForgotPassword } from '@/domain/usecases'
 
 export class DbForgotPassword implements ForgotPassword {
   constructor (

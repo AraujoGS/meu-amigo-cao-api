@@ -1,6 +1,6 @@
-import { PostgresHelper } from '@/infra/db'
 import { AddAccountRepository } from '@/data/interfaces/db'
 import { IdentifierGenerator } from '@/data/interfaces/utils'
+import { PostgresHelper } from '@/infra/db'
 
 export class AddAccountPostgresRepository implements AddAccountRepository {
   constructor (

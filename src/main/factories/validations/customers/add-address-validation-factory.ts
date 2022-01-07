@@ -1,5 +1,5 @@
-import { Validation } from '@/presentation/interfaces'
 import { ZipCodeValidatorAdapter } from '@/infra/validators'
+import { Validation } from '@/presentation/interfaces'
 import { RequiredFieldValidation, ValidationComposite, ZipCodeValidation } from '@/validation/validators'
 
 export const makeAddAddressValidation = (): Validation => {

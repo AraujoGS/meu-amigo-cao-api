@@ -1,5 +1,5 @@
-import 'dotenv/config'
 import { NodemailerHelper, SendEmailRecoverPasswordNodemailer } from '@/infra/comunication'
+import 'dotenv/config'
 import faker from 'faker'
 
 const makeSut = (): SendEmailRecoverPasswordNodemailer => new SendEmailRecoverPasswordNodemailer()

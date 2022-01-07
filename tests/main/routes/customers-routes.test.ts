@@ -1,6 +1,6 @@
 import 'dotenv/config'
-import { setupApp } from '@/main/config/app'
 import { PostgresHelper } from '@/infra/db'
+import { setupApp } from '@/main/config/app'
 import { createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
 import { mockGetAccountData } from '@/tests/main/mocks'
 import { Express } from 'express'

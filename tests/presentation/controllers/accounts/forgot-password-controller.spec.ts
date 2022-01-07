@@ -1,9 +1,9 @@
 import { ForgotPasswordController } from '@/presentation/controllers'
 import { MissingParamError, InvalidParamError } from '@/presentation/errors'
 import { badRequest, preconditionFailed, ok, internalServerError } from '@/presentation/helpers'
-import { ValidationSpy } from '@/tests/validation/mocks'
-import { ForgotPasswordSpy } from '@/tests/presentation/mocks'
 import { throwError } from '@/tests/domain/mocks'
+import { ForgotPasswordSpy } from '@/tests/presentation/mocks'
+import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 
 type SutTypes = {

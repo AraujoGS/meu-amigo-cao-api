@@ -1,5 +1,5 @@
-import { NodemailerHelper } from '@/infra/comunication'
 import { SendEmailRecoverPassword } from '@/data/interfaces/comunication'
+import { NodemailerHelper } from '@/infra/comunication'
 
 export class SendEmailRecoverPasswordNodemailer implements SendEmailRecoverPassword {
   async send (data: SendEmailRecoverPassword.Params): Promise<void> {

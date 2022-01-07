@@ -1,7 +1,7 @@
-import { AddAccount } from '@/domain/usecases'
-import { ActionResult } from '@/domain/models'
 import { Hasher } from '@/data/interfaces/cryptography'
 import { AddAccountRepository, CheckAccountByEmailRepository, CheckAccountByPhoneRepository } from '@/data/interfaces/db'
+import { AddAccount } from '@/domain/usecases'
+import { ActionResult } from '@/domain/models'
 
 export class DbAddAccount implements AddAccount {
   constructor (

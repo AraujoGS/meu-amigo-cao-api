@@ -1,6 +1,6 @@
 import { DbForgotPassword } from '@/data/usecases'
-import { mockForgotPasswordParams, throwError } from '@/tests/domain/mocks'
 import { LoadAccountByEmailAndPhoneRepositorySpy, RandomPasswordGeneratorSpy, SendEmailRecoverPasswordSpy, UpdatePasswordRepositorySpy, HasherSpy } from '@/tests/data/mocks'
+import { mockForgotPasswordParams, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbForgotPassword

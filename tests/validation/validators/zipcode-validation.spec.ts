@@ -1,8 +1,8 @@
+import { InvalidParamError } from '@/presentation/errors'
 import { ZipCodeValidation } from '@/validation/validators'
+import { throwError } from '@/tests/domain/mocks'
 import { ZipCodeValidatorSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
-import { InvalidParamError } from '@/presentation/errors'
-import { throwError } from '@/tests/domain/mocks'
 faker.locale = 'pt_BR'
 
 type SutTypes = {
