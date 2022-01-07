@@ -55,7 +55,8 @@
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: considerações é opcional
-- [ ] validar se o usuário existe e retornar 412 caso não
+- [ ] validar se é uma raça válida e retornar 412 caso não
+- [ ] validar se é um porte válido e retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
 - [ ] inserir o pet, retornar 201
 
