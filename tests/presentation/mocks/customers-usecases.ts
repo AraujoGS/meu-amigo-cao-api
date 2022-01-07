@@ -2,9 +2,8 @@ import { AddAddress } from '@/domain/usecases'
 
 export class AddAddressSpy implements AddAddress {
   data: AddAddress.Params
-  result = true
-  async add (data: AddAddress.Params): Promise<AddAddress.Result> {
+  async add (data: AddAddress.Params): Promise<void> {
     this.data = data
-    return this.result
+    return await Promise.resolve()
   }
 }

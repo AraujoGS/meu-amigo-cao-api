@@ -1,6 +1,5 @@
 import { AddAddress } from '@/domain/usecases'
-import { AccountNotExistsError } from '@/presentation/errors'
-import { badRequest, created, internalServerError, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, created, internalServerError } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace AddAddressController {
@@ -28,10 +27,7 @@ export class AddAddressController implements Controller {
       if (clientError) {
         return badRequest(clientError)
       }
-      const result = await this.addAddress.add(httpRequest)
-      if (!result) {
-        return preconditionFailed(new AccountNotExistsError())
-      }
+      await this.addAddress.add(httpRequest)
       return created()
     } catch (error) {
       return internalServerError(error)
