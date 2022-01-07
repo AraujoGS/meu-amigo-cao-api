@@ -7,7 +7,7 @@ export default {
   info: {
     title: 'Meu Amigo Cão API',
     description: 'API para o petshop meu amigo cão, através dela são feitas as modificações nos dados dos clientes',
-    version: '1.5.0'
+    version: '1.5.1'
   },
   servers: [{
     url: '/api'
