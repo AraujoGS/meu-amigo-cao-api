@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import { NodemailerHelper, SendEmailRecoverPasswordNodemailer } from '@/infra/comunication'
 import faker from 'faker'
+import { throwError } from '@/tests/domain/mocks'
 
 const makeSut = (): SendEmailRecoverPasswordNodemailer => new SendEmailRecoverPasswordNodemailer()
 
@@ -31,5 +32,12 @@ describe('SendEmailRecoverPasswordNodemailer', () => {
       to: `${data.name} <${data.email}>`,
       html: `Olá ${data.name}, foi gerada para você a senha temporária: ${data.password}<br><br> Assim que possível recomendamos alterar-lá.<br><br> Obrigado.`
     })
+  })
+  it('should SendEmailRecoverPasswordNodemailer throw error if send throws', async () => {
+    const sut = makeSut()
+    const data = makeFakeAccount()
+    jest.spyOn(NodemailerHelper, 'send').mockImplementationOnce(throwError)
+    const promise = sut.send(data)
+    expect(promise).rejects.toThrow()
   })
 })
