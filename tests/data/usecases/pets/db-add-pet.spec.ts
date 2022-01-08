@@ -1,4 +1,5 @@
 import { DbAddPet } from '@/data/usecases'
+import { ActionResult } from '@/domain/models'
 import { AddPetRepositorySpy } from '@/tests/data/mocks'
 import { mockAddPetParams, throwError } from '@/tests/domain/mocks'
 
@@ -28,5 +29,10 @@ describe('DbAddPet Usecase', () => {
     jest.spyOn(addPetRepositorySpy, 'add').mockImplementationOnce(throwError)
     const promise = sut.add(mockAddPetParams())
     expect(promise).rejects.toThrow()
+  })
+  it('should DbAddPet return SUCCESS(0) if AddPetRepositorySpy success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.add(mockAddPetParams())
+    expect(result).toBe(ActionResult.SUCCESS)
   })
 })
