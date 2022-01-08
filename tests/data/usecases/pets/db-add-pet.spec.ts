@@ -33,6 +33,12 @@ describe('DbAddPet Usecase', () => {
     const result = await sut.add(mockAddPetParams())
     expect(result).toBe(ActionResult.ERROR_INVALID_DOG_BREED)
   })
+  it('should DbAddPet throw error if CheckDogBreedByIdRepository throws', async () => {
+    const { sut, checkDobBreedByIdRepositorySpy } = makeSut()
+    jest.spyOn(checkDobBreedByIdRepositorySpy, 'check').mockImplementationOnce(throwError)
+    const promise = sut.add(mockAddPetParams())
+    expect(promise).rejects.toThrow()
+  })
   it('should DbAddPet call AddPetRepositorySpy with correct values', async () => {
     const { sut, addPetRepositorySpy } = makeSut()
     const params = mockAddPetParams()
