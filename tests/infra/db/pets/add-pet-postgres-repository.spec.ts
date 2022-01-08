@@ -1,5 +1,5 @@
 import { AddPetPostgresRepository, PostgresHelper } from '@/infra/db'
-import { mockAddPetParams, mockAddAccountParams } from '@/tests/domain/mocks'
+import { mockAddPetParams, mockAddAccountParams, throwError } from '@/tests/domain/mocks'
 import { IdentifierGeneratorSpy, createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
 
 type SutTypes = {
@@ -47,5 +47,11 @@ describe('AddPetPostgres Repository', () => {
     await mockAddAccount(params.accountId)
     await sut.add(params)
     expect(identifierGeneratorSpy.callNumber).toBe(1)
+  })
+  it('should AddPetPostgresRepository throw error if IdentifierGenerator throws', async () => {
+    const { sut, identifierGeneratorSpy } = makeSut()
+    jest.spyOn(identifierGeneratorSpy, 'generate').mockImplementationOnce(throwError)
+    const promise = sut.add(mockAddPetParams())
+    await expect(promise).rejects.toThrow()
   })
 })
