@@ -1,5 +1,6 @@
 import { AddPetRepository } from '@/data/interfaces/db'
 import { AddPet } from '@/domain/usecases'
+import { ActionResult } from '@/domain/models'
 
 export class DbAddPet implements AddPet {
   constructor (
@@ -8,6 +9,6 @@ export class DbAddPet implements AddPet {
 
   async add (data: AddPet.Params): Promise<AddPet.Result> {
     await this.addPetRepository.add(data)
-    return null
+    return ActionResult.SUCCESS
   }
 }
