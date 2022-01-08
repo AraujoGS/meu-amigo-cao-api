@@ -1,6 +1,6 @@
 import { DbAddPet } from '@/data/usecases'
 import { AddPetRepositorySpy } from '@/tests/data/mocks'
-import { mockAddPetParams } from '@/tests/domain/mocks'
+import { mockAddPetParams, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbAddPet
@@ -22,5 +22,11 @@ describe('DbAddPet Usecase', () => {
     const params = mockAddPetParams()
     await sut.add(params)
     expect(addPetRepositorySpy.data).toEqual(params)
+  })
+  it('should DbAddPet throw error if AddPetRepositorySpy throws', async () => {
+    const { sut, addPetRepositorySpy } = makeSut()
+    jest.spyOn(addPetRepositorySpy, 'add').mockImplementationOnce(throwError)
+    const promise = sut.add(mockAddPetParams())
+    expect(promise).rejects.toThrow()
   })
 })
