@@ -48,6 +48,12 @@ describe('DbAddPet Usecase', () => {
     await sut.add(params)
     expect(checkDogTypeByIdRepositorySpy.id).toEqual(params.type)
   })
+  it('should DbAddPet return ERROR_INVALID_DOG_TYPE (7) if CheckDogTypeByIdRepository return false', async () => {
+    const { sut, checkDogTypeByIdRepositorySpy } = makeSut()
+    checkDogTypeByIdRepositorySpy.result = false
+    const result = await sut.add(mockAddPetParams())
+    expect(result).toBe(ActionResult.ERROR_INVALID_DOG_TYPE)
+  })
   it('should DbAddPet call AddPetRepositorySpy with correct values', async () => {
     const { sut, addPetRepositorySpy } = makeSut()
     const params = mockAddPetParams()
