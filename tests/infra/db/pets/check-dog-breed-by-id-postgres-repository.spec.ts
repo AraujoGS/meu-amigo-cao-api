@@ -24,4 +24,10 @@ describe('CheckDogBreedByIdPostgres Repository', () => {
     const response = await sut.check(validDogBreed)
     expect(response).toBe(true)
   })
+  it('should CheckDogBreedByIdPostgresRepository return false if dog breed not exists', async () => {
+    const sut = makeSut()
+    const invalidDogBreed = 200
+    const response = await sut.check(invalidDogBreed)
+    expect(response).toBe(false)
+  })
 })
