@@ -20,14 +20,14 @@ describe('LoadAccountByIdPostgres Repository', () => {
   it('should LoadAccountByIdPostgresRepository return account data if valid id', async () => {
     const sut = makeSut()
     const params = await mockAccount()
-    const response = await sut.loadById(params.id)
+    const response = await sut.load(params.id)
     expect(response).toBeTruthy()
     expect(response.email).toBe(params.email)
     expect(response.password).toBe(params.password)
   })
   it('should LoadAccountByIdPostgresRepository return null if invalid id', async () => {
     const sut = makeSut()
-    const response = await sut.loadById(faker.datatype.uuid())
+    const response = await sut.load(faker.datatype.uuid())
     expect(response).toBeNull()
   })
 })

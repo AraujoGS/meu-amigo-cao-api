@@ -30,7 +30,7 @@ export class LoadAccountByTokenRepositorySpy implements LoadAccountByTokenReposi
     id: faker.datatype.uuid()
   }
 
-  async loadByToken (data: LoadAccountByTokenRepository.Params): Promise<LoadAccountByTokenRepository.Result> {
+  async load (data: LoadAccountByTokenRepository.Params): Promise<LoadAccountByTokenRepository.Result> {
     this.data = data
     return this.result
   }
@@ -43,7 +43,7 @@ export class LoadAccountByEmailAndPhoneRepositorySpy implements LoadAccountByEma
     email: faker.internet.email()
   }
 
-  async loadByEmailAndPhone (data: LoadAccountByEmailAndPhoneRepository.Params): Promise<LoadAccountByEmailAndPhoneRepository.Result> {
+  async load (data: LoadAccountByEmailAndPhoneRepository.Params): Promise<LoadAccountByEmailAndPhoneRepository.Result> {
     this.data = data
     return this.result
   }
@@ -61,7 +61,7 @@ export class RandomPasswordGeneratorSpy implements RandomPasswordGenerator {
 
 export class UpdatePasswordRepositorySpy implements UpdatePasswordRepository {
   data: UpdatePasswordRepository.Params
-  async updatePassword (data: UpdatePasswordRepository.Params): Promise<void> {
+  async update (data: UpdatePasswordRepository.Params): Promise<void> {
     this.data = data
     return await Promise.resolve()
   }
@@ -81,7 +81,7 @@ export class LoadAccountByIdRepositorySpy implements LoadAccountByIdRepository {
     password: faker.random.alphaNumeric(32)
   }
 
-  async loadById (id: LoadAccountByIdRepository.Params): Promise<LoadAccountByIdRepository.Result> {
+  async load (id: LoadAccountByIdRepository.Params): Promise<LoadAccountByIdRepository.Result> {
     this.id = id
     return this.result
   }
@@ -95,7 +95,7 @@ export class LoadAccountByEmailRepositorySpy implements LoadAccountByEmailReposi
     password: faker.datatype.hexaDecimal()
   }
 
-  async loadByEmail (email: LoadAccountByEmailRepository.Params): Promise<LoadAccountByEmailRepository.Result> {
+  async load (email: LoadAccountByEmailRepository.Params): Promise<LoadAccountByEmailRepository.Result> {
     this.email = email
     return this.result
   }
@@ -121,7 +121,7 @@ export class EncrypterSpy implements Encrypter {
 
 export class UpdateAccessTokenRepositorySpy implements UpdateAccessTokenRepository {
   data: UpdateAccessTokenRepository.Params
-  async updateAccessToken (data: UpdateAccessTokenRepository.Params): Promise<void> {
+  async update (data: UpdateAccessTokenRepository.Params): Promise<void> {
     this.data = data
     return await Promise.resolve()
   }

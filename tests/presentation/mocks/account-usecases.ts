@@ -39,7 +39,7 @@ export class LoadAccountByTokenSpy implements LoadAccountByToken {
     id: faker.datatype.uuid()
   }
 
-  async loadByToken (data: LoadAccountByTokenModel): Promise<LoadAccountByToken.Result> {
+  async load (data: LoadAccountByTokenModel): Promise<LoadAccountByToken.Result> {
     this.data = data
     return this.result
   }

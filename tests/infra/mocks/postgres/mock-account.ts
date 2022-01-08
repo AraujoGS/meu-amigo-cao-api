@@ -26,7 +26,7 @@ export const mockAccount = async (): Promise<AccountModel> => {
 export const mockUpdateToken = async (id: string): Promise<string> => {
   const accessToken = faker.random.alphaNumeric(32)
   const updateAccessTokenPostgresRepository = new UpdateAccessTokenPostgresRepository()
-  await updateAccessTokenPostgresRepository.updateAccessToken({
+  await updateAccessTokenPostgresRepository.update({
     id,
     accessToken
   })

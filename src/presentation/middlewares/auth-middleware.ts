@@ -19,7 +19,7 @@ export class AuthMiddleware implements Middleware {
     try {
       const { accessToken } = request
       if (!accessToken) return unauthorized()
-      const account = await this.loadAccountByToken.loadByToken({
+      const account = await this.loadAccountByToken.load({
         token: accessToken,
         role: this.role
       })

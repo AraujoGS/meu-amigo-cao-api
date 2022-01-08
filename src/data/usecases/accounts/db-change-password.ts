@@ -13,12 +13,12 @@ export class DbChangePassword implements ChangePassword {
 
   async change (data: ChangePassword.Params): Promise<ChangePassword.Result> {
     const { id, oldPassword, newPassword } = data
-    const account = await this.loadAccountByIdRepository.loadById(id)
+    const account = await this.loadAccountByIdRepository.load(id)
     if (account) {
       const isValid = await this.hashComparer.compare({ value: oldPassword, hash: account.password })
       if (!isValid) return ActionResult.ERROR_INVALID_PASSWORD
       const hashedNewPassword = await this.hasher.hash(newPassword)
-      await this.updatePasswordRepository.updatePassword({ email: account.email, password: hashedNewPassword })
+      await this.updatePasswordRepository.update({ email: account.email, password: hashedNewPassword })
       return ActionResult.SUCCESS
     }
     return ActionResult.ERROR_ACCOUNT_NOT_EXISTS

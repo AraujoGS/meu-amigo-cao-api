@@ -21,7 +21,7 @@ describe('LoadAccountByEmailAndPhonePostgres Repository', () => {
   it('should LoadAccountByEmailAndPhonePostgresRepository return data if account exists', async () => {
     const sut = makeSut()
     const data = await mockAccount()
-    const response = await sut.loadByEmailAndPhone({
+    const response = await sut.load({
       email: data.email,
       phone: data.phone
     })
@@ -32,7 +32,7 @@ describe('LoadAccountByEmailAndPhonePostgres Repository', () => {
   })
   it('should LoadAccountByEmailAndPhonePostgresRepository return null if account not exists', async () => {
     const sut = makeSut()
-    const response = await sut.loadByEmailAndPhone({
+    const response = await sut.load({
       email: faker.internet.email(),
       phone: faker.phone.phoneNumber('###########')
     })

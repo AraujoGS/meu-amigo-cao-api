@@ -7,5 +7,5 @@ export namespace LoadAccountByIdRepository {
 }
 
 export interface LoadAccountByIdRepository {
-  loadById: (id: LoadAccountByIdRepository.Params) => Promise<LoadAccountByIdRepository.Result>
+  load: (id: LoadAccountByIdRepository.Params) => Promise<LoadAccountByIdRepository.Result>
 }

@@ -22,7 +22,7 @@ describe('LoadAccountByEmailPostgres Repository', () => {
   it('should LoadAccountByEmailPostgresRepository return data if account exists', async () => {
     const sut = makeSut()
     const params = await mockAccount()
-    const response = await sut.loadByEmail(params.email)
+    const response = await sut.load(params.email)
     expect(response).toBeTruthy()
     expect(response.id).toBe(params.id)
     expect(response.name).toBe(params.name)
@@ -31,7 +31,7 @@ describe('LoadAccountByEmailPostgres Repository', () => {
   it('should LoadAccountByEmailPostgresRepository return null if account not exists', async () => {
     const sut = makeSut()
     const emailFake = faker.internet.email()
-    const response = await sut.loadByEmail(emailFake)
+    const response = await sut.load(emailFake)
     expect(response).toBeNull()
   })
 })

@@ -6,5 +6,5 @@ export namespace UpdateAccessTokenRepository {
 }
 
 export interface UpdateAccessTokenRepository {
-  updateAccessToken: (data: UpdateAccessTokenRepository.Params) => Promise<void>
+  update: (data: UpdateAccessTokenRepository.Params) => Promise<void>
 }

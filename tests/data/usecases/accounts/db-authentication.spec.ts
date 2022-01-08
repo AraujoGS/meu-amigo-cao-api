@@ -34,7 +34,7 @@ describe('DbAuthentication Usecase', () => {
   })
   it('should DbAuthentication throw exception when error LoadAccountByEmailRepository', async () => {
     const { sut, loadAccountByEmailRepositorySpy } = makeSut()
-    jest.spyOn(loadAccountByEmailRepositorySpy, 'loadByEmail').mockImplementationOnce(throwError)
+    jest.spyOn(loadAccountByEmailRepositorySpy, 'load').mockImplementationOnce(throwError)
     const promise = sut.auth(mockAuthenticationParams())
     await expect(promise).rejects.toThrow()
   })
@@ -85,7 +85,7 @@ describe('DbAuthentication Usecase', () => {
   })
   it('should DbAuthentication throw exception when error UpdateAccessTokenRepository', async () => {
     const { sut, updateAccessTokenRepositorySpy } = makeSut()
-    jest.spyOn(updateAccessTokenRepositorySpy, 'updateAccessToken').mockImplementationOnce(throwError)
+    jest.spyOn(updateAccessTokenRepositorySpy, 'update').mockImplementationOnce(throwError)
     const promise = sut.auth(mockAuthenticationParams())
     await expect(promise).rejects.toThrow()
   })

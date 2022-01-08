@@ -40,7 +40,7 @@ describe('DbChangePassword Usecase', () => {
   })
   it('should DbChangePassword throw error if LoadAccountByIdRepository throws', async () => {
     const { sut, loadAccountByIdRepositorySpy } = makeSut()
-    jest.spyOn(loadAccountByIdRepositorySpy, 'loadById').mockImplementationOnce(throwError)
+    jest.spyOn(loadAccountByIdRepositorySpy, 'load').mockImplementationOnce(throwError)
     const promise = sut.change(mockChangePasswordParams())
     await expect(promise).rejects.toThrow()
   })
@@ -87,7 +87,7 @@ describe('DbChangePassword Usecase', () => {
   })
   it('should DbChangePassword throw error if UpdatePasswordRepository throws', async () => {
     const { sut, updatePasswordRepositorySpy } = makeSut()
-    jest.spyOn(updatePasswordRepositorySpy, 'updatePassword').mockImplementationOnce(throwError)
+    jest.spyOn(updatePasswordRepositorySpy, 'update').mockImplementationOnce(throwError)
     const promise = sut.change(mockChangePasswordParams())
     await expect(promise).rejects.toThrow()
   })

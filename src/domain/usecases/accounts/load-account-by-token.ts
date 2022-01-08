@@ -8,5 +8,5 @@ export namespace LoadAccountByToken {
 }
 
 export interface LoadAccountByToken {
-  loadByToken: (data: LoadAccountByToken.Params) => Promise<LoadAccountByToken.Result>
+  load: (data: LoadAccountByToken.Params) => Promise<LoadAccountByToken.Result>
 }

@@ -43,7 +43,7 @@ describe('DbForgotPassword Usecase', () => {
   })
   it('should DbForgotPassword throw error if LoadAccountByEmailAndPhoneRepository throws', async () => {
     const { sut, loadAccountByEmailAndPhoneRepositorySpy } = makeSut()
-    jest.spyOn(loadAccountByEmailAndPhoneRepositorySpy, 'loadByEmailAndPhone').mockImplementationOnce(throwError)
+    jest.spyOn(loadAccountByEmailAndPhoneRepositorySpy, 'load').mockImplementationOnce(throwError)
     const promise = sut.recover(mockForgotPasswordParams())
     await expect(promise).rejects.toThrow()
   })
@@ -80,7 +80,7 @@ describe('DbForgotPassword Usecase', () => {
   })
   it('should DbForgotPassword throw error if UpdatePasswordRepository throws', async () => {
     const { sut, updatePasswordRepositorySpy } = makeSut()
-    jest.spyOn(updatePasswordRepositorySpy, 'updatePassword').mockImplementationOnce(throwError)
+    jest.spyOn(updatePasswordRepositorySpy, 'update').mockImplementationOnce(throwError)
     const promise = sut.recover(mockForgotPasswordParams())
     await expect(promise).rejects.toThrow()
   })

@@ -28,7 +28,7 @@ describe('UpdatePasswordPostgres Repository', () => {
     const beforeUserPassword = await getHashSenha(params.id)
     expect(beforeUserPassword.password).toBeTruthy()
     const sut = makeSut()
-    await sut.updatePassword({
+    await sut.update({
       email: params.email,
       password: 'nova_senha'
     })
@@ -39,7 +39,7 @@ describe('UpdatePasswordPostgres Repository', () => {
   it('should UpdatePasswordPostgresRepository throw error if Postgres throws', async () => {
     const sut = makeSut()
     jest.spyOn(PostgresHelper, 'execute').mockImplementationOnce(throwError)
-    const promise = sut.updatePassword({ email: faker.internet.email(), password: faker.random.alphaNumeric(12) })
+    const promise = sut.update({ email: faker.internet.email(), password: faker.random.alphaNumeric(12) })
     await expect(promise).rejects.toThrow()
   })
 })

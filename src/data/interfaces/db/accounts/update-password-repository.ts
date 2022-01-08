@@ -6,5 +6,5 @@ export namespace UpdatePasswordRepository {
 }
 
 export interface UpdatePasswordRepository {
-  updatePassword: (data: UpdatePasswordRepository.Params) => Promise<void>
+  update: (data: UpdatePasswordRepository.Params) => Promise<void>
 }

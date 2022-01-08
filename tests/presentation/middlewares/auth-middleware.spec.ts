@@ -45,7 +45,7 @@ describe('Auth Middleware', () => {
   })
   it('should AuthMiddleware return 500 if LoadAccountByToken throw error', async () => {
     const { sut, loadAccountByTokenSpy } = makeSut()
-    jest.spyOn(loadAccountByTokenSpy, 'loadByToken').mockImplementationOnce(throwError)
+    jest.spyOn(loadAccountByTokenSpy, 'load').mockImplementationOnce(throwError)
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(internalServerError(new Error()))
   })
