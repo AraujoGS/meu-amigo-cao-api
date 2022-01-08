@@ -27,6 +27,17 @@ const mockAddAccount = async (id: string): Promise<void> => {
   await PostgresHelper.execute(query, params)
 }
 
+const mockGetAccount = async (id: string): Promise<any> => {
+  const query = `
+    SELECT c.id_cliente as id, c.nome_cliente as name, p.id_pet as id_pet FROM CLIENTES c
+    LEFT JOIN PETS p ON c.id_cliente = p.id_cliente
+    WHERE c.id_cliente = $1
+  `
+  const params = [id]
+  const result = await PostgresHelper.execute(query, params)
+  return PostgresHelper.mapperOneResult(result)
+}
+
 describe('AddPetPostgres Repository', () => {
   beforeAll(async () => {
     await PostgresHelper.connect(createDbTest())
@@ -53,5 +64,16 @@ describe('AddPetPostgres Repository', () => {
     jest.spyOn(identifierGeneratorSpy, 'generate').mockImplementationOnce(throwError)
     const promise = sut.add(mockAddPetParams())
     await expect(promise).rejects.toThrow()
+  })
+  it('should AddPetPostgresRepository add pet with success', async () => {
+    const { sut } = makeSut()
+    const params = mockAddPetParams()
+    await mockAddAccount(params.accountId)
+    const resultBeforeAddPet = await mockGetAccount(params.accountId)
+    expect(resultBeforeAddPet).toBeTruthy()
+    expect(resultBeforeAddPet.id_pet).toBeFalsy()
+    await sut.add(params)
+    const resultAfterAddPet = await mockGetAccount(params.accountId)
+    expect(resultAfterAddPet.id_pet).toBeTruthy()
   })
 })
