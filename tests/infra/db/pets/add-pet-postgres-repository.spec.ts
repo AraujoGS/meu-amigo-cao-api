@@ -76,4 +76,10 @@ describe('AddPetPostgres Repository', () => {
     const resultAfterAddPet = await mockGetAccount(params.accountId)
     expect(resultAfterAddPet.id_pet).toBeTruthy()
   })
+  it('should AddPetPostgresRepository throw error if Postgres throws', async () => {
+    const { sut } = makeSut()
+    jest.spyOn(PostgresHelper, 'execute').mockImplementationOnce(throwError)
+    const promise = sut.add(mockAddPetParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
