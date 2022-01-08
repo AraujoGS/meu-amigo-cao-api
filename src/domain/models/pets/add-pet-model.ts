@@ -2,7 +2,7 @@ export type AddPetModel = {
   accountId: string
   name: string
   breed: number
-  color: number
+  color: string
   type: number
   considerations: string
 }
