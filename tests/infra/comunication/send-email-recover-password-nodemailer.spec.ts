@@ -1,5 +1,5 @@
-import { NodemailerHelper, SendEmailRecoverPasswordNodemailer } from '@/infra/comunication'
 import 'dotenv/config'
+import { NodemailerHelper, SendEmailRecoverPasswordNodemailer } from '@/infra/comunication'
 import faker from 'faker'
 
 const makeSut = (): SendEmailRecoverPasswordNodemailer => new SendEmailRecoverPasswordNodemailer()
@@ -20,9 +20,16 @@ describe('SendEmailRecoverPasswordNodemailer', () => {
   beforeAll(() => {
     NodemailerHelper.create()
   })
-  it('should SendEmailRecoverPasswordNodemailer send email with success', async () => {
+  it('should SendEmailRecoverPasswordNodemailer call send with correct value', async () => {
     const sut = makeSut()
     const data = makeFakeAccount()
-    expect(async () => await sut.send(data)).not.toThrow()
+    const sendSpy = jest.spyOn(NodemailerHelper, 'send')
+    await sut.send(data)
+    expect(sendSpy).toHaveBeenCalledWith({
+      from: process.env.FROM_EMAIL,
+      subject: 'Recuperação de senha',
+      to: `${data.name} <${data.email}>`,
+      html: `Olá ${data.name}, foi gerada para você a senha temporária: ${data.password}<br><br> Assim que possível recomendamos alterar-lá.<br><br> Obrigado.`
+    })
   })
 })
