@@ -12,7 +12,8 @@ export class DbAddPet implements AddPet {
   async add (data: AddPet.Params): Promise<AddPet.Result> {
     const isValidDogBreed = await this.checkDogBreedByIdRepository.check(data.breed)
     if (!isValidDogBreed) return ActionResult.ERROR_INVALID_DOG_BREED
-    await this.checkDogTypeByIdRepository.check(data.type)
+    const isValidDogType = await this.checkDogTypeByIdRepository.check(data.type)
+    if (!isValidDogType) return ActionResult.ERROR_INVALID_DOG_TYPE
     await this.addPetRepository.add(data)
     return ActionResult.SUCCESS
   }
