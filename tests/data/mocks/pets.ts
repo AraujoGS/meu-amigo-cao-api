@@ -1,4 +1,4 @@
-import { AddPetRepository, CheckDogBreedByIdRepository } from '@/data/interfaces/db'
+import { AddPetRepository, CheckDogBreedByIdRepository, CheckDogTypeByIdRepository } from '@/data/interfaces/db'
 import faker from 'faker'
 faker.locale = 'pt_BR'
 
@@ -14,6 +14,15 @@ export class CheckDogBreedByIdRepositorySpy implements CheckDogBreedByIdReposito
   id: CheckDogBreedByIdRepository.Params
   result = true
   async check (id: CheckDogBreedByIdRepository.Params): Promise<CheckDogBreedByIdRepository.Result> {
+    this.id = id
+    return this.result
+  }
+}
+
+export class CheckDogTypeByIdRepositorySpy implements CheckDogTypeByIdRepository {
+  id: CheckDogTypeByIdRepository.Params
+  result = true
+  async check (id: CheckDogTypeByIdRepository.Params): Promise<CheckDogTypeByIdRepository.Result> {
     this.id = id
     return this.result
   }
