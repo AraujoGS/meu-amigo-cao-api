@@ -51,14 +51,14 @@
 - [X] inserir o endereço do cliente, retornar 201
 
 -Cadastro de pets (logado)
-- [ ] inputs: uuid do cliente, nome, raça, cor, porte e considerações
+- [X] inputs: uuid do cliente, nome, raça, cor, porte e considerações
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: considerações é opcional
-- [ ] validar se é uma raça válida e retornar 412 caso não
-- [ ] validar se é um porte válido e retornar 412 caso não
-- [ ] em caso de erro inesperado retornar 500
-- [ ] inserir o pet, retornar 201
+- [X] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: considerações é opcional
+- [X] validar se é uma raça válida e retornar 412 caso não
+- [X] validar se é um porte válido e retornar 412 caso não
+- [X] em caso de erro inesperado retornar 500
+- [X] inserir o pet, retornar 201
 
 -Consultar cadastro de cliente (logado)
 - [ ] inputs: uuid do usuário
