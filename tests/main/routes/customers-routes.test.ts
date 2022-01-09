@@ -143,5 +143,19 @@ describe('Customers Routes', () => {
         .send(payload)
         .expect(401)
     })
+    it('should add pet route return 403 if invalid token', async () => {
+      const payload = {
+        name: 'Nick',
+        breed: 16,
+        color: 'preta',
+        type: 2,
+        considerations: 'orelhas bem sensíveis, necessário extremo cuidado com a região'
+      }
+      await request(app)
+        .post('/api/customers/pets')
+        .send(payload)
+        .set('x-access-token', 'any_token')
+        .expect(403)
+    })
   })
 })
