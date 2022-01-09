@@ -1,7 +1,7 @@
 import { ActionResult } from '@/domain/models'
 import { AddPetController } from '@/presentation/controllers'
 import { InvalidParamError, MissingParamError } from '@/presentation/errors'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, created, preconditionFailed } from '@/presentation/helpers'
 import { mockAddPetParams } from '@/tests/domain/mocks'
 import { AddPetSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
@@ -59,5 +59,10 @@ describe('AddPet Controller', () => {
     businessRulesValidationSpy.result = new InvalidParamError('breed')
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new InvalidParamError('breed')))
+  })
+  it('should AddPetController return 201 if success', async () => {
+    const { sut } = makeSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(created())
   })
 })
