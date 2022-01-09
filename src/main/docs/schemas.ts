@@ -5,7 +5,8 @@ import {
   loginParamsSchema,
   forgotPasswordParamsSchema,
   changePasswordParamsSchema,
-  AddAddressParamsSchema
+  AddAddressParamsSchema,
+  AddPetParamsSchema
 } from './schemas/'
 
 export default {
@@ -15,5 +16,6 @@ export default {
   forgotPasswordParams: forgotPasswordParamsSchema,
   changePasswordParams: changePasswordParamsSchema,
   addAddressParams: AddAddressParamsSchema,
+  addPetParams: AddPetParamsSchema,
   error: errorSchema
 }

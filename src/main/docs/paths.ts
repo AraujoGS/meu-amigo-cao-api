@@ -3,7 +3,8 @@ import {
   loginPath,
   forgotPasswordPath,
   changePasswordPath,
-  addAddressPath
+  addAddressPath,
+  addPetPath
 } from './paths/'
 
 export default {
@@ -11,5 +12,6 @@ export default {
   '/login': loginPath,
   '/forgot-password': forgotPasswordPath,
   '/change-password': changePasswordPath,
-  '/customers/address': addAddressPath
+  '/customers/address': addAddressPath,
+  '/customers/pets': addPetPath
 }
