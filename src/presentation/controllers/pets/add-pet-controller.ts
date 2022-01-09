@@ -1,5 +1,5 @@
 import { AddPet } from '@/domain/usecases'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, created, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace AddPetController {
@@ -31,6 +31,6 @@ export class AddPetController implements Controller {
     if (conditionFailed) {
       return preconditionFailed(conditionFailed)
     }
-    return null
+    return created()
   }
 }
