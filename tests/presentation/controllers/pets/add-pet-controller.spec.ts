@@ -9,16 +9,19 @@ type SutTypes = {
   sut: AddPetController
   validationSpy: ValidationSpy
   addPetSpy: AddPetSpy
+  businessRulesValidationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
   const addPetSpy = new AddPetSpy()
-  const sut = new AddPetController(validationSpy, addPetSpy)
+  const businessRulesValidationSpy = new ValidationSpy()
+  const sut = new AddPetController(validationSpy, addPetSpy, businessRulesValidationSpy)
   return {
     sut,
     validationSpy,
-    addPetSpy
+    addPetSpy,
+    businessRulesValidationSpy
   }
 }
 
@@ -43,5 +46,10 @@ describe('AddPet Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(addPetSpy.data).toEqual(request)
+  })
+  it('should AddPetController call BusinessRulesValidationSpy with correct values', async () => {
+    const { sut, businessRulesValidationSpy, addPetSpy } = makeSut()
+    await sut.handle(mockRequest())
+    expect(businessRulesValidationSpy.input).toEqual({ resultAddPet: addPetSpy.result })
   })
 })
