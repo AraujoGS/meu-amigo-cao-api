@@ -1,8 +1,8 @@
 import { ActionResult } from '@/domain/models'
 import { AddPetController } from '@/presentation/controllers'
 import { InvalidParamError, MissingParamError } from '@/presentation/errors'
-import { badRequest, created, preconditionFailed } from '@/presentation/helpers'
-import { mockAddPetParams } from '@/tests/domain/mocks'
+import { badRequest, created, internalServerError, preconditionFailed } from '@/presentation/helpers'
+import { mockAddPetParams, throwError } from '@/tests/domain/mocks'
 import { AddPetSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 
@@ -64,5 +64,11 @@ describe('AddPet Controller', () => {
     const { sut } = makeSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(created())
+  })
+  it('should AddPetController return 500 if AddPet throw error', async () => {
+    const { sut, addPetSpy } = makeSut()
+    jest.spyOn(addPetSpy, 'add').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new Error()))
   })
 })
