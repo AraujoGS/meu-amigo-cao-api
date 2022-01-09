@@ -115,5 +115,20 @@ describe('Customers Routes', () => {
         .set('x-access-token', account.accessToken)
         .expect(400)
     })
+    it('should add address route return 412 if fail', async () => {
+      const account = await mockGetAccountData()
+      const payload = {
+        name: 'Nick',
+        breed: 0,
+        color: 'preta',
+        type: 2,
+        considerations: 'orelhas bem sensíveis, necessário extremo cuidado com a região'
+      }
+      await request(app)
+        .post('/api/customers/pets')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(412)
+    })
   })
 })
