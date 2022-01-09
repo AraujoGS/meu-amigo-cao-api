@@ -16,7 +16,8 @@ export namespace AddPetController {
 export class AddPetController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly addPet: AddPet
+    private readonly addPet: AddPet,
+    private readonly businessRulesValidation: Validation
   ) {}
 
   async handle (httpRequest: AddPetController.Request): Promise<HttpResponse> {
@@ -25,7 +26,8 @@ export class AddPetController implements Controller {
     if (clientError) {
       return badRequest(clientError)
     }
-    await this.addPet.add(httpRequest)
+    const result = await this.addPet.add(httpRequest)
+    this.businessRulesValidation.validate({ resultAddPet: result })
     return null
   }
 }
