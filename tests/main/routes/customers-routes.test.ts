@@ -86,7 +86,7 @@ describe('Customers Routes', () => {
     })
   })
   describe('POST /customers/pets', () => {
-    it('should add address route return 201 if success', async () => {
+    it('should add pet route return 201 if success', async () => {
       const account = await mockGetAccountData()
       const payload = {
         name: 'Nick',
@@ -101,7 +101,7 @@ describe('Customers Routes', () => {
         .set('x-access-token', account.accessToken)
         .expect(201)
     })
-    it('should add address route return 400 if fail', async () => {
+    it('should add pet route return 400 if fail', async () => {
       const account = await mockGetAccountData()
       const payload = {
         name: 'Nick',
@@ -115,7 +115,7 @@ describe('Customers Routes', () => {
         .set('x-access-token', account.accessToken)
         .expect(400)
     })
-    it('should add address route return 412 if fail', async () => {
+    it('should add pet route return 412 if fail', async () => {
       const account = await mockGetAccountData()
       const payload = {
         name: 'Nick',
@@ -129,6 +129,19 @@ describe('Customers Routes', () => {
         .send(payload)
         .set('x-access-token', account.accessToken)
         .expect(412)
+    })
+    it('should add pet route return 401 if missing token', async () => {
+      const payload = {
+        name: 'Nick',
+        breed: 16,
+        color: 'preta',
+        type: 2,
+        considerations: 'orelhas bem sensíveis, necessário extremo cuidado com a região'
+      }
+      await request(app)
+        .post('/api/customers/pets')
+        .send(payload)
+        .expect(401)
     })
   })
 })
