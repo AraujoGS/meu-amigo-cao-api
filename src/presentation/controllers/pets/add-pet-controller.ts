@@ -1,3 +1,4 @@
+import { AddPet } from '@/domain/usecases'
 import { badRequest } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
@@ -14,7 +15,8 @@ export namespace AddPetController {
 
 export class AddPetController implements Controller {
   constructor (
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly addPet: AddPet
   ) {}
 
   async handle (httpRequest: AddPetController.Request): Promise<HttpResponse> {
@@ -23,6 +25,7 @@ export class AddPetController implements Controller {
     if (clientError) {
       return badRequest(clientError)
     }
+    await this.addPet.add(httpRequest)
     return null
   }
 }
