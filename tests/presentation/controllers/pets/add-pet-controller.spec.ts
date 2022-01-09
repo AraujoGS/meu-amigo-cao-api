@@ -1,6 +1,7 @@
+import { ActionResult } from '@/domain/models'
 import { AddPetController } from '@/presentation/controllers'
-import { MissingParamError } from '@/presentation/errors'
-import { badRequest } from '@/presentation/helpers'
+import { InvalidParamError, MissingParamError } from '@/presentation/errors'
+import { badRequest, preconditionFailed } from '@/presentation/helpers'
 import { mockAddPetParams } from '@/tests/domain/mocks'
 import { AddPetSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
@@ -51,5 +52,12 @@ describe('AddPet Controller', () => {
     const { sut, businessRulesValidationSpy, addPetSpy } = makeSut()
     await sut.handle(mockRequest())
     expect(businessRulesValidationSpy.input).toEqual({ resultAddPet: addPetSpy.result })
+  })
+  it('should AddPetController return 412 if BusinessRulesValidationSpy return error', async () => {
+    const { sut, businessRulesValidationSpy, addPetSpy } = makeSut()
+    addPetSpy.result = ActionResult.ERROR_INVALID_DOG_BREED
+    businessRulesValidationSpy.result = new InvalidParamError('breed')
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(preconditionFailed(new InvalidParamError('breed')))
   })
 })
