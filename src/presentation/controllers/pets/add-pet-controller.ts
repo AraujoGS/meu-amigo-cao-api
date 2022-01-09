@@ -1,3 +1,4 @@
+import { badRequest } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace AddPetController {
@@ -18,7 +19,10 @@ export class AddPetController implements Controller {
 
   async handle (httpRequest: AddPetController.Request): Promise<HttpResponse> {
     const { considerations, ...data } = httpRequest
-    this.validation.validate(data)
+    const clientError = this.validation.validate(data)
+    if (clientError) {
+      return badRequest(clientError)
+    }
     return null
   }
 }
