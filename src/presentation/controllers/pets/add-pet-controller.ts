@@ -1,5 +1,5 @@
 import { AddPet } from '@/domain/usecases'
-import { badRequest } from '@/presentation/helpers'
+import { badRequest, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace AddPetController {
@@ -27,7 +27,10 @@ export class AddPetController implements Controller {
       return badRequest(clientError)
     }
     const result = await this.addPet.add(httpRequest)
-    this.businessRulesValidation.validate({ resultAddPet: result })
+    const conditionFailed = this.businessRulesValidation.validate({ resultAddPet: result })
+    if (conditionFailed) {
+      return preconditionFailed(conditionFailed)
+    }
     return null
   }
 }
