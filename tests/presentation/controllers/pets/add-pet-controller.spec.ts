@@ -1,4 +1,6 @@
 import { AddPetController } from '@/presentation/controllers'
+import { MissingParamError } from '@/presentation/errors'
+import { badRequest } from '@/presentation/helpers'
 import { mockAddPetParams } from '@/tests/domain/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 
@@ -25,5 +27,11 @@ describe('AddPet Controller', () => {
     await sut.handle(request)
     const { considerations, ...data } = request
     expect(validationSpy.input).toEqual(data)
+  })
+  it('should AddPetController return 400 if Validation return error', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.result = new MissingParamError('name')
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(badRequest(new MissingParamError('name')))
   })
 })
