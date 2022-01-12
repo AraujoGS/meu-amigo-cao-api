@@ -1,4 +1,4 @@
-import { AddAddress } from '@/domain/usecases'
+import { AddAddress, LoadCustomerById } from '@/domain/usecases'
 import faker from 'faker'
 faker.locale = 'pt_BR'
 
@@ -12,3 +12,5 @@ export const mockAddAddressParams = (): AddAddress.Params => ({
   state: faker.address.stateAbbr(),
   complement: faker.random.word()
 })
+
+export const mockLoadCustomerById = (): LoadCustomerById.Params => faker.datatype.uuid()
