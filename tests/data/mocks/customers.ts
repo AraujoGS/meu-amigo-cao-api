@@ -1,4 +1,4 @@
-import { AddAddressRepository, LoadCustomerByIdRepository } from '@/data/interfaces/db'
+import { AddAddressRepository, LoadCustomerByIdRepository, LoadAddressByCustomerIdRepository } from '@/data/interfaces/db'
 import faker from 'faker'
 faker.locale = 'pt_BR'
 
@@ -21,6 +21,24 @@ export class LoadCustomerByIdRepositorySpy implements LoadCustomerByIdRepository
   }
 
   async load (id: LoadCustomerByIdRepository.Params): Promise<LoadCustomerByIdRepository.Result> {
+    this.id = id
+    return this.result
+  }
+}
+
+export class LoadAddressByCustomerIdRepositorySpy implements LoadAddressByCustomerIdRepository {
+  id: LoadAddressByCustomerIdRepository.Params
+  result = [{
+    zipcode: faker.address.zipCode('########'),
+    address: faker.address.streetAddress(),
+    city: faker.address.cityName(),
+    number: faker.datatype.number(),
+    district: faker.random.word(),
+    state: faker.address.stateAbbr(),
+    complement: faker.random.word()
+  }]
+
+  async load (id: LoadAddressByCustomerIdRepository.Params): Promise<LoadAddressByCustomerIdRepository.Result> {
     this.id = id
     return this.result
   }
