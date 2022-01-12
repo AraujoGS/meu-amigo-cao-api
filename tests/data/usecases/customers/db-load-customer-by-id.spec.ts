@@ -53,4 +53,10 @@ describe('DbLoadCustomerById Usecase', () => {
     const promise = sut.load(mockLoadCustomerById())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbLoadCustomerById throw error if LoadPetsByCustomerIdRepository throws', async () => {
+    const { sut, loadPetsByCustomerIdRepositorySpy } = makeSut()
+    jest.spyOn(loadPetsByCustomerIdRepositorySpy, 'load').mockImplementationOnce(throwError)
+    const promise = sut.load(mockLoadCustomerById())
+    await expect(promise).rejects.toThrow()
+  })
 })
