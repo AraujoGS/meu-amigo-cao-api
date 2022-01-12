@@ -1,4 +1,4 @@
-import { AddAddressRepository, LoadCustomerByIdRepository, LoadAddressByCustomerIdRepository } from '@/data/interfaces/db'
+import { AddAddressRepository, LoadCustomerByIdRepository, LoadAddressByCustomerIdRepository, LoadPetsByCustomerIdRepository } from '@/data/interfaces/db'
 import faker from 'faker'
 faker.locale = 'pt_BR'
 
@@ -39,6 +39,23 @@ export class LoadAddressByCustomerIdRepositorySpy implements LoadAddressByCustom
   }]
 
   async load (id: LoadAddressByCustomerIdRepository.Params): Promise<LoadAddressByCustomerIdRepository.Result> {
+    this.id = id
+    return this.result
+  }
+}
+
+export class LoadPetsByCustomerIdRepositorySpy implements LoadPetsByCustomerIdRepository {
+  id: LoadPetsByCustomerIdRepository.Params
+  result = [{
+    accountId: faker.datatype.uuid(),
+    name: faker.name.findName(),
+    breed: 29,
+    color: faker.random.word(),
+    type: 1,
+    considerations: faker.random.words()
+  }]
+
+  async load (id: LoadPetsByCustomerIdRepository.Params): Promise<LoadPetsByCustomerIdRepository.Result> {
     this.id = id
     return this.result
   }
