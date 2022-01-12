@@ -1,6 +1,6 @@
 import { DbLoadCustomerById } from '@/data/usecases'
 import { LoadAddressByCustomerIdRepositorySpy, LoadCustomerByIdRepositorySpy, LoadPetsByCustomerIdRepositorySpy } from '@/tests/data/mocks'
-import { mockLoadCustomerById } from '@/tests/domain/mocks'
+import { mockLoadCustomerById, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbLoadCustomerById
@@ -40,5 +40,11 @@ describe('DbLoadCustomerById Usecase', () => {
     const param = mockLoadCustomerById()
     await sut.load(param)
     expect(loadPetsByCustomerIdRepositorySpy.id).toBe(param)
+  })
+  it('should DbLoadCustomerById throw error if LoadCustomerByIdRepository throws', async () => {
+    const { sut, loadCustomerByIdRepositorySpy } = makeSut()
+    jest.spyOn(loadCustomerByIdRepositorySpy, 'load').mockImplementationOnce(throwError)
+    const promise = sut.load(mockLoadCustomerById())
+    await expect(promise).rejects.toThrow()
   })
 })
