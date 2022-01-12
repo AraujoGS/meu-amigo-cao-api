@@ -9,9 +9,15 @@ export class DbLoadCustomerById implements LoadCustomerById {
   ) {}
 
   async load (id: string): Promise<LoadCustomerById.Result> {
-    await this.loadCustomerByIdRepository.load(id)
-    await this.loadAddressByCustomerIdRepository.load(id)
-    await this.loadPetsByCustomerIdRepository.load(id)
-    return null
+    const [customer, address, pets] = await Promise.all([
+      this.loadCustomerByIdRepository.load(id),
+      this.loadAddressByCustomerIdRepository.load(id),
+      this.loadPetsByCustomerIdRepository.load(id)
+    ])
+    return {
+      ...customer,
+      address,
+      pets
+    }
   }
 }
