@@ -59,4 +59,13 @@ describe('DbLoadCustomerById Usecase', () => {
     const promise = sut.load(mockLoadCustomerById())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbLoadCustomerById return customer if success', async () => {
+    const { sut, loadCustomerByIdRepositorySpy, loadAddressByCustomerIdRepositorySpy, loadPetsByCustomerIdRepositorySpy } = makeSut()
+    const customer = await sut.load(mockLoadCustomerById())
+    expect(customer).toEqual({
+      ...loadCustomerByIdRepositorySpy.result,
+      address: loadAddressByCustomerIdRepositorySpy.result,
+      pets: loadPetsByCustomerIdRepositorySpy.result
+    })
+  })
 })
