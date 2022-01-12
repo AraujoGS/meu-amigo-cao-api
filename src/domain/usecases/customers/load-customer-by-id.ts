@@ -7,7 +7,7 @@ export namespace LoadCustomerById {
     name: string
     email: string
     phone: string
-    birthDate: string
+    birthDate: Date
     address: AddressModel[]
     pets: PetModel[]
   }
