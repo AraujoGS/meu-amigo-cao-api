@@ -1,7 +1,8 @@
 export type PetModel = {
+  id: string
   name: string
-  breed: number
+  breed: string
   color: string
-  type: number
+  type: string
   considerations: string
 }
