@@ -23,6 +23,9 @@ export const PostgresHelper = {
   },
   mapperOneResult (result: QueryResult): any {
     return result?.rows.length ? result.rows[0] : null
+  },
+  mapperManyResult (result: QueryResult): any {
+    return result?.rows.length ? result.rows : []
   }
 }
 
