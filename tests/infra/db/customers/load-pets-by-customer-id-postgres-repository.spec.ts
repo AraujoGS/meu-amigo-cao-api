@@ -1,5 +1,6 @@
 import { PostgresHelper, LoadPetsByCustomerIdPostgresRepository } from '@/infra/db'
 import { createDbTest, sqlClearDb, sqlCreateDb, mockPets, mockAccount } from '@/tests/infra/mocks'
+import faker from 'faker'
 
 const makeSut = (): LoadPetsByCustomerIdPostgresRepository => new LoadPetsByCustomerIdPostgresRepository()
 
@@ -39,5 +40,11 @@ describe('LoadCustomerByIdPostgres Repository', () => {
     expect(response.length).toBe(2)
     expect(response[0].id).toBe(params1.id)
     expect(response[1].id).toBe(params2.id)
+  })
+  it('should LoadPetsByCustomerIdPostgresRepository return array empty if invalid customer id', async () => {
+    const sut = makeSut()
+    const response = await sut.load(faker.datatype.uuid())
+    expect(response).toBeTruthy()
+    expect(response.length).toBe(0)
   })
 })
