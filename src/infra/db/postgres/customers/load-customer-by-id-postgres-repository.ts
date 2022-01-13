@@ -14,7 +14,6 @@ export class LoadCustomerByIdPostgresRepository implements LoadCustomerByIdRepos
     `
     const params = [id]
     const account = await PostgresHelper.execute(query, params)
-    console.log(account)
     return PostgresHelper.mapperOneResult(account)
   }
 }
