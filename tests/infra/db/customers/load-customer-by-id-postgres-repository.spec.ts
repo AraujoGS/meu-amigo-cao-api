@@ -1,5 +1,6 @@
 import { PostgresHelper, LoadCustomerByIdPostgresRepository } from '@/infra/db'
 import { createDbTest, sqlClearDb, sqlCreateDb, mockAccount } from '@/tests/infra/mocks'
+import faker from 'faker'
 
 const makeSut = (): LoadCustomerByIdPostgresRepository => new LoadCustomerByIdPostgresRepository()
 
@@ -27,5 +28,10 @@ describe('LoadCustomerByIdPostgres Repository', () => {
     expect(response.birthDate.getUTCDate()).toBe(params.birthDate.getUTCDate())
     expect(response.birthDate.getUTCMonth()).toBe(params.birthDate.getUTCMonth())
     expect(response.birthDate.getUTCFullYear()).toBe(params.birthDate.getUTCFullYear())
+  })
+  it('should LoadCustomerByIdPostgresRepository return null if invalid id', async () => {
+    const sut = makeSut()
+    const response = await sut.load(faker.datatype.uuid())
+    expect(response).toBeNull()
   })
 })
