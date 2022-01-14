@@ -5,8 +5,11 @@ import {
   loginParamsSchema,
   forgotPasswordParamsSchema,
   changePasswordParamsSchema,
-  AddAddressParamsSchema,
-  AddPetParamsSchema
+  addAddressParamsSchema,
+  addPetParamsSchema,
+  addressSchema,
+  customerSchema,
+  petsSchema
 } from './schemas/'
 
 export default {
@@ -15,7 +18,10 @@ export default {
   loginParams: loginParamsSchema,
   forgotPasswordParams: forgotPasswordParamsSchema,
   changePasswordParams: changePasswordParamsSchema,
-  addAddressParams: AddAddressParamsSchema,
-  addPetParams: AddPetParamsSchema,
+  addAddressParams: addAddressParamsSchema,
+  addPetParams: addPetParamsSchema,
+  customer: customerSchema,
+  address: addressSchema,
+  pets: petsSchema,
   error: errorSchema
 }

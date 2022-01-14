@@ -1,6 +1,10 @@
-export const addAddressParamsSchema = {
+export const addressSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string',
+      default: '852d7b3b-d21f-4aac-9757-0c693e9c6244'
+    },
     zipcode: {
       type: 'string',
       default: '03086090'
@@ -29,6 +33,5 @@ export const addAddressParamsSchema = {
       type: 'string',
       default: 'casa'
     }
-  },
-  required: ['zipcode', 'address', 'number', 'district', 'city', 'state']
+  }
 }
