@@ -158,4 +158,13 @@ describe('Customers Routes', () => {
         .expect(403)
     })
   })
+  describe('GET /customers', () => {
+    it('should load customer by id route return 200 if success', async () => {
+      const account = await mockGetAccountData()
+      await request(app)
+        .get('/api/customers')
+        .set('x-access-token', account.accessToken)
+        .expect(200)
+    })
+  })
 })
