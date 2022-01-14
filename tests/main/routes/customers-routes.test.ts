@@ -166,5 +166,10 @@ describe('Customers Routes', () => {
         .set('x-access-token', account.accessToken)
         .expect(200)
     })
+    it('should load customer by id return 401 if missing token', async () => {
+      await request(app)
+        .get('/api/customers')
+        .expect(401)
+    })
   })
 })
