@@ -1,5 +1,6 @@
 import { LoadCustomerById } from '@/domain/usecases'
 import { Controller, HttpResponse } from '@/presentation/interfaces'
+import { ok } from '@/presentation/helpers'
 
 export namespace LoadCustomerByIdController {
   export type Request = {
@@ -11,7 +12,7 @@ export class LoadCustomerByIdController implements Controller {
 
   async handle (httpRequest: LoadCustomerByIdController.Request): Promise<HttpResponse> {
     const { accountId } = httpRequest
-    await this.loadCustomerById.load(accountId)
-    return null
+    const customer = await this.loadCustomerById.load(accountId)
+    return ok(customer)
   }
 }
