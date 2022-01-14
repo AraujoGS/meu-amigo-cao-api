@@ -1,6 +1,6 @@
 import { LoadCustomerByIdController } from '@/presentation/controllers'
-import { ok } from '@/presentation/helpers'
-import { mockLoadCustomerById } from '@/tests/domain/mocks'
+import { internalServerError, ok } from '@/presentation/helpers'
+import { mockLoadCustomerById, throwError } from '@/tests/domain/mocks'
 import { LoadCustomerByIdSpy } from '@/tests/presentation/mocks'
 
 type SutTypes = {
@@ -29,5 +29,11 @@ describe('LoadCustomerById Controller', () => {
     const { sut, loadCustomerByIdSpy } = makeSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(ok(loadCustomerByIdSpy.result))
+  })
+  it('should LoadCustomerByIdController return 500 if LoadCustomerById throws', async () => {
+    const { sut, loadCustomerByIdSpy } = makeSut()
+    jest.spyOn(loadCustomerByIdSpy, 'load').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new Error()))
   })
 })
