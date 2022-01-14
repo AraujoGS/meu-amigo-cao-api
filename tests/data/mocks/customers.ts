@@ -29,6 +29,7 @@ export class LoadCustomerByIdRepositorySpy implements LoadCustomerByIdRepository
 export class LoadAddressByCustomerIdRepositorySpy implements LoadAddressByCustomerIdRepository {
   id: LoadAddressByCustomerIdRepository.Params
   result = [{
+    id: faker.datatype.uuid(),
     zipcode: faker.address.zipCode('########'),
     address: faker.address.streetAddress(),
     city: faker.address.cityName(),
@@ -47,11 +48,11 @@ export class LoadAddressByCustomerIdRepositorySpy implements LoadAddressByCustom
 export class LoadPetsByCustomerIdRepositorySpy implements LoadPetsByCustomerIdRepository {
   id: LoadPetsByCustomerIdRepository.Params
   result = [{
-    accountId: faker.datatype.uuid(),
+    id: faker.datatype.uuid(),
     name: faker.name.findName(),
-    breed: 29,
+    breed: 'Maltês',
     color: faker.random.word(),
-    type: 1,
+    type: 'MINI',
     considerations: faker.random.words()
   }]
 
