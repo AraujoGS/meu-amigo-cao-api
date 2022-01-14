@@ -3,7 +3,7 @@ export const forgotPasswordParamsSchema = {
   properties: {
     email: {
       type: 'string',
-      default: 'a.perreira@gmail.com'
+      default: 'garaujo@dev.com'
     },
     phone: {
       type: 'string',

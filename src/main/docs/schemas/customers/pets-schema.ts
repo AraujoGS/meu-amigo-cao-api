@@ -3,7 +3,7 @@ export const petsSchema = {
   properties: {
     id: {
       type: 'string',
-      default: '78b6ce57-0f1e-4b43-ae98-a0890d064e63'
+      default: '55796dd3-16de-4852-81c6-bea3c7d1f888'
     },
     name: {
       type: 'string',

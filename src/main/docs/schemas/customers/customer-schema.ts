@@ -3,7 +3,7 @@ export const customerSchema = {
   properties: {
     id: {
       type: 'string',
-      default: 'dcbb59f4-36a2-409f-8c64-68e4746eaa85'
+      default: '7b967943-7366-4f36-bdb3-5ee4bd9d29bf'
     },
     name: {
       type: 'string',
@@ -11,11 +11,11 @@ export const customerSchema = {
     },
     email: {
       type: 'string',
-      default: 'guilhermearaujo421@gmail.com'
+      default: 'garaujo@dev.com'
     },
     phone: {
       type: 'string',
-      default: '11954976862'
+      default: '11936544141'
     },
     birthDate: {
       type: 'string',

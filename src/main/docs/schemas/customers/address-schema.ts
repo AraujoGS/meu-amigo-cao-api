@@ -3,7 +3,7 @@ export const addressSchema = {
   properties: {
     id: {
       type: 'string',
-      default: '852d7b3b-d21f-4aac-9757-0c693e9c6244'
+      default: 'd9121aa0-3e20-463c-bff6-c9594a25c933'
     },
     zipcode: {
       type: 'string',

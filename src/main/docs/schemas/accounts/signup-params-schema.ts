@@ -3,11 +3,11 @@ export const signUpParamsSchema = {
   properties: {
     name: {
       type: 'string',
-      default: 'Alberto Perreira'
+      default: 'Guilherme de Araujo'
     },
     email: {
       type: 'string',
-      default: 'a.perreira@gmail.com'
+      default: 'garaujo@dev.com'
     },
     password: {
       type: 'string',
@@ -23,7 +23,7 @@ export const signUpParamsSchema = {
     },
     birthDate: {
       type: 'string',
-      default: '1986-04-13'
+      default: '1997-05-30'
     }
   },
   required: ['name', 'email', 'password', 'passwordConfirmation', 'phone', 'birthDate']
