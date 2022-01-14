@@ -61,11 +61,11 @@
 - [X] inserir o pet, retornar 201
 
 -Consultar cliente (logado)
-- [ ] inputs: uuid do usuário
+- [X] inputs: uuid do usuário
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] em caso de erro inesperado retornar 500
-- [ ] consultar e retornar 200 com os dados
+- [X] em caso de erro inesperado retornar 500
+- [X] consultar e retornar 200 com os dados
 
 -Alterar cliente (logado)
 - [ ] inputs: uuid do cliente, nome, email, telefone, data de nascimento
