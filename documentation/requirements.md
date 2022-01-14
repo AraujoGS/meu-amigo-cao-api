@@ -62,8 +62,8 @@
 
 -Consultar cliente (logado)
 - [X] inputs: uuid do usuário
-- [ ] validar se token de acesso válido, caso não retornar 401
-- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
+- [X] validar se token de acesso válido, caso não retornar 401
+- [X] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [X] em caso de erro inesperado retornar 500
 - [X] consultar e retornar 200 com os dados
 
