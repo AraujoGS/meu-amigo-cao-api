@@ -74,8 +74,8 @@
 - [X] validar inputs e retornar 400 caso algum campo esteja faltando
 - [X] validar se é um telefone válido, se não retornar 400
 - [X] validar se é um email válido, se não retornar 400
-- [ ] validar se o email está em uso, caso esteja retornar 412 
-- [ ] validar se o telefone está em uso, caso esteja retornar 412 
+- [X] validar se o email está em uso, caso esteja retornar 412 
+- [X] validar se o telefone está em uso, caso esteja retornar 412 
 - [ ] em caso de erro inesperado retornar 500
 - [ ] alterar os dados, retornar 200 e os dados
 
