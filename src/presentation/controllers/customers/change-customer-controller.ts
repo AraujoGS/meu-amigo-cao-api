@@ -1,3 +1,4 @@
+import { ChangeCustomer } from '@/domain/usecases'
 import { badRequest } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
@@ -7,20 +8,29 @@ export namespace ChangeCustomerController {
     name: string
     email: string
     phone: string
-    birthDate: Date
+    birthDate: string
   }
 }
 
 export class ChangeCustomerController implements Controller {
   constructor (
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly changeCustomer: ChangeCustomer
   ) {}
 
-  async handle (httpRequest: any): Promise<HttpResponse> {
+  async handle (httpRequest: ChangeCustomerController.Request): Promise<HttpResponse> {
     const clientError = this.validation.validate(httpRequest)
     if (clientError) {
       return badRequest(clientError)
     }
+    const { name, email, accountId, phone, birthDate } = httpRequest
+    await this.changeCustomer.change({
+      id: accountId,
+      name,
+      email,
+      phone,
+      birthDate: new Date(`${birthDate} 00:00:00`)
+    })
     return null
   }
 }
