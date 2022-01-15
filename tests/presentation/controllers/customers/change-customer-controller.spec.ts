@@ -2,7 +2,7 @@ import { ActionResult } from '@/domain/models'
 import { ChangeCustomerController } from '@/presentation/controllers'
 import { EmailInUseError, MissingParamError } from '@/presentation/errors'
 import { badRequest, preconditionFailed } from '@/presentation/helpers'
-import { ChangeCustomerSpy } from '@/tests/presentation/mocks'
+import { ChangeCustomerSpy, LoadCustomerByIdSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 
@@ -11,18 +11,21 @@ type SutTypes = {
   validationSpy: ValidationSpy
   changeCustomerSpy: ChangeCustomerSpy
   businessRulesValidationSpy: ValidationSpy
+  loadCustomerByIdSpy: LoadCustomerByIdSpy
 }
 
 const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
   const changeCustomerSpy = new ChangeCustomerSpy()
   const businessRulesValidationSpy = new ValidationSpy()
-  const sut = new ChangeCustomerController(validationSpy, changeCustomerSpy, businessRulesValidationSpy)
+  const loadCustomerByIdSpy = new LoadCustomerByIdSpy()
+  const sut = new ChangeCustomerController(validationSpy, changeCustomerSpy, businessRulesValidationSpy, loadCustomerByIdSpy)
   return {
     sut,
     validationSpy,
     changeCustomerSpy,
-    businessRulesValidationSpy
+    businessRulesValidationSpy,
+    loadCustomerByIdSpy
   }
 }
 const mockRequest = (): ChangeCustomerController.Request => ({
@@ -70,5 +73,17 @@ describe('ChangeCustomer Controller', () => {
     businessRulesValidationSpy.result = new EmailInUseError()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new EmailInUseError()))
+  })
+  it('should ChangeCustomerController call BusinessRulesValidation with correct values', async () => {
+    const { sut, businessRulesValidationSpy, changeCustomerSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(businessRulesValidationSpy.input).toEqual({ resultChangeCustomer: changeCustomerSpy.result })
+  })
+  it('should LoadCustomerByIdController call LoadCustomerById with correct value', async () => {
+    const { sut, loadCustomerByIdSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(loadCustomerByIdSpy.id).toBe(request.accountId)
   })
 })
