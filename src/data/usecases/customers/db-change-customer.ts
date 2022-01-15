@@ -1,11 +1,12 @@
-import { LoadCustomerByEmailRepository, LoadCustomerByPhoneRepository } from '@/data/interfaces/db'
+import { LoadCustomerByEmailRepository, LoadCustomerByPhoneRepository, UpdateCustomerRepository } from '@/data/interfaces/db'
 import { ActionResult } from '@/domain/models'
 import { ChangeCustomer } from '@/domain/usecases'
 
 export class DbChangeCustomer implements ChangeCustomer {
   constructor (
     private readonly loadCustomerByEmailRepository: LoadCustomerByEmailRepository,
-    private readonly loadCustomerByPhoneRepository: LoadCustomerByPhoneRepository
+    private readonly loadCustomerByPhoneRepository: LoadCustomerByPhoneRepository,
+    private readonly updateCustomerRepository: UpdateCustomerRepository
   ) {}
 
   async change (data: ChangeCustomer.Params): Promise<ChangeCustomer.Result> {
@@ -18,6 +19,7 @@ export class DbChangeCustomer implements ChangeCustomer {
     if (ownerPhone && ownerPhone.id !== id) {
       return ActionResult.ERROR_PHONE_IN_USE
     }
+    await this.updateCustomerRepository.update(data)
     return null
   }
 }
