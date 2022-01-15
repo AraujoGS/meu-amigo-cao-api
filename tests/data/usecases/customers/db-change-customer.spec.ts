@@ -37,7 +37,7 @@ describe('DbChangeCustomer Usecase', () => {
   it('should DbChangeCustomer return ERROR_EMAIL_IN_USE(2) if LoadCustomerByEmailRepository return account with different id', async () => {
     const { sut, loadCustomerByEmailRepositorySpy } = makeSut()
     loadCustomerByEmailRepositorySpy.result = {
-      id: faker.internet.email()
+      id: faker.datatype.uuid()
     }
     const params = mockChangeCustomerParams()
     const result = await sut.change(params)
@@ -54,5 +54,14 @@ describe('DbChangeCustomer Usecase', () => {
     jest.spyOn(loadCustomerByPhoneRepositorySpy, 'load').mockImplementationOnce(throwError)
     const promise = sut.change(mockChangeCustomerParams())
     await expect(promise).rejects.toThrow()
+  })
+  it('should DbChangeCustomer return ERROR_PHONE_IN_USE(3) if LoadCustomerByPhoneRepository return account with different id', async () => {
+    const { sut, loadCustomerByPhoneRepositorySpy } = makeSut()
+    loadCustomerByPhoneRepositorySpy.result = {
+      id: faker.datatype.uuid()
+    }
+    const params = mockChangeCustomerParams()
+    const result = await sut.change(params)
+    expect(result).toBe(ActionResult.ERROR_PHONE_IN_USE)
   })
 })
