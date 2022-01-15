@@ -79,4 +79,9 @@ describe('DbChangeCustomer Usecase', () => {
     const promise = sut.change(mockChangeCustomerParams())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbChangeCustomer return SUCCESS(0) if UpdateCustomerRepository success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.change(mockChangeCustomerParams())
+    expect(result).toEqual(ActionResult.SUCCESS)
+  })
 })
