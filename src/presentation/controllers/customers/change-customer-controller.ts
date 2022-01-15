@@ -15,7 +15,8 @@ export namespace ChangeCustomerController {
 export class ChangeCustomerController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly changeCustomer: ChangeCustomer
+    private readonly changeCustomer: ChangeCustomer,
+    private readonly businessRulesValidation: Validation
   ) {}
 
   async handle (httpRequest: ChangeCustomerController.Request): Promise<HttpResponse> {
@@ -24,13 +25,14 @@ export class ChangeCustomerController implements Controller {
       return badRequest(clientError)
     }
     const { name, email, accountId, phone, birthDate } = httpRequest
-    await this.changeCustomer.change({
+    const result = await this.changeCustomer.change({
       id: accountId,
       name,
       email,
       phone,
       birthDate: new Date(`${birthDate} 00:00:00`)
     })
+    this.businessRulesValidation.validate({ resultChangeCustomer: result })
     return null
   }
 }
