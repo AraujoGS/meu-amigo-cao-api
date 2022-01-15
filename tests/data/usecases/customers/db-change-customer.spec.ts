@@ -1,6 +1,6 @@
 import { DbChangeCustomer } from '@/data/usecases'
 import { LoadCustomerByEmailRepositorySpy } from '@/tests/data/mocks'
-import { mockChangeCustomerParams } from '@/tests/domain/mocks'
+import { mockChangeCustomerParams, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbChangeCustomer
@@ -22,5 +22,11 @@ describe('DbChangeCustomer Usecase', () => {
     const params = mockChangeCustomerParams()
     await sut.change(params)
     expect(loadCustomerByEmailRepositorySpy.email).toBe(params.email)
+  })
+  it('should DbChangeCustomer throw error if LoadCustomerByEmailRepository throws', async () => {
+    const { sut, loadCustomerByEmailRepositorySpy } = makeSut()
+    jest.spyOn(loadCustomerByEmailRepositorySpy, 'load').mockImplementationOnce(throwError)
+    const promise = sut.change(mockChangeCustomerParams())
+    await expect(promise).rejects.toThrow()
   })
 })
