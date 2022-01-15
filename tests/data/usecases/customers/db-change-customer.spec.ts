@@ -1,20 +1,23 @@
 import { DbChangeCustomer } from '@/data/usecases'
 import { ActionResult } from '@/domain/models'
-import { LoadCustomerByEmailRepositorySpy } from '@/tests/data/mocks'
+import { LoadCustomerByEmailRepositorySpy, LoadCustomerByPhoneRepositorySpy } from '@/tests/data/mocks'
 import { mockChangeCustomerParams, throwError } from '@/tests/domain/mocks'
 import faker from 'faker'
 
 type SutTypes = {
   sut: DbChangeCustomer
   loadCustomerByEmailRepositorySpy: LoadCustomerByEmailRepositorySpy
+  loadCustomerByPhoneRepositorySpy: LoadCustomerByPhoneRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const loadCustomerByEmailRepositorySpy = new LoadCustomerByEmailRepositorySpy()
-  const sut = new DbChangeCustomer(loadCustomerByEmailRepositorySpy)
+  const loadCustomerByPhoneRepositorySpy = new LoadCustomerByPhoneRepositorySpy()
+  const sut = new DbChangeCustomer(loadCustomerByEmailRepositorySpy, loadCustomerByPhoneRepositorySpy)
   return {
     sut,
-    loadCustomerByEmailRepositorySpy
+    loadCustomerByEmailRepositorySpy,
+    loadCustomerByPhoneRepositorySpy
   }
 }
 
@@ -39,5 +42,11 @@ describe('DbChangeCustomer Usecase', () => {
     const params = mockChangeCustomerParams()
     const result = await sut.change(params)
     expect(result).toBe(ActionResult.ERROR_EMAIL_IN_USE)
+  })
+  it('should DbChangeCustomer call LoadCustomerByPhoneRepository with correct phone', async () => {
+    const { sut, loadCustomerByPhoneRepositorySpy } = makeSut()
+    const params = mockChangeCustomerParams()
+    await sut.change(params)
+    expect(loadCustomerByPhoneRepositorySpy.phone).toBe(params.phone)
   })
 })

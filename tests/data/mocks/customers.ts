@@ -3,7 +3,8 @@ import {
   LoadCustomerByIdRepository,
   LoadAddressByCustomerIdRepository,
   LoadPetsByCustomerIdRepository,
-  LoadCustomerByEmailRepository
+  LoadCustomerByEmailRepository,
+  LoadCustomerByPhoneRepository
 } from '@/data/interfaces/db'
 import faker from 'faker'
 faker.locale = 'pt_BR'
@@ -74,6 +75,16 @@ export class LoadCustomerByEmailRepositorySpy implements LoadCustomerByEmailRepo
 
   async load (email: LoadCustomerByEmailRepository.Params): Promise<LoadCustomerByEmailRepository.Result> {
     this.email = email
+    return this.result
+  }
+}
+
+export class LoadCustomerByPhoneRepositorySpy implements LoadCustomerByPhoneRepository {
+  phone: LoadCustomerByPhoneRepository.Params
+  result = null
+
+  async load (phone: LoadCustomerByPhoneRepository.Params): Promise<LoadCustomerByPhoneRepository.Result> {
+    this.phone = phone
     return this.result
   }
 }
