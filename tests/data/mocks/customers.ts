@@ -70,9 +70,7 @@ export class LoadPetsByCustomerIdRepositorySpy implements LoadPetsByCustomerIdRe
 
 export class LoadCustomerByEmailRepositorySpy implements LoadCustomerByEmailRepository {
   email: LoadCustomerByEmailRepository.Params
-  result = {
-    id: faker.datatype.uuid()
-  }
+  result = null
 
   async load (email: LoadCustomerByEmailRepository.Params): Promise<LoadCustomerByEmailRepository.Result> {
     this.email = email

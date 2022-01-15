@@ -1,6 +1,8 @@
 import { DbChangeCustomer } from '@/data/usecases'
+import { ActionResult } from '@/domain/models'
 import { LoadCustomerByEmailRepositorySpy } from '@/tests/data/mocks'
 import { mockChangeCustomerParams, throwError } from '@/tests/domain/mocks'
+import faker from 'faker'
 
 type SutTypes = {
   sut: DbChangeCustomer
@@ -28,5 +30,14 @@ describe('DbChangeCustomer Usecase', () => {
     jest.spyOn(loadCustomerByEmailRepositorySpy, 'load').mockImplementationOnce(throwError)
     const promise = sut.change(mockChangeCustomerParams())
     await expect(promise).rejects.toThrow()
+  })
+  it('should DbChangeCustomer return ERROR_EMAIL_IN_USE(2) if LoadCustomerByEmailRepository return account with different id', async () => {
+    const { sut, loadCustomerByEmailRepositorySpy } = makeSut()
+    loadCustomerByEmailRepositorySpy.result = {
+      id: faker.internet.email()
+    }
+    const params = mockChangeCustomerParams()
+    const result = await sut.change(params)
+    expect(result).toBe(ActionResult.ERROR_EMAIL_IN_USE)
   })
 })
