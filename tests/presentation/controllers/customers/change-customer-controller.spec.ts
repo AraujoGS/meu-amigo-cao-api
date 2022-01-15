@@ -1,4 +1,6 @@
 import { ChangeCustomerController } from '@/presentation/controllers'
+import { MissingParamError } from '@/presentation/errors'
+import { badRequest } from '@/presentation/helpers'
 import { mockChangeCustomerParams } from '@/tests/domain/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 
@@ -29,5 +31,11 @@ describe('ChangeCustomer Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(validationSpy.input).toEqual(request)
+  })
+  it('should ChangeCustomerController return 400 if Validation return error', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.result = new MissingParamError('name')
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(badRequest(new MissingParamError('name')))
   })
 })
