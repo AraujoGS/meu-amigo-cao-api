@@ -1,5 +1,5 @@
 import { ChangeCustomer } from '@/domain/usecases'
-import { badRequest } from '@/presentation/helpers'
+import { badRequest, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace ChangeCustomerController {
@@ -32,7 +32,10 @@ export class ChangeCustomerController implements Controller {
       phone,
       birthDate: new Date(`${birthDate} 00:00:00`)
     })
-    this.businessRulesValidation.validate({ resultChangeCustomer: result })
+    const conditionFailed = this.businessRulesValidation.validate({ resultChangeCustomer: result })
+    if (conditionFailed) {
+      return preconditionFailed(conditionFailed)
+    }
     return null
   }
 }
