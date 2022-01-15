@@ -49,4 +49,10 @@ describe('DbChangeCustomer Usecase', () => {
     await sut.change(params)
     expect(loadCustomerByPhoneRepositorySpy.phone).toBe(params.phone)
   })
+  it('should DbChangeCustomer throw error if LoadCustomerByPhoneRepository throws', async () => {
+    const { sut, loadCustomerByPhoneRepositorySpy } = makeSut()
+    jest.spyOn(loadCustomerByPhoneRepositorySpy, 'load').mockImplementationOnce(throwError)
+    const promise = sut.change(mockChangeCustomerParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
