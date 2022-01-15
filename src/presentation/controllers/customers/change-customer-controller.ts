@@ -1,4 +1,4 @@
-import { ChangeCustomer } from '@/domain/usecases'
+import { ChangeCustomer, LoadCustomerById } from '@/domain/usecases'
 import { badRequest, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
@@ -16,7 +16,8 @@ export class ChangeCustomerController implements Controller {
   constructor (
     private readonly validation: Validation,
     private readonly changeCustomer: ChangeCustomer,
-    private readonly businessRulesValidation: Validation
+    private readonly businessRulesValidation: Validation,
+    private readonly loadCustomerById: LoadCustomerById
   ) {}
 
   async handle (httpRequest: ChangeCustomerController.Request): Promise<HttpResponse> {
@@ -36,6 +37,7 @@ export class ChangeCustomerController implements Controller {
     if (conditionFailed) {
       return preconditionFailed(conditionFailed)
     }
+    await this.loadCustomerById.load(accountId)
     return null
   }
 }
