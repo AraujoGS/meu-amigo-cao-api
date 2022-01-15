@@ -1,4 +1,5 @@
-import { AddAddress, LoadCustomerById } from '@/domain/usecases'
+import { ActionResult } from '@/domain/models'
+import { AddAddress, LoadCustomerById, ChangeCustomer } from '@/domain/usecases'
 import faker from 'faker'
 
 export class AddAddressSpy implements AddAddress {
@@ -39,6 +40,15 @@ export class LoadCustomerByIdSpy implements LoadCustomerById {
 
   async load (id: LoadCustomerById.Params): Promise<LoadCustomerById.Result> {
     this.id = id
+    return this.result
+  }
+}
+
+export class ChangeCustomerSpy implements ChangeCustomer {
+  data: ChangeCustomer.Params
+  result = ActionResult.SUCCESS
+  async change (data: ChangeCustomer.Params): Promise<ChangeCustomer.Result> {
+    this.data = data
     return this.result
   }
 }
