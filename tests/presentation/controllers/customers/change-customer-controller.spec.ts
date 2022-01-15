@@ -9,16 +9,19 @@ type SutTypes = {
   sut: ChangeCustomerController
   validationSpy: ValidationSpy
   changeCustomerSpy: ChangeCustomerSpy
+  businessRulesValidationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
   const changeCustomerSpy = new ChangeCustomerSpy()
-  const sut = new ChangeCustomerController(validationSpy, changeCustomerSpy)
+  const businessRulesValidationSpy = new ValidationSpy()
+  const sut = new ChangeCustomerController(validationSpy, changeCustomerSpy, businessRulesValidationSpy)
   return {
     sut,
     validationSpy,
-    changeCustomerSpy
+    changeCustomerSpy,
+    businessRulesValidationSpy
   }
 }
 const mockRequest = (): ChangeCustomerController.Request => ({
@@ -53,5 +56,11 @@ describe('ChangeCustomer Controller', () => {
       phone: request.phone,
       birthDate: new Date(`${request.birthDate} 00:00:00`)
     })
+  })
+  it('should ChangeCustomerController call BusinessRulesValidation with correct values', async () => {
+    const { sut, businessRulesValidationSpy, changeCustomerSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(businessRulesValidationSpy.input).toEqual({ resultChangeCustomer: changeCustomerSpy.result })
   })
 })
