@@ -20,6 +20,6 @@ export class DbChangeCustomer implements ChangeCustomer {
       return ActionResult.ERROR_PHONE_IN_USE
     }
     await this.updateCustomerRepository.update(data)
-    return null
+    return ActionResult.SUCCESS
   }
 }
