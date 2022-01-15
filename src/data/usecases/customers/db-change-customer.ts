@@ -14,7 +14,10 @@ export class DbChangeCustomer implements ChangeCustomer {
     if (ownerEmail && ownerEmail.id !== id) {
       return ActionResult.ERROR_EMAIL_IN_USE
     }
-    await this.loadCustomerByPhoneRepository.load(phone)
+    const ownerPhone = await this.loadCustomerByPhoneRepository.load(phone)
+    if (ownerPhone && ownerPhone.id !== id) {
+      return ActionResult.ERROR_PHONE_IN_USE
+    }
     return null
   }
 }
