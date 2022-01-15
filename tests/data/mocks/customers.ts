@@ -1,4 +1,10 @@
-import { AddAddressRepository, LoadCustomerByIdRepository, LoadAddressByCustomerIdRepository, LoadPetsByCustomerIdRepository } from '@/data/interfaces/db'
+import {
+  AddAddressRepository,
+  LoadCustomerByIdRepository,
+  LoadAddressByCustomerIdRepository,
+  LoadPetsByCustomerIdRepository,
+  LoadCustomerByEmailRepository
+} from '@/data/interfaces/db'
 import faker from 'faker'
 faker.locale = 'pt_BR'
 
@@ -58,6 +64,18 @@ export class LoadPetsByCustomerIdRepositorySpy implements LoadPetsByCustomerIdRe
 
   async load (id: LoadPetsByCustomerIdRepository.Params): Promise<LoadPetsByCustomerIdRepository.Result> {
     this.id = id
+    return this.result
+  }
+}
+
+export class LoadCustomerByEmailRepositorySpy implements LoadCustomerByEmailRepository {
+  email: LoadCustomerByEmailRepository.Params
+  result = {
+    id: faker.datatype.uuid()
+  }
+
+  async load (email: LoadCustomerByEmailRepository.Params): Promise<LoadCustomerByEmailRepository.Result> {
+    this.email = email
     return this.result
   }
 }
