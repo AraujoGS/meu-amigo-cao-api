@@ -1,6 +1,7 @@
+import { ActionResult } from '@/domain/models'
 import { ChangeCustomerController } from '@/presentation/controllers'
-import { MissingParamError } from '@/presentation/errors'
-import { badRequest } from '@/presentation/helpers'
+import { EmailInUseError, MissingParamError } from '@/presentation/errors'
+import { badRequest, preconditionFailed } from '@/presentation/helpers'
 import { ChangeCustomerSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
@@ -62,5 +63,12 @@ describe('ChangeCustomer Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(businessRulesValidationSpy.input).toEqual({ resultChangeCustomer: changeCustomerSpy.result })
+  })
+  it('should ChangeCustomerController return 412 if ChangeCustomer not success', async () => {
+    const { sut, changeCustomerSpy, businessRulesValidationSpy } = makeSut()
+    changeCustomerSpy.result = ActionResult.ERROR_EMAIL_IN_USE
+    businessRulesValidationSpy.result = new EmailInUseError()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(preconditionFailed(new EmailInUseError()))
   })
 })
