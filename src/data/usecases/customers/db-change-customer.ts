@@ -1,4 +1,5 @@
 import { LoadCustomerByEmailRepository } from '@/data/interfaces/db'
+import { ActionResult } from '@/domain/models'
 import { ChangeCustomer } from '@/domain/usecases'
 
 export class DbChangeCustomer implements ChangeCustomer {
@@ -7,7 +8,11 @@ export class DbChangeCustomer implements ChangeCustomer {
   ) {}
 
   async change (data: ChangeCustomer.Params): Promise<ChangeCustomer.Result> {
-    await this.loadCustomerByEmailRepository.load(data.email)
+    const { id, email } = data
+    const ownerEmail = await this.loadCustomerByEmailRepository.load(email)
+    if (ownerEmail && ownerEmail.id !== id) {
+      return ActionResult.ERROR_EMAIL_IN_USE
+    }
     return null
   }
 }
