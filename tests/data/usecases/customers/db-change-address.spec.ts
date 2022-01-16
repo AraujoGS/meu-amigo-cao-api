@@ -47,4 +47,10 @@ describe('DbChangeAddress Usecase', () => {
     await sut.change(params)
     expect(updateAddressRepositorySpy.data).toEqual(params)
   })
+  it('should DbChangeAddress throw error if UpdateAddressrepository throws', async () => {
+    const { sut, updateAddressRepositorySpy } = makeSut()
+    jest.spyOn(updateAddressRepositorySpy, 'update').mockImplementationOnce(throwError)
+    const promise = sut.change(mockChangeAddressParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
