@@ -1,3 +1,4 @@
+import { ChangeAddress } from '@/domain/usecases'
 import { badRequest } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
@@ -17,11 +18,16 @@ export namespace ChangeAddressController {
 
 export class ChangeAddressController implements Controller {
   constructor (
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly changeAddress: ChangeAddress
   ) {}
 
   async handle (httpRequest: ChangeAddressController.Request): Promise<HttpResponse> {
     const clientError = this.validation.validate(httpRequest)
-    return badRequest(clientError)
+    if (clientError) {
+      return badRequest(clientError)
+    }
+    await this.changeAddress.change(httpRequest)
+    return null
   }
 }
