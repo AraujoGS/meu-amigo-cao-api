@@ -69,8 +69,8 @@
 
 -Alterar cliente (logado)
 - [X] inputs: uuid do cliente, nome, email, telefone, data de nascimento
-- [ ] validar se token de acesso válido, caso não retornar 401
-- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
+- [X] validar se token de acesso válido, caso não retornar 401
+- [X] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [X] validar inputs e retornar 400 caso algum campo esteja faltando
 - [X] validar se é um telefone válido, se não retornar 400
 - [X] validar se é um email válido, se não retornar 400
