@@ -3,15 +3,14 @@ import { hash } from 'bcrypt'
 import { v4 as uuid } from 'uuid'
 import { sign } from 'jsonwebtoken'
 
-export const mockAddAccount = async (): Promise<void> => {
+export const mockAddAccount = async (email?: string, phone?: string): Promise<void> => {
   const password = await hash('123', 12)
-  const phone = '11954976863'
   const id = uuid()
   const query = `
   INSERT INTO CLIENTES(id_cliente, nome_cliente, senha_cliente, email_cliente, telefone_cliente, data_nascimento_cliente)
   VALUES ($1,$2,$3,$4,$5,$6)
   `
-  const params = [id, 'Guilherme de Araujo', password, 'guilhermearaujo421@gmail.com', phone, '1997-05-30']
+  const params = [id, 'Guilherme de Araujo', password, (email || 'guilhermearaujo421@gmail.com'), (phone || '11954976863'), '1997-05-30']
   await PostgresHelper.execute(query, params)
 }
 
@@ -20,10 +19,10 @@ type Account = {
   accessToken: string
 }
 
-export const mockGetAccountData = async (): Promise<Account> => {
-  await mockAddAccount()
+export const mockGetAccountData = async (email?: string, phone?: string): Promise<Account> => {
+  await mockAddAccount(email, phone)
   let query = 'SELECT id_cliente as id FROM CLIENTES WHERE email_cliente = $1'
-  let params = ['guilhermearaujo421@gmail.com']
+  let params = [email || 'guilhermearaujo421@gmail.com']
   const result = await PostgresHelper.execute(query, params)
   const account = PostgresHelper.mapperOneResult(result)
   const accessToken = sign({ id: account.id }, process.env.JWT_SECRET)
