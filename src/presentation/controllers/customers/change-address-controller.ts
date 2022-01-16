@@ -1,3 +1,4 @@
+import { badRequest } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace ChangeAddressController {
@@ -20,7 +21,7 @@ export class ChangeAddressController implements Controller {
   ) {}
 
   async handle (httpRequest: ChangeAddressController.Request): Promise<HttpResponse> {
-    this.validation.validate(httpRequest)
-    return null
+    const clientError = this.validation.validate(httpRequest)
+    return badRequest(clientError)
   }
 }
