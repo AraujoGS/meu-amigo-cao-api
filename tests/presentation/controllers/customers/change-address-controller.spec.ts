@@ -1,6 +1,6 @@
 import { ChangeAddressController } from '@/presentation/controllers'
 import { InvalidAddressError, MissingParamError } from '@/presentation/errors'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, ok, preconditionFailed } from '@/presentation/helpers'
 import { ChangeAddressSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
@@ -57,5 +57,10 @@ describe('ChangeAddress Controller', () => {
     changeAddressSpy.result = false
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new InvalidAddressError()))
+  })
+  it('should ChangeAddressController return 200 if ChangeAddress success', async () => {
+    const { sut } = makeSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(ok())
   })
 })
