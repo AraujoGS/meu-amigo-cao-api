@@ -12,6 +12,7 @@ export class DbChangeAddress implements ChangeAddress {
     const isValid = await this.checkAddressByIdAndCustomerIdRepository.check({ id, accountId })
     if (isValid) {
       await this.updateAddressRepository.update(data)
+      return true
     }
     return false
   }
