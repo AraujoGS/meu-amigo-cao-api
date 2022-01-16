@@ -287,5 +287,18 @@ describe('Customers Routes', () => {
         .set('x-access-token', account.accessToken)
         .expect(412)
     })
+    it('should change address route return 401 if missing token', async () => {
+      await request(app)
+        .put('/api/customers/address')
+        .send({})
+        .expect(401)
+    })
+    it('should change address route return 403 if invalid token', async () => {
+      await request(app)
+        .put('/api/customers/address')
+        .send({})
+        .set('x-access-token', 'any-token')
+        .expect(403)
+    })
   })
 })
