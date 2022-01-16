@@ -85,7 +85,7 @@
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: complemento é opcional
 - [ ] validar se é um cep válido e retornar 400 caso não seja
-- [ ] validar se o usuário tem endereço cadastrado e retornar 412 caso não
+- [ ] validar se o endereço existe e é desse usuário, retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
 - [ ] alterar os dados, retornar 200
 
