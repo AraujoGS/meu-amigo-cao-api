@@ -1,7 +1,7 @@
 import { ActionResult } from '@/domain/models'
 import { ChangeCustomerController } from '@/presentation/controllers'
 import { EmailInUseError, MissingParamError } from '@/presentation/errors'
-import { badRequest, internalServerError, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, internalServerError, ok, preconditionFailed } from '@/presentation/helpers'
 import { throwError } from '@/tests/domain/mocks'
 import { ChangeCustomerSpy, LoadCustomerByIdSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
@@ -92,5 +92,10 @@ describe('ChangeCustomer Controller', () => {
     jest.spyOn(loadCustomerByIdSpy, 'load').mockImplementationOnce(throwError)
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(internalServerError(new Error()))
+  })
+  it('should ChangeCustomerController return 200 if success', async () => {
+    const { sut, loadCustomerByIdSpy } = makeSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(ok(loadCustomerByIdSpy.result))
   })
 })
