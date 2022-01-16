@@ -250,5 +250,23 @@ describe('Customers Routes', () => {
         .set('x-access-token', account.accessToken)
         .expect(200)
     })
+    it('should change address route 400 if fail', async () => {
+      const account = await mockGetAccountData()
+      const addressId = await mockAddAddress(account.id)
+      const payload = {
+        id: addressId,
+        zipcode: '03086090',
+        address: 'Rua Leonardo da Silva e Santos',
+        city: 'São Paulo',
+        number: 100,
+        district: 'Parque São Jorge',
+        complement: 'casa'
+      }
+      await request(app)
+        .put('/api/customers/address')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(400)
+    })
   })
 })
