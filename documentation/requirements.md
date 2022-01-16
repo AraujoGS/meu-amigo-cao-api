@@ -76,7 +76,7 @@
 - [X] validar se é um email válido, se não retornar 400
 - [X] validar se o email está em uso, caso esteja retornar 412 
 - [X] validar se o telefone está em uso, caso esteja retornar 412 
-- [ ] em caso de erro inesperado retornar 500
+- [X] em caso de erro inesperado retornar 500
 - [ ] alterar os dados, retornar 200 e os dados
 
 -Alterar endereço (logado)
