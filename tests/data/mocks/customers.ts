@@ -5,7 +5,8 @@ import {
   LoadPetsByCustomerIdRepository,
   LoadCustomerByEmailRepository,
   LoadCustomerByPhoneRepository,
-  UpdateCustomerRepository
+  UpdateCustomerRepository,
+  CheckAddressByIdAndCustomerIdRepository
 } from '@/data/interfaces/db'
 import faker from 'faker'
 faker.locale = 'pt_BR'
@@ -95,5 +96,14 @@ export class UpdateCustomerRepositorySpy implements UpdateCustomerRepository {
   async update (data: UpdateCustomerRepository.Params): Promise<void> {
     this.data = data
     return await Promise.resolve()
+  }
+}
+
+export class CheckAddressByIdAndCustomerIdRepositorySpy implements CheckAddressByIdAndCustomerIdRepository {
+  data: CheckAddressByIdAndCustomerIdRepository.Params
+  result = true
+  async check (data: CheckAddressByIdAndCustomerIdRepository.Params): Promise<CheckAddressByIdAndCustomerIdRepository.Result> {
+    this.data = data
+    return this.result
   }
 }
