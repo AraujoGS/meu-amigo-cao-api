@@ -32,4 +32,10 @@ describe('DbChangeAddress Usecase', () => {
     const promise = sut.change(mockChangeAddressParams())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbChangeAddress return false if LoadAddressByIdAndCustomerIdRepository return false', async () => {
+    const { sut, checkAddressByIdAndCustomerIdRepositorySpy } = makeSut()
+    checkAddressByIdAndCustomerIdRepositorySpy.result = false
+    const result = await sut.change(mockChangeAddressParams())
+    expect(result).toBe(false)
+  })
 })
