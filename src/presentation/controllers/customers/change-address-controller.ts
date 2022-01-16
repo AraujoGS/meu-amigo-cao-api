@@ -25,7 +25,8 @@ export class ChangeAddressController implements Controller {
 
   async handle (httpRequest: ChangeAddressController.Request): Promise<HttpResponse> {
     try {
-      const clientError = this.validation.validate(httpRequest)
+      const { complement, ...data } = httpRequest
+      const clientError = this.validation.validate(data)
       if (clientError) {
         return badRequest(clientError)
       }
