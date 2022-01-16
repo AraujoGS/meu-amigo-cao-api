@@ -6,7 +6,8 @@ import {
   addAddressPath,
   addPetPath,
   loadCustomerByIdPath,
-  changeCustomerPath
+  changeCustomerPath,
+  changeAddressPath
 } from './paths/'
 
 export default {
@@ -14,7 +15,7 @@ export default {
   '/login': loginPath,
   '/forgot-password': forgotPasswordPath,
   '/change-password': changePasswordPath,
-  '/customers/address': addAddressPath,
+  '/customers/address': { ...addAddressPath, ...changeAddressPath },
   '/customers/pets': addPetPath,
   '/customers': { ...loadCustomerByIdPath, ...changeCustomerPath }
 }
