@@ -53,4 +53,9 @@ describe('DbChangeAddress Usecase', () => {
     const promise = sut.change(mockChangeAddressParams())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbChangeAddress return true if UpdateAddress success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.change(mockChangeAddressParams())
+    expect(result).toBe(true)
+  })
 })
