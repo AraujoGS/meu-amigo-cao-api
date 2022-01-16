@@ -1,7 +1,8 @@
 import { ActionResult } from '@/domain/models'
 import { ChangeCustomerController } from '@/presentation/controllers'
 import { EmailInUseError, MissingParamError } from '@/presentation/errors'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, internalServerError, preconditionFailed } from '@/presentation/helpers'
+import { throwError } from '@/tests/domain/mocks'
 import { ChangeCustomerSpy, LoadCustomerByIdSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
@@ -80,10 +81,16 @@ describe('ChangeCustomer Controller', () => {
     await sut.handle(request)
     expect(businessRulesValidationSpy.input).toEqual({ resultChangeCustomer: changeCustomerSpy.result })
   })
-  it('should LoadCustomerByIdController call LoadCustomerById with correct value', async () => {
+  it('should ChangeCustomerController call LoadCustomerById with correct value', async () => {
     const { sut, loadCustomerByIdSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
     expect(loadCustomerByIdSpy.id).toBe(request.accountId)
+  })
+  it('should ChangeCustomerController return 500 if any usecase throws', async () => {
+    const { sut, loadCustomerByIdSpy } = makeSut()
+    jest.spyOn(loadCustomerByIdSpy, 'load').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new Error()))
   })
 })
