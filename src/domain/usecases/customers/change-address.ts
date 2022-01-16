@@ -1,5 +1,3 @@
-import { ActionResult } from '@/domain/models'
-
 export namespace ChangeAddress {
   export type Params = {
     id: string
@@ -12,7 +10,7 @@ export namespace ChangeAddress {
     state: string
     complement?: string
   }
-  export type Result = ActionResult
+  export type Result = boolean
 }
 
 export interface ChangeAddress {
