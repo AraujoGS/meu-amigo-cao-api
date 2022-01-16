@@ -1,6 +1,6 @@
 import { ChangeAddress } from '@/domain/usecases'
 import { InvalidAddressError } from '@/presentation/errors'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, ok, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace ChangeAddressController {
@@ -32,6 +32,6 @@ export class ChangeAddressController implements Controller {
     if (!result) {
       return preconditionFailed(new InvalidAddressError())
     }
-    return null
+    return ok()
   }
 }
