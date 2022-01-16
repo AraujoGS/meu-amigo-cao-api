@@ -80,14 +80,14 @@
 - [X] alterar os dados, retornar 200 e os dados
 
 -Alterar endereço (logado)
-- [ ] inputs: uuid do usuário, uuid do endereço, cep, logradouro, numero, bairro, cidade, uf e complemento
+- [X] inputs: uuid do usuário, uuid do endereço, cep, logradouro, numero, bairro, cidade, uf e complemento
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: complemento é opcional
-- [ ] validar se é um cep válido e retornar 400 caso não seja
-- [ ] validar se o endereço existe e é desse usuário, retornar 412 caso não
+- [X] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: complemento é opcional
+- [X] validar se é um cep válido e retornar 400 caso não seja
+- [X] validar se o endereço existe e é desse usuário, retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
-- [ ] alterar os dados, retornar 200
+- [X] alterar os dados, retornar 200
 
 -alterar pet (logado)
 - [ ] inputs: uuid do cliente, uuid do pet, nome, raça, cor, porte e considerações
