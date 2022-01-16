@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { PostgresHelper } from '@/infra/db'
 import { setupApp } from '@/main/config/app'
 import { createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
-import { mockGetAccountData } from '@/tests/main/mocks'
+import { mockGetAccountData, mockAddAddress } from '@/tests/main/mocks'
 import { Express } from 'express'
 import request from 'supertest'
 let app: Express = null
@@ -218,16 +218,37 @@ describe('Customers Routes', () => {
         })
         .expect(412)
     })
+    it('should update customer return 401 if missing token', async () => {
+      await request(app)
+        .put('/api/customers')
+        .expect(401)
+    })
+    it('should update customer return 403 if invalid token', async () => {
+      await request(app)
+        .get('/api/customers')
+        .set('x-access-token', 'any_token')
+        .expect(403)
+    })
   })
-  it('should update customer return 401 if missing token', async () => {
-    await request(app)
-      .put('/api/customers')
-      .expect(401)
-  })
-  it('should update customer return 403 if invalid token', async () => {
-    await request(app)
-      .get('/api/customers')
-      .set('x-access-token', 'any_token')
-      .expect(403)
+  describe('PUT /customers/address', () => {
+    it('should change address route 200 if success', async () => {
+      const account = await mockGetAccountData()
+      const addressId = await mockAddAddress(account.id)
+      const payload = {
+        id: addressId,
+        zipcode: '03086090',
+        address: 'Rua Leonardo da Silva e Santos',
+        city: 'São Paulo',
+        number: 100,
+        district: 'Parque São Jorge',
+        state: 'SP',
+        complement: 'casa'
+      }
+      await request(app)
+        .put('/api/customers/address')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(200)
+    })
   })
 })
