@@ -178,4 +178,19 @@ describe('Customers Routes', () => {
         .expect(403)
     })
   })
+  describe('PUT /customers', () => {
+    it('should update customer route return 200 if success', async () => {
+      const account = await mockGetAccountData()
+      await request(app)
+        .put('/api/customers')
+        .set('x-access-token', account.accessToken)
+        .send({
+          name: 'Guilherme de Araujo Silva',
+          email: 'guilhermearaujo421Alterado@gmail.com',
+          phone: '11954976863',
+          birthDate: '1997-05-30'
+        })
+        .expect(200)
+    })
+  })
 })
