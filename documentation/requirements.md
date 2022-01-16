@@ -77,7 +77,7 @@
 - [X] validar se o email está em uso, caso esteja retornar 412 
 - [X] validar se o telefone está em uso, caso esteja retornar 412 
 - [X] em caso de erro inesperado retornar 500
-- [ ] alterar os dados, retornar 200 e os dados
+- [X] alterar os dados, retornar 200 e os dados
 
 -Alterar endereço (logado)
 - [ ] inputs: uuid do usuário, uuid do endereço, cep, logradouro, numero, bairro, cidade, uf e complemento
