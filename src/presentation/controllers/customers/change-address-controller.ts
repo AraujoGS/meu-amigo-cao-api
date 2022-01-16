@@ -1,6 +1,6 @@
 import { ChangeAddress } from '@/domain/usecases'
 import { InvalidAddressError } from '@/presentation/errors'
-import { badRequest, ok, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, internalServerError, ok, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace ChangeAddressController {
@@ -24,14 +24,18 @@ export class ChangeAddressController implements Controller {
   ) {}
 
   async handle (httpRequest: ChangeAddressController.Request): Promise<HttpResponse> {
-    const clientError = this.validation.validate(httpRequest)
-    if (clientError) {
-      return badRequest(clientError)
+    try {
+      const clientError = this.validation.validate(httpRequest)
+      if (clientError) {
+        return badRequest(clientError)
+      }
+      const result = await this.changeAddress.change(httpRequest)
+      if (!result) {
+        return preconditionFailed(new InvalidAddressError())
+      }
+      return ok()
+    } catch (error) {
+      return internalServerError(error)
     }
-    const result = await this.changeAddress.change(httpRequest)
-    if (!result) {
-      return preconditionFailed(new InvalidAddressError())
-    }
-    return ok()
   }
 }
