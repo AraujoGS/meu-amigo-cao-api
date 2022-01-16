@@ -224,4 +224,10 @@ describe('Customers Routes', () => {
       .put('/api/customers')
       .expect(401)
   })
+  it('should update customer return 403 if invalid token', async () => {
+    await request(app)
+      .get('/api/customers')
+      .set('x-access-token', 'any_token')
+      .expect(403)
+  })
 })
