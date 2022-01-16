@@ -1,4 +1,6 @@
 import { ChangeAddressController } from '@/presentation/controllers'
+import { MissingParamError } from '@/presentation/errors'
+import { badRequest } from '@/presentation/helpers'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
 
@@ -28,10 +30,16 @@ const mockRequest = (): ChangeAddressController.Request => ({
 })
 
 describe('ChangeAddress Controller', () => {
-  it('should ChangeCustomerController call Validation with correct values', async () => {
+  it('should ChangeAddressController call Validation with correct values', async () => {
     const { sut, validationSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
     expect(validationSpy.input).toEqual(request)
+  })
+  it('should ChangeAddressController return 400 if Validation return error', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.result = new MissingParamError('address')
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(badRequest(new MissingParamError('address')))
   })
 })
