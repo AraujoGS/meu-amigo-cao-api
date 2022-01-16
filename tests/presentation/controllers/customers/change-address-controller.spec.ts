@@ -1,6 +1,7 @@
 import { ChangeAddressController } from '@/presentation/controllers'
 import { InvalidAddressError, MissingParamError } from '@/presentation/errors'
-import { badRequest, ok, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, internalServerError, ok, preconditionFailed } from '@/presentation/helpers'
+import { throwError } from '@/tests/domain/mocks'
 import { ChangeAddressSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 import faker from 'faker'
@@ -62,5 +63,11 @@ describe('ChangeAddress Controller', () => {
     const { sut } = makeSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(ok())
+  })
+  it('should ChangeAddressController return 500 if ChangeAddress throws', async () => {
+    const { sut, changeAddressSpy } = makeSut()
+    jest.spyOn(changeAddressSpy, 'change').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new Error()))
   })
 })
