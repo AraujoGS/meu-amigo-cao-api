@@ -6,7 +6,8 @@ import {
   LoadCustomerByEmailRepository,
   LoadCustomerByPhoneRepository,
   UpdateCustomerRepository,
-  CheckAddressByIdAndCustomerIdRepository
+  CheckAddressByIdAndCustomerIdRepository,
+  UpdateAddressRepository
 } from '@/data/interfaces/db'
 import faker from 'faker'
 faker.locale = 'pt_BR'
@@ -105,5 +106,13 @@ export class CheckAddressByIdAndCustomerIdRepositorySpy implements CheckAddressB
   async check (data: CheckAddressByIdAndCustomerIdRepository.Params): Promise<CheckAddressByIdAndCustomerIdRepository.Result> {
     this.data = data
     return this.result
+  }
+}
+
+export class UpdateAddressRepositorySpy implements UpdateAddressRepository {
+  data: UpdateAddressRepository.Params
+  async update (data: UpdateAddressRepository.Params): Promise<void> {
+    this.data = data
+    return await Promise.resolve()
   }
 }
