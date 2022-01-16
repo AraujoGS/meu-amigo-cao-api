@@ -9,7 +9,8 @@ import {
   addPetParamsSchema,
   addressSchema,
   customerSchema,
-  petsSchema
+  petsSchema,
+  changeCustomerParamsSchema
 } from './schemas/'
 
 export default {
@@ -23,5 +24,6 @@ export default {
   customer: customerSchema,
   address: addressSchema,
   pets: petsSchema,
+  changeCustomerParams: changeCustomerParamsSchema,
   error: errorSchema
 }
