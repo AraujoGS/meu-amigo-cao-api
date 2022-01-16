@@ -1,5 +1,5 @@
 import { ChangeCustomer, LoadCustomerById } from '@/domain/usecases'
-import { badRequest, internalServerError, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, internalServerError, ok, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace ChangeCustomerController {
@@ -38,8 +38,8 @@ export class ChangeCustomerController implements Controller {
       if (conditionFailed) {
         return preconditionFailed(conditionFailed)
       }
-      await this.loadCustomerById.load(accountId)
-      return null
+      const customer = await this.loadCustomerById.load(accountId)
+      return ok(customer)
     } catch (error) {
       return internalServerError(error)
     }
