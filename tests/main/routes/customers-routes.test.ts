@@ -5,6 +5,7 @@ import { createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
 import { mockGetAccountData, mockAddAddress } from '@/tests/main/mocks'
 import { Express } from 'express'
 import request from 'supertest'
+import faker from 'faker'
 let app: Express = null
 
 describe('Customers Routes', () => {
@@ -267,6 +268,24 @@ describe('Customers Routes', () => {
         .send(payload)
         .set('x-access-token', account.accessToken)
         .expect(400)
+    })
+    it('should change address route 412 if fail', async () => {
+      const account = await mockGetAccountData()
+      const payload = {
+        id: faker.datatype.uuid(),
+        zipcode: '03086090',
+        address: 'Rua Leonardo da Silva e Santos',
+        city: 'São Paulo',
+        number: 100,
+        district: 'Parque São Jorge',
+        state: 'SP',
+        complement: 'casa'
+      }
+      await request(app)
+        .put('/api/customers/address')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(412)
     })
   })
 })
