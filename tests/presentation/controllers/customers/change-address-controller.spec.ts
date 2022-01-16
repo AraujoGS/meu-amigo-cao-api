@@ -39,7 +39,8 @@ describe('ChangeAddress Controller', () => {
     const { sut, validationSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
-    expect(validationSpy.input).toEqual(request)
+    const { complement, ...data } = request
+    expect(validationSpy.input).toEqual(data)
   })
   it('should ChangeAddressController return 400 if Validation return error', async () => {
     const { sut, validationSpy } = makeSut()
