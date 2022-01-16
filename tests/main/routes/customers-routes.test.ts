@@ -219,4 +219,9 @@ describe('Customers Routes', () => {
         .expect(412)
     })
   })
+  it('should update customer return 401 if missing token', async () => {
+    await request(app)
+      .put('/api/customers')
+      .expect(401)
+  })
 })
