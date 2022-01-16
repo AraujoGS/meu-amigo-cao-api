@@ -1,5 +1,5 @@
 import { ChangeCustomer, LoadCustomerById } from '@/domain/usecases'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, internalServerError, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace ChangeCustomerController {
@@ -21,23 +21,27 @@ export class ChangeCustomerController implements Controller {
   ) {}
 
   async handle (httpRequest: ChangeCustomerController.Request): Promise<HttpResponse> {
-    const clientError = this.validation.validate(httpRequest)
-    if (clientError) {
-      return badRequest(clientError)
+    try {
+      const clientError = this.validation.validate(httpRequest)
+      if (clientError) {
+        return badRequest(clientError)
+      }
+      const { name, email, accountId, phone, birthDate } = httpRequest
+      const result = await this.changeCustomer.change({
+        id: accountId,
+        name,
+        email,
+        phone,
+        birthDate: new Date(`${birthDate} 00:00:00`)
+      })
+      const conditionFailed = this.businessRulesValidation.validate({ resultChangeCustomer: result })
+      if (conditionFailed) {
+        return preconditionFailed(conditionFailed)
+      }
+      await this.loadCustomerById.load(accountId)
+      return null
+    } catch (error) {
+      return internalServerError(error)
     }
-    const { name, email, accountId, phone, birthDate } = httpRequest
-    const result = await this.changeCustomer.change({
-      id: accountId,
-      name,
-      email,
-      phone,
-      birthDate: new Date(`${birthDate} 00:00:00`)
-    })
-    const conditionFailed = this.businessRulesValidation.validate({ resultChangeCustomer: result })
-    if (conditionFailed) {
-      return preconditionFailed(conditionFailed)
-    }
-    await this.loadCustomerById.load(accountId)
-    return null
   }
 }
