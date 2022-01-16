@@ -1,5 +1,6 @@
 import { ChangeAddress } from '@/domain/usecases'
-import { badRequest } from '@/presentation/helpers'
+import { InvalidAddressError } from '@/presentation/errors'
+import { badRequest, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace ChangeAddressController {
@@ -27,7 +28,10 @@ export class ChangeAddressController implements Controller {
     if (clientError) {
       return badRequest(clientError)
     }
-    await this.changeAddress.change(httpRequest)
+    const result = await this.changeAddress.change(httpRequest)
+    if (!result) {
+      return preconditionFailed(new InvalidAddressError())
+    }
     return null
   }
 }
