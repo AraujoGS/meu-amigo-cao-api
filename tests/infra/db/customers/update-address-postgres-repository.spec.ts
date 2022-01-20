@@ -60,7 +60,7 @@ describe('UpdateAddressPostgres Repository', () => {
     expect(addressAfterUpdate.number).not.toBe(addressCustomer.number)
     expect(addressAfterUpdate.number).toBe(-1)
   })
-  it('should AddAddressPostgresRepository throw error if Postgres throws', async () => {
+  it('should UpdateAddressPostgresRepository throw error if Postgres throws', async () => {
     const sut = makeSut()
     jest.spyOn(PostgresHelper, 'execute').mockImplementationOnce(throwError)
     const promise = sut.update({

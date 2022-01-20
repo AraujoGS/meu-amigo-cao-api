@@ -6,7 +6,7 @@ const makeSut = (): CheckPetByIdAndCustomerIdPostgresRepository => {
   return new CheckPetByIdAndCustomerIdPostgresRepository()
 }
 
-describe('CheckAddressByIdAndCustomerIdPostgres Repository', () => {
+describe('CheckPetByIdAndCustomerIdPostgres Repository', () => {
   beforeAll(async () => {
     await PostgresHelper.connect(createDbTest())
     await PostgresHelper.execute(sqlCreateDb)
