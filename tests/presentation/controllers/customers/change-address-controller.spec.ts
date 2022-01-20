@@ -1,10 +1,9 @@
 import { ChangeAddressController } from '@/presentation/controllers'
 import { InvalidAddressError, MissingParamError } from '@/presentation/errors'
 import { badRequest, internalServerError, ok, preconditionFailed } from '@/presentation/helpers'
-import { throwError } from '@/tests/domain/mocks'
+import { mockChangeAddressParams, throwError } from '@/tests/domain/mocks'
 import { ChangeAddressSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
-import faker from 'faker'
 
 type SutTypes = {
   sut: ChangeAddressController
@@ -22,17 +21,7 @@ const makeSut = (): SutTypes => {
     changeAddressSpy
   }
 }
-const mockRequest = (): ChangeAddressController.Request => ({
-  id: faker.datatype.uuid(),
-  accountId: faker.datatype.uuid(),
-  zipcode: faker.address.zipCode('########'),
-  address: faker.address.streetAddress(),
-  city: faker.address.cityName(),
-  number: faker.datatype.number(),
-  district: faker.random.word(),
-  state: faker.address.stateAbbr(),
-  complement: faker.random.word()
-})
+const mockRequest = (): ChangeAddressController.Request => mockChangeAddressParams()
 
 describe('ChangeAddress Controller', () => {
   it('should ChangeAddressController call Validation with correct values', async () => {
