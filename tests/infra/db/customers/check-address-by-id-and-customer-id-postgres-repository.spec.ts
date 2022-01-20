@@ -19,14 +19,14 @@ describe('CheckAddressByIdAndCustomerIdPostgres Repository', () => {
   afterAll(async () => {
     await PostgresHelper.disconnect()
   })
-  it('should CheckAddressByIdAndCustomerIdPostgresRepository return true if account exists', async () => {
+  it('should CheckAddressByIdAndCustomerIdPostgresRepository return true if address exists', async () => {
     const sut = makeSut()
     const params = await mockAccount()
     const address = await mockAddress(params.id)
     const response = await sut.check({ id: address.id, accountId: params.id })
     expect(response).toBe(true)
   })
-  it('should CheckAddressByIdAndCustomerIdPostgresRepository return false if account not exists', async () => {
+  it('should CheckAddressByIdAndCustomerIdPostgresRepository return false if address not exists', async () => {
     const sut = makeSut()
     const response = await sut.check({ id: faker.datatype.uuid(), accountId: faker.datatype.uuid() })
     expect(response).toBe(false)
