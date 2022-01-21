@@ -20,10 +20,7 @@ export const mockForgotPasswordParams = (): ForgotPassword.Params => ({
   phone: faker.phone.phoneNumber('###########')
 })
 
-export const mockLoadAccountByTokenParams = (): LoadAccountByToken.Params => ({
-  token: faker.random.alphaNumeric(32),
-  role: faker.random.word()
-})
+export const mockLoadAccountByTokenParams = (): LoadAccountByToken.Params => faker.random.alphaNumeric(32)
 
 export const mockChangePasswordParams = (): ChangePassword.Params => ({
   id: faker.datatype.uuid(),

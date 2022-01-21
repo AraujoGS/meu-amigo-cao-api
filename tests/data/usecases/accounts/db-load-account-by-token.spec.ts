@@ -21,9 +21,9 @@ const makeSut = (): SutTypes => {
 describe('DbLoadAccountByToken Usecase', () => {
   it('should DbLoadAccountByToken call Decrypter with correct token', async () => {
     const { sut, decrypterSpy } = makeSut()
-    const data = mockLoadAccountByTokenParams()
-    await sut.load(data)
-    expect(decrypterSpy.value).toEqual(data.token)
+    const token = mockLoadAccountByTokenParams()
+    await sut.load(token)
+    expect(decrypterSpy.value).toEqual(token)
   })
   it('should DbLoadAccountByToken return null if Decrypter throw error', async () => {
     const { sut, decrypterSpy } = makeSut()
@@ -39,12 +39,9 @@ describe('DbLoadAccountByToken Usecase', () => {
   })
   it('should DbLoadAccountByToken call LoadAccountByTokenRepository with correct values', async () => {
     const { sut, loadAccountByTokenRepositorySpy } = makeSut()
-    const data = mockLoadAccountByTokenParams()
-    await sut.load(data)
-    expect(loadAccountByTokenRepositorySpy.data).toEqual({
-      token: data.token,
-      role: data.role
-    })
+    const token = mockLoadAccountByTokenParams()
+    await sut.load(token)
+    expect(loadAccountByTokenRepositorySpy.data).toEqual(token)
   })
   it('should DbLoadAccountByToken return null if LoadAccountByTokenRepository return null', async () => {
     const { sut, loadAccountByTokenRepositorySpy } = makeSut()

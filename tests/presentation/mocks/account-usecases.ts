@@ -1,5 +1,5 @@
 import { AddAccount, Authentication, ForgotPassword, LoadAccountByToken, ChangePassword } from '@/domain/usecases'
-import { LoadAccountByTokenModel, ActionResult } from '@/domain/models'
+import { ActionResult } from '@/domain/models'
 import faker from 'faker'
 
 export class AddAccountSpy implements AddAccount {
@@ -34,13 +34,13 @@ export class ForgotPasswordSpy implements ForgotPassword {
 }
 
 export class LoadAccountByTokenSpy implements LoadAccountByToken {
-  data: LoadAccountByToken.Params
+  token: LoadAccountByToken.Params
   result = {
     id: faker.datatype.uuid()
   }
 
-  async load (data: LoadAccountByTokenModel): Promise<LoadAccountByToken.Result> {
-    this.data = data
+  async load (token: LoadAccountByToken.Params): Promise<LoadAccountByToken.Result> {
+    this.token = token
     return this.result
   }
 }

@@ -1,12 +1,10 @@
-import { LoadAccountByTokenModel } from '@/domain/models'
-
 export namespace LoadAccountByTokenRepository {
-  export type Params = LoadAccountByTokenModel
+  export type Params = string
   export type Result = {
     id: string
   }
 }
 
 export interface LoadAccountByTokenRepository {
-  load: (data: LoadAccountByTokenRepository.Params) => Promise<LoadAccountByTokenRepository.Result>
+  load: (token: LoadAccountByTokenRepository.Params) => Promise<LoadAccountByTokenRepository.Result>
 }

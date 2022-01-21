@@ -10,9 +10,9 @@ type SutTypes = {
   loadAccountByTokenSpy: LoadAccountByTokenSpy
 }
 
-const makeSut = (role?: string): SutTypes => {
+const makeSut = (): SutTypes => {
   const loadAccountByTokenSpy = new LoadAccountByTokenSpy()
-  const sut = new AuthMiddleware(loadAccountByTokenSpy, role)
+  const sut = new AuthMiddleware(loadAccountByTokenSpy)
   return {
     sut,
     loadAccountByTokenSpy
@@ -25,12 +25,10 @@ const mockRequest = (): AuthMiddleware.Request => ({
 
 describe('Auth Middleware', () => {
   it('should AuthMiddleware call LoadAccountByToken if correct values', async () => {
-    const role = faker.random.word()
-    const { sut, loadAccountByTokenSpy } = makeSut(role)
+    const { sut, loadAccountByTokenSpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
-    expect(loadAccountByTokenSpy.data.token).toBe(request.accessToken)
-    expect(loadAccountByTokenSpy.data.role).toBe(role)
+    expect(loadAccountByTokenSpy.token).toBe(request.accessToken)
   })
   it('should AuthMiddleware return 403 if LoadAccountByToken return null', async () => {
     const { sut, loadAccountByTokenSpy } = makeSut()

@@ -11,18 +11,14 @@ export namespace AuthMiddleware {
 
 export class AuthMiddleware implements Middleware {
   constructor (
-    private readonly loadAccountByToken: LoadAccountByToken,
-    private readonly role?: string
+    private readonly loadAccountByToken: LoadAccountByToken
   ) {}
 
   async handle (request: AuthMiddleware.Request): Promise<HttpResponse> {
     try {
       const { accessToken } = request
       if (!accessToken) return unauthorized()
-      const account = await this.loadAccountByToken.load({
-        token: accessToken,
-        role: this.role
-      })
+      const account = await this.loadAccountByToken.load(accessToken)
       if (!account) {
         return forbidden(new AccessDeniedError())
       }
