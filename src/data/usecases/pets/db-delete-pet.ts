@@ -11,6 +11,7 @@ export class DbDeletePet implements DeletePet {
     const isValid = await this.checkPetByIdAndCustomerIdRepository.check(data)
     if (isValid) {
       await this.deletePetRepository.delete(data)
+      return true
     }
     return false
   }
