@@ -11,7 +11,8 @@ import {
   customerSchema,
   petsSchema,
   changeCustomerParamsSchema,
-  changeAddressParamsSchema
+  changeAddressParamsSchema,
+  changePetParamsSchema
 } from './schemas/'
 
 export default {
@@ -27,5 +28,6 @@ export default {
   pets: petsSchema,
   changeCustomerParams: changeCustomerParamsSchema,
   changeAddressParams: changeAddressParamsSchema,
+  changePetParams: changePetParamsSchema,
   error: errorSchema
 }

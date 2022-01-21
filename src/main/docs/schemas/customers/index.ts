@@ -1,6 +1,5 @@
 export * from './add-address-params-schema'
 export * from './address-schema'
-export * from './pets-schema'
 export * from './customer-schema'
 export * from './change-customer-params-schema'
 export * from './change-address-params-schema'
