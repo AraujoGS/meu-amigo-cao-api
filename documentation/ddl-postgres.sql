@@ -5,8 +5,7 @@ CREATE TABLE IF NOT EXISTS CLIENTES (
   email_cliente VARCHAR(120) CONSTRAINT UK_EMAIL_CLIENTE UNIQUE NOT NULL,
   telefone_cliente VARCHAR(11) CONSTRAINT UK_TELEFONE_CLIENTE UNIQUE NOT NULL,
   data_nascimento_cliente DATE NOT NULL,
-  token_acesso VARCHAR(250),
-  permissao VARCHAR(25)
+  token_acesso VARCHAR(250)
 );
 
 CREATE TABLE IF NOT EXISTS ENDERECOS (
@@ -62,6 +61,7 @@ CREATE TABLE IF NOT EXISTS AGENDAMENTOS (
   id_agendamento  UUID CONSTRAINT PK_ID_AGENDAMENTO PRIMARY KEY,
   data_agendamento  DATE NOT NULL,
   observacoes VARCHAR(300),
+  cancelamento BOOLEAN DEFAULT FALSE,
   id_pet UUID,
   id_servico SMALLINT,
   CONSTRAINT FK_ID_PET_AGENDAMENTOS
@@ -134,4 +134,12 @@ VALUES (1, 'Akita'),
   (46, 'Weimaraner'),
   (47, 'Yorkshire'),
   (48, 'Outro')
-ON CONFLICT (id_raca) DO UPDATE SET nome_raca = EXCLUDED.nome_raca
+ON CONFLICT (id_raca) DO UPDATE SET nome_raca = EXCLUDED.nome_raca;
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_id_cliente ON clientes (id_cliente);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_id_agendamento ON agendamentos (id_agendamento);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_id_endereco ON enderecos (id_endereco);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_id_pet ON pets (id_pet);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_id_servico ON servicos (id_servico);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_id_raca ON raca_pet (id_raca);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_id_porte ON porte_pet (id_porte);
