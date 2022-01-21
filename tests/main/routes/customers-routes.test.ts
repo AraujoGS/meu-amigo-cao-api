@@ -20,6 +20,78 @@ describe('Customers Routes', () => {
   afterAll(async () => {
     await PostgresHelper.disconnect()
   })
+  describe('GET /customers', () => {
+    it('should load customer by id route return 200 if success', async () => {
+      const account = await mockGetAccountData()
+      await request(app)
+        .get('/api/customers')
+        .set('x-access-token', account.accessToken)
+        .expect(200)
+    })
+    it('should load customer by id return 401 if missing token', async () => {
+      await request(app)
+        .get('/api/customers')
+        .expect(401)
+    })
+    it('should load customer by id return 403 if invalid token', async () => {
+      await request(app)
+        .get('/api/customers')
+        .set('x-access-token', 'any_token')
+        .expect(403)
+    })
+  })
+  describe('PUT /customers', () => {
+    it('should update customer route return 200 if success', async () => {
+      const account = await mockGetAccountData()
+      await request(app)
+        .put('/api/customers')
+        .set('x-access-token', account.accessToken)
+        .send({
+          name: 'Guilherme de Araujo Silva',
+          email: 'guilhermearaujo421Alterado@gmail.com',
+          phone: '11954976863',
+          birthDate: '1997-05-30'
+        })
+        .expect(200)
+    })
+    it('should update customer route return 400 if fail', async () => {
+      const account = await mockGetAccountData()
+      await request(app)
+        .put('/api/customers')
+        .set('x-access-token', account.accessToken)
+        .send({
+          name: 'Guilherme de Araujo Silva',
+          email: 'guilhermearaujo421Alterado@gmail.com',
+          phone: '11954976863'
+        })
+        .expect(400)
+    })
+    it('should update customer route return 412 if fail', async () => {
+      const account = await mockGetAccountData()
+      await mockGetAccountData('garaujodev@gmail.com', '11966332211')
+      await request(app)
+        .put('/api/customers')
+        .set('x-access-token', account.accessToken)
+        .send({
+          name: 'Guilherme de Araujo Silva',
+          email: 'garaujodev@gmail.com',
+          phone: '11954976863',
+          birthDate: '1997-05-30'
+        })
+        .expect(412)
+    })
+    it('should update customer return 401 if missing token', async () => {
+      await request(app)
+        .put('/api/customers')
+        .expect(401)
+    })
+    it('should update customer return 403 if invalid token', async () => {
+      await request(app)
+        .get('/api/customers')
+        .set('x-access-token', 'any_token')
+        .expect(403)
+    })
+  })
   describe('POST /customers/address', () => {
     it('should add address route return 201 if success', async () => {
       const account = await mockGetAccountData()
@@ -82,6 +154,76 @@ describe('Customers Routes', () => {
       await request(app)
         .post('/api/customers/address')
         .send(payload)
+        .set('x-access-token', 'any-token')
+        .expect(403)
+    })
+  })
+  describe('PUT /customers/address', () => {
+    it('should change address route 200 if success', async () => {
+      const account = await mockGetAccountData()
+      const addressId = await mockAddAddress(account.id)
+      const payload = {
+        id: addressId,
+        zipcode: '03086090',
+        address: 'Rua Leonardo da Silva e Santos',
+        city: 'São Paulo',
+        number: 100,
+        district: 'Parque São Jorge',
+        state: 'SP',
+        complement: 'casa'
+      }
+      await request(app)
+        .put('/api/customers/address')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(200)
+    })
+    it('should change address route 400 if fail', async () => {
+      const account = await mockGetAccountData()
+      const addressId = await mockAddAddress(account.id)
+      const payload = {
+        id: addressId,
+        zipcode: '03086090',
+        address: 'Rua Leonardo da Silva e Santos',
+        city: 'São Paulo',
+        number: 100,
+        district: 'Parque São Jorge',
+        complement: 'casa'
+      }
+      await request(app)
+        .put('/api/customers/address')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(400)
+    })
+    it('should change address route 412 if fail', async () => {
+      const account = await mockGetAccountData()
+      const payload = {
+        id: faker.datatype.uuid(),
+        zipcode: '03086090',
+        address: 'Rua Leonardo da Silva e Santos',
+        city: 'São Paulo',
+        number: 100,
+        district: 'Parque São Jorge',
+        state: 'SP',
+        complement: 'casa'
+      }
+      await request(app)
+        .put('/api/customers/address')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(412)
+    })
+    it('should change address route return 401 if missing token', async () => {
+      await request(app)
+        .put('/api/customers/address')
+        .send({})
+        .expect(401)
+    })
+    it('should change address route return 403 if invalid token', async () => {
+      await request(app)
+        .put('/api/customers/address')
+        .send({})
         .set('x-access-token', 'any-token')
         .expect(403)
     })
@@ -159,148 +301,6 @@ describe('Customers Routes', () => {
         .expect(403)
     })
   })
-  describe('GET /customers', () => {
-    it('should load customer by id route return 200 if success', async () => {
-      const account = await mockGetAccountData()
-      await request(app)
-        .get('/api/customers')
-        .set('x-access-token', account.accessToken)
-        .expect(200)
-    })
-    it('should load customer by id return 401 if missing token', async () => {
-      await request(app)
-        .get('/api/customers')
-        .expect(401)
-    })
-    it('should load customer by id return 403 if invalid token', async () => {
-      await request(app)
-        .get('/api/customers')
-        .set('x-access-token', 'any_token')
-        .expect(403)
-    })
-  })
-  describe('PUT /customers', () => {
-    it('should update customer route return 200 if success', async () => {
-      const account = await mockGetAccountData()
-      await request(app)
-        .put('/api/customers')
-        .set('x-access-token', account.accessToken)
-        .send({
-          name: 'Guilherme de Araujo Silva',
-          email: 'guilhermearaujo421Alterado@gmail.com',
-          phone: '11954976863',
-          birthDate: '1997-05-30'
-        })
-        .expect(200)
-    })
-    it('should update customer route return 400 if fail', async () => {
-      const account = await mockGetAccountData()
-      await request(app)
-        .put('/api/customers')
-        .set('x-access-token', account.accessToken)
-        .send({
-          name: 'Guilherme de Araujo Silva',
-          email: 'guilhermearaujo421Alterado@gmail.com',
-          phone: '11954976863'
-        })
-        .expect(400)
-    })
-    it('should update customer route return 412 if fail', async () => {
-      const account = await mockGetAccountData()
-      await mockGetAccountData('garaujodev@gmail.com', '11966332211')
-      await request(app)
-        .put('/api/customers')
-        .set('x-access-token', account.accessToken)
-        .send({
-          name: 'Guilherme de Araujo Silva',
-          email: 'garaujodev@gmail.com',
-          phone: '11954976863',
-          birthDate: '1997-05-30'
-        })
-        .expect(412)
-    })
-    it('should update customer return 401 if missing token', async () => {
-      await request(app)
-        .put('/api/customers')
-        .expect(401)
-    })
-    it('should update customer return 403 if invalid token', async () => {
-      await request(app)
-        .get('/api/customers')
-        .set('x-access-token', 'any_token')
-        .expect(403)
-    })
-  })
-  describe('PUT /customers/address', () => {
-    it('should change address route 200 if success', async () => {
-      const account = await mockGetAccountData()
-      const addressId = await mockAddAddress(account.id)
-      const payload = {
-        id: addressId,
-        zipcode: '03086090',
-        address: 'Rua Leonardo da Silva e Santos',
-        city: 'São Paulo',
-        number: 100,
-        district: 'Parque São Jorge',
-        state: 'SP',
-        complement: 'casa'
-      }
-      await request(app)
-        .put('/api/customers/address')
-        .send(payload)
-        .set('x-access-token', account.accessToken)
-        .expect(200)
-    })
-    it('should change address route 400 if fail', async () => {
-      const account = await mockGetAccountData()
-      const addressId = await mockAddAddress(account.id)
-      const payload = {
-        id: addressId,
-        zipcode: '03086090',
-        address: 'Rua Leonardo da Silva e Santos',
-        city: 'São Paulo',
-        number: 100,
-        district: 'Parque São Jorge',
-        complement: 'casa'
-      }
-      await request(app)
-        .put('/api/customers/address')
-        .send(payload)
-        .set('x-access-token', account.accessToken)
-        .expect(400)
-    })
-    it('should change address route 412 if fail', async () => {
-      const account = await mockGetAccountData()
-      const payload = {
-        id: faker.datatype.uuid(),
-        zipcode: '03086090',
-        address: 'Rua Leonardo da Silva e Santos',
-        city: 'São Paulo',
-        number: 100,
-        district: 'Parque São Jorge',
-        state: 'SP',
-        complement: 'casa'
-      }
-      await request(app)
-        .put('/api/customers/address')
-        .send(payload)
-        .set('x-access-token', account.accessToken)
-        .expect(412)
-    })
-    it('should change address route return 401 if missing token', async () => {
-      await request(app)
-        .put('/api/customers/address')
-        .send({})
-        .expect(401)
-    })
-    it('should change address route return 403 if invalid token', async () => {
-      await request(app)
-        .put('/api/customers/address')
-        .send({})
-        .set('x-access-token', 'any-token')
-        .expect(403)
-    })
-  })
   describe('PUT /customers/pets', () => {
     it('should change pet route 200 if success', async () => {
       const account = await mockGetAccountData()
@@ -360,6 +360,46 @@ describe('Customers Routes', () => {
     it('should change pet route return 403 if invalid token', async () => {
       await request(app)
         .put('/api/customers/pets')
+        .send({})
+        .set('x-access-token', 'any-token')
+        .expect(403)
+    })
+  })
+  describe('DELETE /customers/pets', () => {
+    it('should delete pet route 204 if success', async () => {
+      const account = await mockGetAccountData()
+      const petId = await mockAddPets(account.id)
+      await request(app)
+        .delete('/api/customers/pets')
+        .send({ id: petId })
+        .set('x-access-token', account.accessToken)
+        .expect(204)
+    })
+    it('should delete pet route 400 if fail', async () => {
+      const account = await mockGetAccountData()
+      await request(app)
+        .delete('/api/customers/pets')
+        .send({})
+        .set('x-access-token', account.accessToken)
+        .expect(400)
+    })
+    it('should delete pet route 412 if fail', async () => {
+      const account = await mockGetAccountData()
+      await request(app)
+        .delete('/api/customers/pets')
+        .send({ id: faker.datatype.uuid() })
+        .set('x-access-token', account.accessToken)
+        .expect(412)
+    })
+    it('should delete pet route return 401 if missing token', async () => {
+      await request(app)
+        .delete('/api/customers/pets')
+        .send({})
+        .expect(401)
+    })
+    it('should delete pet route return 403 if invalid token', async () => {
+      await request(app)
+        .delete('/api/customers/pets')
         .send({})
         .set('x-access-token', 'any-token')
         .expect(403)
