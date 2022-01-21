@@ -1,6 +1,6 @@
 import { DbDeletePet } from '@/data/usecases'
 import { CheckPetByIdAndCustomerIdRepositorySpy } from '@/tests/data/mocks'
-import { mockDeletePetParams } from '@/tests/domain/mocks'
+import { mockDeletePetParams, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbDeletePet
@@ -25,5 +25,17 @@ describe('DbDeletePet Usecase', () => {
       id: params.id,
       accountId: params.accountId
     })
+  })
+  it('should DbDeletePet throw error if LoadPetByIdAndCustomerIdRepository throws', async () => {
+    const { sut, checkPetByIdAndCustomerIdRepositorySpy } = makeSut()
+    jest.spyOn(checkPetByIdAndCustomerIdRepositorySpy, 'check').mockImplementationOnce(throwError)
+    const promise = sut.delete(mockDeletePetParams())
+    await expect(promise).rejects.toThrow()
+  })
+  it('should DbDeletePet return false if LoadPetByIdAndCustomerIdRepository return false', async () => {
+    const { sut, checkPetByIdAndCustomerIdRepositorySpy } = makeSut()
+    checkPetByIdAndCustomerIdRepositorySpy.result = false
+    const result = await sut.delete(mockDeletePetParams())
+    expect(result).toBe(false)
   })
 })
