@@ -15,13 +15,13 @@ export class LoginController implements Controller {
     private readonly authentication: Authentication
   ) {}
 
-  async handle (httpRequest: LoginController.Request): Promise<HttpResponse> {
+  async handle (request: LoginController.Request): Promise<HttpResponse> {
     try {
-      const clientError = this.validation.validate(httpRequest)
+      const clientError = this.validation.validate(request)
       if (clientError) {
         return badRequest(clientError)
       }
-      const user = await this.authentication.auth(httpRequest)
+      const user = await this.authentication.auth(request)
       if (!user) {
         return unauthorized()
       }

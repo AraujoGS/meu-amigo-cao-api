@@ -20,14 +20,14 @@ export class AddAddressController implements Controller {
     private readonly addAddress: AddAddress
   ) {}
 
-  async handle (httpRequest: AddAddressController.Request): Promise<HttpResponse> {
+  async handle (request: AddAddressController.Request): Promise<HttpResponse> {
     try {
-      const { complement, ...data } = httpRequest
+      const { complement, ...data } = request
       const clientError = this.validation.validate(data)
       if (clientError) {
         return badRequest(clientError)
       }
-      await this.addAddress.add(httpRequest)
+      await this.addAddress.add(request)
       return created()
     } catch (error) {
       return internalServerError(error)

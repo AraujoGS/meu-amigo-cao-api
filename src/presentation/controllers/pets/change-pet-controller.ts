@@ -21,14 +21,14 @@ export class ChangePetController implements Controller {
     private readonly changePet: ChangePet
   ) {}
 
-  async handle (httpRequest: ChangePetController.Request): Promise<HttpResponse> {
+  async handle (request: ChangePetController.Request): Promise<HttpResponse> {
     try {
-      const { considerations, ...data } = httpRequest
+      const { considerations, ...data } = request
       const clientError = this.validation.validate(data)
       if (clientError) {
         return badRequest(clientError)
       }
-      const result = await this.changePet.change(httpRequest)
+      const result = await this.changePet.change(request)
       if (!result) {
         return preconditionFailed(new InvalidPetError())
       }

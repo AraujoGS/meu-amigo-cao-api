@@ -20,13 +20,13 @@ export class ChangeCustomerController implements Controller {
     private readonly loadCustomerById: LoadCustomerById
   ) {}
 
-  async handle (httpRequest: ChangeCustomerController.Request): Promise<HttpResponse> {
+  async handle (request: ChangeCustomerController.Request): Promise<HttpResponse> {
     try {
-      const clientError = this.validation.validate(httpRequest)
+      const clientError = this.validation.validate(request)
       if (clientError) {
         return badRequest(clientError)
       }
-      const { name, email, accountId, phone, birthDate } = httpRequest
+      const { name, email, accountId, phone, birthDate } = request
       const result = await this.changeCustomer.change({
         id: accountId,
         name,

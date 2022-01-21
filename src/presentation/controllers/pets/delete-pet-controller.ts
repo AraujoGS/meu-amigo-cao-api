@@ -16,13 +16,13 @@ export class DeletePetController implements Controller {
     private readonly deletePet: DeletePet
   ) {}
 
-  async handle (httpRequest: DeletePetController.Request): Promise<HttpResponse> {
+  async handle (request: DeletePetController.Request): Promise<HttpResponse> {
     try {
-      const clientError = this.validation.validate(httpRequest)
+      const clientError = this.validation.validate(request)
       if (clientError) {
         return badRequest(clientError)
       }
-      const result = await this.deletePet.delete(httpRequest)
+      const result = await this.deletePet.delete(request)
       if (!result) {
         return preconditionFailed(new InvalidPetError())
       }

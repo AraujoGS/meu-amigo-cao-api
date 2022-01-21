@@ -23,14 +23,14 @@ export class ChangeAddressController implements Controller {
     private readonly changeAddress: ChangeAddress
   ) {}
 
-  async handle (httpRequest: ChangeAddressController.Request): Promise<HttpResponse> {
+  async handle (request: ChangeAddressController.Request): Promise<HttpResponse> {
     try {
-      const { complement, ...data } = httpRequest
+      const { complement, ...data } = request
       const clientError = this.validation.validate(data)
       if (clientError) {
         return badRequest(clientError)
       }
-      const result = await this.changeAddress.change(httpRequest)
+      const result = await this.changeAddress.change(request)
       if (!result) {
         return preconditionFailed(new InvalidAddressError())
       }

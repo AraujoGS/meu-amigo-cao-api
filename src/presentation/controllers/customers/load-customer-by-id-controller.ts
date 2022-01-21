@@ -10,9 +10,9 @@ export namespace LoadCustomerByIdController {
 export class LoadCustomerByIdController implements Controller {
   constructor (private readonly loadCustomerById: LoadCustomerById) {}
 
-  async handle (httpRequest: LoadCustomerByIdController.Request): Promise<HttpResponse> {
+  async handle (request: LoadCustomerByIdController.Request): Promise<HttpResponse> {
     try {
-      const { accountId } = httpRequest
+      const { accountId } = request
       const customer = await this.loadCustomerById.load(accountId)
       return ok(customer)
     } catch (error) {

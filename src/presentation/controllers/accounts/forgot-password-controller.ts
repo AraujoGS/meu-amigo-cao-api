@@ -16,13 +16,13 @@ export class ForgotPasswordController implements Controller {
     private readonly forgotPassword: ForgotPassword
   ) {}
 
-  async handle (httpRequest: ForgotPasswordController.Request): Promise<HttpResponse> {
+  async handle (request: ForgotPasswordController.Request): Promise<HttpResponse> {
     try {
-      const clientError = this.validation.validate(httpRequest)
+      const clientError = this.validation.validate(request)
       if (clientError) {
         return badRequest(clientError)
       }
-      const result = await this.forgotPassword.recover(httpRequest)
+      const result = await this.forgotPassword.recover(request)
       if (!result) {
         return preconditionFailed(new InvalidParamError('email or phone'))
       }

@@ -20,14 +20,14 @@ export class AddPetController implements Controller {
     private readonly businessRulesValidation: Validation
   ) {}
 
-  async handle (httpRequest: AddPetController.Request): Promise<HttpResponse> {
+  async handle (request: AddPetController.Request): Promise<HttpResponse> {
     try {
-      const { considerations, ...data } = httpRequest
+      const { considerations, ...data } = request
       const clientError = this.validation.validate(data)
       if (clientError) {
         return badRequest(clientError)
       }
-      const result = await this.addPet.add(httpRequest)
+      const result = await this.addPet.add(request)
       const conditionFailed = this.businessRulesValidation.validate({ resultAddPet: result })
       if (conditionFailed) {
         return preconditionFailed(conditionFailed)

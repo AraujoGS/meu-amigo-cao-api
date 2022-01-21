@@ -18,13 +18,13 @@ export class ChangePasswordController implements Controller {
     private readonly businessRulesValidation: Validation
   ) {}
 
-  async handle (httpRequest: ChangePasswordController.Request): Promise<HttpResponse> {
+  async handle (request: ChangePasswordController.Request): Promise<HttpResponse> {
     try {
-      const clientError = this.validation.validate(httpRequest)
+      const clientError = this.validation.validate(request)
       if (clientError) {
         return badRequest(clientError)
       }
-      const { oldPassword, newPassword, accountId: id } = httpRequest
+      const { oldPassword, newPassword, accountId: id } = request
       const result = await this.changePassword.change({ id, oldPassword, newPassword })
       const conditionFailed = this.businessRulesValidation.validate({ resultChangePassword: result })
       if (conditionFailed) {
