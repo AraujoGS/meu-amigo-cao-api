@@ -8,6 +8,6 @@ export class DbDeletePet implements DeletePet {
 
   async delete (data: DeletePet.Params): Promise<DeletePet.Result> {
     await this.checkPetByIdAndCustomerIdRepository.check(data)
-    return true
+    return false
   }
 }
