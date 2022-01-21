@@ -50,4 +50,10 @@ describe('DbDeletePet Usecase', () => {
       accountId: params.accountId
     })
   })
+  it('should DbDeletePet throw error if DeletePetRepository throws', async () => {
+    const { sut, deletePetRepositorySpy } = makeSut()
+    jest.spyOn(deletePetRepositorySpy, 'delete').mockImplementationOnce(throwError)
+    const promise = sut.delete(mockDeletePetParams())
+    await expect(promise).rejects.toThrow()
+  })
 })
