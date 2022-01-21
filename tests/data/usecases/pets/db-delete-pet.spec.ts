@@ -1,18 +1,21 @@
 import { DbDeletePet } from '@/data/usecases'
-import { CheckPetByIdAndCustomerIdRepositorySpy } from '@/tests/data/mocks'
+import { CheckPetByIdAndCustomerIdRepositorySpy, DeletePetRepositorySpy } from '@/tests/data/mocks'
 import { mockDeletePetParams, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbDeletePet
   checkPetByIdAndCustomerIdRepositorySpy: CheckPetByIdAndCustomerIdRepositorySpy
+  deletePetRepositorySpy: DeletePetRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const checkPetByIdAndCustomerIdRepositorySpy = new CheckPetByIdAndCustomerIdRepositorySpy()
-  const sut = new DbDeletePet(checkPetByIdAndCustomerIdRepositorySpy)
+  const deletePetRepositorySpy = new DeletePetRepositorySpy()
+  const sut = new DbDeletePet(checkPetByIdAndCustomerIdRepositorySpy, deletePetRepositorySpy)
   return {
     sut,
-    checkPetByIdAndCustomerIdRepositorySpy
+    checkPetByIdAndCustomerIdRepositorySpy,
+    deletePetRepositorySpy
   }
 }
 
@@ -37,5 +40,14 @@ describe('DbDeletePet Usecase', () => {
     checkPetByIdAndCustomerIdRepositorySpy.result = false
     const result = await sut.delete(mockDeletePetParams())
     expect(result).toBe(false)
+  })
+  it('should DbDeletePet call DeletePetRepository with correct values', async () => {
+    const { sut, deletePetRepositorySpy } = makeSut()
+    const params = mockDeletePetParams()
+    await sut.delete(params)
+    expect(deletePetRepositorySpy.data).toEqual({
+      id: params.id,
+      accountId: params.accountId
+    })
   })
 })
