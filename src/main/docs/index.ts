@@ -13,8 +13,8 @@ export default {
     url: '/api'
   }],
   tags: [
-    { name: 'Accounts' },
-    { name: 'Customers' }
+    { name: 'Accounts', description: 'Endpoints para criar, alterar e autenticar usuários' },
+    { name: 'Customers', description: 'Endpoints para manipular dos dados do cliente' }
   ],
   paths,
   schemas,

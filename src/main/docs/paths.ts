@@ -8,7 +8,8 @@ import {
   loadCustomerByIdPath,
   changeCustomerPath,
   changeAddressPath,
-  changePetPath
+  changePetPath,
+  deletePetPath
 } from './paths/'
 
 export default {
@@ -16,7 +17,7 @@ export default {
   '/login': loginPath,
   '/forgot-password': forgotPasswordPath,
   '/change-password': changePasswordPath,
+  '/customers': { ...loadCustomerByIdPath, ...changeCustomerPath },
   '/customers/address': { ...addAddressPath, ...changeAddressPath },
-  '/customers/pets': { ...addPetPath, ...changePetPath },
-  '/customers': { ...loadCustomerByIdPath, ...changeCustomerPath }
+  '/customers/pets': { ...addPetPath, ...changePetPath, ...deletePetPath }
 }
