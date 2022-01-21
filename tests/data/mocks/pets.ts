@@ -3,7 +3,8 @@ import {
   CheckDogBreedByIdRepository,
   CheckDogTypeByIdRepository,
   CheckPetByIdAndCustomerIdRepository,
-  UpdatePetRepository
+  UpdatePetRepository,
+  DeletePetRepository
 } from '@/data/interfaces/db'
 import faker from 'faker'
 faker.locale = 'pt_BR'
@@ -46,6 +47,14 @@ export class CheckPetByIdAndCustomerIdRepositorySpy implements CheckPetByIdAndCu
 export class UpdatePetRepositorySpy implements UpdatePetRepository {
   data: UpdatePetRepository.Params
   async update (data: UpdatePetRepository.Params): Promise<void> {
+    this.data = data
+    return await Promise.resolve()
+  }
+}
+
+export class DeletePetRepositorySpy implements DeletePetRepository {
+  data: DeletePetRepository.Params
+  async delete (data: DeletePetRepository.Params): Promise<void> {
     this.data = data
     return await Promise.resolve()
   }
