@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { PostgresHelper } from '@/infra/db'
 import { setupApp } from '@/main/config/app'
 import { createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
-import { mockGetAccountData, mockAddAddress } from '@/tests/main/mocks'
+import { mockGetAccountData, mockAddAddress, mockAddPets } from '@/tests/main/mocks'
 import { Express } from 'express'
 import request from 'supertest'
 import faker from 'faker'
@@ -296,6 +296,70 @@ describe('Customers Routes', () => {
     it('should change address route return 403 if invalid token', async () => {
       await request(app)
         .put('/api/customers/address')
+        .send({})
+        .set('x-access-token', 'any-token')
+        .expect(403)
+    })
+  })
+  describe('PUT /customers/pets', () => {
+    it('should change pet route 200 if success', async () => {
+      const account = await mockGetAccountData()
+      const petId = await mockAddPets(account.id)
+      const payload = {
+        id: petId,
+        name: 'Nickão',
+        breed: 16,
+        color: 'pretoooo',
+        type: 2,
+        considerations: 'orelhas bem sensíveis, necessário extremo cuidado com a região'
+      }
+      await request(app)
+        .put('/api/customers/pets')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(200)
+    })
+    it('should change pet route 400 if fail', async () => {
+      const account = await mockGetAccountData()
+      const petId = await mockAddPets(account.id)
+      const payload = {
+        id: petId,
+        name: 'Nickão',
+        breed: 16,
+        color: 'pretoooo',
+        considerations: 'orelhas bem sensíveis, necessário extremo cuidado com a região'
+      }
+      await request(app)
+        .put('/api/customers/pets')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(400)
+    })
+    it('should change pet route 412 if fail', async () => {
+      const account = await mockGetAccountData()
+      const payload = {
+        id: faker.datatype.uuid(),
+        name: 'Nickão',
+        breed: 16,
+        color: 'pretoooo',
+        type: 2,
+        considerations: 'orelhas bem sensíveis, necessário extremo cuidado com a região'
+      }
+      await request(app)
+        .put('/api/customers/pets')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(412)
+    })
+    it('should change pet route return 401 if missing token', async () => {
+      await request(app)
+        .put('/api/customers/pets')
+        .send({})
+        .expect(401)
+    })
+    it('should change pet route return 403 if invalid token', async () => {
+      await request(app)
+        .put('/api/customers/pets')
         .send({})
         .set('x-access-token', 'any-token')
         .expect(403)
