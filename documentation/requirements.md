@@ -99,13 +99,13 @@
 - [X] alterar o pet, retornar 200
 
 -remover pet (logado)
-- [ ] inputs: uuid do cliente, uuid do pet
+- [X] inputs: uuid do cliente, uuid do pet
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando.
-- [ ] validar se o pet existe, se é desse usuário e retornar 412 caso não
-- [ ] em caso de erro inesperado retornar 500
-- [ ] deletar o pet e retornar 204
+- [X] validar os inputs e retornar 400 caso algum campo esteja faltando.
+- [X] validar se o pet existe, se é desse usuário e retornar 412 caso não
+- [X] em caso de erro inesperado retornar 500
+- [X] deletar o pet e retornar 204
 
 -Agendar banho ou tosa (logado)
 - [ ] inputs: uuid do cliente, serviço (banho, tosa ou banho e tosa), data, pet, observações
