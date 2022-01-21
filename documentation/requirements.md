@@ -112,6 +112,8 @@
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: observações é opcional
+- [ ] validar se o pet existe, se é desse usuário e retornar 412 caso não
+- [ ] validar se é um serviço válido e retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
 - [ ] em caso de sucesso retornar 201 e os dados do agendamento
 
@@ -127,6 +129,8 @@
 - [ ] inputs: uuid do cliente, uuid do agendamento
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
+- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando
+- [ ] validar se existe o agendamento e retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
 - [ ] caso o agendamento não exista, retornar 204
 - [ ] em caso de sucesso retornar 200
@@ -136,5 +140,8 @@
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: observações é opcional
+- [ ] validar se existe o agendamento e retornar 412 caso não
+- [ ] validar se o pet existe, se é desse usuário e retornar 412 caso não
+- [ ] validar se é um serviço válido e retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
 - [ ] em caso de sucesso retornar 200 e os dados atualizados
