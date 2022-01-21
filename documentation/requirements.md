@@ -89,7 +89,7 @@
 - [X] em caso de erro inesperado retornar 500
 - [X] alterar os dados, retornar 200
 
--alterar pet (logado)
+-Alterar pet (logado)
 - [X] inputs: uuid do cliente, uuid do pet, nome, raça, cor, porte e considerações
 - [X] validar se token de acesso válido, caso não retornar 401
 - [X] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
@@ -98,10 +98,10 @@
 - [X] em caso de erro inesperado retornar 500
 - [X] alterar o pet, retornar 200
 
--remover pet (logado)
+-Remover pet (logado)
 - [X] inputs: uuid do cliente, uuid do pet
-- [ ] validar se token de acesso válido, caso não retornar 401
-- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
+- [X] validar se token de acesso válido, caso não retornar 401
+- [X] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [X] validar os inputs e retornar 400 caso algum campo esteja faltando.
 - [X] validar se o pet existe, se é desse usuário e retornar 412 caso não
 - [X] em caso de erro inesperado retornar 500
