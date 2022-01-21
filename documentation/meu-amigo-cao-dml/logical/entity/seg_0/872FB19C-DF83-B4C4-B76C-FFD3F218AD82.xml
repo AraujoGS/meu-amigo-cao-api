@@ -5,7 +5,7 @@
 <ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
 <importedID>4203E6B6-A614-5387-6A1D-69752A98B063</importedID>
 <engineerTo>
-<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+<item key="8726786C-E321-E43A-4554-E11641E75172" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -22,7 +22,7 @@
 <ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
 <importedID>1F6EF53D-B1C3-04B2-4CF1-0E07F05EE877</importedID>
 <engineerTo>
-<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+<item key="8726786C-E321-E43A-4554-E11641E75172" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -35,7 +35,7 @@
 <ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
 <importedID>D457C5D0-F6B9-50CC-BCE9-D1482CCE9A60</importedID>
 <engineerTo>
-<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+<item key="8726786C-E321-E43A-4554-E11641E75172" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -48,7 +48,7 @@
 <ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
 <importedID>FF525BE6-2400-09F0-C981-301AFDB8FC9B</importedID>
 <engineerTo>
-<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+<item key="8726786C-E321-E43A-4554-E11641E75172" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -57,6 +57,19 @@
 <dataTypeSize>300</dataTypeSize>
 <ownDataTypeParameters>300,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="cancelamento" id="56E12E7D-9199-8640-2E9B-21F4001B53CB">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-21 15:36:56 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<engineerTo>
+<item key="8726786C-E321-E43A-4554-E11641E75172" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
 <Attribute name="id_servico" id="DDD19889-5528-DE09-8027-B0B3617B8F84">
 <createdBy>gdear</createdBy>
 <createdTime>2022-01-01 18:42:36 UTC</createdTime>
@@ -64,7 +77,7 @@
 <ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
 <importedID>94E9B8CA-D689-6D1C-4B79-871582B211AB</importedID>
 <engineerTo>
-<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+<item key="8726786C-E321-E43A-4554-E11641E75172" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <referedAttribute>52F7AFD7-ADC1-0FFA-581B-1A44E20DF258</referedAttribute>
@@ -80,7 +93,7 @@
 <ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
 <importedID>77A351C4-8658-1E8B-D321-5514BE34B9B7</importedID>
 <engineerTo>
-<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+<item key="8726786C-E321-E43A-4554-E11641E75172" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <referedAttribute>81233DE4-0D7A-C14C-93DF-063D70CA3CAE</referedAttribute>
@@ -96,7 +109,7 @@
 <ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
 <importedID>64B58FE3-67BA-2D56-0529-740B607F7EF4</importedID>
 <engineerTo>
-<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+<item key="8726786C-E321-E43A-4554-E11641E75172" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <referedAttribute>E0AD39AF-8B43-563B-A340-7DEC2102D5D5</referedAttribute>
@@ -113,7 +126,7 @@
 <ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
 <importedID>B38EA70E-05E5-80FF-0324-99ED15C1A723</importedID>
 <engineerTo>
-<item key="855EECEC-05F3-5798-1DEC-903AA8327632" value="true"/>
+<item key="8726786C-E321-E43A-4554-E11641E75172" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

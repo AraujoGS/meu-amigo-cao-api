@@ -43,6 +43,17 @@
 <ownDataTypeParameters>300,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="cancelamento" id="9BA09D3F-9249-794E-4A9C-551733D5CBC8">
+<createdBy>gdear</createdBy>
+<createdTime>2022-01-21 15:36:41 UTC</createdTime>
+<ownerDesignName>meu-amigo-cao-dml</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 <Column name="id_servico" id="11F9146E-F308-1BAA-1C81-F6C841F58B9C">
 <createdBy>gdear</createdBy>
 <createdTime>2021-11-02 18:02:32 UTC</createdTime>
