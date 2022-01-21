@@ -56,4 +56,9 @@ describe('DbDeletePet Usecase', () => {
     const promise = sut.delete(mockDeletePetParams())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbDeletePet return true if DeletePetRepository success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.delete(mockDeletePetParams())
+    expect(result).toBe(true)
+  })
 })
