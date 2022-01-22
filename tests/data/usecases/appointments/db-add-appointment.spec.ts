@@ -54,4 +54,10 @@ describe('DbAddAppointment Usecase', () => {
     const promise = sut.add(mockAddAppointments())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbAddAppointment return ERROR_INVALID_SERVICE (9) if CheckPetByIdAndCustomerIdRepository return false', async () => {
+    const { sut, checkServiceByIdRepositorySpy } = makeSut()
+    checkServiceByIdRepositorySpy.result = false
+    const result = await sut.add(mockAddAppointments())
+    expect(result).toBe(ActionResult.ERROR_INVALID_SERVICE)
+  })
 })
