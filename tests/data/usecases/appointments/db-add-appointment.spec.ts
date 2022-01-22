@@ -1,19 +1,22 @@
 import { DbAddAppointment } from '@/data/usecases'
 import { ActionResult } from '@/domain/models'
-import { CheckPetByIdAndCustomerIdRepositorySpy } from '@/tests/data/mocks'
+import { CheckPetByIdAndCustomerIdRepositorySpy, CheckServiceByIdRepositorySpy } from '@/tests/data/mocks'
 import { mockAddAppointments, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbAddAppointment
   checkPetByIdAndCustomerIdRepositorySpy: CheckPetByIdAndCustomerIdRepositorySpy
+  checkServiceByIdRepositorySpy: CheckServiceByIdRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const checkPetByIdAndCustomerIdRepositorySpy = new CheckPetByIdAndCustomerIdRepositorySpy()
-  const sut = new DbAddAppointment(checkPetByIdAndCustomerIdRepositorySpy)
+  const checkServiceByIdRepositorySpy = new CheckServiceByIdRepositorySpy()
+  const sut = new DbAddAppointment(checkPetByIdAndCustomerIdRepositorySpy, checkServiceByIdRepositorySpy)
   return {
     sut,
-    checkPetByIdAndCustomerIdRepositorySpy
+    checkPetByIdAndCustomerIdRepositorySpy,
+    checkServiceByIdRepositorySpy
   }
 }
 
@@ -38,5 +41,11 @@ describe('DbAddAppointment Usecase', () => {
     checkPetByIdAndCustomerIdRepositorySpy.result = false
     const result = await sut.add(mockAddAppointments())
     expect(result).toBe(ActionResult.ERROR_PET_NOT_EXISTS)
+  })
+  it('should DbAddAppointment call CheckServiceByIdRepository with correct values', async () => {
+    const { sut, checkServiceByIdRepositorySpy } = makeSut()
+    const params = mockAddAppointments()
+    await sut.add(params)
+    expect(checkServiceByIdRepositorySpy.id).toEqual(params.service)
   })
 })
