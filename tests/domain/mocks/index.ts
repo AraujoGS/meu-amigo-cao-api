@@ -1,4 +1,5 @@
 export * from './account'
 export * from './customers'
 export * from './pets'
+export * from './appointments'
 export * from './test-helpers'
