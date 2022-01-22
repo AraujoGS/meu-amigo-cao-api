@@ -69,4 +69,10 @@ describe('DbAddAppointment Usecase', () => {
     await sut.add(params)
     expect(addAppointmentRepositorySpy.data).toEqual(params)
   })
+  it('should DbAddAppointment throw error if AddAppointmentRepository throws', async () => {
+    const { sut, addAppointmentRepositorySpy } = makeSut()
+    jest.spyOn(addAppointmentRepositorySpy, 'add').mockImplementationOnce(throwError)
+    const promise = sut.add(mockAddAppointments())
+    await expect(promise).rejects.toThrow()
+  })
 })
