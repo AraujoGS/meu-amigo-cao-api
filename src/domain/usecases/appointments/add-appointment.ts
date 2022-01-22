@@ -1,13 +1,7 @@
-import { ActionResult } from '@/domain/models'
+import { ActionResult, AddAppointmentModel } from '@/domain/models'
 
 export namespace AddAppointment {
-  export type Params = {
-    accountId: string
-    service: number
-    date: Date
-    petId: string
-    observations: string
-  }
+  export type Params = AddAppointmentModel
   export type Result = ActionResult
 }
 

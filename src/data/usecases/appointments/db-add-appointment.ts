@@ -1,11 +1,12 @@
-import { CheckPetByIdAndCustomerIdRepository, CheckServiceByIdRepository } from '@/data/interfaces/db'
+import { AddAppointmentRepository, CheckPetByIdAndCustomerIdRepository, CheckServiceByIdRepository } from '@/data/interfaces/db'
 import { ActionResult } from '@/domain/models'
 import { AddAppointment } from '@/domain/usecases'
 
 export class DbAddAppointment implements AddAppointment {
   constructor (
     private readonly checkPetByIdAndCustomerIdRepository: CheckPetByIdAndCustomerIdRepository,
-    private readonly checkServiceByIdRepository: CheckServiceByIdRepository
+    private readonly checkServiceByIdRepository: CheckServiceByIdRepository,
+    private readonly addAppointmentRepository: AddAppointmentRepository
   ) {}
 
   async add (data: AddAppointment.Params): Promise<AddAppointment.Result> {
@@ -18,6 +19,7 @@ export class DbAddAppointment implements AddAppointment {
     if (!validService) {
       return ActionResult.ERROR_INVALID_SERVICE
     }
+    await this.addAppointmentRepository.add(data)
     return null
   }
 }
