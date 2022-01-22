@@ -20,6 +20,6 @@ export class DbAddAppointment implements AddAppointment {
       return ActionResult.ERROR_INVALID_SERVICE
     }
     await this.addAppointmentRepository.add(data)
-    return null
+    return ActionResult.SUCCESS
   }
 }
