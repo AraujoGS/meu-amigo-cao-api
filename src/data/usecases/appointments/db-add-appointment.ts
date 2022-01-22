@@ -14,7 +14,10 @@ export class DbAddAppointment implements AddAppointment {
     if (!petExists) {
       return ActionResult.ERROR_PET_NOT_EXISTS
     }
-    await this.checkServiceByIdRepository.check(service)
+    const validService = await this.checkServiceByIdRepository.check(service)
+    if (!validService) {
+      return ActionResult.ERROR_INVALID_SERVICE
+    }
     return null
   }
 }
