@@ -75,4 +75,9 @@ describe('DbAddAppointment Usecase', () => {
     const promise = sut.add(mockAddAppointments())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbAddAppointment return SUCCESS (0) if AddAppointmentRepository success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.add(mockAddAppointments())
+    expect(result).toBe(ActionResult.SUCCESS)
+  })
 })
