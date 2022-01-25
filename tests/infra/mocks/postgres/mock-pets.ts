@@ -9,7 +9,7 @@ type PetsModel = {
   breed: string
   color: string
   type: string
-  considerations: string
+  considerations?: string
 }
 
 export const mockPets = async (id: string): Promise<PetsModel> => {
