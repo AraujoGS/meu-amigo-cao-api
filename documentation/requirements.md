@@ -109,8 +109,8 @@
 
 -Agendar banho ou tosa (logado)
 - [X] inputs: uuid do cliente, serviço (banho, tosa ou banho e tosa), data, pet, observações
-- [ ] validar se token de acesso válido, caso não retornar 401
-- [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
+- [X] validar se token de acesso válido, caso não retornar 401
+- [X] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
 - [X] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: observações é opcional
 - [X] validar se o pet existe, se é desse usuário e retornar 412 caso não
 - [X] validar se é um serviço válido e retornar 412 caso não
