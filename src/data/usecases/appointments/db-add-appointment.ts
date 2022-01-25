@@ -10,7 +10,7 @@ export class DbAddAppointment implements AddAppointment {
   ) {}
 
   async add (data: AddAppointment.Params): Promise<AddAppointment.Result> {
-    const { petId, accountId, service } = data
+    const { petId, accountId, service, observations, date } = data
     const petExists = await this.checkPetByIdAndCustomerIdRepository.check({ id: petId, accountId })
     if (!petExists) {
       return ActionResult.ERROR_PET_NOT_EXISTS
@@ -19,7 +19,12 @@ export class DbAddAppointment implements AddAppointment {
     if (!validService) {
       return ActionResult.ERROR_INVALID_SERVICE
     }
-    await this.addAppointmentRepository.add(data)
+    await this.addAppointmentRepository.add({
+      petId,
+      service,
+      observations,
+      date
+    })
     return ActionResult.SUCCESS
   }
 }

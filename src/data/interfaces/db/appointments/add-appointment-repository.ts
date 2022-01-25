@@ -1,7 +1,10 @@
-import { AddAppointmentModel } from '@/domain/models'
-
 export namespace AddAppointmentRepository {
-  export type Params = AddAppointmentModel
+  export type Params = {
+    service: number
+    date: Date
+    petId: string
+    observations: string
+  }
 }
 
 export interface AddAppointmentRepository {
