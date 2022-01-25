@@ -6,7 +6,7 @@ export namespace UpdatePetRepository {
     breed: number
     color: string
     type: number
-    considerations: string
+    considerations?: string
   }
 }
 

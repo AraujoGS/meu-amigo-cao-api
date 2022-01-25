@@ -1,34 +1,35 @@
-import { AddPet } from '@/domain/usecases'
+import { AddAppointment } from '@/domain/usecases'
 import { badRequest, created, internalServerError, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
-export namespace AddPetController {
+export namespace AddAppointmentController {
   export type Request = {
     accountId: string
-    name: string
-    breed: number
-    color: string
-    type: number
-    considerations?: string
+    petId: string
+    observations?: string
+    service: number
+    date: string
   }
 }
-
-export class AddPetController implements Controller {
+export class AddAppointmentController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly addPet: AddPet,
+    private readonly addAppointment: AddAppointment,
     private readonly businessRulesValidation: Validation
   ) {}
 
-  async handle (request: AddPetController.Request): Promise<HttpResponse> {
+  async handle (request: AddAppointmentController.Request): Promise<HttpResponse> {
     try {
-      const { considerations, ...data } = request
+      const { observations, ...data } = request
       const clientError = this.validation.validate(data)
       if (clientError) {
         return badRequest(clientError)
       }
-      const result = await this.addPet.add(request)
-      const conditionFailed = this.businessRulesValidation.validate({ resultAddPet: result })
+      const result = await this.addAppointment.add({
+        ...request,
+        date: new Date(request.date)
+      })
+      const conditionFailed = this.businessRulesValidation.validate({ resultAddAppointment: result })
       if (conditionFailed) {
         return preconditionFailed(conditionFailed)
       }

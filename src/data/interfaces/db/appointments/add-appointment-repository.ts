@@ -3,7 +3,7 @@ export namespace AddAppointmentRepository {
     service: number
     date: Date
     petId: string
-    observations: string
+    observations?: string
   }
 }
 

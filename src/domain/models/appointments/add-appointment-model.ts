@@ -3,5 +3,5 @@ export type AddAppointmentModel = {
   service: number
   date: Date
   petId: string
-  observations: string
+  observations?: string
 }

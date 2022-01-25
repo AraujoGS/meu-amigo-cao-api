@@ -4,5 +4,5 @@ export type AddPetModel = {
   breed: number
   color: string
   type: number
-  considerations: string
+  considerations?: string
 }
