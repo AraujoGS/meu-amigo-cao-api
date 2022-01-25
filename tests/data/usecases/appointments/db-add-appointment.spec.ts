@@ -67,7 +67,12 @@ describe('DbAddAppointment Usecase', () => {
     const { sut, addAppointmentRepositorySpy } = makeSut()
     const params = mockAddAppointments()
     await sut.add(params)
-    expect(addAppointmentRepositorySpy.data).toEqual(params)
+    expect(addAppointmentRepositorySpy.data).toEqual({
+      petId: params.petId,
+      service: params.service,
+      observations: params.observations,
+      date: params.date
+    })
   })
   it('should DbAddAppointment throw error if AddAppointmentRepository throws', async () => {
     const { sut, addAppointmentRepositorySpy } = makeSut()
