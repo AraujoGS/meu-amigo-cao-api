@@ -1,5 +1,6 @@
 export * from './accounts'
 export * from './customers'
 export * from './pets'
+export * from './appointments'
 export * from './error-schema'
 export * from './api-key-auth-schema'

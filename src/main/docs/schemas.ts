@@ -13,7 +13,8 @@ import {
   changeCustomerParamsSchema,
   changeAddressParamsSchema,
   changePetParamsSchema,
-  deletePetParamsSchema
+  deletePetParamsSchema,
+  addAppointmentParamsSchema
 } from './schemas/'
 
 export default {
@@ -31,5 +32,6 @@ export default {
   changeAddressParams: changeAddressParamsSchema,
   changePetParams: changePetParamsSchema,
   deletePetParams: deletePetParamsSchema,
+  addAppointmentParams: addAppointmentParamsSchema,
   error: errorSchema
 }
