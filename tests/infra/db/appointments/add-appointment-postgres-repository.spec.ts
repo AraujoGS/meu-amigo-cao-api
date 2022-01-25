@@ -20,7 +20,7 @@ const mockGetAppointments = async (id: string): Promise<any> => {
   const query = `
     SELECT c.id_cliente as id, p.id_pet as petId, a.id_agendamento as appointment FROM CLIENTES c
     JOIN PETS p ON c.id_cliente = p.id_cliente
-    RIGHT JOIN AGENDAMENTOS a ON p.id_pet = a.id_pet
+    LEFT JOIN AGENDAMENTOS a ON p.id_pet = a.id_pet
     WHERE c.id_cliente = $1
   `
   const params = [id]
