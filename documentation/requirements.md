@@ -108,14 +108,14 @@
 - [X] deletar o pet e retornar 204
 
 -Agendar banho ou tosa (logado)
-- [ ] inputs: uuid do cliente, serviço (banho, tosa ou banho e tosa), data, pet, observações
+- [X] inputs: uuid do cliente, serviço (banho, tosa ou banho e tosa), data, pet, observações
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: observações é opcional
-- [ ] validar se o pet existe, se é desse usuário e retornar 412 caso não
-- [ ] validar se é um serviço válido e retornar 412 caso não
-- [ ] em caso de erro inesperado retornar 500
-- [ ] em caso de sucesso retornar 201 e os dados do agendamento
+- [X] validar os inputs e retornar 400 caso algum campo esteja faltando. OBS: observações é opcional
+- [X] validar se o pet existe, se é desse usuário e retornar 412 caso não
+- [X] validar se é um serviço válido e retornar 412 caso não
+- [X] em caso de erro inesperado retornar 500
+- [X] em caso de sucesso retornar 201 
 
 -Consultar seus agendamentos(logado)
 - [ ] inputs: uuid do cliente, offset e limit
