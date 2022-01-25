@@ -405,4 +405,59 @@ describe('Customers Routes', () => {
         .expect(403)
     })
   })
+  describe('POST /customers/appointments', () => {
+    it('should add appointment route return 201 if success', async () => {
+      const account = await mockGetAccountData()
+      const petId = await mockAddPets(account.id)
+      const payload = {
+        service: 3,
+        date: '2022-01-25 14:30:00',
+        petId
+      }
+      await request(app)
+        .post('/api/customers/appointments')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(201)
+    })
+    it('should add appointment route return 400 if fail', async () => {
+      const account = await mockGetAccountData()
+      const payload = {
+        service: 0,
+        date: '2022-01-25 14:30:00'
+      }
+      await request(app)
+        .post('/api/customers/appointments')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(400)
+    })
+    it('should add appointment route return 412 if fail', async () => {
+      const account = await mockGetAccountData()
+      const petId = await mockAddPets(account.id)
+      const payload = {
+        service: 0,
+        date: '2022-01-25 14:30:00',
+        petId
+      }
+      await request(app)
+        .post('/api/customers/appointments')
+        .send(payload)
+        .set('x-access-token', account.accessToken)
+        .expect(412)
+    })
+    it('should add appointment route return 401 if missing token', async () => {
+      await request(app)
+        .post('/api/customers/appointments')
+        .send({})
+        .expect(401)
+    })
+    it('should add appointment route return 403 if invalid token', async () => {
+      await request(app)
+        .post('/api/customers/appointments')
+        .send({})
+        .set('x-access-token', 'any_token')
+        .expect(403)
+    })
+  })
 })
