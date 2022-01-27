@@ -1,4 +1,5 @@
 import { LoadAppointmentsByCustomerIdController } from '@/presentation/controllers'
+import { ok } from '@/presentation/helpers'
 import { mockLoadAppointmentsByCustomerId } from '@/tests/domain/mocks'
 import { LoadAppointmentsByCustomerIdSpy } from '@/tests/presentation/mocks'
 
@@ -24,5 +25,10 @@ describe('LoadAppointmentsByCustomerId Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(loadAppointmentsByCustomerIdSpy.data).toEqual(request)
+  })
+  it('should LoadAppointmentsByCustomerIdController return 200 if LoadAppointmentsByCustomerId return list appointments', async () => {
+    const { sut, loadAppointmentsByCustomerIdSpy } = makeSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(ok(loadAppointmentsByCustomerIdSpy.result))
   })
 })
