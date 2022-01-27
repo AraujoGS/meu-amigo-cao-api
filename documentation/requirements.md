@@ -118,12 +118,12 @@
 - [X] em caso de sucesso retornar 201 
 
 -Consultar seus agendamentos(logado)
-- [ ] inputs: uuid do cliente, offset e limit
+- [X] inputs: uuid do cliente, offset e limit
 - [ ] validar se token de acesso válido, caso não retornar 401
 - [ ] validar se pelo token de acesso o usuário tem acesso a essa funcionalidade, caso não retornar 403
-- [ ] em caso de erro inesperado retornar 500
-- [ ] caso não tenha agendamentos, retornar 200 e uma lista vazia
-- [ ] em caso de sucesso retornar 200 e uma lista
+- [X] em caso de erro inesperado retornar 500
+- [X] caso não tenha agendamentos, retornar 200 e uma lista vazia
+- [X] em caso de sucesso retornar 200 e uma lista
 
 -Cancelar um agendamento (logado)
 - [ ] inputs: uuid do cliente, uuid do agendamento
