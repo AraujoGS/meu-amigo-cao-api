@@ -31,4 +31,10 @@ describe('LoadAppointmentsByCustomerId Controller', () => {
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(ok(loadAppointmentsByCustomerIdSpy.result))
   })
+  it('should LoadAppointmentsByCustomerIdController return 200 if LoadAppointmentsByCustomerId return list appointments empty', async () => {
+    const { sut, loadAppointmentsByCustomerIdSpy } = makeSut()
+    loadAppointmentsByCustomerIdSpy.result = []
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(ok([]))
+  })
 })
