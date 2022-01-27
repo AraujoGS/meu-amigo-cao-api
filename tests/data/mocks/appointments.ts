@@ -1,4 +1,9 @@
-import { CheckServiceByIdRepository, AddAppointmentRepository } from '@/data/interfaces/db'
+import {
+  CheckServiceByIdRepository,
+  AddAppointmentRepository,
+  LoadAppointmentsByCustomerIdRepository
+} from '@/data/interfaces/db'
+import faker from 'faker'
 
 export class CheckServiceByIdRepositorySpy implements CheckServiceByIdRepository {
   id: CheckServiceByIdRepository.Params
@@ -14,5 +19,22 @@ export class AddAppointmentRepositorySpy implements AddAppointmentRepository {
   async add (data: AddAppointmentRepository.Params): Promise<void> {
     this.data = data
     return await Promise.resolve()
+  }
+}
+
+export class LoadAppointmentsByCustomerIdRepositorySpy implements LoadAppointmentsByCustomerIdRepository {
+  data: LoadAppointmentsByCustomerIdRepository.Params
+  result = [{
+    id: faker.datatype.uuid(),
+    service: faker.random.word(),
+    date: faker.date.future(),
+    observations: faker.random.words(),
+    petName: faker.name.findName(),
+    cancellation: faker.datatype.boolean()
+  }]
+
+  async load (data: LoadAppointmentsByCustomerIdRepository.Params): Promise<LoadAppointmentsByCustomerIdRepository.Result> {
+    this.data = data
+    return this.result
   }
 }
