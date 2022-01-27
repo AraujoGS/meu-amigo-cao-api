@@ -29,4 +29,9 @@ describe('DbLoadAppointmentsByCustomerId Usecase', () => {
     const promise = sut.load(mockLoadAppointmentsByCustomerId())
     await expect(promise).rejects.toThrow()
   })
+  it('should DbLoadAppointmentsByCustomerId return list appointments if LoadAppointmentsByCustomerIdRepository success', async () => {
+    const { sut } = makeSut()
+    const list = await sut.load(mockLoadAppointmentsByCustomerId())
+    expect(list.length).toBeGreaterThan(0)
+  })
 })
