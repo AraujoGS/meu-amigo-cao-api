@@ -32,7 +32,7 @@ const mockRequest = (): AddAppointmentController.Request => ({
   date: '2022-01-25 14:30:00'
 })
 
-describe('SignUp Controller', () => {
+describe('AddAppointment Controller', () => {
   it('should AddAppointmentController return 500 if AddAppointment throw error', async () => {
     const { sut, addAppointmentSpy } = makeSut()
     jest.spyOn(addAppointmentSpy, 'add').mockImplementationOnce(throwError)
