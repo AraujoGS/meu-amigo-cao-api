@@ -44,4 +44,10 @@ describe('DbCancelAppointment Usecase', () => {
     await sut.cancel(params)
     expect(cancelAppointmentRepositorySpy.data).toEqual(params)
   })
+  it('should DbCancelAppointment throw error if CancelAppointmentRepository throws', async () => {
+    const { sut, cancelAppointmentRepositorySpy } = makeSut()
+    jest.spyOn(cancelAppointmentRepositorySpy, 'cancel').mockImplementationOnce(throwError)
+    const promise = sut.cancel(mockCancelAppointment())
+    expect(promise).rejects.toThrow()
+  })
 })
