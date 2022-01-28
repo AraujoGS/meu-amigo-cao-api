@@ -10,7 +10,8 @@ import {
   changeAddressPath,
   changePetPath,
   deletePetPath,
-  addAppointmentPath
+  addAppointmentPath,
+  loadAppointmentsByCustomerIdPath
 } from './paths/'
 
 export default {
@@ -21,5 +22,5 @@ export default {
   '/customers': { ...loadCustomerByIdPath, ...changeCustomerPath },
   '/customers/address': { ...addAddressPath, ...changeAddressPath },
   '/customers/pets': { ...addPetPath, ...changePetPath, ...deletePetPath },
-  '/customers/appointments': addAppointmentPath
+  '/customers/appointments': { ...loadAppointmentsByCustomerIdPath, ...addAppointmentPath }
 }
