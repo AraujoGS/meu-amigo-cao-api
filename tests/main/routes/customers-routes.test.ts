@@ -460,4 +460,27 @@ describe('Customers Routes', () => {
         .expect(403)
     })
   })
+  describe('GET /customers/appointments', () => {
+    it('should load appointments route return 200 if success', async () => {
+      const account = await mockGetAccountData()
+      await mockAddPets(account.id)
+      await request(app)
+        .get('/api/customers/appointments')
+        .set('x-access-token', account.accessToken)
+        .expect(200, [])
+    })
+    it('should load appointments route return 401 if missing token', async () => {
+      await request(app)
+        .get('/api/customers/appointments')
+        .send({})
+        .expect(401)
+    })
+    it('should load appointments route return 403 if invalid token', async () => {
+      await request(app)
+        .get('/api/customers/appointments')
+        .send({})
+        .set('x-access-token', 'any_token')
+        .expect(403)
+    })
+  })
 })
