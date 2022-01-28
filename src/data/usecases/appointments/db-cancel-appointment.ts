@@ -10,7 +10,7 @@ export class DbCancelAppointment implements CancelAppointment {
   async cancel (data: CancelAppointment.Params): Promise<CancelAppointment.Result> {
     const isValid = await this.checkAppointmentByIdAndCustomerIdRepository.check(data)
     if (isValid) {
-      await this.cancelAppointmentRepository.cancel(data)
+      await this.cancelAppointmentRepository.cancel(data.id)
       return true
     }
     return false

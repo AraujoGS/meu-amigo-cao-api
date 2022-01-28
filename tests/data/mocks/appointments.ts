@@ -51,9 +51,9 @@ export class CheckAppointmentByIdAndCustomerIdRepositorySpy implements CheckAppo
 }
 
 export class CancelAppointmentRepositorySpy implements CancelAppointmentRepository {
-  data: CancelAppointmentRepository.Params
-  async cancel (data: CancelAppointmentRepository.Params): Promise<void> {
-    this.data = data
+  id: CancelAppointmentRepository.Params
+  async cancel (id: CancelAppointmentRepository.Params): Promise<void> {
+    this.id = id
     return await Promise.resolve()
   }
 }

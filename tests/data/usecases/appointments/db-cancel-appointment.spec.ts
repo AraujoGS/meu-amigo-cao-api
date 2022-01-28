@@ -42,7 +42,7 @@ describe('DbCancelAppointment Usecase', () => {
     const { sut, cancelAppointmentRepositorySpy } = makeSut()
     const params = mockCancelAppointment()
     await sut.cancel(params)
-    expect(cancelAppointmentRepositorySpy.data).toEqual(params)
+    expect(cancelAppointmentRepositorySpy.id).toEqual(params.id)
   })
   it('should DbCancelAppointment throw error if CancelAppointmentRepository throws', async () => {
     const { sut, cancelAppointmentRepositorySpy } = makeSut()
