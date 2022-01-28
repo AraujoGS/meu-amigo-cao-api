@@ -7,7 +7,8 @@ import {
   makeChangeAddressController,
   makeChangePetController,
   makeDeletePetController,
-  makeAddAppointmentController
+  makeAddAppointmentController,
+  makeLoadAppointmentsByCustomerIdController
 } from '@/main/factories/controllers'
 import { auth } from '@/main/middlewares'
 import { Router } from 'express'
@@ -20,5 +21,6 @@ export default (router: Router): void => {
   router.post('/customers/pets', auth, adaptRoutes(makeAddPetController()))
   router.put('/customers/pets', auth, adaptRoutes(makeChangePetController()))
   router.delete('/customers/pets', auth, adaptRoutes(makeDeletePetController()))
+  router.get('/customers/appointments', auth, adaptRoutes(makeLoadAppointmentsByCustomerIdController()))
   router.post('/customers/appointments', auth, adaptRoutes(makeAddAppointmentController()))
 }
