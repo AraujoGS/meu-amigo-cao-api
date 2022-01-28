@@ -132,5 +132,4 @@
 - [ ] validar os inputs e retornar 400 caso algum campo esteja faltando
 - [ ] validar se existe o agendamento e retornar 412 caso não
 - [ ] em caso de erro inesperado retornar 500
-- [ ] caso o agendamento não exista, retornar 204
 - [ ] em caso de sucesso retornar 200
