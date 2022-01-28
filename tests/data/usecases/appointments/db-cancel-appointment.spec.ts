@@ -1,6 +1,6 @@
 import { DbCancelAppointment } from '@/data/usecases'
 import { CheckAppointmentByIdAndCustomerIdRepositorySpy } from '@/tests/data/mocks'
-import { mockCancelAppointment } from '@/tests/domain/mocks'
+import { mockCancelAppointment, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbCancelAppointment
@@ -22,5 +22,11 @@ describe('DbCancelAppointment Usecase', () => {
     const params = mockCancelAppointment()
     await sut.cancel(params)
     expect(checkAppointmentByIdAndCustomerIdRepositorySpy.data).toEqual(params)
+  })
+  it('should DbCancelAppointment throw error if CheckAppointmentByIdAndCustomerIdRepository throws', async () => {
+    const { sut, checkAppointmentByIdAndCustomerIdRepositorySpy } = makeSut()
+    jest.spyOn(checkAppointmentByIdAndCustomerIdRepositorySpy, 'check').mockImplementationOnce(throwError)
+    const promise = sut.cancel(mockCancelAppointment())
+    expect(promise).rejects.toThrow()
   })
 })
