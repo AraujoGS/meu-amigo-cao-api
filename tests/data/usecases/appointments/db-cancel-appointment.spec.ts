@@ -29,4 +29,10 @@ describe('DbCancelAppointment Usecase', () => {
     const promise = sut.cancel(mockCancelAppointment())
     expect(promise).rejects.toThrow()
   })
+  it('should DbCancelAppointment return false if CheckAppointmentByIdAndCustomerIdRepository return false', async () => {
+    const { sut, checkAppointmentByIdAndCustomerIdRepositorySpy } = makeSut()
+    checkAppointmentByIdAndCustomerIdRepositorySpy.result = false
+    const result = await sut.cancel(mockCancelAppointment())
+    expect(result).toBe(false)
+  })
 })
