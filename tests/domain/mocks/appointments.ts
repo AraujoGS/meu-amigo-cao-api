@@ -1,4 +1,4 @@
-import { AddAppointment, LoadAppointmentsByCustomerId } from '@/domain/usecases'
+import { AddAppointment, LoadAppointmentsByCustomerId, CancelAppointment } from '@/domain/usecases'
 import faker from 'faker'
 
 export const mockAddAppointments = (): AddAppointment.Params => ({
@@ -13,4 +13,9 @@ export const mockLoadAppointmentsByCustomerId = (): LoadAppointmentsByCustomerId
   accountId: faker.datatype.uuid(),
   offset: 1,
   limit: 10
+})
+
+export const mockCancelAppointment = (): CancelAppointment.Params => ({
+  accountId: faker.datatype.uuid(),
+  id: faker.datatype.uuid()
 })
