@@ -2,7 +2,8 @@ import {
   CheckServiceByIdRepository,
   AddAppointmentRepository,
   LoadAppointmentsByCustomerIdRepository,
-  CheckAppointmentByIdAndCustomerIdRepository
+  CheckAppointmentByIdAndCustomerIdRepository,
+  CancelAppointmentRepository
 } from '@/data/interfaces/db'
 import faker from 'faker'
 
@@ -46,5 +47,13 @@ export class CheckAppointmentByIdAndCustomerIdRepositorySpy implements CheckAppo
   async check (data: CheckAppointmentByIdAndCustomerIdRepository.Params): Promise<CheckAppointmentByIdAndCustomerIdRepository.Result> {
     this.data = data
     return this.result
+  }
+}
+
+export class CancelAppointmentRepositorySpy implements CancelAppointmentRepository {
+  data: CancelAppointmentRepository.Params
+  async cancel (data: CancelAppointmentRepository.Params): Promise<void> {
+    this.data = data
+    return await Promise.resolve()
   }
 }

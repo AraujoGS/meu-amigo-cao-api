@@ -1,18 +1,21 @@
 import { DbCancelAppointment } from '@/data/usecases'
-import { CheckAppointmentByIdAndCustomerIdRepositorySpy } from '@/tests/data/mocks'
+import { CancelAppointmentRepositorySpy, CheckAppointmentByIdAndCustomerIdRepositorySpy } from '@/tests/data/mocks'
 import { mockCancelAppointment, throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbCancelAppointment
   checkAppointmentByIdAndCustomerIdRepositorySpy: CheckAppointmentByIdAndCustomerIdRepositorySpy
+  cancelAppointmentRepositorySpy: CancelAppointmentRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const checkAppointmentByIdAndCustomerIdRepositorySpy = new CheckAppointmentByIdAndCustomerIdRepositorySpy()
-  const sut = new DbCancelAppointment(checkAppointmentByIdAndCustomerIdRepositorySpy)
+  const cancelAppointmentRepositorySpy = new CancelAppointmentRepositorySpy()
+  const sut = new DbCancelAppointment(checkAppointmentByIdAndCustomerIdRepositorySpy, cancelAppointmentRepositorySpy)
   return {
     sut,
-    checkAppointmentByIdAndCustomerIdRepositorySpy
+    checkAppointmentByIdAndCustomerIdRepositorySpy,
+    cancelAppointmentRepositorySpy
   }
 }
 
@@ -34,5 +37,11 @@ describe('DbCancelAppointment Usecase', () => {
     checkAppointmentByIdAndCustomerIdRepositorySpy.result = false
     const result = await sut.cancel(mockCancelAppointment())
     expect(result).toBe(false)
+  })
+  it('should DbCancelAppointment call CancelAppointmentRepository with correct values', async () => {
+    const { sut, cancelAppointmentRepositorySpy } = makeSut()
+    const params = mockCancelAppointment()
+    await sut.cancel(params)
+    expect(cancelAppointmentRepositorySpy.data).toEqual(params)
   })
 })
