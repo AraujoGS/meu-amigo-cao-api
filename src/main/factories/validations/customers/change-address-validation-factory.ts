@@ -3,7 +3,7 @@ import { Validation } from '@/presentation/interfaces'
 import { RequiredFieldValidation, ValidationComposite, ZipCodeValidation } from '@/validation/validators'
 
 export const makeChangeAddressValidation = (): Validation => {
-  const fields = ['accountId', 'id', 'zipcode', 'address', 'number', 'district', 'city', 'state']
+  const fields = ['id', 'zipcode', 'address', 'number', 'district', 'city', 'state']
   const validations: Validation[] = []
   for (const field of fields) {
     validations.push(new RequiredFieldValidation(field))

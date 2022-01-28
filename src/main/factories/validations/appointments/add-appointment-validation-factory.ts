@@ -3,7 +3,7 @@ import { Validation } from '@/presentation/interfaces'
 import { RequiredFieldValidation, ValidationComposite, DateValidation } from '@/validation/validators'
 
 export const makeAddAppointmentValidation = (): Validation => {
-  const fields = ['accountId', 'petId', 'date', 'service']
+  const fields = ['petId', 'date', 'service']
   const validations: Validation[] = []
   for (const field of fields) {
     validations.push(new RequiredFieldValidation(field))
