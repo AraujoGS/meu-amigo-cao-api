@@ -1,6 +1,6 @@
 import { CancelAppointmentController } from '@/presentation/controllers'
 import { AppointmentNotExistsError, MissingParamError } from '@/presentation/errors'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, ok, preconditionFailed } from '@/presentation/helpers'
 import { mockCancelAppointment } from '@/tests/domain/mocks'
 import { CancelAppointmentSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
@@ -48,5 +48,10 @@ describe('CancelAppointment Controller', () => {
     cancelAppointmentSpy.result = false
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(preconditionFailed(new AppointmentNotExistsError()))
+  })
+  it('should CancelAppointmentController return 200 if CancelAppointment return true', async () => {
+    const { sut } = makeSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(ok())
   })
 })
