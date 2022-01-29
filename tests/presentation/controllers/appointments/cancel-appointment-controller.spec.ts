@@ -1,7 +1,7 @@
 import { CancelAppointmentController } from '@/presentation/controllers'
 import { AppointmentNotExistsError, MissingParamError } from '@/presentation/errors'
-import { badRequest, ok, preconditionFailed } from '@/presentation/helpers'
-import { mockCancelAppointment } from '@/tests/domain/mocks'
+import { badRequest, internalServerError, ok, preconditionFailed } from '@/presentation/helpers'
+import { mockCancelAppointment, throwError } from '@/tests/domain/mocks'
 import { CancelAppointmentSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 
@@ -53,5 +53,11 @@ describe('CancelAppointment Controller', () => {
     const { sut } = makeSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(ok())
+  })
+  it('should CancelAppointmentController return 500 if CancelAppointment throw error', async () => {
+    const { sut, cancelAppointmentSpy } = makeSut()
+    jest.spyOn(cancelAppointmentSpy, 'cancel').mockImplementationOnce(throwError)
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(internalServerError(new Error()))
   })
 })
