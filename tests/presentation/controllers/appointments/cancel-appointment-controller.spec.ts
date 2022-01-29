@@ -1,4 +1,6 @@
 import { CancelAppointmentController } from '@/presentation/controllers'
+import { MissingParamError } from '@/presentation/errors'
+import { badRequest } from '@/presentation/helpers'
 import { mockCancelAppointment } from '@/tests/domain/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 
@@ -24,5 +26,11 @@ describe('CancelAppointment Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(validationSpy.input).toEqual({ id: request.id })
+  })
+  it('should CancelAppointmentController return 400 if Validation return error', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.result = new MissingParamError('id')
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(badRequest(new MissingParamError('id')))
   })
 })
