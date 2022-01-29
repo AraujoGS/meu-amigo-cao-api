@@ -1,6 +1,6 @@
 import { CancelAppointment } from '@/domain/usecases'
 import { AppointmentNotExistsError } from '@/presentation/errors'
-import { badRequest, ok, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, internalServerError, ok, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace CancelAppointmentController {
@@ -17,14 +17,18 @@ export class CancelAppointmentController implements Controller {
   ) {}
 
   async handle (request: any): Promise<HttpResponse> {
-    const clientError = this.validation.validate({ id: request.id })
-    if (clientError) {
-      return badRequest(clientError)
+    try {
+      const clientError = this.validation.validate({ id: request.id })
+      if (clientError) {
+        return badRequest(clientError)
+      }
+      const result = await this.cancelAppointment.cancel(request)
+      if (!result) {
+        return preconditionFailed(new AppointmentNotExistsError())
+      }
+      return ok()
+    } catch (error) {
+      return internalServerError(error)
     }
-    const result = await this.cancelAppointment.cancel(request)
-    if (!result) {
-      return preconditionFailed(new AppointmentNotExistsError())
-    }
-    return ok()
   }
 }
