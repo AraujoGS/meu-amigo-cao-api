@@ -1,3 +1,4 @@
+import { badRequest } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace CancelAppointmentController {
@@ -13,7 +14,7 @@ export class CancelAppointmentController implements Controller {
   ) {}
 
   async handle (request: any): Promise<HttpResponse> {
-    this.validation.validate({ id: request.id })
-    return null
+    const clientError = this.validation.validate({ id: request.id })
+    return badRequest(clientError)
   }
 }
