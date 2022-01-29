@@ -1,4 +1,4 @@
-import { AddAppointment, LoadAppointmentsByCustomerId } from '@/domain/usecases'
+import { AddAppointment, LoadAppointmentsByCustomerId, CancelAppointment } from '@/domain/usecases'
 import { ActionResult } from '@/domain/models'
 import faker from 'faker'
 
@@ -23,6 +23,15 @@ export class LoadAppointmentsByCustomerIdSpy implements LoadAppointmentsByCustom
   }]
 
   async load (data: LoadAppointmentsByCustomerId.Params): Promise<LoadAppointmentsByCustomerId.Result> {
+    this.data = data
+    return this.result
+  }
+}
+
+export class CancelAppointmentSpy implements CancelAppointment {
+  data: CancelAppointment.Params
+  result = true
+  async cancel (data: CancelAppointment.Params): Promise<CancelAppointment.Result> {
     this.data = data
     return this.result
   }

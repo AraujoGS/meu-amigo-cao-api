@@ -2,19 +2,23 @@ import { CancelAppointmentController } from '@/presentation/controllers'
 import { MissingParamError } from '@/presentation/errors'
 import { badRequest } from '@/presentation/helpers'
 import { mockCancelAppointment } from '@/tests/domain/mocks'
+import { CancelAppointmentSpy } from '@/tests/presentation/mocks'
 import { ValidationSpy } from '@/tests/validation/mocks'
 
 type SutTypes = {
   sut: CancelAppointmentController
   validationSpy: ValidationSpy
+  cancelAppointmentSpy: CancelAppointmentSpy
 }
 
 const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
-  const sut = new CancelAppointmentController(validationSpy)
+  const cancelAppointmentSpy = new CancelAppointmentSpy()
+  const sut = new CancelAppointmentController(validationSpy, cancelAppointmentSpy)
   return {
     sut,
-    validationSpy
+    validationSpy,
+    cancelAppointmentSpy
   }
 }
 
@@ -32,5 +36,11 @@ describe('CancelAppointment Controller', () => {
     validationSpy.result = new MissingParamError('id')
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(badRequest(new MissingParamError('id')))
+  })
+  it('should CancelAppointmentController call CancelAppointment with correct values', async () => {
+    const { sut, cancelAppointmentSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(cancelAppointmentSpy.data).toEqual(request)
   })
 })
