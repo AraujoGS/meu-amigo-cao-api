@@ -1,7 +1,7 @@
 import { CancelAppointmentRepository } from '@/data/interfaces/db'
 import { PostgresHelper } from '@/infra/db'
 
-export class CancelAppointmentRepositoryPostgresRepository implements CancelAppointmentRepository {
+export class CancelAppointmentPostgresRepository implements CancelAppointmentRepository {
   async cancel (id: CancelAppointmentRepository.Params): Promise<void> {
     const query = 'UPDATE AGENDAMENTOS SET cancelamento = true WHERE id_agendamento = $1'
     const params = [id]
