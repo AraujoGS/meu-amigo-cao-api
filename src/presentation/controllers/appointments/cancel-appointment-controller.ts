@@ -1,6 +1,6 @@
 import { CancelAppointment } from '@/domain/usecases'
 import { AppointmentNotExistsError } from '@/presentation/errors'
-import { badRequest, preconditionFailed } from '@/presentation/helpers'
+import { badRequest, ok, preconditionFailed } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/interfaces'
 
 export namespace CancelAppointmentController {
@@ -25,5 +25,6 @@ export class CancelAppointmentController implements Controller {
     if (!result) {
       return preconditionFailed(new AppointmentNotExistsError())
     }
+    return ok()
   }
 }
