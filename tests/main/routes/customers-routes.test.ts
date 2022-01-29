@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { PostgresHelper } from '@/infra/db'
 import { setupApp } from '@/main/config/app'
 import { createDbTest, sqlClearDb, sqlCreateDb } from '@/tests/infra/mocks'
-import { mockGetAccountData, mockAddAddress, mockAddPets } from '@/tests/main/mocks'
+import { mockGetAccountData, mockAddAddress, mockAddPets, mockAddAppointments } from '@/tests/main/mocks'
 import { Express } from 'express'
 import request from 'supertest'
 import faker from 'faker'
@@ -467,7 +467,7 @@ describe('Customers Routes', () => {
       await request(app)
         .get('/api/customers/appointments')
         .set('x-access-token', account.accessToken)
-        .expect(200, [])
+        .expect(200)
     })
     it('should load appointments route return 401 if missing token', async () => {
       await request(app)
@@ -478,6 +478,47 @@ describe('Customers Routes', () => {
     it('should load appointments route return 403 if invalid token', async () => {
       await request(app)
         .get('/api/customers/appointments')
+        .send({})
+        .set('x-access-token', 'any_token')
+        .expect(403)
+    })
+  })
+  describe('POST /customers/appointments/cancel', () => {
+    it('should cancel appointment route return 200 if success', async () => {
+      const account = await mockGetAccountData()
+      const petId = await mockAddPets(account.id)
+      const appointmentId = await mockAddAppointments(petId)
+      await request(app)
+        .post('/api/customers/appointments/cancel')
+        .set('x-access-token', account.accessToken)
+        .send({ id: appointmentId })
+        .expect(200)
+    })
+    it('should cancel appointment route return 400 if fail', async () => {
+      const account = await mockGetAccountData()
+      await request(app)
+        .post('/api/customers/appointments/cancel')
+        .set('x-access-token', account.accessToken)
+        .send({})
+        .expect(400)
+    })
+    it('should cancel appointment route return 412 if fail', async () => {
+      const account = await mockGetAccountData()
+      await request(app)
+        .post('/api/customers/appointments/cancel')
+        .set('x-access-token', account.accessToken)
+        .send({ id: account.id })
+        .expect(412)
+    })
+    it('should cancel appointment route return 401 if missing token', async () => {
+      await request(app)
+        .post('/api/customers/appointments/cancel')
+        .send({})
+        .expect(401)
+    })
+    it('should cancel appointment route return 403 if invalid token', async () => {
+      await request(app)
+        .post('/api/customers/appointments/cancel')
         .send({})
         .set('x-access-token', 'any_token')
         .expect(403)

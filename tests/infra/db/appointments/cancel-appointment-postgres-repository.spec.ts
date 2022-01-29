@@ -1,8 +1,8 @@
-import { PostgresHelper, CancelAppointmentRepositoryPostgresRepository } from '@/infra/db'
+import { PostgresHelper, CancelAppointmentPostgresRepository } from '@/infra/db'
 import { mockCancelAppointment, throwError } from '@/tests/domain/mocks'
 import { createDbTest, sqlClearDb, sqlCreateDb, mockAccount, mockPets, mockAppointment } from '@/tests/infra/mocks'
 
-const makeSut = (): CancelAppointmentRepositoryPostgresRepository => new CancelAppointmentRepositoryPostgresRepository()
+const makeSut = (): CancelAppointmentPostgresRepository => new CancelAppointmentPostgresRepository()
 
 const getAppointment = async (id: string, accountId: string): Promise<any> => {
   const response = await PostgresHelper.execute(`
@@ -31,7 +31,7 @@ describe('UpdatePasswordPostgres Repository', () => {
     await PostgresHelper.disconnect()
   })
 
-  it('should CancelAppointmentRepositoryPostgresRepository cancel appointment with success', async () => {
+  it('should CancelAppointmentPostgresRepository cancel appointment with success', async () => {
     const sut = makeSut()
     const account = await mockAccount()
     const pet = await mockPets(account.id)
@@ -44,7 +44,7 @@ describe('UpdatePasswordPostgres Repository', () => {
     expect(appointmentAfterCancellation).toBeTruthy()
     expect(appointmentAfterCancellation.cancellation).toBe(true)
   })
-  it('should CancelAppointmentRepositoryPostgresRepository throw error if Postgres throws', async () => {
+  it('should CancelAppointmentPostgresRepository throw error if Postgres throws', async () => {
     const sut = makeSut()
     jest.spyOn(PostgresHelper, 'execute').mockImplementationOnce(throwError)
     const promise = sut.cancel(mockCancelAppointment().id)
