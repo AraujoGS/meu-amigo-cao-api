@@ -1,6 +1,6 @@
 {
   "name": "meu-amigo-cao-api",
-  "version": "1.10.1",
+  "version": "1.11.0",
   "description": "Projeto para praticar boas práticas de programação",
   "main": "dist/main/server.js",
   "scripts": {
